@@ -26,4 +26,38 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function warehouse()
+    {
+
+    }
+
+    public function production_staff()
+    {
+        
+    }
+
+    public function production_admin()
+    {
+        
+    }
+
+    public function procuremnt_staff()
+    {
+        
+    }
+
+    public function procuremnt_admin()
+    {
+        
+    }
+
+    public function finance_staff()
+    {
+        
+    }
+
+    public function finance_admin()
+    {
+        
+    } 
 }
