@@ -28,36 +28,36 @@ class HomeController extends Controller
 
     public function warehouse()
     {
-
+        return view('production.warehouse.home');
     }
 
     public function production_staff()
     {
-        
+        return view('production.staff.home');
     }
 
     public function production_admin()
     {
-        
+        return view('production.admin.home');
     }
 
-    public function procuremnt_staff()
+    public function procurement_staff()
     {
-        
+        return view('procurement.staff.home');
     }
 
-    public function procuremnt_admin()
+    public function procurement_admin()
     {
-        
+        return view('procurement.admin.home');
     }
 
     public function finance_staff()
     {
-        
+        return view('finance.staff.home');
     }
 
     public function finance_admin()
     {
-        
+        return view('finance.admin.home');
     } 
 }

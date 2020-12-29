@@ -49,12 +49,26 @@ class LoginController extends Controller
         // die();
         // Chekc user roles
         switch ($roles[0]) {
-            case 'finance/staff':
-                // return redirect()->route('account.index');
-                return '/finance/account';
+            case 'production/warehouse':
+                return '/production/warehouse/home';
                 break;
-            case 'customer':
-                return '/';
+            case 'production/staff':
+                return '/production/staff/home';
+                break;
+            case 'production/admin':
+                return '/production/admin/home';
+                break;
+            case 'procurement/staff':
+                return '/procurement/staff/home';
+                break;
+            case 'procurement/admin':
+                return '/procurement/admin/home';
+                break;
+            case 'finance/staff':
+                return '/finance/staff/home';
+                break;
+            case 'finance/admin':
+                return '/finance/admin/home';
         }
     }
 }

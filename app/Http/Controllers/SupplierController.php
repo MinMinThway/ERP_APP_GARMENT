@@ -15,6 +15,9 @@ class SupplierController extends Controller
     public function index()
     {
         //
+        // here supplier page
+
+        return view('procurement.staff.supplier');
     }
 
     /**
