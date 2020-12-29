@@ -44,16 +44,17 @@ class LoginController extends Controller
     }
 
     protected function redirectTo(){
-        $roles = auth()->user()->getRoleNames();
-        // var_dump($roles);
+        $roles = auth()->user()->getRoleNames();    
+        // var_dump($roles[0]);
         // die();
         // Chekc user roles
-        // switch ($roles[0]) {
-        //     case 'admin':
-        //         return '/dashboard';
-        //         break;
-        //     case 'customer':
-        //         return '/';
-        // }
+        switch ($roles[0]) {
+            case 'finance/staff':
+                // return redirect()->route('account.index');
+                return '/finance/account';
+                break;
+            case 'customer':
+                return '/';
+        }
     }
 }
