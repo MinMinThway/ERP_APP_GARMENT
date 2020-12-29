@@ -15,7 +15,14 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
+            $table->integer('qty');
+            $table->string('price')->nullable();
+            $table->string('UOM');
             $table->timestamps();
+            $table->unsignedBigInteger('warehouse_id');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('warehouse_id')->references('id')->on('warehouses')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 
