@@ -1,0 +1,1 @@
+<link href="{{asset('vendors/fontawesome/css/font-awesome.css')}}" rel="stylesheet">
