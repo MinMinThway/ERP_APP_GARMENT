@@ -64,17 +64,17 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
-                <ul class="nav side-menu">             
-                  <li>
+                <ul class="nav side-menu">       
+                  <li class="{{ Request::is('production/warehouse/home') ? 'current-page' : 'ss' }}">
                     <a href="{{route('warehouse.home')}}">
                       <i class="fa fa-tachometer" aria-hidden="true"></i>
                     Dashboard 
                     </a>
                   </li>
-                  <li>
-                    <a href="{{route('warehouse.home')}}">
+                  <li class="{{ Request::is('production/warehouse/materials*') ? 'current-page' : '' }}">
+                    <a href="{{route('materials.index')}}">
                       <i class="fa fa-database" aria-hidden="true"></i>
-                    Product
+                    Materials
                     </a>
                   </li>
                 </ul>
@@ -252,7 +252,7 @@
     <script src="{{asset('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('build/js/custom.min.js')}}"></script>
+    <script src="{{asset('build/js/custom.js')}}"></script>
     @yield('script')
   </body>
 </html>

@@ -30,6 +30,7 @@ Route::get('/warehouse', function(){
 // Route::middleware('auth')->group(function () {
 Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/home','HomeController@warehouse')->name('warehouse.home');
+	Route::resource('/production/warehouse/materials','warehouseController');
 });
 Route::middleware('role:production/staff')->group(function () {
 	Route::get('/production/staff/home','HomeController@production_staff')->name('production.staff.home');
