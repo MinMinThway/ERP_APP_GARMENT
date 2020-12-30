@@ -25,7 +25,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        return view('finance.staff.addbanks');
     }
 
     /**
