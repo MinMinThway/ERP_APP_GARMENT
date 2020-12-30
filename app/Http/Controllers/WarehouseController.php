@@ -15,7 +15,8 @@ class WarehouseController extends Controller
     public function index()
     {
         //
-        return view('production.warehouse.material');
+        $warehouses=Warehouse::all();
+        return view('production.warehouse.material',compact('warehouses'));
     }
 
     /**
@@ -26,6 +27,7 @@ class WarehouseController extends Controller
     public function create()
     {
         //
+        return view('production.warehouse.create');
     }
 
     /**
@@ -37,6 +39,33 @@ class WarehouseController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'codeno' => 'required',
+            'name' => 'required',
+            'photo' => 'required|mimes:jpeg,jpg,png',
+            'unit' => 'required',
+        ]);
+        // upload
+        if ($request->file()) {
+            // 624872374523_a.jpg
+            $fileName = time().'_'.$request->photo->getClientOriginalName();
+
+            // materials
+            $filePath =  $request->file('photo')->storeAs('warehouse/photo',$fileName,'public');
+            $path = '/storage/'.$filePath;
+        }
+        // db insert
+        $warehouse = new Warehouse;
+        $warehouse->codeno = $request->codeno;
+        $warehouse->name = $request->name;
+        $warehouse->photo = $path;
+        $warehouse->stock_qty = $request->stock;
+        $warehouse->UOM = $request->unit;
+        $warehouse->order_time_duration = $request->ordertime;
+        $warehouse->stock_safety_factor = $request->factor;
+        $warehouse->save();
+        // header('location ')
+        return redirect()->route('materials.index');
     }
 
     /**
