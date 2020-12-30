@@ -72,7 +72,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">       
-                  <li class="{{ Request::is('production/warehouse/home') ? 'current-page' : 'ss' }}">
+                  <li class="{{ Request::is('production/warehouse/home') ? 'current-page' : '' }}">
                     <a href="{{route('warehouse.home')}}">
                       <i class="fa fa-tachometer" aria-hidden="true"></i>
                     Dashboard 

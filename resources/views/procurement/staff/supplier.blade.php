@@ -3,20 +3,33 @@
 @section('body')
 	<!-- page content -->
 	<div class="right_col" role="main">
-	<h1 class="text text-center text-danger"> supplier table here </h1>
-	<a href="{{route('supplier.create')}}" style="float:right;" class="btn btn-outline-primary">Add New Supplier</a>
-		<div class="x_panel">
-			<div class="container">
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+	    <div class="page-title">
+			<div class="col-md-12 col-sm-12 ">
+		        <div class="x_panel">
+		        	<h2 class="">Supplier <i class="fa fa-user-circle" aria-hidden="true"></i>
+		        		<span class="float-right">
+		        			<a href="{{route('supplier.create')}}">
+		        			 New 
+		        			<i class="fa fa-plus" aria-hidden="true"></i>
+		        			</a>
+						</span>
+					</h2>
+		        </div>	    
+		   	</div>
+	    </div>
+
+		<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+			{{-- <div class="container"> --}}
+			<div class="x_panel">
 					<table class="table-bordered text-center table-striped" cellpadding="15" width="100%">
 						<thead>
 							<tr>
-								<td>#</td>
-								<td>Companey_Name</td>
-								<td>Email</td>
-								<td>Address</td>
-								<td>Phone</td>
-								<td>Action</td>
+								<th>#</th>
+								<th class="align-middle text-center">Companey_Name</th>
+								<th >Email</th>
+								<th>Address</th>
+								<th>Phone</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						@php $i=1;  @endphp
@@ -24,12 +37,11 @@
 							@foreach($suppliers as $supplier)
 
 								@if ($supplier->id== 1)
-								    I have one record!
+								    
 								@else
-							
 								<tr>
 									<td>{{$i++}}</td>
-									<td>{{$supplier->company_name}}</td>
+									<td class="align-middle text-left">{{$supplier->company_name}}</td>
 									<td>{{$supplier->email}}</td>
 									<td>{{$supplier->address}}</td>
 									<td>{{$supplier->phone}}</td>
@@ -49,7 +61,7 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+			{{-- </div> --}}
 		</div>
 	</div>
 

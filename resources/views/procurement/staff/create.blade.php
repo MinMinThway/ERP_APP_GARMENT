@@ -3,11 +3,22 @@
 @section('body')
 	<!-- page content -->
 	<div class="right_col" role="main">
-	<h1 class="text text-center text-danger"> supplier table here </h1>
-	<a href="{{route('supplier.index')}}" style="float:right;" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i></a>
-		<div class="x_panel">
-			<div class="container">
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+	    <div class="page-title">
+			<div class="col-md-12 col-sm-12 ">
+		        <div class="x_panel">
+		        	<h2 class="">New Supplier <i class="fa fa-user-circle fa-1x" aria-hidden="true"></i>
+		        		<span class="float-right">
+		        			<a href="{{route('supplier.index')}}">
+		        			<i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i>
+		        			</a>
+						</span>
+					</h2>
+		        </div>	    
+		   	</div>
+	    </div>
+	    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="x_panel">
+				<div class="container">
 					<form action="{{route('supplier.store')}}" method="POST">
 						@csrf
 						<div class="form-group">

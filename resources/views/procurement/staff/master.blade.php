@@ -14,6 +14,7 @@
     <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/fontawesome/css/font-awesome.css')}}" rel="stylesheet">
     <!-- NProgress -->
     <link href="{{asset('vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- iCheck -->
@@ -68,8 +69,18 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">               
-                  <li><a href="{{route('procurement.staff.home')}}"><i class="fa fa-home"></i> Home </a></li>
-                  <li><a href="{{route('supplier.index')}}"><i class="fa fa-laptop"></i> supplier </a></li>
+                  <li class="{{ Request::is('procurement/staff/home') ? 'current-page' : '' }}">
+                    <a href="{{route('procurement.staff.home')}}">
+                      <i class="fa fa-home"></i> 
+                       Dashboard
+                    </a>
+                  </li>
+                  <li class="{{ Request::is('procurement/supplier*') ? 'current-page' : '' }}">
+                    <a href="{{route('supplier.index')}}">
+                      <i class="fa fa-users" aria-hidden="true"></i>
+                       supplier 
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -245,7 +256,7 @@
     <script src="{{asset('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('build/js/custom.min.js')}}"></script>
+    <script src="{{asset('build/js/custom.js')}}"></script>
     @yield('script')
   </body>
 </html>
