@@ -15,6 +15,7 @@ class WarehouseDetailController extends Controller
     public function index()
     {
         //
+        return view('production.warehouse.inventory');
     }
 
     /**

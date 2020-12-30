@@ -84,6 +84,14 @@
                     Materials
                     </a>
                   </li>
+
+                  <li class="{{ Request::is('production/warehouse/inventory*') ? 'current-page' : '' }}">
+                    <a href="{{route('inventory.index')}}">
+                      <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                    inventory
+                    </a>
+                  </li>
+
                 </ul>
               </div>
             </div>

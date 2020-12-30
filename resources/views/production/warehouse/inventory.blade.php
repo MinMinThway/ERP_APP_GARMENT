@@ -1,5 +1,7 @@
 @extends('production.warehouse.master')
-
+@php
+// var_dump('haha').die();
+@endphp
 @section('body')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -7,10 +9,10 @@
 	    <div class="page-title">
 			<div class="col-md-12 col-sm-12 ">
 		        <div class="x_panel">
-		        	<h2 class="">Raw Materils <i class="fa fa-cubes" aria-hidden="true"></i>
+		        	<h2 class="">Transection <i class="fa fa-cubes" aria-hidden="true"></i>
 		        		<span class="float-right">
-		        			<a href="{{route('materials.create')}}">
-		        			Add 
+		        			<a href=""> {{-- {{route('materials.create')}} --}}
+		        			Add
 		        			<i class="fa fa-plus" aria-hidden="true"></i>
 		        			</a>
 						</span>
@@ -51,50 +53,40 @@
 			                      <thead>
 			                        <tr>
 			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center" width="200px">Name</th>
 			                        	<th class="align-middle text-center">Code No</th>
-			                        	<th class="align-middle text-center">Photo</th>
+			                        	<th class="align-middle text-center" width="200px">Name</th>
+			                        	<th class="align-middle text-center">Date</th>
+			                        	<th class="align-middle text-center">Input</th>
+			                        	<th class="align-middle text-center">Output</th>
 			                        	<th class="align-middle text-center">Stock</th>
 			                        	<th class="align-middle text-center">Unit</th>
-			                        	<th class="align-middle text-center">Lead Time</th>
-			                        	<th class="align-middle text-center">Factor</th>
 			                        	<th class="align-middle text-center">Action</th>
 			                        </tr>
 			                      </thead>
 
 
 			                      <tbody>
-			                      	@php
+			                      	{{-- @php
 			                      		$i=0;
-			                      	@endphp
-			                      	@foreach($warehouses as $warehouse)
+			                      	@endphp --}}
+			                      	{{-- @foreach($warehouses as $warehouse) --}}
 			                        <tr>
-			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-left">{{$warehouse->name}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->codeno}}</td>
-			                        	<td class="align-middle text-center"><img width="100px" src="{{asset($warehouse->photo)}}"></td>
-			                        	<td class="align-middle text-center">{{$warehouse->stock_qty}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->UOM}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->order_time_duration}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->stock_safety_factor}}</td>
-			                        	<th class="align-middle text-center">
-			                        		<a href="{{route('materials.edit',$warehouse->id)}}" class="btn btn-warning mr-2">
-                                            <i class="fa fa-cog" aria-hidden="true"></i>
+			                        	<td class="align-middle text-center">1</td>
+			                        	<td class="align-middle text-center">CT-001</td>
+			                        	<td class="align-middle text-left">This is name</td>
+			                        	<td class="align-middle text-center">Date</td>
+			                        	<th class="align-middle text-center">Input</th>
+			                        	<th class="align-middle text-center">Output</th>
+			                        	<th class="align-middle text-center">Stock</th>
+			                        	<th class="align-middle text-center">Unit</th>
+			                        	<th class="align-middle text-center">Action</th>
+{{-- 			                        		<a href="{{route('materials.edit',$warehouse->id)}}" class="btn btn-warning mr-2">
+                                            <i class="fa fa-cog" aria-hidden="true"></i> --}}
                                         </a>
-
-                                        <form action="{{route('materials.destroy',$warehouse->id)}}"
-                                        onsubmit="return confirm('Are you sure?')" 
-                                        method="POST" class="d-inline ml-2">
-                                        @csrf
-                                        @method('DELETE')
-                                            <button class="btn btn-outline-danger">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                            </button>
-                                        </form>
 
 			                        	</th>
 			                        </tr>
-			                        @endforeach
+			                        {{-- @endforeach --}}
 			                      </tbody>
 			                    </table>
 	                  		</div>
