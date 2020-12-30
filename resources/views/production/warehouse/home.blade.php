@@ -1,19 +1,24 @@
 @extends('production.warehouse.master')
-
+@php
+use App\Warehouse;
+  $count_items=Warehouse::all()->count();
+@endphp
 @section('body')
 	<!-- page content -->
 	<div class="right_col" role="main">
         <!-- top tiles -->
         <div class="row" style="display: inline-block;" >
         	<div class="tile_count">
+            <a href="{{route('materials.index')}}">
             	<div class="col-md-2 col-sm-4  tile_stats_count">
               		<span class="count_top">
               			<i class="fa fa-cubes" aria-hidden="true"></i>
-						Total Material
-					</span>
-              <div class="count">40</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-            </div>
+						          Total Material
+					        </span>
+              <div class="count">{{$count_items}}</div>
+                <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+              </div>
+            </a>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
               <div class="count">123.50</div>
