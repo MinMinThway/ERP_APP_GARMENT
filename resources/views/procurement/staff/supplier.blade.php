@@ -3,6 +3,70 @@
 @section('body')
 	<!-- page content -->
 	<div class="right_col" role="main">
-	<h1 class="text text-center text-danger"> supplier table here </h1>
+	    <div class="page-title">
+			<div class="col-md-12 col-sm-12 ">
+		        <div class="x_panel">
+		        	<h2 class="">Supplier <i class="fa fa-user-circle" aria-hidden="true"></i>
+		        		<span class="float-right">
+		        			<a href="{{route('supplier.create')}}">
+		        			 New 
+		        			<i class="fa fa-plus" aria-hidden="true"></i>
+		        			</a>
+						</span>
+					</h2>
+		        </div>	    
+		   	</div>
+	    </div>
+
+		<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+			{{-- <div class="container"> --}}
+			<div class="x_panel">
+					<table class="table-bordered text-center table-striped" cellpadding="15" width="100%">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th class="align-middle text-center">Companey_Name</th>
+								<th >Email</th>
+								<th>Address</th>
+								<th>Phone</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						@php $i=1;  @endphp
+						<tbody>
+							@foreach($suppliers as $supplier)
+
+								@if ($supplier->id== 1)
+								    
+								@else
+								<tr>
+									<td>{{$i++}}</td>
+									<td class="align-middle text-left">{{$supplier->company_name}}</td>
+									<td>{{$supplier->email}}</td>
+									<td>{{$supplier->address}}</td>
+									<td>{{$supplier->phone}}</td>
+									
+									<td>
+										<a href="{{route('supplier.edit',$supplier->id)}}" class="btn btn-outline-warning btn-sm">Edit</a>
+										
+										<form action="{{route('supplier.destroy',$supplier->id)}}" method="POST" onsubmit="return confirm('Are you sure want to delete')" class="d-inline">
+											@csrf
+											@method('DELETE')
+											<input type="submit" name="btnsubmit" class="btn btn-outline-danger btn-sm" value="Delete">
+										</form>
+									</td>
+								</tr>
+								@endif
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			{{-- </div> --}}
+		</div>
 	</div>
+
+
+@endsection
+@section('script')
+	
 @endsection

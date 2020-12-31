@@ -1,12 +1,10 @@
-<link href="{{asset('vendors/fontawesome/css/font-awesome.css')}}" rel="stylesheet">
-
-
- <link href="{{asset('vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
-    <!-- Ion.RangeSlider -->
-    <link href="{{asset('vendors/normalize-css/normalize.css')}}" rel="stylesheet">
-    <link href="{{asset('vendors/ion.rangeSlider/css/ion.rangeSlider.css')}}" rel="stylesheet">
-    <link href="{{asset('vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css')}}" rel="stylesheet">
-    <!-- Bootstrap Colorpicker -->
-    <link href="{{asset('vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}" rel="stylesheet">
-
-    <link href="{{asset('vendors/cropper/dist/cropper.min.css')}}" rel="stylesheet">
+<div class="item form-group">
+	<label class="col-form-label col-md-3 col-sm-3 label-align" for="codeno">Code No <span class="required">*</span>
+	</label>
+	<div class="col-md-6 col-sm-6 ">
+		<input type="text" id="codeno" name="codeno" class="form-control @error('codeno') is-invalid @enderror" value="@error('codeno') {{old('codeno')}} @else {{$warehouse->codeno}} @enderror">
+		@error('codeno')
+			<div class="text text-danger">{{$message}}</div>
+		@enderror
+	</div>
+</div>

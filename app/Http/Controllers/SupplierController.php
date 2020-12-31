@@ -16,8 +16,8 @@ class SupplierController extends Controller
     {
         //
         // here supplier page
-
-        return view('procurement.staff.supplier');
+        $suppliers=Supplier::orderBy('id','desc')->get();
+        return view('procurement.staff.supplier',compact('suppliers'));
     }
 
     /**
@@ -27,7 +27,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('procurement.staff.create');
     }
 
     /**
@@ -38,7 +38,23 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd($request);
+        $request->validate([
+        'company_name' => 'required|max:255',
+        'email' => 'required',
+        'address' => 'required',
+        'phone' => 'required',
+        ]);
+        $suppliers=new Supplier;
+        $suppliers->company_name=$request->company_name;
+        $suppliers->email=$request->email;
+        $suppliers->address=$request->address;
+        $suppliers->phone=$request->phone;
+
+        $suppliers->save();
+
+        return redirect()->route('supplier.index');
+
     }
 
     /**
@@ -60,7 +76,8 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+       // dd($supplier);
+         return view('procurement.staff.edit',compact('supplier'));
     }
 
     /**
@@ -72,7 +89,22 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+       //dd($supplier);
+       $request->validate([
+            'company_name' => 'required|max:255',
+            'email' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            ]);
+            $supplier->company_name=$request->company_name;
+            $supplier->email=$request->email;
+            $supplier->address=$request->address;
+            $supplier->phone=$request->phone;
+
+            $supplier->save();
+
+            return redirect()->route('supplier.index');
+           
     }
 
     /**
@@ -83,6 +115,7 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        $supplier->delete();
+        return redirect()->route('supplier.index');
     }
 }

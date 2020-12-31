@@ -12,6 +12,13 @@
 
     <!-- Bootstrap -->
     <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Datatables -->    
+    <link href="{{asset('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendors/fontawesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -65,7 +72,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">       
-                  <li class="{{ Request::is('production/warehouse/home') ? 'current-page' : 'ss' }}">
+                  <li class="{{ Request::is('production/warehouse/home') ? 'current-page' : '' }}">
                     <a href="{{route('warehouse.home')}}">
                       <i class="fa fa-tachometer" aria-hidden="true"></i>
                     Dashboard 
@@ -77,6 +84,14 @@
                     Materials
                     </a>
                   </li>
+
+                  <li class="{{ Request::is('production/warehouse/inventory*') ? 'current-page' : '' }}">
+                    <a href="{{route('inventory.index')}}">
+                      <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                    inventory
+                    </a>
+                  </li>
+
                 </ul>
               </div>
             </div>
