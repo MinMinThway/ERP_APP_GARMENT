@@ -53,7 +53,7 @@ class HomeController extends Controller
 
     public function finance_staff()
     {
-        return view('finance.staff.home');
+        return view('finance.staff.index');
     }
 
     public function finance_admin()

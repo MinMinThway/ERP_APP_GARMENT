@@ -34,13 +34,15 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" action="{{route('account.store')}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
+									<form id="demo-form2" action="{{route('account.update',$account->id)}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
 										@csrf
+              							@method('PUT')
+
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="bankname">Bank Name<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" name="bankname" id="bankname" required="required" class="form-control @error('bankname') is-invalid @enderror" value="{{old('bankname')}}">
+												<input type="text" name="bankname" id="bankname" required="required" class="form-control @error('bankname') is-invalid @enderror" value="{{$account->bank}}">
 
 												@error('bankname')
 					                                <div class="alert alert-danger">{{ $message }}</div>
@@ -52,7 +54,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="accounttype">Account Type<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6">
-												<input type="text" id="accounttype" name="accounttype" required="required" class="form-control @error('accounttype') is-invalid @enderror" value="{{old('accounttype')}}">
+												<input type="text" id="accounttype" name="accounttype" required="required" class="form-control @error('accounttype') is-invalid @enderror" value="{{$account->type}}">
 
 												@error('accounttype')
 					                                <div class="alert alert-danger">{{ $message }}</div>
@@ -63,7 +65,7 @@
 					                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="accountno">Account Number</label><span class="required">*</span>
 
 					                        <div class="col-md-6 col-sm-6">
-					                          <input type="text" id="accountno" name="accountno" required="required" class="form-control @error('accountno') is-invalid @enderror" value="{{old('accountno')}}">
+					                          <input type="text" id="accountno" name="accountno" required="required" class="form-control @error('accountno') is-invalid @enderror" value="{{$account->acc_number}}">
 
 												@error('accountno')
 					                                <div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +78,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="balance">Balance<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="balance" name="balance" required="required" class="form-control @error('balance') is-invalid @enderror" value="{{old('balance')}}">
+												<input type="text" id="balance" name="balance" required="required" class="form-control @error('balance') is-invalid @enderror" value="{{$account->balance}}">
 
 												@error('balance')
 					                                <div class="alert alert-danger">{{ $message }}</div>
@@ -88,8 +90,7 @@
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<button type="submit" class="btn btn-success">Submit</button>
-												<button class="btn btn-primary" type="reset">Reset</button>
-												<button class="btn btn-primary" type="reset">Cancel</button>
+												<button class="btn btn-danger" type="reset">Cancel</button>
 											</div>
 										</div>
 

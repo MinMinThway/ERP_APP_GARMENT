@@ -14,8 +14,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
-        return view('finance.staff.account');
+        $accounts= Account::orderBy('id','desc')->get();
+        return view('finance.staff.indexbanks',compact('accounts'));
     }
 
     /**
@@ -36,7 +36,22 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'bankname'    => 'required|min:5',
+            'accounttype' => 'required|min:3',
+            'accountno'   => 'required|min:2',
+            'balance'     => 'required|min:5'
+        ]);
+
+        $accounts = new Account;
+        $accounts->bank       = $request->bankname;
+        $accounts->type       = $request->accounttype;
+        $accounts->acc_number = $request->accountno;
+        $accounts->balance    = $request->balance;
+        $accounts->save();
+
+         return redirect()->route('account.index');
     }
 
     /**
@@ -58,8 +73,9 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        //
+        return view('finance.staff.editbanks',compact('account'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -70,7 +86,21 @@ class AccountController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        //
+        $request->validate([
+            'bankname'    => 'required|min:5',
+            'accounttype' => 'required|min:3',
+            'accountno'   => 'required|min:2',
+            'balance'     => 'required|min:5'
+        ]);
+
+        
+        $account->bank       = $request->bankname;
+        $account->type       = $request->accounttype;
+        $account->acc_number = $request->accountno;
+        $account->balance    = $request->balance;
+        $account->save();
+        
+        return redirect()->route('account.index');
     }
 
     /**
@@ -81,6 +111,32 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        //
+        $account->delete();
+
+        return redirect()->route('account.index');
     }
+
+    public function newbudget(Request $request, Account $account)
+    {
+        $account = Account::orderBy('id','desc')->get();
+        $accountno = Account::
+        return view('finance.staff.addbudget',compact('account'));
+    }
+
+    // public function balanceupdate(Request $request, Account $account)
+    // {
+    //     $request->validate([
+    //         'bankname'    => 'required|min:5',
+    //         'accountno'   => 'required|min:2',
+    //         'balance'     => 'required|min:5'
+    //     ]);
+
+        
+    //     $account->bank       = $request->bankname;
+    //     $account->acc_number = $request->accountno;
+    //     $account->balance    = $request->balance;
+    //     $account->save();
+        
+    //     return redirect()->route('account.index');
+    // }
 }
