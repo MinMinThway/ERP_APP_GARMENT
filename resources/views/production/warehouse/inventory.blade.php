@@ -1,6 +1,7 @@
 @extends('production.warehouse.master')
 @php
-// var_dump('haha').die();
+// var_dump($details[0]->warehouse->name).die();
+
 @endphp
 @section('body')
 <!-- page content -->
@@ -9,9 +10,9 @@
 	    <div class="page-title">
 			<div class="col-md-12 col-sm-12 ">
 		        <div class="x_panel">
-		        	<h2 class="">Transection <i class="fa fa-cubes" aria-hidden="true"></i>
+		        	<h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
 		        		<span class="float-right">
-		        			<a href=""> {{-- {{route('materials.create')}} --}}
+		        			<a href="{{route('inventory.create')}}">
 		        			Add
 		        			<i class="fa fa-plus" aria-hidden="true"></i>
 		        			</a>
@@ -27,13 +28,13 @@
 		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Raw Material List <small></small></h2>
+	            	<h2>Inventory List <small></small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
 		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
 		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		                    	<a class="dropdown-item" href="{{route('materials.create')}}">Add New</a>
+		                    	<a class="dropdown-item" href="{{route('inventory.create')}}">Add New</a>
 		                    	<a class="dropdown-item" href="#">Settings 2</a>
 		                  	</div>
 		              	</li>
@@ -66,27 +67,32 @@
 
 
 			                      <tbody>
-			                      	{{-- @php
+			                      	@php
 			                      		$i=0;
-			                      	@endphp --}}
-			                      	{{-- @foreach($warehouses as $warehouse) --}}
+			                      	@endphp
+			                      	@foreach($details as $detail)
 			                        <tr>
-			                        	<td class="align-middle text-center">1</td>
-			                        	<td class="align-middle text-center">CT-001</td>
-			                        	<td class="align-middle text-left">This is name</td>
-			                        	<td class="align-middle text-center">Date</td>
-			                        	<th class="align-middle text-center">Input</th>
-			                        	<th class="align-middle text-center">Output</th>
-			                        	<th class="align-middle text-center">Stock</th>
-			                        	<th class="align-middle text-center">Unit</th>
-			                        	<th class="align-middle text-center">Action</th>
-{{-- 			                        		<a href="{{route('materials.edit',$warehouse->id)}}" class="btn btn-warning mr-2">
-                                            <i class="fa fa-cog" aria-hidden="true"></i> --}}
+			                        	<td class="align-middle text-center">{{++$i}}</td>
+			                        	<td class="align-middle text-center">{{$detail->warehouse->codeno}}</td>
+			                        	<td class="align-middle text-left">{{$detail->warehouse->name}}</td>
+			                        	<td class="align-middle text-center">{{$detail->date}}</td>
+			                        	<th class="align-middle text-center">{{$detail->input_qty}}</th>
+			                        	<th class="align-middle text-center">{{$detail->output_qty}}</th>
+			                        	<th class="align-middle text-center">{{$detail->warehouse->stock_qty}}</th>
+			                        	<th class="align-middle text-center">{{$detail->warehouse->UOM}}</th>
+			                        	<th class="align-middle text-center">
+			                        	@if($detail->input_qty)
+			                        	<a href="#" class="btn btn-info">
+                                            <i class="fa fa-info" aria-hidden="true"></i>
                                         </a>
-
-			                        	</th>
+                                        @else
+			                        	<a href="{{route('inventory.edit',$detail->id)}}" class="btn btn-warning">
+                                            <i class="fa fa-cog" aria-hidden="true"></i>
+                                        </a>
+                                        @endif
+			                        	</th>                     		
 			                        </tr>
-			                        {{-- @endforeach --}}
+			                        @endforeach
 			                      </tbody>
 			                    </table>
 	                  		</div>

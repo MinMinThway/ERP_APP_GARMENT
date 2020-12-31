@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Warehouse_detail;
 use Illuminate\Http\Request;
-
+use App\Warehouse;
 class WarehouseDetailController extends Controller
 {
     /**
@@ -15,7 +15,8 @@ class WarehouseDetailController extends Controller
     public function index()
     {
         //
-        return view('production.warehouse.inventory');
+        $details=Warehouse_detail::all();
+        return view('production.warehouse.inventory',compact('details'));
     }
 
     /**
@@ -26,6 +27,8 @@ class WarehouseDetailController extends Controller
     public function create()
     {
         //
+        $warehouses = Warehouse::all();
+        return view('production.warehouse.inventory_create',compact('warehouses'));
     }
 
     /**
@@ -82,5 +85,15 @@ class WarehouseDetailController extends Controller
     public function destroy(Warehouse_detail $warehouse_detail)
     {
         //
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Warehouse_detail  $warehouse_detail
+     * @return \Illuminate\Http\Response
+     */
+    public function get($id){
+        var_dump($id);
     }
 }

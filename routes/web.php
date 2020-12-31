@@ -32,6 +32,7 @@ Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/home','HomeController@warehouse')->name('warehouse.home');
 	Route::resource('/production/warehouse/materials','warehouseController');
 	Route::resource('/production/warehouse/inventory','warehouseDetailController');
+	Route::get('','warehouseDetailController@get')->name('inventory.get');
 });
 Route::middleware('role:production/staff')->group(function () {
 	Route::get('/production/staff/home','HomeController@production_staff')->name('production.staff.home');
@@ -47,11 +48,9 @@ Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');
 });
 Route::middleware('role:finance/staff')->group(function () {
-
-	Route::get('/finance/staff/index','HomeController@finance_staff')->name('finance.staff.index');
-	Route::get('/finance/account/newbudget','AccountController@newbudget')->name('finance.account.newbudget');
-	
-	Route::resource('finance/account','AccountController');
+	// Route::get('/finance/staff/index','HomeController@finance_staff')->name('finance.staff.index');
+	// Route::get('/finance/account/newbudget','AccountController@newbudget')->name('finance.account.newbudget');
+	// Route::resource('finance/account','AccountController');
 });
 Route::middleware('role:finance/admin')->group(function () {
 	Route::get('/finance/admin/home','HomeController@finance_admin')->name('finance.admin.home');

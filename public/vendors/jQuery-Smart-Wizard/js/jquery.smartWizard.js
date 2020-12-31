@@ -22,8 +22,8 @@ function SmartWizard(target, options) {
     this.loader = $('<div>Loading</div>').addClass("loader");
     this.buttons = {
         next : $('<a>'+options.labelNext+'</a>').attr("href","#").addClass("buttonNext"),
-        previous : $('<a>'+options.labelPrevious+'</a>').attr("href","#").addClass("buttonPrevious"),
-        finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("buttonFinish")
+        previous : $('<a class="float-left">'+options.labelPrevious+'</a>').attr("href","#").addClass("buttonPrevious"),
+        // finish  : $('<a>'+options.labelFinish+'</a>').attr("href","#").addClass("buttonFinish")
     };
 
     /*
@@ -52,9 +52,9 @@ function SmartWizard(target, options) {
         $this.elmStepContainer.append(allDivs);
         elmActionBar.append($this.loader);
         $this.target.append($this.elmStepContainer);
-        elmActionBar.append($this.buttons.finish)
-                    .append($this.buttons.next)
-                    .append($this.buttons.previous);
+        // elmActionBar.append($this.buttons.finish)
+        elmActionBar.append($this.buttons.previous)
+                    .append($this.buttons.next);                    
         $this.target.append(elmActionBar);
         this.contentWidth = $this.elmStepContainer.width();
 
