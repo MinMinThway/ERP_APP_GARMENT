@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Warehouse_detail;
 use Illuminate\Http\Request;
 use App\Warehouse;
+use Illuminate\Support\Facades\DB;
 class WarehouseDetailController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class WarehouseDetailController extends Controller
     public function index()
     {
         //
-        $details=Warehouse_detail::all();
+        $details=Warehouse_detail::OrderBy('id','desc')->get();
         return view('production.warehouse.inventory',compact('details'));
     }
 
@@ -40,6 +41,8 @@ class WarehouseDetailController extends Controller
     public function store(Request $request)
     {
         //
+        
+
     }
 
     /**
@@ -74,6 +77,57 @@ class WarehouseDetailController extends Controller
     public function update(Request $request, Warehouse_detail $warehouse_detail)
     {
         //
+    DB::transaction(function() use ($request){
+        date_default_timezone_set("Asia/Rangoon");
+        $todayDate = date('Y-m-d',strtotime('today'));
+
+        // var_dump($todayDate).die();
+        $id=$request->id;
+        $input=$request->input;
+        $output=$request->output;
+        
+        if ($input>0 && $output>0) {
+            echo 'error1';
+            exit();
+        }
+        if (($input=='' && $output=='')||($input=='0' && $output=='0')) {
+            echo 'error2';
+            exit();
+        }
+
+        $warehouse=Warehouse::find($id);
+        $old_qty=$warehouse->stock_qty;
+        if ($old_qty>$output) {
+            $detail=new Warehouse_detail;
+            $detail->date=$todayDate;
+            $detail->input_qty=$input;
+            $detail->output_qty=$output;
+            $detail->warehouse_id=$id;
+            if ($input>0 && ($output=='' || $output=='0')) {
+                    $detail->stock=$old_qty+$input;
+            }else{
+                if ($output>0 && ($input=='' || $input=='0')) {
+                    $detail->stock=$old_qty-$output;
+                }    
+            }
+            $detail->save();
+
+            $warehouse=Warehouse::find($id);
+            $old_qty=$warehouse->stock_qty;
+            if ($input>0 && ($output=='' || $output=='0')) {
+                    $warehouse->stock_qty=$old_qty+$input;
+            }else{
+                if ($output>0 && ($input=='' || $input=='0')) {
+                    $warehouse->stock_qty=$old_qty-$output;
+                }    
+            }
+            $warehouse->save();
+        } else {
+            echo 'error3';
+            exit();
+        }
+    });
+    echo 'done';
     }
 
     /**
@@ -93,7 +147,17 @@ class WarehouseDetailController extends Controller
      * @param  \App\Warehouse_detail  $warehouse_detail
      * @return \Illuminate\Http\Response
      */
-    public function get($id){
-        var_dump($id);
+    public function get(Request $request)
+    {
+        //
+        $detail=Warehouse::find($request->id);
+        echo json_encode($detail);
     }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Warehouse_detail  $warehouse_detail
+     * @return \Illuminate\Http\Response
+     */
 }

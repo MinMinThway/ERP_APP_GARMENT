@@ -78,7 +78,7 @@
 			                        	<td class="align-middle text-center">{{$detail->date}}</td>
 			                        	<th class="align-middle text-center">{{$detail->input_qty}}</th>
 			                        	<th class="align-middle text-center">{{$detail->output_qty}}</th>
-			                        	<th class="align-middle text-center">{{$detail->warehouse->stock_qty}}</th>
+			                        	<th class="align-middle text-center">{{$detail->stock}}</th>
 			                        	<th class="align-middle text-center">{{$detail->warehouse->UOM}}</th>
 			                        	<th class="align-middle text-center">
 			                        	@if($detail->input_qty)

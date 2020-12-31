@@ -18,6 +18,7 @@ class CreateWarehouseDetailsTable extends Migration
             $table->date('date');
             $table->string('input_qty')->nullable();
             $table->string('output_qty')->nullable();
+            $table->string('stock')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('warehouse_id');
             $table->foreign('warehouse_id')->references('id')->on('warehouses')->onDelete('cascade');

@@ -77,7 +77,7 @@
                         <span class="step_no">2</span>
                         <span class="step_descr">
                                           Step 2<br />
-                                          <small>Step 2 description</small>
+                                          <small>Input Ammout</small>
                                       </span>
                       </a>
                     </li>
@@ -86,7 +86,7 @@
                         <span class="step_no">3</span>
                         <span class="step_descr">
                                           Step 3<br />
-                                          <small>Step 3 description</small>
+                                          <small>Check</small>
                                       </span>
                       </a>
                     </li>
@@ -114,7 +114,7 @@
 				                                @foreach ($warehouses as $warehouse)                            
 				                                <tr>				                                	
 				                                  <td class="align-middle text-center">
-													<input type="checkbox" class="haha" name="check" data-id="{{$warehouse->id}}">
+													<input type="checkbox" class="haha" id='id{{$warehouse->id}}' name="check" check='0' data-id="{{$warehouse->id}}">
 				                                  </td>
 				                                  <td class="align-middle text-center">{{$warehouse->codeno}}</td>
 				                                  <td class="align-middle text-left">{{$warehouse->name}}</td>
@@ -131,46 +131,38 @@
 				    </div>
 
                   </div> {{-- step-1 end --}}
-                  <div id="step-2">
-	                   <div class="row">
-				        <div class="col-md-12">
-				            <div class="tile">
-				                <div class="tile-body">
-				                    <div class="table-responsive">
-				                        <table class="table table-hover table-striped display">
-				                            <thead style="background-color: #3f5367" class="text-white">
-				                                <tr>
-				                                  <th class="align-middle text-center" width="50px">No</th>
-				                                  <th class="align-middle text-center" width="80px">Code No</th>
-				                                  <th class="align-middle text-center" width="200px">Name</th>
-				                                  <th class="align-middle text-center">Stock</th>
-				                                  <th class="align-middle text-center">Input</th>
-				                                  <th class="align-middle text-center">Output</th>
-				                                  <th class="align-middle text-center">Unit</th>
-				                                </tr>
-				                            </thead>
-				                            <tbody>
-												<tr id="appendhere">
-													
-												</tr>			                            
-				                            </tbody>
-				                        </table>
-				                    </div>
-				                </div>
-				            </div>
-				        </div>
+                  	<div id="step-2">
+	                 	<div class="row">
+				        	<div class="col-md-12">
+				            	<div class="tile">
+				                	<div class="tile-body">
+				                    	<div class="table-responsive">
+				                        	<table class="table table-hover table-striped display">
+					                            <thead style="background-color: #3f5367" class="text-white">
+					                                <tr>
+					                                  <th class="align-middle text-center" width="80px">Code No</th>
+					                                  <th class="align-middle text-center" width="200px">Name</th>
+					                                  <th class="align-middle text-center">Stock</th>
+					                                  <th class="align-middle text-center" width="50px">Input</th>
+					                                  <th class="align-middle text-center" width="50px">Output</th>
+					                                  <th class="align-middle text-center">Unit</th>
+					                                  <th class="align-middle text-center">Action                           	  </th>
+					                                </tr>
+					                            </thead>
+					                            <tbody id="appendhere">
+						                            
+					                            </tbody>
+				                        	</table>
+				                    	</div>
+				                	</div>
+				            	</div>
+				        	</div>
+				    	</div>
 				    </div>
-                  <div id="step-3">
-                    <h2 class="StepTitle">Step 3 Content</h2>
-                    <p>
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                  </div>
+                  	<div id="step-3">
+                  		{{-- <div class="container"> --}}
+
+                  	</div>
                 </div>
                 <!-- End SmartWizard Content -->
               </div>
@@ -196,18 +188,84 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
 		$(document).on('click','input[name=check]',function(){
 			var id=$(this).data('id');
-			$.ajax({
-	            method:"GET",
-	            data: {id:id},
-	            url: '{{route('inventory.get')}}',
-	            success:function(x){
- 
-	            }
-	        })
+			var state=$(this).attr('check');
+			var tr_id='#id'+id; // parent
+			var tr_ids='#ids'+id; // parent
+			if (state=='0') {
+		        $.ajax({
+		            url:'{{route('inventory_get')}}',
+		            method:"GET",
+		            data:{id:id},
+		            success:function(data){
+		            	if(data){
+				            var array=JSON.parse(data);
+				            if (array.stock_qty==null) {
+				            	var stock ='';
+				            } else {
+				            	var stock = array.stock_qty;
+				            }
+				            // var no=$("#appendhere").children().length;
+				            var html=`<tr id='ids${array.id}' data-id='${array.id}'>
+			                    <th class="align-middle text-center" width="80px">${array.codeno}</th>
+			                    <th class="align-middle text-center" width="200px">${array.name}</th>
+			                    <th class="align-middle text-center">${stock}</th>
+			                    <th class="align-middle text-center" width="50px"><input id='ip${array.id}' min='0' type="number" name="Input"></th>
+			                    <th class="align-middle text-center" width="50px"><input id='op${array.id}' min='0' type="number" name="Output"></th>
+			                    <th class="align-middle text-left">${array.UOM}</th>
+                              	<th>
+                              	<button class="btn btn-success" name="checkOut" 
+									data-id='${array.id}'
+									data-input='#ip${array.id}'
+									data-output='#op${array.id}'
+									>
+								Confirm</button>
+                              	</th>
+			                    </tr>`;
+			                $('#appendhere').append(html);
+			                $(tr_id).attr('check','1');
+				            }	
+		            	}
+		        });
+		    }else{
+		    	$(tr_id).attr('check','0');
+		    	$(tr_ids).remove();
+		    }
 		})
+
+		$(document).on('click','button[name=checkOut]',function(){
+			var id=$(this).data('id');
+			var input_id=$(this).data('input');
+			var output_id=$(this).data('output');
+			var input=$(input_id).val();
+			var output=$(output_id).val();
+			var tr_ids='#ids'+id;
+			$.ajax({
+	            url:'{{route('inventory.update',1)}}',
+	            method:"PUT",
+	            data:{id:id,input:input,output:output},
+	            success:function(data){
+	            	if(data=='error1'){
+	            		alert('#error1 only input or output allow');
+	            	}
+	            	if(data=='error2'){
+	            		alert('#error2 both input and output not 0 nor null');
+	            	}	
+	               	if(data=='error3'){
+	            		alert('#error3 Not Enough Balance!');
+	            	}
+	            	if (data=='done') {
+	            		$(tr_ids).remove();
+	            	}
+	            }
+		    });
+		})
+
 	})
+
 </script>
 
 @endsection
+

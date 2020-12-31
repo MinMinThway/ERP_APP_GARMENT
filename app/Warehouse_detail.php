@@ -8,7 +8,7 @@ class Warehouse_detail extends Model
 {
     //
     protected $fillable = [
-    	'date','input_qty','output_qty','warehouse_id',
+    	'date','input_qty','output_qty','stock','warehouse_id',
     ];
     public function warehouse()
     {
