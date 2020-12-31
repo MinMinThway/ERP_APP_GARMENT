@@ -47,9 +47,6 @@
 	              	<div class="row">
 	                  	<div class="col-sm-12">
 	                    	<div class="card-box table-responsive">
-{{-- 					            <p class="text-muted font-13 m-b-30">
-					              The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
-					            </p> --}}
 			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
@@ -73,13 +70,13 @@
 			                      	@foreach($details as $detail)
 			                        <tr>
 			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-center">{{$detail->warehouse->codeno}}</td>
+			                        	<td class="align-middle text-left">{{$detail->warehouse->codeno}}</td>
 			                        	<td class="align-middle text-left">{{$detail->warehouse->name}}</td>
-			                        	<td class="align-middle text-center">{{$detail->date}}</td>
-			                        	<th class="align-middle text-center">{{$detail->input_qty}}</th>
-			                        	<th class="align-middle text-center">{{$detail->output_qty}}</th>
-			                        	<th class="align-middle text-center">{{$detail->stock}}</th>
-			                        	<th class="align-middle text-center">{{$detail->warehouse->UOM}}</th>
+			                        	<td class="align-middle text-left">{{$detail->date}}</td>
+			                        	<th class="align-middle text-right">{{$detail->input_qty}}</th>
+			                        	<th class="align-middle text-right">{{$detail->output_qty}}</th>
+			                        	<th class="align-middle text-right">{{$detail->stock}}</th>
+			                        	<th class="align-middle text-left">{{$detail->warehouse->UOM}}</th>
 			                        	<th class="align-middle text-center">
 			                        	@if($detail->input_qty)
 			                        	<a href="#" class="btn btn-info">

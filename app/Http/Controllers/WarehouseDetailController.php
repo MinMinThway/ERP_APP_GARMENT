@@ -97,7 +97,7 @@ class WarehouseDetailController extends Controller
 
         $warehouse=Warehouse::find($id);
         $old_qty=$warehouse->stock_qty;
-        if ($old_qty>$output) {
+        if ($old_qty>=$output) {
             $detail=new Warehouse_detail;
             $detail->date=$todayDate;
             $detail->input_qty=$input;
@@ -122,12 +122,12 @@ class WarehouseDetailController extends Controller
                 }    
             }
             $warehouse->save();
+            echo $warehouse->stock_qty;
         } else {
             echo 'error3';
             exit();
         }
     });
-    echo 'done';
     }
 
     /**

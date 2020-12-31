@@ -118,7 +118,7 @@
 				                                  </td>
 				                                  <td class="align-middle text-center">{{$warehouse->codeno}}</td>
 				                                  <td class="align-middle text-left">{{$warehouse->name}}</td>
-				                                  <td class="align-middle text-right">{{$warehouse->stock_qty}}</td>
+				                                  <td id='st{{$warehouse->id}}' class="align-middle text-right">{{$warehouse->stock_qty}}</td>
 				                                  <td class="align-middle text-left">{{$warehouse->UOM}}</td>
 				                                </tr>
 				                                @endforeach				                            
@@ -150,7 +150,7 @@
 					                                </tr>
 					                            </thead>
 					                            <tbody id="appendhere">
-						                            
+						                            <tr></tr>
 					                            </tbody>
 				                        	</table>
 				                    	</div>
@@ -159,10 +159,35 @@
 				        	</div>
 				    	</div>
 				    </div>
-                  	<div id="step-3">
-                  		{{-- <div class="container"> --}}
-
-                  	</div>
+                <div id="step-3">
+		          	<div class="x_content">
+		              	<div class="row">
+		                  	<div class="col-sm-12">
+		                    	<div class="card-box table-responsive">
+				                    <table id="" class="table table-striped table-bordered display" style="width:100%">
+				                      <thead style="background-color: #3f5367" class="text-white">
+				                       	<tr>
+		                                  <th class="align-middle text-center" >Code No</th>
+		                                  <th class="align-middle text-center" >Name</th>
+		                                  <th class="align-middle text-center" >Stock</th>
+		                                  <th class="align-middle text-center" >Input</th>
+		                                  <th class="align-middle text-center" >Output</th>
+		                                  <th class="align-middle text-center">Unit</th>
+		                                </tr>
+				                      </thead>
+				                      <tbody id="appendhere2">
+				                      	<tr>
+				                      		
+				                      	</tr>
+				                      </tbody>
+				                    </table>
+				                    <div class="my-5"></div>
+				                    <a href="{{route('inventory.index')}}" class="btn btn-info pull-right">Finish</a>
+				                    <div class="my-5"></div>
+		                  		</div>
+		                	</div>
+		              	</div> 
+		            </div>
                 </div>
                 <!-- End SmartWizard Content -->
               </div>
@@ -193,7 +218,7 @@
 			var id=$(this).data('id');
 			var state=$(this).attr('check');
 			var tr_id='#id'+id; // parent
-			var tr_ids='#ids'+id; // parent
+			var tr_ids='#ids'+id; // check
 			if (state=='0') {
 		        $.ajax({
 		            url:'{{route('inventory_get')}}',
@@ -220,6 +245,9 @@
 									data-id='${array.id}'
 									data-input='#ip${array.id}'
 									data-output='#op${array.id}'
+									data-code='${array.codeno}'
+									data-name='${array.name}'
+									data-unit='${array.UOM}'
 									>
 								Confirm</button>
                               	</th>
@@ -242,6 +270,12 @@
 			var input=$(input_id).val();
 			var output=$(output_id).val();
 			var tr_ids='#ids'+id;
+			var chk_id='#id'+id;
+			var st_id='#st'+id; // check
+			//for report
+			var code=$(this).data('code');
+			var name=$(this).data('name');
+			var unit=$(this).data('unit');
 			$.ajax({
 	            url:'{{route('inventory.update',1)}}',
 	            method:"PUT",
@@ -249,15 +283,30 @@
 	            success:function(data){
 	            	if(data=='error1'){
 	            		alert('#error1 only input or output allow');
+	            		exit();
 	            	}
 	            	if(data=='error2'){
 	            		alert('#error2 both input and output not 0 nor null');
+	            		exit();
 	            	}	
 	               	if(data=='error3'){
 	            		alert('#error3 Not Enough Balance!');
+	            		exit();
 	            	}
-	            	if (data=='done') {
+	            	if (data) {
 	            		$(tr_ids).remove();
+	            		$(chk_id).click();
+	            		$(st_id).html(data);
+
+                       	var html=`<tr>
+                          <th class="align-middle text-center" >${code}</th>
+                          <th class="align-middle text-center" >${name}</th>
+                          <th class="align-middle text-center" >${data}</th>
+                          <th class="align-middle text-center" >${input}</th>
+                          <th class="align-middle text-center" >${output}</th>
+                          <th class="align-middle text-center">${unit}</th> 
+                        </tr>`;
+	            		$('#appendhere2').append(html);
 	            	}
 	            }
 		    });
