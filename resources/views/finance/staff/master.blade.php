@@ -4,6 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
@@ -80,22 +82,16 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="{{route('finance.staff.index')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                  <li><a href="{{route('finance.staff.home')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
                 </ul>
               </div>
 
               <div class="menu_section">
                 <h3>Finance</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-institution"></i>Bank Accounts<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{route('account.index')}}">Account Lists</a></li>
-                    </ul>
+                  <li><a href="{{route('account.index')}}"><i class="fa fa-institution"></i>Bank Accounts</a>
                   </li>
-                  <li><a><i class="fa fa-money"></i>Budgets<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{route('finance.account.newbudget')}}">Add Budget</a></li>
-                    </ul>
+                  <li><a href="{{asset('/finance/account/addbudget')}}"><i class="fa fa-money"></i>Budgets</a>
                   </li>
                 </ul>
               </div>
@@ -169,7 +165,7 @@
 
                     <li role="presentation" class="nav-item dropdown open">
                       <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-inbox"></i>
                         <span class="badge bg-green">6</span>
                       </a>
                       <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">

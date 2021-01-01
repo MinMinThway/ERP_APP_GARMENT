@@ -1,3 +1,4 @@
+
 @extends('finance.staff.master')
 
 @section('body')
@@ -34,55 +35,55 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+										
 
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Bank Name<span class="required">*</span>
 											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<select class="form-control">
+											<div class="col-md-4 col-sm-4">
+												<select class="form-control" id="bank" name="bankname">
 													<option>Choose option</option>
 													@foreach($account as $account)
-														<option>{{$account->bank}}</option>
+														<option id={{$account->id}}>{{$account->bank}}</option>
 													@endforeach
 												</select>
 												
 											</div>
 										</div>
+										<form id="demo-form2" action="{{route('account.addbalance')}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
+										@csrf
+              							@method('GET')
+              							<input type="hidden" name="id" value="{{$account->id}}">
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Account Type<span class="required">*</span>
 											</label>
-											<div class="col-md-6 col-sm-6 ">
+											<div class="col-md-4 col-sm-4 " >
+												<input type="text" name="accounttype" class="form-control" id="actype" disabled="">
 												
 												
-												<select class="form-control">
-													<option>Choose option</option>
-													@foreach($account as $account)
-													{{-- <option>{{$account->type}}</option> --}}
-													@endforeach
-												</select>
 											</div>
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Account Number<span class="required">*</span>
 											</label>
-											<div class="col-md-6 col-sm-6 " id="accountno">
-												
+											<div class="col-md-4 col-sm-4 " >
+												<input type="text" class="form-control" name="accountno" id="accountno" disabled="">
 											</div>
 										</div>
+
+										
 											<div class="form-group row">
 					                        <label class="col-form-label col-md-3 col-sm-3 label-align">Ammount</label>
-					                        <div class="col-md-6 col-sm-6">
-					                          <input type="text" class="form-control" data-inputmask="'mask' : '999-999-999-999'">
-					                          
+					                        <div class="col-md-4 col-sm-4">
+					                          <input type="number" class="form-control" id="ammount" name="ammount">
 					                        </div>
 					                      </div>
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<button type="submit" class="btn btn-success">Submit</button>
-												<button class="btn btn-primary" type="reset">Reset</button>
-												<button class="btn btn-primary" type="reset">Cancel</button>
+												<button class="btn btn-outline-dark" type="reset">Reset</button>
+												<button class="btn btn-outline-danger" type="reset">Cancel</button>
 											</div>
 										</div>
 
@@ -94,9 +95,54 @@
 				</div>
 	</div>
 
-	<script type="text/javascript">
+	 	{{-- var bank=$('#bank').val();
+
+	// 	$.ajax(
+	// 	{
+	// 		method:'POST',
+	// 		url:"{{route('account.newbudget')}}",
+	// 		data:{
+	// 			bank:bank,
+	// 		},
+	// 		dataType:'json',
+
+
+	// 		success:function(response)
+	// 		{
+	// 			//console.log(response);
+	// 			var data= JSON.parse(response);
+	// 			var account='';
+	// 			account +=`<select class="form-control">
+	// 							<option>Choose option</option>
+								
+	// 						</select>`;
+									
+	// 		$.each(data,function(i,v){
+	// 			if(v)
+	// 			{
+	// 				var accounttype=v.type;
+					
+					
+
+	// 				accountnoresultDiv +=`<option>{{$account->type}}</option>`;
+
+	// 			}
+
+	// 	})
+
+	// $('#accountno').html(accountnoresultDiv);
+		
+// 	}
+// })
+// });
+
+    
+     
+
+
+	{{-- <script type="text/javascript">
 		$(document).ready(function(){
-			fetch_accountno();
+			
 
 			function fetch_accountno(query = '')
 			{
@@ -108,12 +154,79 @@
 					dataType:'json',
 					success:function(data)
 					{
-						$('#accountno').html(data.account_no)
+						$('#accountno').html(data.account_no)// table data 
+
 					}
 				})
 			}
 
-			$(document).on()
+			$(document).on('keyup','#bank',function(){
+				var query= $(this).val();
+				fetch_accountno(query);
+
+			});
+
+		});
+	</script> --}}
+@endsection
+
+@section('script')
+	<script type="text/javascript">
+		$(document).ready(function(){
+			 
+	$.ajaxSetup({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	
+		$("#bank").on('change',function(){
+			var bank =$(this).children(":selected").attr("id");
+			
+			$.ajax(
+				{
+			method:'GET',
+			url:"{{route('account.addtype')}}",
+			data:{
+				bank:bank
+			},
+			// // dataType:'json',
+			
+			success:function(data)
+	 		{
+	 			if(data){
+	 			 var array = JSON.parse(data);
+	 			 // console.log(array.type);
+	 			 $('#actype').val(array.type);
+	 			 $('#accountno').val(array.acc_number);
+	 			}
+
+
+
+	 		}
+		});
+		});
+
+		
+
+
+		// 	 $.ajax(
+		// {
+		// 	method:'POST',
+			// url:"",
+		// 	data:{
+		// 		bank:bank,
+		// 	},
+		// 	dataType:'json',
+			
+		// 	success:function(response)
+	 // 		{
+	 // 			//console.log(response);
+	 // 		}
+		// });
+			 
+
 
 		})
 	</script>

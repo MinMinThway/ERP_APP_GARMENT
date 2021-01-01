@@ -55,12 +55,12 @@
                           <td>{{$account->acc_number}}</td>
                           <td>${{$account->balance}}</td>
                           <td>
-                          	<a href="{{route('account.edit',$account->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                          	<a href="{{route('account.edit',$account->id)}}" class="btn btn-primary btn-sm" alt="Edit"><i class="fa fa-edit"></i></a>
                         <form method="post" action="{{route('account.destroy',$account->id)}}" onsubmit="return confirm('Are you sure?')" class="d-inline">
                               @csrf
                         @method('DELETE')
 
-                          <button type="submit" class="btn btn-danger btn-sm" name="btnsubmit" value="Delete">Delete</button></td>
+                          <button type="submit" class="btn btn-danger btn-sm" name="btnsubmit" value="Delete"><i class="fa fa-trash"></i></button></td>
                         </tr>
 
                         @endforeach

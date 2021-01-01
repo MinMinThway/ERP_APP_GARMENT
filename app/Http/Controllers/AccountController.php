@@ -90,7 +90,7 @@ class AccountController extends Controller
             'bankname'    => 'required|min:5',
             'accounttype' => 'required|min:3',
             'accountno'   => 'required|min:2',
-            'balance'     => 'required|min:5'
+            'balance'     => 'required|min:5' 
         ]);
 
         
@@ -118,25 +118,24 @@ class AccountController extends Controller
 
     public function newbudget(Request $request, Account $account)
     {
+        
         $account = Account::orderBy('id','desc')->get();
-        $accountno = Account::
         return view('finance.staff.addbudget',compact('account'));
     }
 
-    // public function balanceupdate(Request $request, Account $account)
-    // {
-    //     $request->validate([
-    //         'bankname'    => 'required|min:5',
-    //         'accountno'   => 'required|min:2',
-    //         'balance'     => 'required|min:5'
-    //     ]);
+    public function account(Request $request, Account $account)
+    {
+        $data=Account::find($request->bank);
 
+        echo json_encode($data);
+    }
+
+    public function amountadd(Request $request, Account $account)
+    {
+        $account= Account::find($request->id);
+        $account->balance  =  $account->balance + $request->ammount;
+        $account->save();
+         return redirect()->route('account.index');
+    }
         
-    //     $account->bank       = $request->bankname;
-    //     $account->acc_number = $request->accountno;
-    //     $account->balance    = $request->balance;
-    //     $account->save();
-        
-    //     return redirect()->route('account.index');
-    // }
 }
