@@ -41,18 +41,18 @@
 								@else
 								<tr>
 									<td>{{$i++}}</td>
-									<td class="align-middle text-left">{{$supplier->company_name}}</td>
-									<td>{{$supplier->email}}</td>
-									<td>{{$supplier->address}}</td>
-									<td>{{$supplier->phone}}</td>
+									<td class="align-middle text-left" width="220px">{{$supplier->company_name}}</td>
+									<td class="align-middle text-left" width="220px">{{$supplier->email}}</td>
+									<td class="align-middle text-left" width="220px">{{$supplier->address}}</td>
+									<td class="align-middle text-left">{{$supplier->phone}}</td>
 									
 									<td>
-										<a href="{{route('supplier.edit',$supplier->id)}}" class="btn btn-outline-warning btn-sm">Edit</a>
+										<a href="{{route('supplier.edit',$supplier->id)}}" class="btn btn-outline-warning btn-sm"><i class="fa fa-cog" aria-hidden="true"></i></a>
 										
 										<form action="{{route('supplier.destroy',$supplier->id)}}" method="POST" onsubmit="return confirm('Are you sure want to delete')" class="d-inline">
 											@csrf
 											@method('DELETE')
-											<input type="submit" name="btnsubmit" class="btn btn-outline-danger btn-sm" value="Delete">
+											<button type="submit" name="btnsubmit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
 										</form>
 									</td>
 								</tr>

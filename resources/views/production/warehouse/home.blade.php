@@ -49,6 +49,39 @@ use App\Warehouse_detail;
     $df_ct_wk_down=number_format((($df_ct_week*100)/$past_week),0);
   }
   // week Transection
+  //Months Transection
+  $m=strtotime('today');
+  $start_month=strtotime('-1 Months');
+  $end_month=strtotime('today');
+  $startm=date('Y-m-d',$start_month);
+  $endm=date('Y-m-d',$end_month);
+
+  //Past months
+
+  $start_monthp=strtotime('-2 Months');
+  $end_monthp=strtotime('-1 Months');
+  $startmp=date('Y-m-d',$start_monthp);
+  $endmp=date('Y-m-d',$end_monthp);
+
+  // var_dump($startmp);
+  // var_dump($endmp).die();
+ //past month
+
+ $this_month=Warehouse_detail::whereBetween('date', [$startm, $endm])->count();
+ $past_month=Warehouse_detail::whereBetween('date', [$startmp, $endmp])->count();
+
+$df_ct_mt_up=0;
+$df_ct_mt_down=0;
+if ($this_month>$past_month) {
+  // trend
+  $df_ct_month=$this_month-$past_month;
+  $df_ct_mt_up=number_format((($df_ct_month*100)/$past_month),0);
+}else{
+  $df_ct_month=$past_month-$this_month;
+  $df_ct_mt_down=number_format((($df_ct_month*100)/$past_month),0);
+}
+
+  //Months Transection
 
 @endphp
 @section('body')
@@ -58,7 +91,7 @@ use App\Warehouse_detail;
         <div class="row" style="display: inline-block;" >
         	<div class="tile_count">
             <a href="{{route('materials.index')}}">
-            	<div class="col-md-3 col-sm-4  tile_stats_count">
+            	<div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               		<span class="count_top">
               			<i class="fa fa-cubes" aria-hidden="true"></i>
 						          Total Material
@@ -67,7 +100,7 @@ use App\Warehouse_detail;
                 {{-- <span class="count_bottom"><i class="green">4% </i> From last Week</span> --}}
               </div>
             </a>
-            <div class="col-md-3 col-sm-4  tile_stats_count">
+            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-clock-o"></i> Totay Transection</span>
               <div class="count">{{$today_transection}}</div>
               <span class="count_bottom"><i class="@if($df_ct_ps_up>$df_ct_ps_down) green @else red @endif">
@@ -79,7 +112,7 @@ use App\Warehouse_detail;
                  From Yesterday</span>
             </div>
 
-            <div class="col-md-3 col-sm-4  tile_stats_count">
+            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-clock-o"></i> Week Transection</span>
               <div class="count">{{$this_week}}</div>
               <span class="count_bottom"><i class="@if($df_ct_wk_up>$df_ct_wk_down) green @else red @endif">
@@ -91,17 +124,23 @@ use App\Warehouse_detail;
                  From Yesterday</span>
             </div>
 
-            <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-              <div class="count">4,567</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
+              <span class="count_top"><i class="fa fa-user"></i> Month Transection</span>
+              <div class="count">{{$this_month}}</div>
+              <span class="count_bottom"><i class=" @if($df_ct_mt_up>$df_ct_mt_down) green @else red @endif">
+              @if($df_ct_mt_up>$df_ct_mt_down)
+                <i class="fa fa-sort-asc"></i>{{$df_ct_mt_up}}% </i>
+                @else
+                <i class="fa fa-sort-desc"></i>{{$df_ct_mt_down}}% </i>
+                @endif
+              </i> From last Week</span>
             </div>
-            <div class="col-md-2 col-sm-4  tile_stats_count">
+            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
               <div class="count">2,315</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
-            <div class="col-md-2 col-sm-4  tile_stats_count">
+            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
               <div class="count">7,325</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
