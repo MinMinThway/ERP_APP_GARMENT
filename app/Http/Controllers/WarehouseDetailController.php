@@ -153,11 +153,4 @@ class WarehouseDetailController extends Controller
         $detail=Warehouse::find($request->id);
         echo json_encode($detail);
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Warehouse_detail  $warehouse_detail
-     * @return \Illuminate\Http\Response
-     */
 }

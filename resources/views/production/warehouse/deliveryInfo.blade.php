@@ -1,9 +1,24 @@
 @extends('production.warehouse.master')
 @php
-// var_dump($details[0]->warehouse->name).die();
+// use App\Order_detail;
+use App\Warehouse;
+	// $order= new Order;
+	// $order->date='2020-12-15';
+	// $order->invoice_no='CNG22343221';
+	// $order->total='50';
+	// $order->supplier_id=7;
+	// $order->status_id=7;
+	// $order->save();
+
+	// $order_detail=new Order_detail;
+	// $order_detail->qty=10;
+	// $order_detail->price='15';
+	// $order_detail->UOM='piece';
+	// $order_detail->warehouse_id=3;
+	// $order_detail->order_id=1;
+	// $order_detail->save();
 
 @endphp
-
 @section('body')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -13,8 +28,8 @@
 		        <div class="x_panel">
 		        	<h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
 		        		<span class="float-right">
-		        			<a href="{{route('inventory.create')}}">
-		        			Add
+		        			<a href=""> {{-- {{route('inventory.create')}} --}}
+		        			Delivered
 		        			<i class="fa fa-plus" aria-hidden="true"></i>
 		        			</a>
 						</span>
@@ -29,13 +44,13 @@
 		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Inventory List <small></small></h2>
+	            	<h2>Order Acceptable List <small>Shipment On The Way</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
 		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
 		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		                    	<a class="dropdown-item" href="{{route('inventory.create')}}">Add New</a>
+		                    	<a class="dropdown-item" href="">Add New</a> 
 		                    	<a class="dropdown-item" href="#">Settings 2</a>
 		                  	</div>
 		              	</li>
@@ -48,18 +63,14 @@
 	              	<div class="row">
 	                  	<div class="col-sm-12">
 	                    	<div class="card-box table-responsive">
-			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+			                    <table id="" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
-			                        	<th class="align-middle text-center">No</th>
+			                        	<th class="align-middle text-center">No</th>  
 			                        	<th class="align-middle text-center">Code No</th>
-			                        	<th class="align-middle text-center" width="200px">Name</th>
-			                        	<th class="align-middle text-center">Date</th>
-			                        	<th class="align-middle text-center">Input</th>
-			                        	<th class="align-middle text-center">Output</th>
-			                        	<th class="align-middle text-center">Stock</th>
-			                        	<th class="align-middle text-center">Unit</th>
-			                        	<th class="align-middle text-center">Action</th>
+			                        	<th class="align-middle text-center">Name</th>
+			                        	<th class="align-middle text-center">Qty</th>
+			                        	<th class="align-middle text-center">Unit</th>			         
 			                        </tr>
 			                      </thead>
 
@@ -68,36 +79,38 @@
 			                      	@php
 			                      		$i=0;
 			                      	@endphp
-			                      	@foreach($details as $detail)
+			                      	@foreach($order->detail as $data)
+			                      	@php
+			                      		$warehouse=Warehouse::find($data->warehouse_id);
+			                      	@endphp
 			                        <tr>
-			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-left">{{$detail->warehouse->codeno}}</td>
-			                        	<td class="align-middle text-left">{{$detail->warehouse->name}}</td>
-			                        	<td class="align-middle text-left">{{$detail->date}}</td>
-			                        	<th class="align-middle text-right">{{$detail->input_qty}}</th>
-			                        	<th class="align-middle text-right">{{$detail->output_qty}}</th>
-			                        	<th class="align-middle text-right">{{$detail->stock}}</th>
-			                        	<th class="align-middle text-left">{{$detail->warehouse->UOM}}</th>
-			                        	<th class="align-middle text-center">
-			                        	@if($detail->input_qty)
-			                        	<a href="#" class="btn btn-info">
-                                            <i class="fa fa-info" aria-hidden="true"></i>
-                                        </a>
-                                        @else
-			                        	<a href="{{route('inventory.edit',$detail->id)}}" class="btn btn-warning">
-                                            <i class="fa fa-cog" aria-hidden="true"></i>
-                                        </a>
-                                        @endif
-			                        	</th>                     		
+			                        	<th class="align-middle text-center">{{++$i}}</th>  
+			                        	<th class="align-middle text-center">{{$warehouse->codeno}}</th>
+			                        	<th class="align-middle text-left">{{$warehouse->name}}</th>
+			                        	<th class="align-middle text-right">{{$data->qty}}</th>
+			                        	<th class="align-middle text-left">{{$data->UOM}}</th>           
 			                        </tr>
 			                        @endforeach
+			                        <form id="deli" action="{{route('delivered')}}" method="POST" class="d-none">
+			                        	@csrf
+			                        	@method('GET')
+			                        	<input type="hidden" name="id" value="{{$order->id}}">
+		                        	</form>
 			                      </tbody>
-			                    </table>
+			                    </table> 
+			                    
 	                  		</div>
 	                	</div>
 	              	</div> 
+	            
 	            </div>
+
 	        </div>
+	    </div>
+
+	    {{-- <div class="clearfix"></div> --}}
+	    <div class="pt-3">
+	    <button onclick="document.getElementById('deli').submit();" class="btn btn-success pull-right">Delivery</button>
 	    </div>
   	</div>
 </div>

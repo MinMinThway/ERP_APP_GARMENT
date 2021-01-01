@@ -26,6 +26,7 @@ Route::get('/warehouse', function(){
 	return view('production.warehouse.warehouse');
 });
 
+Route::resource('/Order','OrderController');
 
 // Route::middleware('auth')->group(function () {
 Route::middleware('role:production/warehouse')->group(function () {
@@ -33,7 +34,10 @@ Route::middleware('role:production/warehouse')->group(function () {
 	Route::resource('/production/warehouse/materials','warehouseController');
 	Route::resource('/production/warehouse/inventory','warehouseDetailController');
 	Route::get('/inventory_get','warehouseDetailController@get')->name('inventory_get');
-	Route::get('/inventory_send','warehouseDetailController@get')->name('inventory_send');
+	// Route::get('/inventory_send','warehouseDetailController@get')->name('inventory_send');
+	Route::get('/production/warehouse/delivery','OrderController@delivery')->name('delivery');
+	Route::get('/production/warehouse/delivery/info','OrderController@deliveryInfo')->name('deliveryInfo');
+	Route::get('/production/warehouse/delivery/set','OrderController@delivered')->name('delivered');
 });
 Route::middleware('role:production/staff')->group(function () {
 	Route::get('/production/staff/home','HomeController@production_staff')->name('production.staff.home');

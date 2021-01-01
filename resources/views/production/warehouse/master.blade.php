@@ -53,7 +53,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                {{-- <img src="" alt="..." class="img-circle profile_img"> --}}
               </div>
               <div class="profile_info">
                 <span>User Name</span>
@@ -89,7 +89,14 @@
                   <li class="{{ Request::is('production/warehouse/inventory*') ? 'current-page' : '' }}">
                     <a href="{{route('inventory.index')}}">
                       <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                    inventory
+                    Inventory
+                    </a>
+                  </li>
+
+                  <li class="{{ Request::is('production/warehouse/delivery*') ? 'current-page' : '' }}">
+                    <a href="{{route('delivery')}}">
+                      <i class="fa fa-truck" aria-hidden="true"></i>
+                    Delivery
                     </a>
                   </li>
 
