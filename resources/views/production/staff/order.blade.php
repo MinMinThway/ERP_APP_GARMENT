@@ -38,7 +38,7 @@
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
               <div class="x_title">
-                <h2>INVENTORY <small>Transection</small></h2>
+                <h2>Order <small>Creating</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -140,11 +140,11 @@
 				                        	<table class="table table-hover table-striped display">
 					                            <thead style="background-color: #3f5367" class="text-white">
 					                                <tr>
-					                                  <th class="align-middle text-center" width="80px">Code No</th>
-					                                  <th class="align-middle text-center" width="200px">Name</th>
-					                                  <th class="align-middle text-center">Stock</th>
-					                                  <th class="align-middle text-center" width="50px">Input</th>
-					                                  <th class="align-middle text-center" width="50px">Output</th>
+					                                  <th class="align-middle text-center" >Code No</th>
+					                                  <th class="align-middle text-center" >Name</th>
+					                                  <th class="align-middle text-center">warehouse</th>
+					                                  <th class="align-middle text-center" >Order</th>
+					                                  {{-- <th class="align-middle text-center" width="50px">Output</th> --}}
 					                                  <th class="align-middle text-center">Unit</th>
 					                                  <th class="align-middle text-center">Action                           	  </th>
 					                                </tr>
@@ -169,10 +169,10 @@
 				                       	<tr>
 		                                  <th class="align-middle text-center" >Code No</th>
 		                                  <th class="align-middle text-center" >Name</th>
-		                                  <th class="align-middle text-center" >Stock</th>
-		                                  <th class="align-middle text-center" >Input</th>
-		                                  <th class="align-middle text-center" >Output</th>
+		                                  <th class="align-middle text-center" >Warehouse</th>
+		                                  <th class="align-middle text-center" >Order</th>
 		                                  <th class="align-middle text-center">Unit</th>
+		                                  <th class="align-middle text-center">Action</th>
 		                                </tr>
 				                      </thead>
 				                      <tbody id="appendhere2">
@@ -182,7 +182,7 @@
 				                      </tbody>
 				                    </table>
 				                    <div class="my-5"></div>
-				                    <a href="{{route('inventory.index')}}" class="btn btn-info pull-right">Finish</a>
+				                    <button name="order" class="btn btn-info pull-right">Order Confirm</button>
 				                    <div class="my-5"></div>
 		                  		</div>
 		                	</div>
@@ -207,7 +207,18 @@
 <script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script>
 
 <script type="text/javascript">
+	var old=localStorage.getItem('order');
 	$(document).ready(function(){
+		setInterval(check,1000);
+		ifChange();
+		function check(){
+			var current=localStorage.getItem('order');
+			if (old!=current) {
+				ifChange();
+				old=current;
+			}	
+		}
+		
 	    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -234,22 +245,21 @@
 				            }
 				            // var no=$("#appendhere").children().length;
 				            var html=`<tr id='ids${array.id}' data-id='${array.id}'>
-			                    <th class="align-middle text-center" width="80px">${array.codeno}</th>
-			                    <th class="align-middle text-center" width="200px">${array.name}</th>
+			                    <th class="align-middle text-center" >${array.codeno}</th>
+			                    <th class="align-middle text-center" >${array.name}</th>
 			                    <th class="align-middle text-center">${stock}</th>
-			                    <th class="align-middle text-center" width="50px"><input id='ip${array.id}' min='0' type="number" name="Input"></th>
-			                    <th class="align-middle text-center" width="50px"><input id='op${array.id}' min='0' type="number" name="Output"></th>
+			                    <th class="align-middle text-center"><input id='qty${array.id}' min='0' type="number" name="Input" class='w-50' value='0'></th>
 			                    <th class="align-middle text-left">${array.UOM}</th>
                               	<th>
                               	<button class="btn btn-success" name="checkOut" 
 									data-id='${array.id}'
-									data-input='#ip${array.id}'
-									data-output='#op${array.id}'
+									data-qty='#qty${array.id}'
 									data-code='${array.codeno}'
 									data-name='${array.name}'
 									data-unit='${array.UOM}'
+									data-stock='${stock}'
 									>
-								Confirm</button>
+								Add Order</button>
                               	</th>
 			                    </tr>`;
 			                $('#appendhere').append(html);
@@ -262,13 +272,15 @@
 		    	$(tr_ids).remove();
 		    }
 		})
+               // <th class="align-middle text-center" width="50px"><input id='op${array.id}' min='0' type="number" name="Output"></th>
 
+        // this is 
 		$(document).on('click','button[name=checkOut]',function(){
 			var id=$(this).data('id');
-			var input_id=$(this).data('input');
-			var output_id=$(this).data('output');
+			var input_id=$(this).data('qty');
+			// var output_id=$(this).data('output');
 			var input=$(input_id).val();
-			var output=$(output_id).val();
+			// var output=$(output_id).val();
 			var tr_ids='#ids'+id;
 			var chk_id='#id'+id;
 			var st_id='#st'+id; // check
@@ -276,43 +288,70 @@
 			var code=$(this).data('code');
 			var name=$(this).data('name');
 			var unit=$(this).data('unit');
-			$.ajax({
-	            url:'{{route('inventory.update',1)}}',
-	            method:"PUT",
-	            data:{id:id,input:input,output:output},
-	            success:function(data){
-	            	if(data=='error1'){
-	            		alert('#error1 only input or output allow');
-	            		exit();
-	            	}
-	            	if(data=='error2'){
-	            		alert('#error2 both input and output not 0 nor null');
-	            		exit();
-	            	}	
-	               	if(data=='error3'){
-	            		alert('#error3 Not Enough Balance!');
-	            		exit();
-	            	}
-	            	if (data) {
-	            		$(tr_ids).remove();
-	            		$(chk_id).click();
-	            		$(st_id).html(data);
+			var stock=$(this).data('stock');
 
-                       	var html=`<tr>
-                          <th class="align-middle text-center" >${code}</th>
-                          <th class="align-middle text-center" >${name}</th>
-                          <th class="align-middle text-center" >${data}</th>
-                          <th class="align-middle text-center" >${input}</th>
-                          <th class="align-middle text-center" >${output}</th>
-                          <th class="align-middle text-center">${unit}</th> 
-                        </tr>`;
-	            		$('#appendhere2').append(html);
-	            	}
-	            }
-		    });
+			var mylocal='order';
+			var myString=localStorage.getItem(mylocal);
+			var myData={
+				warehouse_id:id,
+				qty:input,
+				UOM:unit,
+				stock:stock,
+				codeno:code,
+				name:name,
+			};
+			var hit=false;
+			if (myString) {
+				var myArray=JSON.parse(myString);
+				for (x in myArray) {
+					if (myArray[x].warehouse_id==id) {
+						myArray[x].qty=parseInt(myArray[x].qty)+parseInt(input);
+						hit=true;
+					}
+				}
+				if (hit) {
+
+				}else{
+					myArray.push(myData);					
+				}
+			}else{
+				var myArray=[];
+				myArray.push(myData);				
+			}
+			localStorage.setItem(mylocal,JSON.stringify(myArray));
+			$(tr_ids).remove();
+        	$(chk_id).click();
 		})
+        // this is
+    function ifChange(){
 
-	})
+    	var mylocal='order';
+		var myArray=JSON.parse(localStorage.getItem(mylocal));
+		var html='';
+		if(myArray){
+			for (x in myArray) {
+    	html+=`<tr>
+                  <th class="align-middle text-center" >${myArray[x].codeno}</th>
+                  <th class="align-middle text-left" >${myArray[x].name}</th>
+                  <th class="align-middle text-right" >${myArray[x].stock}</th>
+                  <th class="align-middle text-center" >${myArray[x].qty}</th>
+                  <th class="align-middle text-left">${myArray[x].UOM}</th> 
+                  <th class="align-middle text-center">
+                  <button class='btn btn-outline-warning'>edit</button>
+                  </th>
+                </tr>`;				
+			}
+		}
+	$('#appendhere2').html('');
+    $('#appendhere2').append(html);
+    }
+
+	$(document).on('click','button[name=order]',function(){
+		alert('ha ha'); //ajax.
+	});
+
+
+	})// readyfunction
 
 </script>
 
