@@ -55,7 +55,6 @@ Route::middleware('role:procurement/admin')->group(function () {
 });
 
 Route::middleware('role:finance/staff')->group(function () {
-<<<<<<< HEAD
 
 	Route::get('/finance/staff/home','HomeController@finance_staff')->name('finance.staff.home');
 
@@ -66,11 +65,7 @@ Route::middleware('role:finance/staff')->group(function () {
 	Route::get('/finance/account/addbalance','AccountController@amountadd')->name('account.addbalance');
 
 	Route::resource('finance/account','AccountController');
-=======
-	// Route::get('/finance/staff/index','HomeController@finance_staff')->name('finance.staff.index');
-	// Route::get('/finance/account/newbudget','AccountController@newbudget')->name('finance.account.newbudget');
-	// Route::resource('finance/account','AccountController');
->>>>>>> 17c84d41099b04666085d89242503179bb39d786
+
 });
 
 
