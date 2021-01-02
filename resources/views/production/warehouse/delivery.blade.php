@@ -80,8 +80,13 @@ use App\Order;
 				                        	@method('GET')
 				                        	<input type="text" name="id" value="{{$order->id}}">
 			                        	</form>
+			                     		<form id="deli{{$order->id}}" action="{{route('delivered')}}" method="POST" class="d-none">
+				                        	@csrf
+				                        	@method('GET')
+				                        	<input type="hidden" name="id" value="{{$order->id}}">
+			                        	</form>
 			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-info">info</button>
-			                        		<button class="btn btn-success">Delivery</button>
+			                        		<button onclick="document.getElementById('deli{{$order->id}}').submit();" class="btn btn-success">Delivery</button>
 			                        	</th>                    		
 			                        </tr>
 			                        @endforeach

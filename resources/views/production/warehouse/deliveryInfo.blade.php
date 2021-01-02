@@ -28,9 +28,9 @@ use App\Warehouse;
 		        <div class="x_panel">
 		        	<h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
 		        		<span class="float-right">
-		        			<a href=""> {{-- {{route('inventory.create')}} --}}
-		        			Delivered
-		        			<i class="fa fa-plus" aria-hidden="true"></i>
+		        			<a href="{{route('delivery')}}"> {{--  --}}
+		        			Back
+		        			{{-- <i class="fa fa-back" aria-hidden="true"></i> --}}
 		        			</a>
 						</span>
 					</h2>
@@ -63,7 +63,7 @@ use App\Warehouse;
 	              	<div class="row">
 	                  	<div class="col-sm-12">
 	                    	<div class="card-box table-responsive">
-			                    <table id="" class="table table-striped table-bordered" style="width:100%">
+			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
 			                        	<th class="align-middle text-center">No</th>  
@@ -108,7 +108,7 @@ use App\Warehouse;
 	        </div>
 	    </div>
 
-	    {{-- <div class="clearfix"></div> --}}
+	    {{-- <div class="clearfix"a></div> --}}
 	    <div class="pt-3">
 	    <button onclick="document.getElementById('deli').submit();" class="btn btn-success pull-right">Delivery</button>
 	    </div>
