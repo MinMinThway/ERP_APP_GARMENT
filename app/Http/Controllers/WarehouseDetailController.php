@@ -147,10 +147,21 @@ class WarehouseDetailController extends Controller
      * @param  \App\Warehouse_detail  $warehouse_detail
      * @return \Illuminate\Http\Response
      */
-    public function get(Request $request)
+    public function get(Request $request)  // From ware house user
     {
         //
         $detail=Warehouse::find($request->id);
         echo json_encode($detail);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function report() // production staff report
+    {
+        //
+        // $details=Warehouse_detail::OrderBy('id','desc')->get();
+        return view('production.staff.report');
     }
 }

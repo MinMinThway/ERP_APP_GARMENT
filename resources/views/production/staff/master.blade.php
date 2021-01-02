@@ -10,6 +10,8 @@
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>ERP Software</title>
+    {{-- icofont --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('icon/icofont/icofont.min.css')}}">
 
     <!-- Bootstrap -->
     <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -73,32 +75,32 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">       
-                  <li class="{{ Request::is('production/warehouse/home') ? 'current-page' : '' }}">
-                    <a href="{{route('warehouse.home')}}">
+                  <li class="{{ Request::is('production/staff/home') ? 'current-page' : '' }}">
+                    <a href="{{route('production.staff.home')}}">
                       <i class="fa fa-tachometer" aria-hidden="true"></i>
                     Dashboard 
                     </a>
                   </li>
-{{--                   <li class="{{ Request::is('production/warehouse/materials*') ? 'current-page' : '' }}">
+{{--                    <li class="{{ Request::is('production/warehouse/materials*') ? 'current-page' : '' }}">
                     <a href="{{route('materials.index')}}">
                       <i class="fa fa-database" aria-hidden="true"></i>
                     Materials
                     </a>
-                  </li>
+                  </li> --}}
 
                   <li class="{{ Request::is('production/warehouse/inventory*') ? 'current-page' : '' }}">
                     <a href="{{route('inventory.index')}}">
-                      <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                    Inventory
+                      <i class="icofont-chart-line-alt pr-1"></i>
+                     Inventory Analysis
                     </a>
                   </li>
 
-                  <li class="{{ Request::is('production/warehouse/delivery*') ? 'current-page' : '' }}">
-                    <a href="{{route('delivery')}}">
-                      <i class="fa fa-truck" aria-hidden="true"></i>
-                    Delivery
+                 <li class="{{ Request::is('production/staff/report*') ? 'current-page' : '' }}">
+                    <a href="{{route('production.staff.report')}}">
+                      <i class="icofont-listing-number pr-1"></i>
+                    Report
                     </a>
-                  </li> --}}
+                  </li>
 
                 </ul>
               </div>

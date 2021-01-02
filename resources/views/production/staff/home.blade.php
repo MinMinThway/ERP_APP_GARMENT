@@ -1,4 +1,4 @@
-@extends('production.warehouse.master')
+@extends('production.staff.master')
 @php
 use App\Warehouse;
 use App\Warehouse_detail;
