@@ -117,7 +117,7 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function delivered(Request $request)
+    public function delivered(Request $request)  // transection create
     {
         //
     DB::transaction(function() use ($request){
@@ -151,4 +151,17 @@ class OrderController extends Controller
     });
     return redirect()->route('delivery');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function order_create() // production/staff/order create
+    {
+        //
+        $warehouses = Warehouse::all();
+        return view('production.staff.order',compact('warehouses'));
+    }
+
 }

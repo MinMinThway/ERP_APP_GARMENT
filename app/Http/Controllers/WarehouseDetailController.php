@@ -176,7 +176,9 @@ class WarehouseDetailController extends Controller
                 $stock->save();
             }
         }
-        $warehouses=Warehouse::all();
+        $warehouses=Warehouse::orderBy('reorder_date')
+            ->where('reorder_date','!=',null)
+            ->get();
         return view('production.staff.report',compact('warehouses'));
     }
 }

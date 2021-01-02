@@ -102,6 +102,13 @@
                     </a>
                   </li>
 
+                 <li class="{{ Request::is('production/staff/order*') ? 'current-page' : '' }}">
+                    <a href="{{route('production.staff.order')}}">
+                      <i class="icofont-ui-cart pr-1"></i>
+                    Order
+                    </a>
+                  </li>
+
                 </ul>
               </div>
             </div>

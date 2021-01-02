@@ -28,10 +28,10 @@ use App\Order;
 	    <div class="clearfix"></div>
 
 	    <div class="clearfix"></div>
-		<div class="col-md-12 col-sm-12 ">
+		{{-- <div class="col-md-12 col-sm-12 "> --}}
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Order Acceptable List <small>Shipment On The Way</small></h2>
+	            	<h2>Stock Safe <small>depend on lead time and safety factor</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
@@ -53,43 +53,62 @@ use App\Order;
 			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
-			                        	<th class="align-middle text-center">No</th>  {{-- width="200px" --}}
-			                        	<th class="align-middle text-center">Date</th>
-			                        	<th class="align-middle text-center">Invoice No</th>
-			                        	<th class="align-middle text-center">Order Id</th>
-			                        	<th class="align-middle text-center">Supplier</th>
-			                        	<th class="align-middle text-center">Action</th>
+			                        	<th class="align-middle text-center">No</th>
+			                        	<th class="align-middle text-center">Code No</th>
+			                        	<th class="align-middle text-center" width="150px">Name</th>
+			                        	<th class="align-middle text-center">Stock</th>
+			                        	<th class="align-middle text-center">Lead Time</th>
+			                        	<th class="align-middle text-center">Factor</th>
+			                        	<th class="align-middle text-center">Reorder Date</th>
+			                        	{{-- <th class="align-middle text-center">Action</th> --}}
 			                        </tr>
 			                      </thead>
 
 
 			                      <tbody>
-{{-- 			                      	@php
+ 			                      	@php
 			                      		$i=0;
+			                      		$today=date('Y-m-d',strtotime('today'));
 			                      	@endphp
-			                      	@foreach($orders as $order)
+			                      	@foreach($warehouses as $warehouse)
 			                        <tr>
-			                        	<th class="align-middle text-center">{{++$i}}</th> 
-			                        	<th class="align-middle text-center">{{$order->date}}</th>
-			                        	<th class="align-middle text-center">{{$order->invoice_no}}</th>
-			                        	<th class="align-middle text-center">CYD-#{{$order->id}}</th>
-			                        	<th class="align-middle text-center">{{$order->supplier->company_name}}</th>
-			                        	<th class="align-middle text-center">
-			                        	<form id="info{{$order->id}}" action="{{route('deliveryInfo')}}" method="POST" class="d-none">
-				                        	@csrf
-				                        	@method('GET')
-				                        	<input type="text" name="id" value="{{$order->id}}">
-			                        	</form>
-			                     		<form id="deli{{$order->id}}" action="{{route('delivered')}}" method="POST" class="d-none">
-				                        	@csrf
-				                        	@method('GET')
-				                        	<input type="hidden" name="id" value="{{$order->id}}">
-			                        	</form>
-			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-info">info</button>
-			                        		<button onclick="document.getElementById('deli{{$order->id}}').submit();" class="btn btn-success">Delivery</button>
-			                        	</th>                    		
+			                        	<th class="align-middle text-center">{{++$i}}</th>
+			                        	<th class="align-middle text-center 
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->codeno}}</th>
+
+			                        	<th class="align-middle text-left
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->name}}</th>
+
+			                        	<th class="align-middle text-right
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->stock_qty}}</th>
+
+			                        	<th class="align-middle text-center
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->order_time_duration}}</th>
+
+			                        	<th class="align-middle text-center
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->stock_safety_factor}}</th>
+			                        	<th class="align-middle text-center
+										@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->reorder_date}}</th>                    		
 			                        </tr>
-			                        @endforeach --}}
+			                        @endforeach
 			                      </tbody>
 			                    </table> 
 	                  		</div>
@@ -97,7 +116,7 @@ use App\Order;
 	              	</div> 
 	            </div>
 	        </div>
-	    </div>
+	    {{-- </div> --}}
   	</div>
 </div>
 <!-- /page content -->
