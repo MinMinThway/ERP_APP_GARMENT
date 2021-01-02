@@ -22,6 +22,7 @@ class CreateWarehousesTable extends Migration
             $table->string('UOM');
             $table->integer('order_time_duration')->nullable();
             $table->string('stock_safety_factor')->nullable();
+            $table->string('reorder_date')->nullable();
             $table->timestamps();
         });
     }
