@@ -323,6 +323,7 @@
         	$(chk_id).click();
 		})
         // this is
+
     function ifChange(){
 
     	var mylocal='order';
@@ -334,10 +335,18 @@
                   <th class="align-middle text-center" >${myArray[x].codeno}</th>
                   <th class="align-middle text-left" >${myArray[x].name}</th>
                   <th class="align-middle text-right" >${myArray[x].stock}</th>
-                  <th class="align-middle text-center" >${myArray[x].qty}</th>
+                  <th class="align-middle text-center" >                  
+                  <span id='tx${myArray[x].warehouse_id}'>${myArray[x].qty}</span>
+                  <span><input id='val${myArray[x].warehouse_id}' type='number' min='0' value='${myArray[x].qty}' class='d-none w-25' style='text-align: right;'></input></span>
+                  </th>
                   <th class="align-middle text-left">${myArray[x].UOM}</th> 
                   <th class="align-middle text-center">
-                  <button class='btn btn-outline-warning'>edit</button>
+                  <button name='edit' id='id${myArray[x].warehouse_id}' 
+                  		data-tx='#tx${myArray[x].warehouse_id}' 
+                  		data-val='#val${myArray[x].warehouse_id}' 
+                  		data-id='${myArray[x].warehouse_id}'
+                  		state='edit'
+                  		class='btn btn-outline-danger'>edit</button>
                   </th>
                 </tr>`;				
 			}
@@ -345,6 +354,41 @@
 	$('#appendhere2').html('');
     $('#appendhere2').append(html);
     }
+
+    $(document).on('click','button[name=edit]',function(){
+    	var text_id=$(this).data('tx');
+    	var input_id=$(this).data('val');
+    	var id=$(this).data('id');
+    	var state=$(this).attr('state');
+    	if (state=='edit') {
+    		$(this).attr('state','set');
+    		$(this).html('set');
+    		$(this).attr('class','btn btn-outline-primary');
+    		$(input_id).attr('class','w-25');
+    		$(text_id).attr('class','d-none');
+    	}else{
+    		$(input_id).attr('class','d-none');
+    		$(text_id).attr('class','');
+    		$(text_id).text($(input_id).val());
+    		$(this).attr('state','edit');
+    		$(this).html('edit');
+    		$(this).attr('class','btn btn-outline-danger');
+    		// set local storage
+			var mylocal='order';
+			var myString=localStorage.getItem(mylocal);    		
+    		if (myString) {
+				var myArray=JSON.parse(myString);
+				for (x in myArray) {
+					if (myArray[x].warehouse_id==id) {
+						myArray[x].qty=parseInt($(input_id).val());
+					}
+				}
+				localStorage.setItem(mylocal,JSON.stringify(myArray));
+    		}			
+    		//
+    	}
+    	// console.log(state);
+    });
 
 	$(document).on('click','button[name=order]',function(){
 		//ajax.

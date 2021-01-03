@@ -6,11 +6,11 @@
 	    <div class="page-title">
 			<div class="col-md-12 col-sm-12 ">
 		        <div class="x_panel">
-		        	<h2 class="">Supplier <i class="fa fa-user-circle" aria-hidden="true"></i>
-		        		<span class="float-right">
+		        	<h2 class="">Supplier <i class="icofont-building-alt icofont-2x"></i>
+		        		<span class="float-right align-items-center">
 		        			<a href="{{route('supplier.create')}}">
-		        			 New 
 		        			<i class="fa fa-plus" aria-hidden="true"></i>
+		        			 New 		        			
 		        			</a>
 						</span>
 					</h2>

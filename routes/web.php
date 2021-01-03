@@ -29,6 +29,7 @@ Route::get('/warehouse', function(){
 Route::resource('/Order','OrderController');
 
 // Route::middleware('auth')->group(function () {
+// STATUS 
 Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/home','HomeController@warehouse')->name('warehouse.home');
 	Route::resource('/production/warehouse/materials','warehouseController');
@@ -38,19 +39,24 @@ Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/delivery/info','OrderController@deliveryInfo')->name('deliveryInfo');
 	Route::get('/production/warehouse/delivery/set','OrderController@delivered')->name('delivered');
 });
+
 Route::middleware('role:production/staff')->group(function () {
 	Route::get('/production/staff/home','HomeController@production_staff')->name('production.staff.home');
 	Route::get('/production/staff/report','warehouseDetailController@report')->name('production.staff.report');
 	Route::get('/production/staff/order','OrderController@order_create')->name('production.staff.order');
 	Route::get('/inventory_get','warehouseDetailController@get')->name('inventory_get');
 });
+
 Route::middleware('role:production/admin')->group(function () {
 	Route::get('/production/admin/home','HomeController@production_admin')->name('production.admin.home');
 });
 
 Route::middleware('role:procurement/staff')->group(function () {
 	Route::get('/procurement/staff/home','HomeController@procurement_staff')->name('procurement.staff.home');
+	Route::get('/procurement/staff/order','OrderController@order_2_index')->name('procurement.staff.order');
+	Route::get('/setsupplier','OrderController@set_supplier')->name('setsupplier');
 	Route::resource('procurement/supplier','SupplierController');
+
 });
 Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');

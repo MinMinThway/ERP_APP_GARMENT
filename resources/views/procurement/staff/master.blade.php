@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    @php
+      date_default_timezone_set("Asia/Rangoon");
+    @endphp
+    <meta name="csrf-token" content="{{ csrf_token() }}">  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+  <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>ERP Software</title>
+    {{-- icofont --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('icon/icofont/icofont.min.css')}}">
 
     <!-- Bootstrap -->
     <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Datatables -->    
+    <link href="{{asset('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendors/fontawesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -19,17 +32,14 @@
     <link href="{{asset('vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{asset('vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
-	
+  
     <!-- bootstrap-progressbar -->
     <link href="{{asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
     <!-- JQVMap -->
     <link href="{{asset('vendors/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
-  {{--   font awsome
- --}}
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="  sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-   {{--  font awsome --}}
+
     <!-- Custom Theme Style -->
     <link href="{{asset('build/css/custom.min.css')}}" rel="stylesheet">
   </head>
@@ -48,7 +58,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="{{asset('logo/erp.png')}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>User Name</span>
@@ -63,7 +73,6 @@
             <!-- /menu profile quick info -->
 
             <br />
-            {{-- <span class="label label-success pull-right">Coming Soon</span> --}}
             {{-- slide bar menu --}}
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
@@ -71,16 +80,24 @@
                 <ul class="nav side-menu">               
                   <li class="{{ Request::is('procurement/staff/home') ? 'current-page' : '' }}">
                     <a href="{{route('procurement.staff.home')}}">
-                      <i class="fa fa-home"></i> 
+                      <i class="icofont-dashboard icofont-2x pr-1"></i>
                        Dashboard
                     </a>
                   </li>
                   <li class="{{ Request::is('procurement/supplier*') ? 'current-page' : '' }}">
                     <a href="{{route('supplier.index')}}">
-                      <i class="fa fa-users" aria-hidden="true"></i>
+                      <i class="icofont-users-alt-6 icofont-2x pr-1"></i>
                        supplier 
                     </a>
                   </li>
+
+                  <li class="{{ Request::is('procurement/staff/order*') ? 'current-page' : '' }}">
+                    <a href="{{route('procurement.staff.order')}}">
+                      <i class="icofont-notification icofont-2x pr-1"></i>
+                       Order Request
+                    </a>
+                  </li>
+
                 </ul>
               </div>
             </div>
@@ -116,7 +133,7 @@
                   <ul class=" navbar-right">
                     <li class="nav-item dropdown open" style="padding-left: 15px;">
                       <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="images/img.jpg" alt="">{{Auth::user()->email}}
+                        <img src="{{asset('logo/erp.png')}}" alt="">{{Auth::user()->email}}
                       </a>
                       <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item"  href="javascript:;"> Profile</a>

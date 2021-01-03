@@ -186,5 +186,30 @@ class OrderController extends Controller
         $warehouses = Warehouse::all();
         return view('production.staff.order',compact('warehouses'));
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function order_2_index() // procurement/staff/order edit/update
+    {
+        //
+        $orders = Order::where('status_id','=',2)->get();
+        return view('procurement.staff.order',compact('orders'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function set_supplier() // procurement/staff/set supplier
+    {
+        //
+        $order_id=$_GET['oid'];
+        $supplier_id=$_GET['sid'];
+        $order=Order::find($order_id);
+        $order->supplier_id=$supplier_id;
+        $order->save();
+        echo 'done';
+    }
 }
