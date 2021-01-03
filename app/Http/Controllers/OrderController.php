@@ -212,4 +212,11 @@ class OrderController extends Controller
         $order->save();
         echo 'done';
     }
+    public function order_edit()
+    {
+         $order_id=$_GET['id'].die();
+      // var_dump('hello').die();
+   // $orders=Order_detail::find($order_id);
+        return view('procurement.staff.order_edit');
+    }
 }

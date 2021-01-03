@@ -39,15 +39,15 @@ use App\Supplier;
 			                      <thead>
 			                        <tr>
 			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center">Order_id</th>
-			                        	<th class="align-middle text-center" >Date</th>
-			                        	<th class="align-middle text-center">Item(nos)</th>
-			                        	<th class="align-middle text-center">Supplier</th>
-			                        	<th class="align-middle text-center">Action</th>        	
+			                        	<th class="align-middle text-center">Codeno</th>
+			                        	<th class="align-middle text-center" >Name</th>
+			                        	<th class="align-middle text-center">Qty</th>
+			                        	<th class="align-middle text-center">Unit</th>
+			                        	<th class="align-middle text-center">Price</th>        	
 			                        </tr>
 			                      </thead>
 			                      <tbody>
-			                      	@php
+			                      {{-- 	@php
 			                      		$i=0;
 			                      	@endphp
 			                      	@foreach($orders as $order)
@@ -77,7 +77,7 @@ use App\Supplier;
 
 			                        	</th>
 			                        </tr>
-			                        @endforeach
+			                        @endforeach --}}
 			                      </tbody>
 			                    </table> 
 	                  		</div>
