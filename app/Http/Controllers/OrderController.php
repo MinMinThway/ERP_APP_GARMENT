@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Order_detail;
 use Illuminate\Http\Request;
 use App\Warehouse_detail;
 use App\Warehouse;
@@ -24,9 +25,31 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+    DB::transaction(function() use ($request){
+        $data=$_GET['data'];
+        $arrays=json_decode($data);
+        date_default_timezone_set("Asia/Rangoon");        
+        $today=date('Y-m-d',strtotime('today'));
+
+        $order=new Order;
+        $order->date=$today;
+        $order->status_id=1;
+        $order->save();
+
+        $data=$_GET['data'];
+        $arrays=json_decode($data);
+        foreach ($arrays as $array) {
+            $order_detail=new Order_detail;
+            $order_detail->qty=$array->qty;
+            $order_detail->UOM=$array->UOM;
+            $order_detail->warehouse_id=$array->warehouse_id;
+            $order_detail->order_id=$order->id;
+            $order_detail->save();
+        }
+        echo 'done';
+    });
     }
 
     /**

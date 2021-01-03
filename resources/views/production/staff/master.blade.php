@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    @php
+      date_default_timezone_set("Asia/Rangoon");
+    @endphp
     <meta name="csrf-token" content="{{ csrf_token() }}">  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->

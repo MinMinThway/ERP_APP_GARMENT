@@ -347,7 +347,21 @@
     }
 
 	$(document).on('click','button[name=order]',function(){
-		alert('ha ha'); //ajax.
+		//ajax.
+	var string=localStorage.getItem('order');
+	if (string) {
+		$.ajax({
+			url:"{{route('Order.create')}}",
+			method:'GET',
+			data:{data:string},
+			success:function(ans){
+				if (ans=='done') {
+					$('#appendhere2').html('');
+					localStorage.removeItem('order');
+				}
+			}
+		});
+	}
 	});
 
 
