@@ -14,9 +14,7 @@ use App\Warehouse_detail;
    //   $test->save();
    // }
    // var_dump($tests).die();
-
-
-  date_default_timezone_set("Asia/Rangoon");
+  // date_default_timezone_set("Asia/Rangoon");
   $todayDate = date('Y-m-d',strtotime('today'));
   $yesterday = date('Y-m-d',strtotime('Yesterday'));
   $today_transection=Warehouse_detail::where('date','=',$todayDate)->count();

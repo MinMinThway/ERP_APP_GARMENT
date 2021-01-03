@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    @php
+      date_default_timezone_set("Asia/Rangoon");
+    @endphp
     <meta name="csrf-token" content="{{ csrf_token() }}">  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -97,6 +100,13 @@
                     <a href="{{route('delivery')}}">
                       <i class="fa fa-truck" aria-hidden="true"></i>
                     Delivery
+                    </a>
+                  </li>
+
+                 <li class="{{ Request::is('production/warehouse/delivery*') ? 'current-page' : '' }}">
+                    <a href="{{route('delivery')}}">
+                      <i class="icofont-ui-cart"></i>
+                    Order
                     </a>
                   </li>
 

@@ -147,10 +147,41 @@ class WarehouseDetailController extends Controller
      * @param  \App\Warehouse_detail  $warehouse_detail
      * @return \Illuminate\Http\Response
      */
-    public function get(Request $request)
+    public function get(Request $request)  // From ware house user
     {
         //
         $detail=Warehouse::find($request->id);
         echo json_encode($detail);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function report() // production staff report
+    {        
+        //
+        $warehouse_details = Warehouse_detail::select(DB::raw('sum(output_qty) as total_output'),
+            DB::raw('count(DISTINCT date) as total_day'),'warehouse_id')
+                    ->groupBy('warehouse_id')
+                    ->get();
+        foreach ($warehouse_details as $value) {
+            $avg_out_day=$value->total_output/$value->total_day; // avg consume
+            $stock=Warehouse::find($value->warehouse_id);
+            if ($avg_out_day>0) {
+                $day_left=number_format($stock->stock_qty/$avg_out_day,0)-($stock->order_time_duration*$stock->stock_safety_factor); // day left for orders
+                if ($day_left>0) {
+                    $d=strtotime('+'.$day_left.' day');
+                    $reorder_date=date('Y-m-d',strtotime('today',$d));
+                    $stock->reorder_date=$reorder_date;
+                    $stock->save();
+                }
+             }
+           
+        }
+        $warehouses=Warehouse::orderBy('reorder_date')
+            ->where('reorder_date','!=',null)
+            ->get();
+        return view('production.staff.report',compact('warehouses'));
     }
 }
