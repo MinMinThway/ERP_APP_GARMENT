@@ -212,11 +212,34 @@ class OrderController extends Controller
         $order->save();
         echo 'done';
     }
-    public function order_edit()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function set_price() // procurement/staff/set price
     {
-         $order_id=$_GET['id'].die();
-      // var_dump('hello').die();
-   // $orders=Order_detail::find($order_id);
-        return view('procurement.staff.order_edit');
+        //
+        $id=$_GET['id'];
+        $price=$_GET['price'];
+
+        $detail=Order_detail::find($id);
+        $detail->price=number_format($price,2);
+        $detail->save();
+        echo number_format($price,2);
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_edit(Request $request, Order $order)
+    {
+        //
+        $id=$request->id;
+        $order=Order::find($id);
+        return view('procurement.staff.order_edit',compact('order'));
     }
 }

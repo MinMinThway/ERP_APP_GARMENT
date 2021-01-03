@@ -3,6 +3,7 @@
 use App\Order_detail;
 use App\Order;
 use App\Supplier;
+use App\Warehouse;
 @endphp
 
 @section('body')
@@ -40,52 +41,88 @@ use App\Supplier;
 			                        <tr>
 			                        	<th class="align-middle text-center">No</th>
 			                        	<th class="align-middle text-center">Codeno</th>
-			                        	<th class="align-middle text-center" >Name</th>
+			                        	<th class="align-middle text-center">Name</th>
 			                        	<th class="align-middle text-center">Qty</th>
 			                        	<th class="align-middle text-center">Unit</th>
-			                        	<th class="align-middle text-center">Price</th>        	
+			                        	<th class="align-middle text-center">Unit Price</th>        	
 			                        </tr>
 			                      </thead>
 			                      <tbody>
-			                      {{-- 	@php
+			                      	@php
 			                      		$i=0;
 			                      	@endphp
-			                      	@foreach($orders as $order)
+			                      	@foreach($order->detail as $data)
 			                      	@php
-			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
-			                      		$suppliers=Supplier::all();
+			                      		$warehouse=Warehouse::find($data->warehouse_id);
 			                      	@endphp
 
 									<tr>
 			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-center">ERP#{{$order->id}}</td>
-			                        	<td class="align-middle text-center" >{{$order->date}}</td>
-			                        	<td class="align-middle text-center">{{$detail}}</td>
+			                        	<td class="align-middle text-center">{{$warehouse->codeno}}</td>
+			                        	<td class="align-middle text-left">{{$warehouse->name}}</td>
+			                        	<td class="align-middle text-right">{{$data->qty}}</td>
+			                        	<td class="align-middle text-left">{{$data->UOM}}</td>
 			                        	<td class="align-middle text-center">
-		                        		<select style="height:30px;border-radius: 10px;" id='ed{{$order->id}}' onchange="select('#ed{{$order->id}}')">
-		                        			@foreach($suppliers as $supplier)
-
-		                        			<option data-oid="{{$order->id}}" value="{{$supplier->id}}" @if($supplier->id==$order->supplier_id) selected @endif>{{$supplier->company_name}}</option>
-		                        			@endforeach
-		                        		</select>
-			                        	</td>
-			                        	<td class="align-middle text-center">
-			                        		<a href="{{route('procurement.staff.order_edit',$order->id)}}" class="btn btn-warning" style="border-radius: 20px;">edit</a>
-			                        		@if($order->denile_note)
-			                        		<button class="btn btn-danger" data-id='{{$order->id}}'>Reject</button>
+			                        		@if($data->price)
+			                        			<div id="wp2{{$data->id}}" class="float-right pr-5">
+				                        			<span id="sp1{{$data->id}}" class='pr-2'>{{$data->price}} $</span>
+				                        			<button id="edo{{$data->id}}" onclick="select('#edo{{$data->id}}','edit1')" style="border-radius: 20px" class="btn btn-warning edit"
+			                        				data-hdiv='#wp2{{$data->id}}'
+			                        				data-sdiv='#np2{{$data->id}}'
+				                        			>edit</button>
+			                        			</div>
+			               			        <div id="np2{{$data->id}}" style="display: none">
+			                        		<input id="in2{{$data->id}}" type="number" min='0' step="0.01" name="" value="{{$data->price}}" 
+			                        		style="border-radius: 20px;border: none;box-shadow: 1px 1px 1px 1px gray;text-align: right;">
+			                        		<a id="pr2{{$data->id}}" href='javascript:void(0)' 
+			                        			data-id='{{$data->id}}'
+			                        			data-input='#in2{{$data->id}}'
+			                        			data-np='#np2{{$data->id}}'
+			                        			data-wp='#wp2{{$data->id}}'
+			                        			data-sp1='#sp1{{$data->id}}'
+			                        			data-sp2='#sp2{{$data->id}}'
+			                        			onclick="select('#pr2{{$data->id}}','noprice')">
+			                        		<i style="position: absolute;" class="icofont-check-circled icofont-2x pl-1 text-success"></i>
+			                        		</a>
+			                        		</div>
+			                        		@else
+			                        		<div class="float-right pr-5" id="wp{{$data->id}}" style="display: none">
+			                        			<span id="sp2{{$data->id}}" class='pr-2'></span>
+			                        			<button id="edt{{$data->id}}" onclick="select('#edt{{$data->id}}','edit2')" style="border-radius: 20px" class="btn btn-warning edit"
+			                        				data-hdiv='#wp{{$data->id}}'
+			                        				data-sdiv='#np{{$data->id}}'
+			                        				>edit</button>
+			                        		</div>
+			                        		<div id="np{{$data->id}}">
+			                        		<input id="in{{$data->id}}" type="number" min='0' step="0.01" name="" 
+			                        		style="border-radius: 20px;border: none;box-shadow: 1px 1px 1px 1px gray;text-align: right;">
+			                        		<a id="pr{{$data->id}}" href='javascript:void(0)' 
+			                        			data-id='{{$data->id}}'
+			                        			data-input='#in{{$data->id}}'
+			                        			data-np='#np{{$data->id}}'
+			                        			data-wp='#wp{{$data->id}}'
+			                        			data-sp1='#sp1{{$data->id}}'
+			                        			data-sp2='#sp2{{$data->id}}'
+			                        			onclick="select('#pr{{$data->id}}','noprice')">
+			                        		<i style="position: absolute;" class="icofont-check-circled icofont-2x pl-1 text-success"></i>
+			                        		</a>
+			                        		</div>
 			                        		@endif
-
-			                        	</th>
+			                        	</td>
 			                        </tr>
-			                        @endforeach --}}
+			                        @endforeach
 			                      </tbody>
 			                    </table> 
+
 	                  		</div>
+
 	                	</div>
+	                	<a class="btn btn-success pull-right">Finish</a>
 	              	</div> 
 	            </div>
 	        </div>
 	    {{-- </div> --}}
+
   	</div>
 </div>
 <!-- /page content -->
@@ -130,20 +167,46 @@ use App\Supplier;
 
 
 <script type="text/javascript">
-function select(id){
+function select(selector,state){
 	$(document).ready(function(){
-		var selector=id+' option:selected';
-		var order_id=$(selector).data('oid');
-		var supplier_id=$(selector).val();
+		if (state=='noprice') {
+		var id=$(selector).data('id');
+		var input=$(selector).data('input');
+		var price=$(input).val();
+
+		var np=$(selector).data('np');
+		var wp=$(selector).data('wp');
+		var sp1=$(selector).data('sp1');
+		var sp2=$(selector).data('sp2');
 
 		$.ajax({
-			url:'{{route('setsupplier')}}',
+			url:'{{route('setprice')}}',
 			method:'GET',
-			data:{oid:order_id,sid:supplier_id},
-			success:function(res){
+			data:{id:id,price:price},
+			success:function(price){
+				if (price) {
+					$(np).hide(1000);
+					$(wp).show(1000);
+					$(sp1).text(price+' $');
+					$(sp2).text(price+' $');
+				}
 			}
 		})
+		}else if (state=='edit2') {
+		
+		var show_div=$(selector).data('sdiv');
+		var hide_div=$(selector).data('hdiv');
+		$(hide_div).hide(1000);
+		$(show_div).show(1000);
+		
+		}else{
+		var show_div=$(selector).data('sdiv');
+		var hide_div=$(selector).data('hdiv');
+		$(hide_div).hide(1000);
+		$(show_div).show(1000);
+		}
 	})
-}		                
+
+}
 </script>
 @endsection

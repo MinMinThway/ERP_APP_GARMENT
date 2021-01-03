@@ -54,9 +54,9 @@ Route::middleware('role:production/admin')->group(function () {
 Route::middleware('role:procurement/staff')->group(function () {
 	Route::get('/procurement/staff/home','HomeController@procurement_staff')->name('procurement.staff.home');
 	Route::get('/procurement/staff/order','OrderController@order_2_index')->name('procurement.staff.order');
-	Route::get('/procurement/staff/order_edit','OrderController@order_edit')->name('procurement.staff.order_edit');
+	Route::get('/procurement/staff/order/edit','OrderController@order_edit')->name('order_edit');
 	Route::get('/setsupplier','OrderController@set_supplier')->name('setsupplier');
-
+	Route::get('/setprice','OrderController@set_price')->name('setprice');
 	Route::resource('procurement/supplier','SupplierController');
 
 });
