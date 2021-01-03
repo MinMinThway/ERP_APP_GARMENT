@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Account_detail;
 use Illuminate\Http\Request;
+use App\Account;
+use Illuminate\Support\Facades\DB;
 
 class AccountDetailController extends Controller
 {
@@ -69,8 +71,27 @@ class AccountDetailController extends Controller
      */
     public function update(Request $request, Account_detail $account_detail)
     {
-        //
-    }
+        //  DB::transaction(function() use ($request){
+        //     date_default_timezone_set("Asia/Rangoon");
+        //     $today = date('Y-m-d',strtotime('today'));
+
+        // $input=$request->input;
+
+        // $account= Account::find($request->id);
+         
+        //  $accountdetail=new Account_detail;
+        //  $accountdetail->date=$today;
+        //  $accountdetail->income=$request->ammount;
+        //  $accountdetail->tranbalance= $account->balance + $request->ammount;
+        //  $accountdetail->account_id= $request->id;
+
+        // $accountdetail->save();
+
+        // $account->balance  =  $account->balance + $request->ammount;
+        // $account->save();
+        //  return redirect()->route('account.index');
+
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -81,5 +102,44 @@ class AccountDetailController extends Controller
     public function destroy(Account_detail $account_detail)
     {
         //
+    }
+
+
+    public function account(Request $request, Account_detail $account_detail)
+    {
+        $data=Account::find($request->bank);
+
+        echo json_encode($data);
+    }
+
+    public function amountadd(Request $request, Account_detail $account_detail)
+    {
+         DB::transaction(function() use ($request){
+            date_default_timezone_set("Asia/Rangoon");
+            $today = date('Y-m-d',strtotime('today'));
+
+        $input=$request->input;
+
+        $account= Account::find($request->id);
+        $oldbalance = $account->balance;
+        $newbalance = $request->ammount;
+        $tranbalance = $oldbalance + $newbalance;
+         //dd($tranbalance);
+        
+         $accountdetail=new Account_detail;
+
+         $accountdetail->date=$today;
+         $accountdetail->income=$request->ammount;
+         $accountdetail->tranbalance= $tranbalance;
+         $accountdetail->account_id= $request->id;
+
+        $accountdetail->save();
+
+        $account->balance  =   $tranbalance;
+        $account->save();
+         
+        });
+         return view('finance.staff.home');
+
     }
 }

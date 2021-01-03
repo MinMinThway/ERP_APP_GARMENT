@@ -60,9 +60,9 @@ Route::middleware('role:finance/staff')->group(function () {
 
 	Route::get('/finance/account/addbudget','AccountController@newbudget')->name('account.newbudget');
 
-	Route::get('/finance/account/budget','AccountController@account')->name('account.addtype');
+	Route::get('/finance/account/budget','AccountDetailController@account')->name('account.addtype');
 
-	Route::get('/finance/account/addbalance','AccountController@amountadd')->name('account.addbalance');
+	Route::get('/finance/account/budget/addbalance','AccountDetailController@amountadd')->name('account.addbalance');
 
 	Route::resource('finance/account','AccountController');
 

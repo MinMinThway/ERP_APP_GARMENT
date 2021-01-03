@@ -2,7 +2,12 @@
 @extends('finance.staff.master')
 
 @section('body')
+@php
 
+  date_default_timezone_set("Asia/Rangoon");
+  $today= date('Y-m-d',strtotime('today'));
+
+@endphp
 <div class="right_col" role="main">
 				<div class="">
 					<div class="page-title">
@@ -44,7 +49,10 @@
 												<select class="form-control" id="bank" name="bankname">
 													<option>Choose option</option>
 													@foreach($account as $account)
-														<option id={{$account->id}}>{{$account->bank}}</option>
+													@if($account->id!=1)
+														<option id={{$account->id}}>
+															{{$account->bank}}</option>
+													@endif
 													@endforeach
 												</select>
 												
@@ -54,6 +62,8 @@
 										@csrf
               							@method('GET')
               							<input type="hidden" name="id" value="{{$account->id}}">
+
+              							
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Account Type<span class="required">*</span>
 											</label>
@@ -82,7 +92,6 @@
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
 												<button type="submit" class="btn btn-success">Submit</button>
-												<button class="btn btn-outline-dark" type="reset">Reset</button>
 												<button class="btn btn-outline-danger" type="reset">Cancel</button>
 											</div>
 										</div>

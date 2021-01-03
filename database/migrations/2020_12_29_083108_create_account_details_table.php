@@ -18,6 +18,7 @@ class CreateAccountDetailsTable extends Migration
             $table->date('date');
             $table->string('income');
             $table->string('outcome');
+            $table->string('tranbalance');
             $table->timestamps();
             $table->unsignedBigInteger('account_id');
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');

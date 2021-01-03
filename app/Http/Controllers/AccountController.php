@@ -119,23 +119,30 @@ class AccountController extends Controller
     public function newbudget(Request $request, Account $account)
     {
         
-        $account = Account::orderBy('id','desc')->get();
+        $account = Account::all();
         return view('finance.staff.addbudget',compact('account'));
     }
 
-    public function account(Request $request, Account $account)
-    {
-        $data=Account::find($request->bank);
+    // public function newbudget(Request $request, Account $account)
+    // {
+        
+    //     $account = Account::orderBy('id','desc')->get();
+    //     return view('finance.staff.addbudget',compact('account'));
+    // }
 
-        echo json_encode($data);
-    }
+    // public function account(Request $request, Account $account)
+    // {
+    //     $data=Account::find($request->bank);
 
-    public function amountadd(Request $request, Account $account)
-    {
-        $account= Account::find($request->id);
-        $account->balance  =  $account->balance + $request->ammount;
-        $account->save();
-         return redirect()->route('account.index');
-    }
+    //     echo json_encode($data);
+    // }
+
+    // public function amountadd(Request $request, Account $account)
+    // {
+    //     $account= Account::find($request->id);
+    //     $account->balance  =  $account->balance + $request->ammount;
+    //     $account->save();
+    //      return redirect()->route('account.index');
+    // }
         
 }
