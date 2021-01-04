@@ -221,7 +221,7 @@
 			var tr_ids='#ids'+id; // check
 			if (state=='0') {
 		        $.ajax({
-		            url:'{{route('inventory_get')}}',
+		            url:'{{route('inventory_get1')}}',
 		            method:"GET",
 		            data:{id:id},
 		            success:function(data){

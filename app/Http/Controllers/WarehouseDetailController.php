@@ -147,7 +147,20 @@ class WarehouseDetailController extends Controller
      * @param  \App\Warehouse_detail  $warehouse_detail
      * @return \Illuminate\Http\Response
      */
-    public function get(Request $request)  // From ware house user
+    public function get1(Request $request)  // From warehouse user
+    {
+        //
+        $detail=Warehouse::find($request->id);
+        echo json_encode($detail);
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Warehouse_detail  $warehouse_detail
+     * @return \Illuminate\Http\Response
+     */
+    public function get(Request $request)  // From production staff user
     {
         //
         $detail=Warehouse::find($request->id);

@@ -34,7 +34,7 @@ Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/home','HomeController@warehouse')->name('warehouse.home');
 	Route::resource('/production/warehouse/materials','warehouseController');
 	Route::resource('/production/warehouse/inventory','warehouseDetailController');
-	Route::get('/inventory_get','warehouseDetailController@get')->name('inventory_get');
+	Route::get('/inventory_get1','warehouseDetailController@get1')->name('inventory_get1');
 	Route::get('/production/warehouse/delivery','OrderController@delivery')->name('delivery');
 	Route::get('/production/warehouse/delivery/info','OrderController@deliveryInfo')->name('deliveryInfo');
 	Route::get('/production/warehouse/delivery/set','OrderController@delivered')->name('delivered');
