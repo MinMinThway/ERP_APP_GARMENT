@@ -62,7 +62,7 @@ use App\Supplier;
 			                        	<td class="align-middle text-center" >{{$order->date}}</td>
 			                        	<td class="align-middle text-center">{{$detail}}</td>
 			                        	<td class="align-middle text-center">
-		                        		<select id='ed{{$order->id}}' onchange="select('#ed{{$order->id}}')">
+		                        		<select style="height:30px;border-radius: 10px;" id='ed{{$order->id}}' onchange="select('#ed{{$order->id}}')">
 		                        			@foreach($suppliers as $supplier)
 
 		                        			<option data-oid="{{$order->id}}" value="{{$supplier->id}}" @if($supplier->id==$order->supplier_id) selected @endif>{{$supplier->company_name}}</option>
@@ -70,9 +70,16 @@ use App\Supplier;
 		                        		</select>
 			                        	</td>
 			                        	<td class="align-middle text-center">
-			                        		<button class="btn btn-warning">edit</button>
+			                        		<form action="{{route('order_edit')}}" method="POST">
+		                        			@csrf
+		                        			@method('GET')
+		                        			<input type="hidden" name="id" value="{{$order->id}}"> 
+			                        		<button type="submit" class="btn btn-warning" style="border-radius: 20px;">
+			                        		edit
+			                        		</button>
+			                        		</form>
 			                        		@if($order->denile_note)
-			                        		<button class="btn btn-danger" data-id='{{$order->id}}'>Reject</button>
+			                        		<button class="btn btn-danger" data-id='{{$order->id}}' style="border-radius: 20px;">Reject</button>
 			                        		@endif
 
 			                        	</th>
@@ -141,6 +148,7 @@ function select(id){
 			method:'GET',
 			data:{oid:order_id,sid:supplier_id},
 			success:function(res){
+				
 			}
 		})
 	})
