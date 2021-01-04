@@ -66,7 +66,7 @@ use App\Supplier;
 			                        	<td class="align-middle text-left">{{$supplier->company_name}}</td>
 			                        	<td class="align-middle text-center">
 
-			                      		<form id="finish" action="{{route('procurement.admin.order.detail')}}" method="POST">
+			                      		<form action="{{route('procurement.admin.order.detail')}}" method="POST">
 						               		@csrf
 						               		@method('GET')
 						               		<input type="hidden" name="id" value="{{$order->id}}">
