@@ -4,7 +4,6 @@
 @php
 use App\Supplier;
 $suppliers=Supplier::all()->count();
-$suppliers--;
 @endphp
   <!-- page content -->
   <div class="right_col" role="main">

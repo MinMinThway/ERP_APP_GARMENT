@@ -302,4 +302,49 @@ class OrderController extends Controller
     {
         return view('procurement.staff.success');
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function order_3_index() // procurement/admin/order list
+    {
+        //
+        $orders = Order::where('status_id','=',3)->get();
+        return view('procurement.admin.order',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_3_detail(Request $request, Order $order)  // procurement/admin/ check order detail
+    {
+        //
+        $id=$request->id;
+        $order=Order::find($id);
+        return view('procurement.admin.detail',compact('order'));
+
+    // $order=Order::find(8);
+    // foreach($order->detail as $item) {
+
+    //     $p_orders=Order::where('status_id','>',3)->orderBy('id','desc')->get();
+
+    //     $change=0;
+    //     foreach ($p_orders as $p_order) {
+
+    //         $p_order_detail=Order_detail::where('order_id','=',$p_order->id)
+    //             ->where('warehouse_id','=',$item->warehouse_id)
+    //             ->first();
+
+    //         if ($p_order_detail->price) {
+    //             $change=$p_order_detail->price-$item->price;
+    //         }
+    //         dd($change).die();
+    //     }
+    // }
+    
+    }
 }

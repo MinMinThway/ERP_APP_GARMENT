@@ -14,4 +14,8 @@ class Warehouse extends Model
     {
       return $this->hasMany('App\Warehouse_detail');
     }
+	public function order_detail()
+    {
+      return $this->hasMany('App\Order_detail');
+    }
 }

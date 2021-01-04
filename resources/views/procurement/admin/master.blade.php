@@ -78,18 +78,26 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">               
-                  <li class="{{ Request::is('procurement/staff/home') ? 'current-page' : '' }}">
+                  <li class="{{ Request::is('procurement/admin/home') ? 'current-page' : '' }}">
                     <a href="{{route('procurement.admin.home')}}">
                       <i class="icofont-dashboard icofont-2x pr-1"></i>
                        Dashboard
                     </a>
-                  </li>
-                    <li class="{{ Request::is('procurement/staff/home') ? 'current-page' : '' }}">
+                   </li>
+                 {{--   <li class="{{ Request::is('procurement/admin/report') ? 'current-page' : '' }}">
                     <a href="#">
                      <i class="icofont-list icofont-2x pr-1"></i>
                        Report List
                     </a>
+                  </li> --}}
+
+                  <li class="{{ Request::is('procurement/admin/order*') ? 'current-page' : '' }}">
+                    <a href="{{route('procurement.admin.order')}}">
+                      <i class="icofont-notification icofont-2x pr-1"></i>
+                       Order Request
+                    </a>
                   </li>
+
 
                 </ul>
               </div>
