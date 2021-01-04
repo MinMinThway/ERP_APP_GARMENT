@@ -8,7 +8,7 @@ class Account_detail extends Model
 {
     //
     protected $fillable = [
-    	'date','income','outcome','account_id',
+    	'date','income','outcome','tranbalance','account_id',
     ];
 
     public function account()

@@ -63,7 +63,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="" alt="..." class="img-circle profile_img">
+                 <img src="{{asset('logo/erp.png')}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Finance Staff</span>
@@ -91,7 +91,7 @@
                 <ul class="nav side-menu">
                   <li><a href="{{route('account.index')}}"><i class="fa fa-institution"></i>Bank Accounts</a>
                   </li>
-                  <li><a href="{{asset('/finance/account/addbudget')}}"><i class="fa fa-money"></i>Budgets</a>
+                  <li><a href="{{asset('/finance/staff/account/addbudget')}}"><i class="fa fa-money"></i>Budgets</a>
                   </li>
                 </ul>
               </div>
@@ -99,7 +99,7 @@
               <div class="menu_section">
                 <h3>Orders</h3>
                 <ul class="nav side-menu">
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
+                  <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-laptop"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
                 </ul>
               </div>
 
@@ -145,8 +145,9 @@
                   <ul class=" navbar-right">
                     <li class="nav-item dropdown open" style="padding-left: 15px;">
                       <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="images/img.jpg" alt="">{{Auth::user()->email}}
+                        <img src="{{asset('logo/erp.png')}}" alt="">{{Auth::user()->email}}
                       </a>
+
                       <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item"  href="javascript:;"> Profile</a>
                           <a class="dropdown-item"  href="javascript:;">
@@ -164,9 +165,9 @@
                     </li>
 
                     <li role="presentation" class="nav-item dropdown open">
-                      <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-inbox"></i>
-                        <span class="badge bg-green">6</span>
+                      <a href="javascript:;"  class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-inbox" aria-hidden="true" style="margin-top: 10px;"></i>
+                        <span class="badge bg-green" style="margin-top: 8px;">6</span>
                       </a>
                       <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                         <li class="nav-item">

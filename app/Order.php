@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Order_detail;
 use App\Supplier;
+use App\Account;
 class Order extends Model
 {
     //
@@ -19,5 +20,10 @@ class Order extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
     }
 }

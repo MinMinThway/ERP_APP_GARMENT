@@ -242,4 +242,32 @@ class OrderController extends Controller
         $order=Order::find($id);
         return view('procurement.staff.order_edit',compact('order'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function order_4_index()
+    {
+        //
+        $orders = Order::where('status_id','=',2)->get();
+         return view('finance.staff.orders',compact('orders'));
+       
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_4_edit(Request $request, Order $order)
+    {
+        //
+        $id=$request->id;
+        $order=Order::find($id);
+        return view('finance.staff.detailorder',compact('order'));
+    }
 }

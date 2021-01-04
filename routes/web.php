@@ -67,14 +67,13 @@ Route::middleware('role:procurement/admin')->group(function () {
 Route::middleware('role:finance/staff')->group(function () {
 
 	Route::get('/finance/staff/home','HomeController@finance_staff')->name('finance.staff.home');
+	Route::get('/finance/staff/account/addbudget','AccountController@newbudget')->name('account.newbudget');
+	Route::get('/finance/staff/account/budget','AccountDetailController@account')->name('account.addtype');
+	Route::get('/finance/staff/account/budget/addbalance','AccountDetailController@amountadd')->name('account.addbalance');
+	Route::get('/finance/staff/orders','OrderController@order_4_index')->name('finance.staff.order');
+	Route::get('/finance/staff/orders/detail','OrderController@order_4_edit')->name('finance.staff.order.detail');
 
-	Route::get('/finance/account/addbudget','AccountController@newbudget')->name('account.newbudget');
-
-	Route::get('/finance/account/budget','AccountDetailController@account')->name('account.addtype');
-
-	Route::get('/finance/account/budget/addbalance','AccountDetailController@amountadd')->name('account.addbalance');
-
-	Route::resource('finance/account','AccountController');
+	Route::resource('finance/staff/account','AccountController');
 
 });
 

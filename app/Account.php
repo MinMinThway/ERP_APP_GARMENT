@@ -14,4 +14,9 @@ class Account extends Model
     {
       return $this->hasMany(' App\Account_detail');
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

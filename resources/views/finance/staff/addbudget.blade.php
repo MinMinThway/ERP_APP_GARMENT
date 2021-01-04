@@ -33,7 +33,7 @@
 								<div class="x_title">
 									<h2>Add Budgets</h2>
 									<ul class="nav navbar-right panel_toolbox">
-										<li><a class=""><i class="fa fa-reply"> Back</i></a>
+										<li><a href="{{route('finance.staff.home')}}"><i class="fa fa-reply"> Back</i></a>
 										</li>
 									</ul>
 									<div class="clearfix"></div>
