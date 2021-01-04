@@ -56,6 +56,7 @@ Route::middleware('role:procurement/staff')->group(function () {
 	Route::get('/procurement/staff/order','OrderController@order_2_index')->name('procurement.staff.order');
 	Route::get('/procurement/staff/order/edit','OrderController@order_edit')->name('order_edit');
 	Route::get('/setsupplier','OrderController@set_supplier')->name('setsupplier');
+	Route::get('/noteget','OrderController@note_2_get')->name('note_2_get');
 	Route::get('/setprice','OrderController@set_price')->name('setprice');
 	Route::get('/status_2_change','OrderController@status_2_change')->name('status_2_change');
 	Route::get('/procurement/staff/order/error','OrderController@status_2_change_error')->name('status_2_change_error');
@@ -67,6 +68,8 @@ Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');
 	Route::get('/procurement/admin/order','OrderController@order_3_index')->name('procurement.admin.order');
 	Route::get('/procurement/admin/order/detail','OrderController@order_3_detail')->name('procurement.admin.order.detail');
+	Route::get('/procurement/admin/order/reject','OrderController@order_3_reject')->name('procurement.admin.order.reject');
+	Route::get('/status_3_change','OrderController@status_3_change')->name('status_3_change');
 });
 
 Route::middleware('role:finance/staff')->group(function () {
