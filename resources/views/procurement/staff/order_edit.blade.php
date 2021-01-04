@@ -28,8 +28,8 @@ use App\Warehouse;
 	          	<div class="x_title">
 	            	<h2>Go Finish! <small>When supplier and price comfirm.</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
-						<button class="btn btn-info pull-right pt-1">Back</a>
-						<button class="btn btn-danger pull-right pt-1">Finish</a>
+						<a class="btn btn-info pull-right pt-1">Back</a>
+						<a class="btn btn-danger pull-right pt-1" href="#">Finish</a>
 	            	</ul>
 	            	<div class="clearfix"></div>
 	          	</div>
@@ -76,7 +76,7 @@ use App\Warehouse;
 			               			        <div id="np2{{$data->id}}" style="display: none">
 			                        		<input id="in2{{$data->id}}" type="number" min='0' step="0.01" name="" value="{{$data->price}}" 
 			                        		style="border-radius: 20px;border: none;box-shadow: 1px 1px 1px 1px gray;text-align: right;">
-			                        		<a id="pr2{{$data->id}}" href='javascript:void(0)' 
+			                        		<a id="pr2{{$data->id}}" href='javascript:void(0)'
 			                        			data-id='{{$data->id}}'
 			                        			data-input='#in2{{$data->id}}'
 			                        			data-np='#np2{{$data->id}}'

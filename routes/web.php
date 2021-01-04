@@ -62,6 +62,7 @@ Route::middleware('role:procurement/staff')->group(function () {
 });
 Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');
+	Route::get('/procurement/admin/report','OrderDetailController@report')->name('procurement.admin.report');
 });
 
 Route::middleware('role:finance/staff')->group(function () {

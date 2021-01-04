@@ -40,6 +40,10 @@ class HomeController extends Controller
     {
         return view('production.admin.home');
     }
+     public function report()
+    {
+        return 'asdfjhsd';
+    }
 
     public function procurement_staff()
     {
