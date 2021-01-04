@@ -47,7 +47,7 @@ use App\Supplier;
 			                        	<th class="align-middle text-center" width="20%">Price</th>
 			                        	<th class="align-middle text-center" width="10%">qty</th>
 			                        	<th class="align-middle text-center" width="10%">Unit</th>
-			                        	<th class="align-middle text-center" width="10%">ammount</th>
+			                        	<th class="align-middle text-center" width="10%">amount</th>
 			                        </tr>
 			                      </thead>
 			                      <tbody>
