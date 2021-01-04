@@ -235,11 +235,71 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function order_edit(Request $request, Order $order)
+    public function order_edit(Request $request, Order $order)  // procurement/staff/ order edit page
     {
         //
         $id=$request->id;
         $order=Order::find($id);
         return view('procurement.staff.order_edit',compact('order'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_2_change(Request $request, Order $order) // procurement/staff/ status chage
+    {
+        //
+        session_start();
+        $id=$request->id;
+
+        $order=Order::find($id);
+        if ($order->supplier_id<2) {
+            $_SESSION['errortype']='Supplier Requirement Fail !';
+            $_SESSION['error']='sorry we cant change status your order "ERP#'.$order->id.'" is does not have supplier please check again!';
+            return redirect()->route('status_2_change_error');
+            exit();
+        }
+        foreach ($order->detail as $item) {
+            if ($item->price>0) {
+                var_dump($item->price);
+            }else{
+                $_SESSION['errortype']='Price does not match!';
+                $warehouse=Warehouse::find($item->warehouse_id);
+                $_SESSION['error']='your selected product "'.$warehouse->name.'", price ="'.$item->price.'" is cannot be set. Please check again!';
+                return redirect()->route('status_2_change_error');
+                exit();
+            }
+        }
+        $order->status_id=3;
+        $order->save();
+        $_SESSION['successtitle']='Congratulations! you have successfully.';
+        $_SESSION['success']='Your admin is approve after checking process.';
+        return redirect()->route('status_2_change_success');   
+
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_2_change_error(Request $request, Order $order) // procurement/staff/ status chage error
+    {
+        return view('procurement.staff.error');
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_2_change_success(Request $request, Order $order) // procurement/staff/ status chage error
+    {
+        return view('procurement.staff.success');
     }
 }

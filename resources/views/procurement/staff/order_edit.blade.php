@@ -14,22 +14,16 @@ use App\Warehouse;
 	    <div class="clearfix"></div>
 
 	    <div class="clearfix"></div>
-		{{-- <div class="col-md-12 col-sm-12 "> --}}
-{{-- 				<div class="x_title">
-				         <div class="page-title">
-					<div class="col-md-12 col-sm-12 ">
-				        <div class="x_panel">
-				        	<h4 class="text text-gray-dark d-inline-block pt-2">Go Finish! When supplier and price comfirm.</h4>
-			  				<button class="btn btn-danger pull-right pt-1">Finish</a>
-				        </div>	    
-				   	</div>
-			    </div>
- --}}
 	          	<div class="x_title">
 	            	<h2>Go Finish! <small>When supplier and price comfirm.</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 						<a class="btn btn-info pull-right pt-1">Back</a>
-						<a class="btn btn-danger pull-right pt-1" href="#">Finish</a>
+		               	<form id="finish" action="{{route('status_2_change')}}" method="POST">
+		               		@csrf
+		               		@method('GET')
+		               		<input type="hidden" name="id" value="{{$order->id}}">
+		               	</form>
+						<button onclick="document.getElementById('finish').submit();" class="btn btn-danger pull-right pt-1" href="#">Finish</button>
 	            	</ul>
 	            	<div class="clearfix"></div>
 	          	</div>
@@ -209,6 +203,10 @@ function select(selector,state){
 		$(hide_div).hide(1000);
 		$(show_div).show(1000);
 		}
+		// else if(state=='finish'){
+		// 	var data=JSON.parse(selector);
+		// 	alert('this is finish '+data.name);
+		// }
 	})
 
 }

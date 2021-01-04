@@ -57,12 +57,14 @@ Route::middleware('role:procurement/staff')->group(function () {
 	Route::get('/procurement/staff/order/edit','OrderController@order_edit')->name('order_edit');
 	Route::get('/setsupplier','OrderController@set_supplier')->name('setsupplier');
 	Route::get('/setprice','OrderController@set_price')->name('setprice');
+	Route::get('/status_2_change','OrderController@status_2_change')->name('status_2_change');
+	Route::get('/procurement/staff/order/error','OrderController@status_2_change_error')->name('status_2_change_error');
+	Route::get('/procurement/staff/order/success','OrderController@status_2_change_success')->name('status_2_change_success');
 	Route::resource('procurement/supplier','SupplierController');
 
 });
 Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');
-	Route::get('/procurement/admin/report','OrderDetailController@report')->name('procurement.admin.report');
 });
 
 Route::middleware('role:finance/staff')->group(function () {

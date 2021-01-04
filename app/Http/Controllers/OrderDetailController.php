@@ -82,15 +82,4 @@ class OrderDetailController extends Controller
     {
         //
     }
-
-     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Order_detail  $order_detail
-     * @return \Illuminate\Http\Response
-     */
-    public function report()
-    {
-        var_dump('dd').die();
-    }
 }
