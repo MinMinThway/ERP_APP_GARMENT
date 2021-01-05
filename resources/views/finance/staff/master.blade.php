@@ -106,7 +106,7 @@
               <div class="menu_section">
                 <h3>Reports</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i>Balance Sheet</a>
+                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Balance Sheet</a>
                   </li>
                   <li><a><i class="fa fa-sitemap"></i>Business Performance Ratios</a>
                   </li>                  

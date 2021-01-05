@@ -57,11 +57,16 @@ Route::middleware('role:procurement/staff')->group(function () {
 	Route::get('/procurement/staff/order/edit','OrderController@order_edit')->name('order_edit');
 	Route::get('/setsupplier','OrderController@set_supplier')->name('setsupplier');
 	Route::get('/setprice','OrderController@set_price')->name('setprice');
+	Route::get('/status_2_change','OrderController@status_2_change')->name('status_2_change');
+	Route::get('/procurement/staff/order/error','OrderController@status_2_change_error')->name('status_2_change_error');
+	Route::get('/procurement/staff/order/success','OrderController@status_2_change_success')->name('status_2_change_success');
 	Route::resource('procurement/supplier','SupplierController');
 
 });
 Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');
+	Route::get('/procurement/admin/order','OrderController@order_3_index')->name('procurement.admin.order');
+	Route::get('/procurement/admin/order/detail','OrderController@order_3_detail')->name('procurement.admin.order.detail');
 });
 
 Route::middleware('role:finance/staff')->group(function () {
@@ -72,7 +77,8 @@ Route::middleware('role:finance/staff')->group(function () {
 	Route::get('/finance/staff/account/budget/addbalance','AccountDetailController@amountadd')->name('account.addbalance');
 	Route::get('/finance/staff/orders','OrderController@order_4_index')->name('finance.staff.order');
 	Route::get('/finance/staff/orders/detail','OrderController@order_4_edit')->name('finance.staff.order.detail');
-
+	Route::get('/finance/staff/orders/update','OrderController@order_4_update')->name('finance.staff.order.update');
+	Route::get('/finance/staff/balancesheet','AccountController@balancesheet')->name('finance.staff.balancesheet');
 	Route::resource('finance/staff/account','AccountController');
 
 });

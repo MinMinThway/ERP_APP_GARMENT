@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use Illuminate\Http\Request;
+use App\Order;
+use App\Account_detail;
 
 class AccountController extends Controller
 {
@@ -121,6 +123,14 @@ class AccountController extends Controller
         
         $account = Account::all();
         return view('finance.staff.addbudget',compact('account'));
+    }
+
+    public function balancesheet(){
+
+
+    $orders=Order::where('status_id','=',2)->get();
+    $account_details=Account_detail::all();
+    return view('finance.staff.balancesheet',compact('orders','account_details'));
     }
 
     // public function newbudget(Request $request, Account $account)

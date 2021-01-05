@@ -7,6 +7,8 @@ use App\Order_detail;
 use Illuminate\Http\Request;
 use App\Warehouse_detail;
 use App\Warehouse;
+use App\Account;
+use App\Account_detail;
 use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
@@ -235,12 +237,117 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function order_edit(Request $request, Order $order)
+    public function order_edit(Request $request, Order $order)  // procurement/staff/ order edit page
     {
         //
         $id=$request->id;
         $order=Order::find($id);
         return view('procurement.staff.order_edit',compact('order'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_2_change(Request $request, Order $order) // procurement/staff/ status chage
+    {
+        //
+        session_start();
+        $id=$request->id;
+
+        $order=Order::find($id);
+        if ($order->supplier_id<2) {
+            $_SESSION['errortype']='Supplier Requirement Fail !';
+            $_SESSION['error']='sorry we cant change status your order "ERP#'.$order->id.'" is does not have supplier please check again!';
+            return redirect()->route('status_2_change_error');
+            exit();
+        }
+        foreach ($order->detail as $item) {
+            if ($item->price>0) {
+                var_dump($item->price);
+            }else{
+                $_SESSION['errortype']='Price does not match!';
+                $warehouse=Warehouse::find($item->warehouse_id);
+                $_SESSION['error']='your selected product "'.$warehouse->name.'", price ="'.$item->price.'" is cannot be set. Please check again!';
+                return redirect()->route('status_2_change_error');
+                exit();
+            }
+        }
+        $order->status_id=3;
+        $order->save();
+        $_SESSION['successtitle']='Congratulations! you have successfully.';
+        $_SESSION['success']='Your admin is approve after checking process.';
+        return redirect()->route('status_2_change_success');   
+
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_2_change_error(Request $request, Order $order) // procurement/staff/ status chage error
+    {
+        return view('procurement.staff.error');
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_2_change_success(Request $request, Order $order) // procurement/staff/ status chage error
+    {
+        return view('procurement.staff.success');
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function order_3_index() // procurement/admin/order list
+    {
+        //
+        $orders = Order::where('status_id','=',3)->get();
+        return view('procurement.admin.order',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_3_detail(Request $request, Order $order)  // procurement/admin/ check order detail
+    {
+        //
+        $id=$request->id;
+        $order=Order::find($id);
+        return view('procurement.admin.detail',compact('order'));
+
+    // $order=Order::find(8);
+    // foreach($order->detail as $item) {
+
+    //     $p_orders=Order::where('status_id','>',3)->orderBy('id','desc')->get();
+
+    //     $change=0;
+    //     foreach ($p_orders as $p_order) {
+
+    //         $p_order_detail=Order_detail::where('order_id','=',$p_order->id)
+    //             ->where('warehouse_id','=',$item->warehouse_id)
+    //             ->first();
+
+    //         if ($p_order_detail->price) {
+    //             $change=$p_order_detail->price-$item->price;
+    //         }
+    //         dd($change).die();
+    //     }
+    // }
+    
     }
 
     /**
@@ -251,8 +358,8 @@ class OrderController extends Controller
     public function order_4_index()
     {
         //
-        $orders = Order::where('status_id','=',2)->get();
-         return view('finance.staff.orders',compact('orders'));
+        $orders=Order::where('status_id','=',2)->get();
+        return view('finance.staff.orders',compact('orders'));
        
     }
 
@@ -265,9 +372,57 @@ class OrderController extends Controller
      */
     public function order_4_edit(Request $request, Order $order)
     {
-        //
         $id=$request->id;
         $order=Order::find($id);
-        return view('finance.staff.detailorder',compact('order'));
+        $account=Account::all();
+        return view('finance.staff.detailorder',compact('order','account'));
+
+        // $order_id=$request->orderid;
+        // $detail=Order_detail::all();
+        // $order = Order::find($order_id);
+        // return view('finance.staff.detailorder',compact('order',));
     }
+
+    public function order_4_update(Request $request, Order $order)
+    {   
+        
+
+        $id = $request->id;
+        $accountid=$request->account;
+        $oldtotal=$request->balance;
+        // $cheque=$request->cheque;
+        DB::transaction(function() use ($request){
+            date_default_timezone_set("Asia/Rangoon");
+            $today = date('Y-m-d',strtotime('today'));
+
+            $order=Order::find($request->id);
+            // $order->cheque_no=$request->cheque;
+            $order->status_id=5;
+            $order->save();
+
+            $account= Account::find($request->account);
+            $oldbalance = $account->balance;
+            $newbalance = $request->balance;
+            $tranbalance = $oldbalance - $newbalance;
+            
+
+            $accountdetail=new Account_detail;
+            $accountdetail->date=$today;
+            $accountdetail->outcome=$request->total;
+            $accountdetail->tranbalance= $tranbalance;
+            $accountdetail->account_id= $request->id;
+            $accountdetail->save();
+
+            $account->balance  =   $tranbalance;
+            $account->save();
+
+
+        
+        
+
+    });
+    }
+   
+
+
 }

@@ -1,4 +1,3 @@
-
 @extends('finance.staff.master')
 
 @section('body')

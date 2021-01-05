@@ -75,7 +75,7 @@ use App\Supplier;
                                 $suppliers=Supplier::all();
                               @endphp
 
-                  <tr>
+                            <tr>
                                 <td class="align-middle text-center">{{++$i}}</td>
                                 <td class="align-middle text-center">ERP#{{$order->id}}</td>
                                 <td class="align-middle text-center" >{{$order->date}}</td>
@@ -89,7 +89,7 @@ use App\Supplier;
                                   <form action="{{route('finance.staff.order.detail')}}" method="POST">
                                   @csrf
                                   @method('GET')
-                                  <input type="hidden" name="id" value="{{$order->id}}"> 
+                                  <input type="hidden" name="id" value="{{$order->id}}">
                                   <button type="submit" class="btn btn-primary btn-sm" name="btnsubmit"><i class="fa fa-info"></i></button>
                                   </form>
                                   @if($order->denile_note)
