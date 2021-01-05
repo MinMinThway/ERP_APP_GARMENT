@@ -8,92 +8,6 @@ use App\Order;
 <!-- page content -->
 <div class="right_col" role="main">
   	<div class="">
-	    {{-- <div class="page-title"> --}}
-			<div class="col-md-12 col-sm-12 ">
-		        <div class="x_panel">
-{{-- 		        	<h2 class="">Order Histry Detail
-		        		<span class="float-right">
-		        			<a href="{{route('staff_0_history')}}" class="btn btn-danger btn-sm" style="border-radius: 20px">
-		        			Back
-		        			</a>
-						</span>
-					</h2> --}}
-					<div class="container">
-					<div class="row row-cols-md-8">						
-						<div class="card col">						  
-						  <div class="card-body">
-					    	<h1 class="text text-white text-center rounded-circle bg-primary" >1</h1>
-						    <h6 class="card-text text-center text-primary">admin</h6>
-						    <p class="card-text text-center">production</p>
-						    <p class="card-text text-center">approve</p>
-						  </div>
-						</div>
-						
-						<div class="card col">
-						  <div class="card-body">
-						    <h1 class="text text-white text-center rounded-circle bg-success">2</h1>
-						    <h6 class="card-text text-center text-success">staff</h6>
-						    <p class="card-text text-center">procurement</p>
-						    <p class="card-text text-center">add price</p>
-						  </div>
-						</div>
-
-						<div class="card col">
-						  <div class="card-body">
-						   	<h1 class="text text-white text-center rounded-circle bg-success" >3</h1>
-						    <h6 class="card-text text-center text-success">admin</h6>
-						    <p class="card-text text-center">procurement</p>
-						    <p class="card-text text-center">approve</p>
-						  </div>
-						</div>
-
-						<div class="card col">
-						  <div class="card-body">
-						    <h1 class="text text-white text-center rounded-circle bg-danger">4</h1>
-						    <h6 class="card-text text-center text-danger">staff</h6>
-						    <p class="card-text text-center">finance</p>
-						    <p class="card-text text-center">payment</p>
-						  </div>
-						</div>
-
-						<div class="card col">
-						  <div class="card-body">
-						    <h1 class="text text-white text-center rounded-circle bg-danger" >5</h1>
-						    <h6 class="card-text text-center text-danger">admin</h6>
-						    <p class="card-text text-center">finance</p>
-						    <p class="card-text text-center">approve</p>
-						  </div>
-						</div>
-
-						<div class="card col">
-						  <div class="card-body">
-						    <h1 class="text text-white text-center rounded-circle bg-success">6</h1>
-						    <h6 class="card-text text-center text-success">staff</h6>
-						    <p class="card-text text-center">procurement</p>
-						    <p class="card-text text-center">order</p>
-						  </div>
-						</div>
-
-						<div class="card col">
-						  <div class="card-body">
-						    <h1 class="text text-white text-center rounded-circle bg-warning">7</h1>
-						    <h6 class="card-text text-center">supplier</h6>
-						    <p class="card-text text-center">shipping</p>
-						  </div>
-						</div>
-
-						<div class="card col">
-						  <div class="card-body">
-						   	<h1 class="text text-white text-center rounded-circle bg-primary" >8</h1>
-						    <h6 class="card-text text-center text-primary">warehouse</h6>
-						    <p class="card-text text-center">delivery</p>
-						  </div>
-						</div>
-					</div>
-					</div>
-		        </div>	    
-		   	{{-- </div> --}}
-	    </div>
 
 	    <div class="clearfix"></div>
 		<div class="col-md-12 col-sm-12 ">
@@ -140,17 +54,38 @@ use App\Order;
 										<th class="align-middle text-center">CYD-#{{$order->id}}</th>
 			                        	<th class="align-middle text-center">{{$order->date}}</th>
 			                        	<th class="align-middle text-center">
-			                        	<a href="javascript:void(0)" class="btn text-white text-center rounded-circle 
+			                        	<button style="border-radius: 25px" class="btn btn-sm text-white
 			                        	@if($order->status_id==1||$order->status_id==8)
-			                        	bg-primary
+			                        	btn-primary
 			                        	@elseif($order->status_id==2||$order->status_id==3||$order->status_id==6)
-										bg-success
+										btn-success
 			                        	@elseif($order->status_id==4||$order->status_id==5)
-										bg-danger
+										btn-danger
 										@elseif($order->status_id==7)
-										bg-warning
+										btn-warning
 			                        	@endif
-			                        	" >{{$order->status_id}}</a>
+			                        	" 
+			                        	>
+			                        	@if($order->status_id==1)
+			                        	admin-production
+			                        	@elseif($order->status_id==2)
+			                        	staff-procurement
+			                        	@elseif($order->status_id==3)
+			                        	admin-procurement
+			                        	@elseif($order->status_id==4)
+			                        	staff-finance
+			                        	@elseif($order->status_id==5)
+			                        	admin-finance
+			                        	@elseif($order->status_id==6)
+			                        	order-state
+			                        	@elseif($order->status_id==7)
+			                        	shipping
+			                        	@else
+			                        	delivery
+			                        	@endif
+
+			                        	{{-- {{$order->status_id}} --}}
+			                        	</button>
 
 			                        	</th>
 			                        	<th class="align-middle text-center">
