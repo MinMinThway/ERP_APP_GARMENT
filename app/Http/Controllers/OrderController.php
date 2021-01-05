@@ -290,7 +290,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function staff_5_history()
+    public function admin_5_history()
     {
         //
         $orders=Order::where('status_id','>=',6)->get();
