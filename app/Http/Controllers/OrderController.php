@@ -122,6 +122,18 @@ class OrderController extends Controller
         return view('production.warehouse.delivery',compact('orders'));
     }
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function history()
+    {
+        //
+        $orders=Order::where('status_id','=',8)->get();
+        // dd($orders[0]->supplier->company_name);
+        return view('production.warehouse.history',compact('orders'));
+    }
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -134,6 +146,20 @@ class OrderController extends Controller
         $id = $request->id;
         $order=Order::find($id);
         return view('production.warehouse.deliveryInfo',compact('order'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function deliveredInfo(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('production.warehouse.deliveredInfo',compact('order'));
     }
     /**
      * Update the specified resource in storage.
@@ -226,7 +252,7 @@ class OrderController extends Controller
         $price=$_GET['price'];
 
         $detail=Order_detail::find($id);
-        $detail->price=number_format($price,2);
+        $detail->price=$price;
         $detail->save();
         echo number_format($price,2);
     }
@@ -276,6 +302,7 @@ class OrderController extends Controller
             }
         }
         $order->status_id=3;
+        $order->denile_note=null;
         $order->save();
         $_SESSION['successtitle']='Congratulations! you have successfully.';
         $_SESSION['success']='Your admin is approve after checking process.';
@@ -309,6 +336,18 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function note_2_get() // get/reject/note
+    {
+        //
+        $id=$_GET['id'];
+        $order=Order::find($id);
+        echo $order->denile_note;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function order_3_index() // procurement/admin/order list
     {
         //
@@ -328,26 +367,43 @@ class OrderController extends Controller
         $id=$request->id;
         $order=Order::find($id);
         return view('procurement.admin.detail',compact('order'));
+   
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_3_reject(Request $request, Order $order)  // procurement/admin/ check order detail
+    {
+        //
+        $id=$request->id;
+        $note=$request->note;
+        $order=Order::find($id);
+        $order->denile_note=$note;
+        $order->status_id=$order->status_id-1;
+        $order->save();
 
-    // $order=Order::find(8);
-    // foreach($order->detail as $item) {
-
-    //     $p_orders=Order::where('status_id','>',3)->orderBy('id','desc')->get();
-
-    //     $change=0;
-    //     foreach ($p_orders as $p_order) {
-
-    //         $p_order_detail=Order_detail::where('order_id','=',$p_order->id)
-    //             ->where('warehouse_id','=',$item->warehouse_id)
-    //             ->first();
-
-    //         if ($p_order_detail->price) {
-    //             $change=$p_order_detail->price-$item->price;
-    //         }
-    //         dd($change).die();
-    //     }
-    // }
-    
+        $orders = Order::where('status_id','=',3)->get();
+        return view('procurement.admin.order',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_3_change(Request $request, Order $order) // procurement/staff/ status chage
+    {
+        //
+        $id=$request->id;
+        $order=Order::find($id);
+        $order->status_id=4;
+        $order->save();
+        return redirect()->route('procurement.admin.order');
     }
 
     /**

@@ -17,7 +17,7 @@ use App\Warehouse;
 	          	<div class="x_title">
 	            	<h2>Go Finish! <small>When supplier and price comfirm.</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
-						<a class="btn btn-info pull-right pt-1">Back</a>
+						<a href="{{route('procurement.staff.order')}}" class="btn btn-info text-white pull-right pt-1">Back</a>
 		               	<form id="finish" action="{{route('status_2_change')}}" method="POST">
 		               		@csrf
 		               		@method('GET')

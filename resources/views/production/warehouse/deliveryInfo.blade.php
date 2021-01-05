@@ -94,11 +94,12 @@ use App\Warehouse_detail;
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
-		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		                    	<a class="dropdown-item" href="">Add New</a> 
-		                    	<a class="dropdown-item" href="#">Settings 2</a>
-		                  	</div>
+                        <form id="deli" action="{{route('delivered')}}" method="POST" class="d-none">
+                        	@csrf
+                        	@method('GET')
+                        	<input type="hidden" name="id" value="{{$order->id}}">
+                    	</form>
+              		    <button onclick="document.getElementById('deli').submit();" class="btn btn-primary btn-sm pull-right" style="border-radius: 20px">Delivery</button>
 		              	</li>
 		              	<li><a class="close-link"><i class="fa fa-close"></i></a>
 		              	</li>
@@ -137,11 +138,6 @@ use App\Warehouse_detail;
 			                        	<th class="align-middle text-left">{{$data->UOM}}</th>           
 			                        </tr>
 			                        @endforeach
-			                        <form id="deli" action="{{route('delivered')}}" method="POST" class="d-none">
-			                        	@csrf
-			                        	@method('GET')
-			                        	<input type="hidden" name="id" value="{{$order->id}}">
-		                        	</form>
 			                      </tbody>
 			                    </table> 
 			                    
@@ -155,9 +151,6 @@ use App\Warehouse_detail;
 	    </div>
 
 	    {{-- <div class="clearfix"a></div> --}}
-	    <div class="pt-3">
-	    <button onclick="document.getElementById('deli').submit();" class="btn btn-success pull-right">Delivery</button>
-	    </div>
   	</div>
 </div>
 <!-- /page content -->

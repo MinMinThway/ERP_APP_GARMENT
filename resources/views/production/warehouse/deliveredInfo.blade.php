@@ -1,30 +1,38 @@
-@extends('procurement.admin.master')
+@extends('production.warehouse.master')
 @php
-use App\Order_detail;
-use App\Order;
-use App\Supplier;
+// use App\Order_detail;
+use App\Warehouse;
+use App\Warehouse_detail;
 @endphp
-
 @section('body')
 <!-- page content -->
 <div class="right_col" role="main">
   	<div class="">
+	    <div class="page-title">
+			<div class="col-md-12 col-sm-12 ">
+		        <div class="x_panel">
+		        	<h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
+		        		<span class="float-right">
+		        			<a href="{{route('history')}}"> {{--  --}}
+		        			Back
+		        			{{-- <i class="fa fa-back" aria-hidden="true"></i> --}}
+		        			</a>
+						</span>
+					</h2>
+		        </div>	    
+		   	</div>
+	    </div>
 
 	    <div class="clearfix"></div>
 
 	    <div class="clearfix"></div>
-		{{-- <div class="col-md-12 col-sm-12 "> --}}
+		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Order Request <small>please click detail for check and approve</small></h2>
+	            	<h2>Delivered List <small></small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
-		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		                    	<a class="dropdown-item" href="">Add New</a> {{-- {{route('inventory.create')}} --}}
-		                    	<a class="dropdown-item" href="#">Settings 2</a>
-		                  	</div>
 		              	</li>
 		              	<li><a class="close-link"><i class="fa fa-close"></i></a>
 		              	</li>
@@ -38,51 +46,44 @@ use App\Supplier;
 			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
-			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center">Order_id</th>
-			                        	<th class="align-middle text-center">Date</th>
-			                        	<th class="align-middle text-center">Item(nos)</th>
-			                        	<th class="align-middle text-center">Total</th>
-			                        	<th class="align-middle text-center">Supplier</th>
-			                        	<th class="align-middle text-center">Action</th>        	
+			                        	<th class="align-middle text-center">No</th>  
+			                        	<th class="align-middle text-center">Code No</th>
+			                        	<th class="align-middle text-center">Name</th>
+			                        	<th class="align-middle text-center">Qty</th>
+			                        	<th class="align-middle text-center">Unit</th>			         
 			                        </tr>
 			                      </thead>
+
+
 			                      <tbody>
 			                      	@php
 			                      		$i=0;
 			                      	@endphp
-			                      	@foreach($orders as $order)
+			                      	@foreach($order->detail as $data)
 			                      	@php
-			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
-			                      		$supplier=Supplier::find($order->supplier_id);
+			                      		$warehouse=Warehouse::find($data->warehouse_id);
 			                      	@endphp
-
-									<tr>
-			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-center">ERP#{{$order->id}}</td>
-			                        	<td class="align-middle text-center" >{{$order->date}}</td>
-			                        	<td class="align-middle text-center">{{$detail}}</td>
-			                        	<td class="align-middle text-center">{{$order->total}}</td>
-			                        	<td class="align-middle text-left">{{$supplier->company_name}}</td>
-			                        	<td class="align-middle text-center">
-
-			                      		<form action="{{route('procurement.admin.order.detail')}}" method="POST">
-						               		@csrf
-						               		@method('GET')
-						               		<input type="hidden" name="id" value="{{$order->id}}">
-		                        		<button type="submit" class="btn btn-info" style="border-radius: 20px;">
-		                        		detail
-		                        		</button>
+			                        <tr>
+			                        	<th class="align-middle text-center">{{++$i}}</th>  
+			                        	<th class="align-middle text-center">{{$warehouse->codeno}}</th>
+			                        	<th class="align-middle text-left">{{$warehouse->name}}</th>
+			                        	<th class="align-middle text-right">{{$data->qty}}</th>
+			                        	<th class="align-middle text-left">{{$data->UOM}}</th>           
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
 			                    </table> 
+			                    
 	                  		</div>
 	                	</div>
 	              	</div> 
+	            
 	            </div>
+
 	        </div>
-	    {{-- </div> --}}
+	    </div>
+
+	    {{-- <div class="clearfix"a></div> --}}
   	</div>
 </div>
 <!-- /page content -->
@@ -118,18 +119,4 @@ use App\Supplier;
 
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
 
-
-<script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script>
-
-
-
-<script type="text/javascript">
-	$(document).ready(function(){
-
-	})
-	                
-</script>
 @endsection

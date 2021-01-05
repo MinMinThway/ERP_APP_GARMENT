@@ -1,8 +1,23 @@
-@extends('procurement.admin.master')
+@extends('production.warehouse.master')
 @php
 use App\Order_detail;
 use App\Order;
-use App\Supplier;
+	// $order= new Order;
+	// $order->date='2020-12-15';
+	// $order->invoice_no='CNG22343221';
+	// $order->total='50';
+	// $order->supplier_id=7;
+	// $order->status_id=7;
+	// $order->save();
+
+	// $order_detail=new Order_detail;
+	// $order_detail->qty=10;
+	// $order_detail->price='15';
+	// $order_detail->UOM='piece';
+	// $order_detail->warehouse_id=3;
+	// $order_detail->order_id=1;
+	// $order_detail->save();
+
 @endphp
 
 @section('body')
@@ -13,10 +28,10 @@ use App\Supplier;
 	    <div class="clearfix"></div>
 
 	    <div class="clearfix"></div>
-		{{-- <div class="col-md-12 col-sm-12 "> --}}
+		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Order Request <small>please click detail for check and approve</small></h2>
+	            	<h2>Order Acceptable List <small>Shipment On The Way</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
@@ -38,41 +53,51 @@ use App\Supplier;
 			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
-			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center">Order_id</th>
-			                        	<th class="align-middle text-center">Date</th>
-			                        	<th class="align-middle text-center">Item(nos)</th>
-			                        	<th class="align-middle text-center">Total</th>
-			                        	<th class="align-middle text-center">Supplier</th>
-			                        	<th class="align-middle text-center">Action</th>        	
+			                        	<th class="align-middle text-center" rowspan="2">No</th>
+  			                        	<th class="align-middle text-center" rowspan="2">Invoice No</th>
+			                        	<th class="align-middle text-center" rowspan="2">Order Id</th>
+			                        	<th class="align-middle text-center" colspan="2">Date</th>
+			                        	<th class="align-middle text-center" rowspan="2">Lead Time(d)</th>
+			                        	<th class="align-middle text-center" rowspan="2">Action</th>
+			                        </tr>
+					                <tr>
+			                        	<th class="align-middle text-center">Order</th>
+			                        	<th class="align-middle text-center">Recieved</th>
 			                        </tr>
 			                      </thead>
+
+
 			                      <tbody>
 			                      	@php
 			                      		$i=0;
+
 			                      	@endphp
 			                      	@foreach($orders as $order)
 			                      	@php
-			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
-			                      		$supplier=Supplier::find($order->supplier_id);
+			                      		$recieve=date('Y-m-d',strtotime($order->updated_at));
+										$lead_time=((abs(strtotime($order->date)-strtotime(date('Y-m-d',strtotime($order->updated_at)))))/(60*60*24));
 			                      	@endphp
-
-									<tr>
-			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-center">ERP#{{$order->id}}</td>
-			                        	<td class="align-middle text-center" >{{$order->date}}</td>
-			                        	<td class="align-middle text-center">{{$detail}}</td>
-			                        	<td class="align-middle text-center">{{$order->total}}</td>
-			                        	<td class="align-middle text-left">{{$supplier->company_name}}</td>
-			                        	<td class="align-middle text-center">
-
-			                      		<form action="{{route('procurement.admin.order.detail')}}" method="POST">
-						               		@csrf
-						               		@method('GET')
-						               		<input type="hidden" name="id" value="{{$order->id}}">
-		                        		<button type="submit" class="btn btn-info" style="border-radius: 20px;">
-		                        		detail
-		                        		</button>
+			                        <tr>
+			                        	<th class="align-middle text-center">{{++$i}}</th>  
+			                        	<th class="align-middle text-center">{{$order->invoice_no}}</th>
+										<th class="align-middle text-center">CYD-#{{$order->id}}</th>
+			                        	<th class="align-middle text-center">{{$order->date}}</th>
+			                        	<th class="align-middle text-center">{{$recieve}}</th>
+			                        	<th class="align-middle text-center">
+			                        	@if($lead_time>1)
+			                        		{{$lead_time}} days
+			                        	@else
+			                        		{{$lead_time}} day
+			                        	@endif
+			                        	</th>
+			                        	<th class="align-middle text-center">
+			                        	<form id="info{{$order->id}}" action="{{route('deliveredInfo')}}" method="POST" class="d-none">
+				                        	@csrf
+				                        	@method('GET')
+				                        	<input type="text" name="id" value="{{$order->id}}">
+			                        	</form>
+			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-success btn-sm" style="border-radius: 20px">info</button>
+			                        	</th>                    		
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
@@ -82,7 +107,7 @@ use App\Supplier;
 	              	</div> 
 	            </div>
 	        </div>
-	    {{-- </div> --}}
+	    </div>
   	</div>
 </div>
 <!-- /page content -->
@@ -118,18 +143,4 @@ use App\Supplier;
 
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
 
-
-<script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script>
-
-
-
-<script type="text/javascript">
-	$(document).ready(function(){
-
-	})
-	                
-</script>
 @endsection

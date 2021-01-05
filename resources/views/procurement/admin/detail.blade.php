@@ -19,18 +19,17 @@ use App\Supplier;
 	            	<h2>Order Request <small>please click detail for check and approve</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                  		<form id="finish" action="" method="POST" class="d-inline">
+                  		<form action="{{route('status_3_change')}}" method="POST" class="d-inline">
 		               		@csrf
 		               		@method('GET')
-		               		<input type="hidden" name="id" value="{{$order->id}}">
-                		
-		               	</form>
-						<button type="submit" class="btn btn-danger btn-sm" style="border-radius: 20px;">
+		               		<input type="hidden" name="id" value="{{$order->id}}">		               	
+						<button data-toggle="modal" data-target="#reject" type="submit" class="btn btn-danger btn-sm" style="border-radius: 20px;">
                 		Reject
                 		</button>
 		               	<button type="submit" class="btn btn-success btn-sm" style="border-radius: 20px;">
                 		approve
                 		</button>
+                		</form>
 	            	</ul>
 	            	<div class="clearfix"></div>
 	          	</div>
@@ -97,7 +96,7 @@ use App\Supplier;
 			                        		-{{$change}}
 			                        		</span></span>
 			                        		@else
-			                        		<span class="mr-2"><i class="icofont-minus"></i> 0.00</span>
+			                        		<span class="mr-2" style="color: gray;"><i class="icofont-minus icofont-2x"></i> ±0.00</span>
 			                        		@endif
 			                        		
 			                        	</td>	
@@ -116,6 +115,35 @@ use App\Supplier;
   	</div>
 </div>
 <!-- /page content -->
+
+<!-- Modal -->
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('procurement.admin.order.reject')}}" method="POST">
+      	@csrf
+      	@method('GET')
+      	<input type="hidden" name="id" value="{{$order->id}}">
+      <div class="modal-body">
+        <textarea class="text" style="width: 100%;text-align: left;" name="note">
+        	Please give reason about reject. clearly define what you want to check again!
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Reject</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('script')
