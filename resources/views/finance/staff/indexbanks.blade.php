@@ -27,7 +27,7 @@
                   <div class="x_title">
                     <h2>Accounts</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class=""><i class="fa fa-plus-circle fa-lg"> Add</i></a>
+                      <li><a ><i class="fa fa-plus-circle fa-lg"> Add</i></a>
                     </li>
                     </ul>
                     <div class="clearfix"></div>
