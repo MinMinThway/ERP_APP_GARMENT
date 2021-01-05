@@ -172,7 +172,10 @@ class WarehouseDetailController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function report() // production staff report
-    {        
+    {   
+        // lead time
+
+        // lead time 
         // calculation reorder date
         $warehouse_details = Warehouse_detail::select(DB::raw('sum(output_qty) as total_output'),
             DB::raw('count(DISTINCT date) as total_day'),'warehouse_id')

@@ -19,13 +19,13 @@ use App\Supplier;
 	            	<h2>Order Request <small>please click detail for check and approve</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+		              	<button data-toggle="modal" data-target="#reject" type="submit" class="btn btn-danger btn-sm" style="border-radius: 20px;">
+                		Reject
+                		</button>
                   		<form action="{{route('status_3_change')}}" method="POST" class="d-inline">
 		               		@csrf
 		               		@method('GET')
 		               		<input type="hidden" name="id" value="{{$order->id}}">		               	
-						<button data-toggle="modal" data-target="#reject" type="submit" class="btn btn-danger btn-sm" style="border-radius: 20px;">
-                		Reject
-                		</button>
 		               	<button type="submit" class="btn btn-success btn-sm" style="border-radius: 20px;">
                 		approve
                 		</button>
