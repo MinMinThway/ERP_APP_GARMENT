@@ -72,7 +72,11 @@ use App\Order;
 			                      	@endphp
 			                      	@foreach($warehouses as $warehouse)
 			                        <tr>
-			                        	<th class="align-middle text-center">{{++$i}}</th>
+			                        	<th class="align-middle text-center
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{++$i}}</th>
 			                        	<th class="align-middle text-center 
 			                        	@if($warehouse->reorder_date<$today)
 			                        	text-danger

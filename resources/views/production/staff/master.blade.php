@@ -80,7 +80,7 @@
                 <ul class="nav side-menu">       
                   <li class="{{ Request::is('production/staff/home') ? 'current-page' : '' }}">
                     <a href="{{route('production.staff.home')}}">
-                      <i class="fa fa-tachometer" aria-hidden="true"></i>
+                      <i class="icofont-dashboard pr-2" style="font-size: 20px"></i>
                     Dashboard 
                     </a>
                   </li>
@@ -93,22 +93,22 @@
 
                   <li class="{{ Request::is('production/warehouse/inventory*') ? 'current-page' : '' }}">
                     <a href="{{route('inventory.index')}}">
-                      <i class="icofont-chart-line-alt pr-1"></i>
+                      <i class="icofont-chart-line-alt pr-2" style="font-size: 20px"></i>
                      Inventory Analysis
                     </a>
                   </li>
 
                  <li class="{{ Request::is('production/staff/report*') ? 'current-page' : '' }}">
                     <a href="{{route('production.staff.report')}}">
-                      <i class="icofont-listing-number pr-1"></i>
+                      <i class="icofont-listing-number pr-2" style="font-size: 20px"></i>
                     Report
                     </a>
                   </li>
 
                  <li class="{{ Request::is('production/staff/order*') ? 'current-page' : '' }}">
                     <a href="{{route('production.staff.order')}}">
-                      <i class="icofont-ui-cart pr-1"></i>
-                    Order
+                      <i class="icofont-ui-cart pr-2" style="font-size: 20px"></i>
+                    Create Order
                     </a>
                   </li>
 
