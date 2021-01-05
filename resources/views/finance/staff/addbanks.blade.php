@@ -27,7 +27,7 @@
 								<div class="x_title">
 									<h2>Add Banks</h2>
 									<ul class="nav navbar-right panel_toolbox">
-										<li><a href="{{route('account.index')}}"><i class="fa fa-reply"> Back</i></a>
+										<li><a href="{{route('account.home')}}"><i class="fa fa-reply"> Back</i></a>
 										</li>
 									</ul>
 									<div class="clearfix"></div>

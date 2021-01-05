@@ -188,7 +188,11 @@ use App\Account_detail
                       <!-- /.row -->
                     </section>
                     <div class="pt-3">
+                      <button class="btn btn-danger pull-right" data-id='{{$order->id}}' >Reject</button>
+                       <textarea id="denilenote" ></textarea>
                       <button onclick="document.getElementById('demo-form2').submit();" class="btn btn-success pull-right">Approve</button>
+
+                       
                       </div>
                   </div>
                 </div>
