@@ -184,14 +184,14 @@ class WarehouseDetailController extends Controller
         foreach ($warehouse_details as $value) {
             $avg_out_day=$value->total_output/$value->total_day; // avg consume
             $stock=Warehouse::find($value->warehouse_id);
-            if ($avg_out_day>0) {
+            if ($avg_out_day>0) {   // check have transection items
                 $day_left=number_format($stock->stock_qty/$avg_out_day,0)-($stock->order_time_duration*$stock->stock_safety_factor); // day left for orders
-                if ($day_left>0) {
+                // if ($day_left>0) {
                     $d=strtotime('+'.$day_left.' day');
                     $reorder_date=date('Y-m-d',strtotime('today',$d));
                     $stock->reorder_date=$reorder_date;
                     $stock->save();
-                }
+                // }
              }           
         }
         // calculation reorder date
