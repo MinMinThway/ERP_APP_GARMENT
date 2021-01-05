@@ -120,6 +120,18 @@ class OrderController extends Controller
         return view('production.warehouse.delivery',compact('orders'));
     }
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function history()
+    {
+        //
+        $orders=Order::where('status_id','=',8)->get();
+        // dd($orders[0]->supplier->company_name);
+        return view('production.warehouse.history',compact('orders'));
+    }
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -132,6 +144,20 @@ class OrderController extends Controller
         $id = $request->id;
         $order=Order::find($id);
         return view('production.warehouse.deliveryInfo',compact('order'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function deliveredInfo(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('production.warehouse.deliveredInfo',compact('order'));
     }
     /**
      * Update the specified resource in storage.

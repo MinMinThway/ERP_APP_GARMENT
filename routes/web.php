@@ -38,6 +38,8 @@ Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/delivery','OrderController@delivery')->name('delivery');
 	Route::get('/production/warehouse/delivery/info','OrderController@deliveryInfo')->name('deliveryInfo');
 	Route::get('/production/warehouse/delivery/set','OrderController@delivered')->name('delivered');
+	Route::get('/production/warehouse/history','OrderController@history')->name('history');
+	Route::get('/production/warehouse/history/info','OrderController@deliveredInfo')->name('deliveredInfo');
 });
 
 Route::middleware('role:production/staff')->group(function () {

@@ -85,8 +85,8 @@ use App\Order;
 				                        	@method('GET')
 				                        	<input type="hidden" name="id" value="{{$order->id}}">
 			                        	</form>
-			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-info">info</button>
-			                        		<button onclick="document.getElementById('deli{{$order->id}}').submit();" class="btn btn-success">Delivery</button>
+			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-success btn-sm" style="border-radius: 20px">info</button>
+			                        		<button onclick="document.getElementById('deli{{$order->id}}').submit();" class="btn btn-primary btn-sm" style="border-radius: 20px">Delivery</button>
 			                        	</th>                    		
 			                        </tr>
 			                        @endforeach

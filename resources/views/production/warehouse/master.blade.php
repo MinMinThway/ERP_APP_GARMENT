@@ -13,7 +13,8 @@
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>ERP Software</title>
-
+    {{-- icofont --}}
+    <link rel="stylesheet" type="text/css" href="{{asset('icon/icofont/icofont.min.css')}}">
     <!-- Bootstrap -->
     <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Datatables -->    
@@ -78,35 +79,35 @@
                 <ul class="nav side-menu">       
                   <li class="{{ Request::is('production/warehouse/home') ? 'current-page' : '' }}">
                     <a href="{{route('warehouse.home')}}">
-                      <i class="fa fa-tachometer" aria-hidden="true"></i>
+                      <i class="icofont-dashboard pr-2" style="font-size: 20px"></i>
                     Dashboard 
                     </a>
                   </li>
                   <li class="{{ Request::is('production/warehouse/materials*') ? 'current-page' : '' }}">
                     <a href="{{route('materials.index')}}">
-                      <i class="fa fa-database" aria-hidden="true"></i>
+                      <i class="icofont-database pr-2" style="font-size: 20px"></i>
                     Materials
                     </a>
                   </li>
 
                   <li class="{{ Request::is('production/warehouse/inventory*') ? 'current-page' : '' }}">
                     <a href="{{route('inventory.index')}}">
-                      <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                      <i class="icofont-exchange pr-2" style="font-size: 20px"></i>
                     Inventory
                     </a>
                   </li>
 
                   <li class="{{ Request::is('production/warehouse/delivery*') ? 'current-page' : '' }}">
                     <a href="{{route('delivery')}}">
-                      <i class="fa fa-truck" aria-hidden="true"></i>
+                      <i class="icofont-delivery-time pr-2" style="font-size: 20px"></i>
                     Delivery
                     </a>
                   </li>
 
-                 <li class="{{ Request::is('production/warehouse/delivery*') ? 'current-page' : '' }}">
-                    <a href="{{route('delivery')}}">
-                      <i class="icofont-ui-cart"></i>
-                    Order
+                 <li class="{{ Request::is('production/warehouse/history*') ? 'current-page' : '' }}">
+                    <a href="{{route('history')}}">
+                      <i class="icofont-history pr-2" style="font-size: 20px"></i>
+                    History
                     </a>
                   </li>
 

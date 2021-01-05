@@ -1,53 +1,7 @@
 @extends('production.warehouse.master')
 @php
-// use App\Order_detail;
-use App\Warehouse;
-use App\Warehouse_detail;
-	// $warehouses=Warehouse::all();
-	// foreach ($warehouses as $warehouse) {
-	// 	$id=$warehouse->id;
-	// 	$item=Warehouse::find($id);
-	// 	$item->stock_qty=0;
-	// 	// $item->order_time_duration=30;
-	// 	// $item->stock_safety_factor='1';
-	// 	$item->save();
-	// }
-	// $warehose_id=11;
-	// $warehose_qty=2000;
-
-	// $today=strtotime('-1 day');
-
-	// $wdetails=Warehouse_detail::all();
-	// foreach ($wdetails as $wdetail) {
-	// 	$id=$wdetail->id;
-	// 	$transection=Warehouse_detail::find($id);
-	// 	$transection->delete();
-	// }
-	// $d=strtotime('-1 day');
-	// for ($i=1; $i < 30; $i++) {
-	// 	$d=strtotime('+'.$i.' day');
-	// 	$day=date('Y-m-d',strtotime('today -18days',$d));
-		// var_dump($day);
-		// $random=rand(10,20);
-		// var_dump($random);
-
-	// 	$warehouse=new Warehouse_detail;
-	// 	$warehouse->date=$day;
-	// 	$warehouse->output_qty=$random;
-	// 	$warehose_qty=$warehose_qty-$random;
-	// 	$warehouse->stock=$warehose_qty;
-	// 	$warehouse->warehouse_id=$warehose_id;
-	// 	$warehouse->save();
-
-	// 	$update_qty=Warehouse::find($warehose_id);
-	// 	$update_qty->stock_qty=$warehose_qty;
-	// 	$update_qty->save();
-	// }
-	// var_dump('finish').die();
-	// var_dump(date('Y-m-d',strtotime('today',$today))).die();
-
-
-	
+use App\Order_detail;
+use App\Order;
 	// $order= new Order;
 	// $order->date='2020-12-15';
 	// $order->invoice_no='CNG22343221';
@@ -65,24 +19,11 @@ use App\Warehouse_detail;
 	// $order_detail->save();
 
 @endphp
+
 @section('body')
 <!-- page content -->
 <div class="right_col" role="main">
   	<div class="">
-	    <div class="page-title">
-			<div class="col-md-12 col-sm-12 ">
-		        <div class="x_panel">
-		        	<h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
-		        		<span class="float-right">
-		        			<a href="{{route('delivery')}}"> {{--  --}}
-		        			Back
-		        			{{-- <i class="fa fa-back" aria-hidden="true"></i> --}}
-		        			</a>
-						</span>
-					</h2>
-		        </div>	    
-		   	</div>
-	    </div>
 
 	    <div class="clearfix"></div>
 
@@ -94,12 +35,11 @@ use App\Warehouse_detail;
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
-                        <form id="deli" action="{{route('delivered')}}" method="POST" class="d-none">
-                        	@csrf
-                        	@method('GET')
-                        	<input type="hidden" name="id" value="{{$order->id}}">
-                    	</form>
-              		    <button onclick="document.getElementById('deli').submit();" class="btn btn-primary btn-sm pull-right" style="border-radius: 20px">Delivery</button>
+		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		                    	<a class="dropdown-item" href="">Add New</a> {{-- {{route('inventory.create')}} --}}
+		                    	<a class="dropdown-item" href="#">Settings 2</a>
+		                  	</div>
 		              	</li>
 		              	<li><a class="close-link"><i class="fa fa-close"></i></a>
 		              	</li>
@@ -113,11 +53,16 @@ use App\Warehouse_detail;
 			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
-			                        	<th class="align-middle text-center">No</th>  
-			                        	<th class="align-middle text-center">Code No</th>
-			                        	<th class="align-middle text-center">Name</th>
-			                        	<th class="align-middle text-center">Qty</th>
-			                        	<th class="align-middle text-center">Unit</th>			         
+			                        	<th class="align-middle text-center" rowspan="2">No</th>
+  			                        	<th class="align-middle text-center" rowspan="2">Invoice No</th>
+			                        	<th class="align-middle text-center" rowspan="2">Order Id</th>
+			                        	<th class="align-middle text-center" colspan="2">Date</th>
+			                        	<th class="align-middle text-center" rowspan="2">Lead Time(d)</th>
+			                        	<th class="align-middle text-center" rowspan="2">Action</th>
+			                        </tr>
+					                <tr>
+			                        	<th class="align-middle text-center">Order</th>
+			                        	<th class="align-middle text-center">Recieved</th>
 			                        </tr>
 			                      </thead>
 
@@ -125,32 +70,44 @@ use App\Warehouse_detail;
 			                      <tbody>
 			                      	@php
 			                      		$i=0;
+
 			                      	@endphp
-			                      	@foreach($order->detail as $data)
+			                      	@foreach($orders as $order)
 			                      	@php
-			                      		$warehouse=Warehouse::find($data->warehouse_id);
+			                      		$recieve=date('Y-m-d',strtotime($order->updated_at));
+										$lead_time=((abs(strtotime($order->date)-strtotime(date('Y-m-d',strtotime($order->updated_at)))))/(60*60*24));
 			                      	@endphp
 			                        <tr>
 			                        	<th class="align-middle text-center">{{++$i}}</th>  
-			                        	<th class="align-middle text-center">{{$warehouse->codeno}}</th>
-			                        	<th class="align-middle text-left">{{$warehouse->name}}</th>
-			                        	<th class="align-middle text-right">{{$data->qty}}</th>
-			                        	<th class="align-middle text-left">{{$data->UOM}}</th>           
+			                        	<th class="align-middle text-center">{{$order->invoice_no}}</th>
+										<th class="align-middle text-center">CYD-#{{$order->id}}</th>
+			                        	<th class="align-middle text-center">{{$order->date}}</th>
+			                        	<th class="align-middle text-center">{{$recieve}}</th>
+			                        	<th class="align-middle text-center">
+			                        	@if($lead_time>1)
+			                        		{{$lead_time}} days
+			                        	@else
+			                        		{{$lead_time}} day
+			                        	@endif
+			                        	</th>
+			                        	<th class="align-middle text-center">
+			                        	<form id="info{{$order->id}}" action="{{route('deliveredInfo')}}" method="POST" class="d-none">
+				                        	@csrf
+				                        	@method('GET')
+				                        	<input type="text" name="id" value="{{$order->id}}">
+			                        	</form>
+			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-success btn-sm" style="border-radius: 20px">info</button>
+			                        	</th>                    		
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
 			                    </table> 
-			                    
 	                  		</div>
 	                	</div>
 	              	</div> 
-	            
 	            </div>
-
 	        </div>
 	    </div>
-
-	    {{-- <div class="clearfix"a></div> --}}
   	</div>
 </div>
 <!-- /page content -->

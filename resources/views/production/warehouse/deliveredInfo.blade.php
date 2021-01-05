@@ -3,67 +3,6 @@
 // use App\Order_detail;
 use App\Warehouse;
 use App\Warehouse_detail;
-	// $warehouses=Warehouse::all();
-	// foreach ($warehouses as $warehouse) {
-	// 	$id=$warehouse->id;
-	// 	$item=Warehouse::find($id);
-	// 	$item->stock_qty=0;
-	// 	// $item->order_time_duration=30;
-	// 	// $item->stock_safety_factor='1';
-	// 	$item->save();
-	// }
-	// $warehose_id=11;
-	// $warehose_qty=2000;
-
-	// $today=strtotime('-1 day');
-
-	// $wdetails=Warehouse_detail::all();
-	// foreach ($wdetails as $wdetail) {
-	// 	$id=$wdetail->id;
-	// 	$transection=Warehouse_detail::find($id);
-	// 	$transection->delete();
-	// }
-	// $d=strtotime('-1 day');
-	// for ($i=1; $i < 30; $i++) {
-	// 	$d=strtotime('+'.$i.' day');
-	// 	$day=date('Y-m-d',strtotime('today -18days',$d));
-		// var_dump($day);
-		// $random=rand(10,20);
-		// var_dump($random);
-
-	// 	$warehouse=new Warehouse_detail;
-	// 	$warehouse->date=$day;
-	// 	$warehouse->output_qty=$random;
-	// 	$warehose_qty=$warehose_qty-$random;
-	// 	$warehouse->stock=$warehose_qty;
-	// 	$warehouse->warehouse_id=$warehose_id;
-	// 	$warehouse->save();
-
-	// 	$update_qty=Warehouse::find($warehose_id);
-	// 	$update_qty->stock_qty=$warehose_qty;
-	// 	$update_qty->save();
-	// }
-	// var_dump('finish').die();
-	// var_dump(date('Y-m-d',strtotime('today',$today))).die();
-
-
-	
-	// $order= new Order;
-	// $order->date='2020-12-15';
-	// $order->invoice_no='CNG22343221';
-	// $order->total='50';
-	// $order->supplier_id=7;
-	// $order->status_id=7;
-	// $order->save();
-
-	// $order_detail=new Order_detail;
-	// $order_detail->qty=10;
-	// $order_detail->price='15';
-	// $order_detail->UOM='piece';
-	// $order_detail->warehouse_id=3;
-	// $order_detail->order_id=1;
-	// $order_detail->save();
-
 @endphp
 @section('body')
 <!-- page content -->
@@ -74,7 +13,7 @@ use App\Warehouse_detail;
 		        <div class="x_panel">
 		        	<h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
 		        		<span class="float-right">
-		        			<a href="{{route('delivery')}}"> {{--  --}}
+		        			<a href="{{route('history')}}"> {{--  --}}
 		        			Back
 		        			{{-- <i class="fa fa-back" aria-hidden="true"></i> --}}
 		        			</a>
@@ -90,16 +29,10 @@ use App\Warehouse_detail;
 		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Order Acceptable List <small>Shipment On The Way</small></h2>
+	            	<h2>Delivered List <small></small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
-                        <form id="deli" action="{{route('delivered')}}" method="POST" class="d-none">
-                        	@csrf
-                        	@method('GET')
-                        	<input type="hidden" name="id" value="{{$order->id}}">
-                    	</form>
-              		    <button onclick="document.getElementById('deli').submit();" class="btn btn-primary btn-sm pull-right" style="border-radius: 20px">Delivery</button>
 		              	</li>
 		              	<li><a class="close-link"><i class="fa fa-close"></i></a>
 		              	</li>
