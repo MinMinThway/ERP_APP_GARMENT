@@ -73,6 +73,7 @@ use App\Supplier;
 		                        		<button type="submit" class="btn btn-info" style="border-radius: 20px;">
 		                        		detail
 		                        		</button>
+		                        		</form>
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
@@ -119,10 +120,10 @@ use App\Supplier;
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
 
 
-<script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
+{{-- <script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script>
+<script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script> --}}
 
 
 
