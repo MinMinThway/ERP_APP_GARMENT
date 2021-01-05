@@ -414,7 +414,7 @@ class OrderController extends Controller
     public function order_4_index()
     {
         //
-        $orders=Order::where('status_id','=',2)->get();
+        $orders=Order::where('status_id','=',4)->get();
         return view('finance.staff.orders',compact('orders'));
        
     }
