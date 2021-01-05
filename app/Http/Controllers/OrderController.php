@@ -442,10 +442,6 @@ class OrderController extends Controller
     public function order_4_update(Request $request, Order $order)
     {   
         
-
-        $id = $request->id;
-        $accountid=$request->account;
-        $oldtotal=$request->balance;
         // $cheque=$request->cheque;
         DB::transaction(function() use ($request){
             date_default_timezone_set("Asia/Rangoon");
@@ -464,18 +460,13 @@ class OrderController extends Controller
 
             $accountdetail=new Account_detail;
             $accountdetail->date=$today;
-            $accountdetail->outcome=$request->total;
+            $accountdetail->outcome=$request->balance;
             $accountdetail->tranbalance= $tranbalance;
             $accountdetail->account_id= $request->id;
             $accountdetail->save();
 
             $account->balance  =   $tranbalance;
             $account->save();
-
-
-        
-        
-
     });
     }
    
