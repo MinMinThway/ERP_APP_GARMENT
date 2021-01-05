@@ -173,7 +173,7 @@ class WarehouseDetailController extends Controller
      */
     public function report() // production staff report
     {        
-        //
+        // calculation reorder date
         $warehouse_details = Warehouse_detail::select(DB::raw('sum(output_qty) as total_output'),
             DB::raw('count(DISTINCT date) as total_day'),'warehouse_id')
                     ->groupBy('warehouse_id')
@@ -189,9 +189,9 @@ class WarehouseDetailController extends Controller
                     $stock->reorder_date=$reorder_date;
                     $stock->save();
                 }
-             }
-           
+             }           
         }
+        // calculation reorder date
         $warehouses=Warehouse::orderBy('reorder_date')
             ->where('reorder_date','!=',null)
             ->get();
