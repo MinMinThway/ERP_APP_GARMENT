@@ -63,10 +63,11 @@ use App\Account_detail
                               @php
                                 $warehouse=Warehouse::find($data->warehouse_id);
                               @endphp
-                              <small><b>Order Date: {{$order->date}}</b></small><br>
-                              <small><b>Order ID:{{$order->id}}</b></small><br>
-                              <small><b>Total Price : $ {{$order->total}}</b></small><br>
-                            
+                              @endforeach
+                              <h6 style="margin-left: 15px;"><b>Order Date: {{$order->date}}</b></h6>
+                              <h6 style="margin-left: 15px;"><b>Order ID:{{$order->id}}</b></h6>
+                              <h6 style="margin-left: 15px;"><b>Total Price : $ {{$order->total}}</b></h6>
+                              
                           </h6>
                         </div>
                         <!-- /.col -->
@@ -87,16 +88,20 @@ use App\Account_detail
                                 <th class="align-middle text-center">Supplier</th>
                                 <th class="align-middle text-center">Qty</th>
                                 <th class="align-middle text-center">Unit</th>
-                                <th class="align-middle text-center">Price</th>
-                                <th class="align-middle text-center">Action</th>
-
+                                <th class="align-middle text-center">Order Price</th>
+                                
                               </tr>
                             </thead>
                             <tbody>
-                              
-                              @php                                
+                              @foreach($order->detail as $data)
+                               @php
+                                $warehouse=Warehouse::find($data->warehouse_id);
+                              @endphp
+
+                              @php   
+
                               $amt = number_format($data->qty*$data->price,2);  
-                                  $p_orders=Order::where('status_id','>',3)->orderBy('id','desc')->get();
+                                  $p_orders=Order::where('status_id','>',4)->orderBy('id','desc')->get();
 
                                   $change=0;
                                   foreach ($p_orders as $p_order) {
@@ -104,6 +109,8 @@ use App\Account_detail
                                       $p_order_detail=Order_detail::where('order_id','=',$p_order->id)
                                           ->where('warehouse_id','=',$data->warehouse_id)
                                           ->first();
+
+                                          // dd($p_order_detail);
                                       if ($p_order_detail) {
                                       
                                       if ($p_order_detail->price) {
@@ -120,8 +127,7 @@ use App\Account_detail
                                 <td class="align-middle text-center">{{$order->supplier->company_name}}</td>
                                 <td class="align-middle text-right">{{$data->qty}}</td>
                                 <td class="align-middle text-left">{{$data->UOM}}</td>
-                                <td class="align-middle text-left">{{$data->price}}</td>
-                                <td class="align-middle text-center">
+                                <td class="align-middle text-center">{{$data->price}}</
                                  @if($change<0)
                                   <span class="mr-2"><i class="icofont-caret-up text-danger icofont-2x"></i> <span class="text text-danger">
                                   @php
@@ -131,21 +137,16 @@ use App\Account_detail
                                   +{{$change}}
                                   </span></span>
                                   @elseif($change>0)
-                                  <span class="mr-2"><i class="icofont-caret-down text-success icofont-2x"></i> <span class="text text-success">
+                                  <span class="mr-2"><i class="icofont-caret-down text-success icofont-2x"></i> <span class="text text-success"><b>
                                   @php
                                     $change=abs($change);
                                     $change=number_format($change,2);
                                   @endphp
                                   -{{$change}}
-                                  </span></span>
+                                  </b></span></span>
                                   @else
                                   <span class="mr-2"><i class="icofont-minus"></i> 0.00</span>
                                   @endif
-                                    <div id="wp2{{$data->id}}" class="float-right pr-5">
-                                      
-                                      <button id="edo{{$data->id}}" onclick="select('#edo{{$data->id}}','edit1')" style="border-radius: 20px" class="btn btn-success edit">Submit</button>
-                                    </div>
-                                 
                                 </td>
                               </tr>
                              @endforeach
@@ -154,12 +155,31 @@ use App\Account_detail
                         </div>
                         <!-- /.col -->
                       </div>
-                      <!-- /.row -->
 
+                      <!-- /.row -->
+                       <div class="pt-3">
+
+                    {{--   <button class="btn btn-danger pull-right reject" data-target="#reject" data-id='{{$order->id}}' >Reject</button> --}}
+                      <button  class="btn btn-success pull-right submit">Submit</button>
+
+                      
+
+                        {{-- <form id="rejectform" action="{{route('finance.staff.order.reject')}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
+                          @csrf
+                            @method('GET')
+                             <input type="hidden" name="id" value="{{$order->id}}">
+                            <div id="denile" class="denile">
+                         <h6><b>Denile Reason</b></h6>
+                          <textarea id="denilenote" class="w-100"></textarea>
+                        </div>
+                      </form> --}}
+
+                      </div>
+                      <br><br><br><br>
                       <div class="row">
                         <!-- accepted payments column -->
-                        <div class="col-md-4 col-sm-4">
-                          Please Select Bank
+                        <div class="col-md-12 col-sm-12 bank" align="center" >
+                          <h6><b>Please Select Bank</b></h6>
                         <select class="form-control" id="bank" name="bankname">
                           <option>Choose option</option>
                           @foreach($account as $account)
@@ -173,26 +193,25 @@ use App\Account_detail
                       </div>
                       <br>
                       </div>
-                      <div class="col-md-3">
-                          Cheque No
-                          <input type="number" class="form-control" id="cheque" name="cheque">
-                          </div>
-                        </div>
+                      
                         <form id="demo-form2" action="{{route('finance.staff.order.update')}}"method="POST"data-parsley-validate class="form-horizontal form-label-left">
                           @csrf
                             @method('GET')
                             <input type="hidden" name="id" value="{{$order->id}}">
                             <input type="hidden" name="balance" value="{{$order->total}}">
                             <input type="hidden" name="account" value="{{$account->id}}">
-                            
+                            <div div class="col-md-12 col-sm-12 cheque" align="center">
+                           <h6><b>Cheque No</b></h6>
+                          <input type="number" class="form-control" id="cheque" name="cheque">
+                          </div>
+                        </div>
+
+
                       <!-- /.row -->
                     </section>
                     <div class="pt-3">
-                      <button class="btn btn-danger pull-right" data-id='{{$order->id}}' >Reject</button>
-                       <textarea id="denilenote" ></textarea>
-                      <button onclick="document.getElementById('demo-form2').submit();" class="btn btn-success pull-right">Approve</button>
+                      <button onclick="document.getElementById('demo-form2').submit();" class="btn btn-success pull-right btnapprove">Report</button>
 
-                       
                       </div>
                   </div>
                 </div>
@@ -205,5 +224,54 @@ use App\Account_detail
         </div>
         <!-- /page content -->
 
+@endsection
+
+@section('script')
+<script src="{{asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
+<script src="{{asset('vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
+<script src="{{asset('vendors/jszip/dist/jszip.min.js')}}"></script>
+<script src="{{asset('vendors/pdfmake/build/pdfmake.min.js')}}"></script>
+<script src="{{asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+
+{{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
+
+
+<script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
+
+<script type="text/javascript">
+      $(document).ready(function(){
+          // $(".denile").hide(1);
+          $(".bank").hide(1);
+          $(".cheque").hide(1);
+          $(".btnapprove").hide(1);
+          $(".done").hide(1);
+
+          $(".submit").on('click',function(){
+            $(".bank").show(1);
+          $(".cheque").show(1);
+            $(".btnapprove").show();
+          })
+
+          // $(".reject").on('click',function(){
+          //    $(".denile").show();
+          //     $(".done").show(1);
+          // })
+
+          
+      })
+</script>
 
 @endsection

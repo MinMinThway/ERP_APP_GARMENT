@@ -27,7 +27,7 @@
                   <div class="x_title">
                     <h2>Accounts</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a ><i class="fa fa-plus-circle fa-lg"> Add</i></a>
+                      <li><a href="{{route('account.create')}}"><i class="fa fa-plus-circle fa-lg"> Add</i></a>
                     </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -48,7 +48,7 @@
                       	@php $i=1; @endphp
                   
                         @foreach($accounts as $account)
-
+                          @if($account->id!=1)
                         <tr>
                           <th scope="row">{{$i++}}</th>
                           <td>{{$account->bank}}</td>
@@ -63,7 +63,7 @@
 
                           <button type="submit" class="btn btn-danger btn-sm" name="btnsubmit" value="Delete"><i class="fa fa-trash"></i></button></td>
                         </tr>
-
+                          @endif
                         @endforeach
                       </tbody>
                     </table>

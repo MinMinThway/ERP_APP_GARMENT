@@ -129,7 +129,7 @@ class AccountController extends Controller
 
 
     $orders=Order::where('status_id','=',2)->get();
-    $account_details=Account_detail::all();
+    $account_details=Account_detail::orderBy('id','desc')->get();
     return view('finance.staff.balancesheet',compact('orders','account_details'));
     }
 

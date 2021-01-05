@@ -447,14 +447,14 @@ class OrderController extends Controller
         $accountid=$request->account;
         $oldtotal=$request->balance;
 
-
+        //dd($request->cheque);
         // $cheque=$request->cheque;
         DB::transaction(function() use ($request){
             date_default_timezone_set("Asia/Rangoon");
             $today = date('Y-m-d',strtotime('today'));
 
             $order=Order::find($request->id);
-            // $order->cheque_no=$request->cheque;
+            $order->cheque_no=$request->cheque;
             $order->status_id=5;
             $order->save();
 
@@ -476,5 +476,16 @@ class OrderController extends Controller
         });
 
         return redirect()->route('finance.staff.balancesheet');
+    }
+
+    public function order_4_reject(Request $request, Order $order)
+    {
+        dd($request);
+        DB::transaction(function() use ($request){
+            $order=Order::find($request->id);
+            $order->denile_note=$request->denile;
+            $order->status_id=3;
+            $order->save();
+        });
     }
 }

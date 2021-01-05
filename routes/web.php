@@ -83,7 +83,10 @@ Route::middleware('role:finance/staff')->group(function () {
 	Route::get('/finance/staff/orders','OrderController@order_4_index')->name('finance.staff.order');
 	Route::get('/finance/staff/orders/detail','OrderController@order_4_edit')->name('finance.staff.order.detail');
 	Route::get('/finance/staff/orders/update','OrderController@order_4_update')->name('finance.staff.order.update');
+	Route::get('/finance/staff/orders/reject','OrderController@order_4_reject')->name('finance.staff.order.reject');
 	Route::get('/finance/staff/balancesheet','AccountController@balancesheet')->name('finance.staff.balancesheet');
+	Route::get('/finance/staff/monthlybalance','AccountDetailController@monthlyreport')->name('finance.staff.monthlybalance');
+
 	Route::resource('finance/staff/account','AccountController');
 
 });

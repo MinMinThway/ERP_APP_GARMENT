@@ -84,10 +84,7 @@ use App\Supplier;
                                 <td class="align-middle text-center">{{$accountdetail->outcome}}</td>
                                 <td class="align-middle text-center">{{$accountdetail->tranbalance}}</td>
 
-                                <td class="align-middle text-center"><button>More</button></td>
-
-
-                                
+                                <td class="align-middle text-center">{{$accountdetail->account->bank}}</td>
                                 </th>
                               </tr>
                               @endforeach

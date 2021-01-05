@@ -13,7 +13,7 @@
     <title>ERP Software</title>
     
     
-    
+    <link rel="stylesheet" type="text/css" href="{{asset('icon/icofont/icofont.min.css')}}">
     <link href="{{asset('vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
     <!-- Ion.RangeSlider -->
     <link href="{{asset('vendors/normalize-css/normalize.css')}}" rel="stylesheet">
@@ -100,13 +100,25 @@
                 <h3>Orders</h3>
                 <ul class="nav side-menu">
                   <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-laptop"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
+                    </ul>
+              </div>
+                  <div class="menu_section">
+                <h3>Balance</h3>
+                <ul class="nav side-menu">
+                   <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Balance Sheet</a>
                 </ul>
               </div>
 
               <div class="menu_section">
                 <h3>Reports</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Balance Sheet</a>
+                 
+                  </li>
+                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Daily Report</a>
+                  </li>
+                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Monthly Report</a>
+                  </li>
+                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Yearly Report</a>
                   </li>
                   <li><a><i class="fa fa-sitemap"></i>Business Performance Ratios</a>
                   </li>                  
