@@ -1,4 +1,4 @@
-@extends('production.staff.master')
+@extends('production.admin.master')
 @php
 // use App\Order_detail;
 use App\Warehouse;
@@ -13,7 +13,7 @@ use App\Warehouse_detail;
 		        <div class="x_panel">
 		        	<h2 class="">Order Histry Detail
 		        		<span class="float-right">
-		        			<a href="{{route('staff_0_history')}}" class="btn btn-danger btn-sm" style="border-radius: 20px">
+		        			<a href="{{route('admin_1_history')}}" class="btn btn-danger btn-sm" style="border-radius: 20px">
 		        			Back
 		        			</a>
 						</span>

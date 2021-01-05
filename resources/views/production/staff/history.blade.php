@@ -94,7 +94,7 @@ use App\Order;
 				                        	@method('GET')
 				                        	<input type="text" name="id" value="{{$order->id}}">
 			                        	</form>
-			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-success btn-sm" style="border-radius: 20px">info</button>
+			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-info btn-sm" style="border-radius: 20px">info</button>
 			                        	</th>                    		
 			                        </tr>
 			                        @endforeach

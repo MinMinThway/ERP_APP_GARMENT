@@ -98,6 +98,12 @@
                     </a>
                   </li>
 
+                  <li class="{{ Request::is('procurement/admin/history*') ? 'current-page' : '' }}">
+                    <a href="{{route('admin_3_history')}}">
+                      <i class="icofont-history pr-2" style="font-size: 20px"></i>
+                    Order History
+                    </a>
+                  </li>
 
                 </ul>
               </div>
