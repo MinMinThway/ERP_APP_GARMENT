@@ -17,7 +17,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('icon/icofont/icofont.min.css')}}">
 
     <!-- Bootstrap -->
-    <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet"> --}}
+    <link href="{{asset('vendors/bootstrap4/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/bootstrap4/bootstrap.min.js')}}" rel="stylesheet">
     <!-- Datatables -->    
     <link href="{{asset('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
@@ -109,6 +111,13 @@
                     <a href="{{route('production.staff.order')}}">
                       <i class="icofont-ui-cart pr-2" style="font-size: 20px"></i>
                     Create Order
+                    </a>
+                  </li>
+
+                  <li class="{{ Request::is('production/staff/history*') ? 'current-page' : '' }}">
+                    <a href="{{route('staff_0_history')}}">
+                      <i class="icofont-history pr-2" style="font-size: 20px"></i>
+                    Order History
                     </a>
                   </li>
 
