@@ -553,6 +553,18 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function note_0_get() // get/reject/note
+    {
+        //
+        $id=$_GET['id'];
+        $order=Order::find($id);
+        echo $order->denile_note;
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function note_2_get() // get/reject/note
     {
         //
