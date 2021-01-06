@@ -99,8 +99,9 @@ use App\Account_detail
                               @endphp
 
                               @php   
-
+                              //dd($data->price);
                               $amt = number_format($data->qty*$data->price,2);  
+
                                   $p_orders=Order::where('status_id','>',4)->orderBy('id','desc')->get();
 
                                   $change=0;
@@ -178,6 +179,7 @@ use App\Account_detail
                       <br><br><br><br>
                       <div class="row">
                         <!-- accepted payments column -->
+
                         <div class="col-md-12 col-sm-12 bank" align="center" >
                           <h6><b>Please Select Bank</b></h6>
                         <select class="form-control" id="bank" name="bankname">
@@ -187,9 +189,13 @@ use App\Account_detail
                             <option id={{$account->id}}>
                               {{$account->bank}}</option>
                           @endif
+
                           @endforeach
+
                         </select>
-                        
+                        {{-- @if($account->balance > $data->price)
+                              <p>Amount is low</p>
+                          @endif --}}
                       </div>
                       <br>
                       </div>
@@ -264,6 +270,14 @@ use App\Account_detail
           $(".cheque").show(1);
             $(".btnapprove").show();
           })
+
+
+          // $('#bank').on('click',function(){
+          //   if($account->balance < $order->total)
+          //   {
+          //     alert("OK");
+          //   }
+          // })
 
           // $(".reject").on('click',function(){
           //    $(".denile").show();

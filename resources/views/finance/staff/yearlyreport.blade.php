@@ -112,7 +112,7 @@ use App\Order;
 			                      </tbody>
 			                    <tbody>
 			                    	<tr>
-			                    		<td colspan="5" class="align-middle text-center"><h6><b>Total Amount for {{$month}} is</b></h6></td>
+			                    		<td colspan="5" class="align-middle text-center"><h6><b>Total Amount for {{$year}} is</b></h6></td>
 			                    		<td colspan="2" class="align-middle text-right"><h6><b>{{$sum}}</b></h6></td>
 			                    	</tr>
 			                    </tbody>

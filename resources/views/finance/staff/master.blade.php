@@ -82,14 +82,14 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="{{route('finance.staff.home')}}"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                  <li><a href="{{route('finance.staff.home')}}"><i class="fa fa-dashboard pr-2" style="font-size: 20px"></i>Dashboard</a></li>
                 </ul>
               </div>
 
               <div class="menu_section">
                 <h3>Finance</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{route('account.index')}}"><i class="fa fa-institution"></i>Bank Accounts</a>
+                  <li><a href="{{route('account.index')}}"><i class="fa fa-institution pr-2" style="font-size: 20px"></i>Bank Accounts</a>
                   </li>
                   <li><a href="{{asset('/finance/staff/account/addbudget')}}"><i class="fa fa-money"></i>Budgets</a>
                   </li>
@@ -99,28 +99,37 @@
               <div class="menu_section">
                 <h3>Orders</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-laptop"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
+                  <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-laptop pr-2" style="font-size: 20px"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
                     </ul>
               </div>
                   <div class="menu_section">
                 <h3>Balance</h3>
                 <ul class="nav side-menu">
-                   <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Balance Sheet</a>
+                   <li><a href="{{route('finance.staff.searchbalancesheet')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Balance Sheet</a>
+                   </li>
+                   <li class="{{ Request::is('finance/staff/history*') ? 'current-page' : '' }}">
+                      <a href="{{route('staff_4_history')}}">
+                        <i class="icofont-history pr-2" style="font-size: 20px"></i>
+                      Order History
+                      </a>
+
+                      
+                      </li>
+
                 </ul>
               </div>
 
               <div class="menu_section">
                 <h3>Reports</h3>
                 <ul class="nav side-menu">
-                 
                   </li>
-                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Daily Report</a>
+                  <li><a href="{{route('finance.staff.searchreport')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Daily Report</a>
                   </li>
-                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Monthly Report</a>
+                  <li><a href="{{route('finance.staff.monthlysearchreport')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Monthly Report</a>
                   </li>
-                  <li><a href="{{route('finance.staff.balancesheet')}}"><i class="fa fa-bug"></i>Yearly Report</a>
+                  <li><a href="{{route('finance.staff.yearlysearchreport')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Yearly Report</a>
                   </li>
-                  <li><a><i class="fa fa-sitemap"></i>Business Performance Ratios</a>
+                  <li><a><i class="fa fa-sitemap pr-2" style="font-size: 20px"></i>Business Performance Ratios</a>
                   </li>                  
                 </ul>
               </div>

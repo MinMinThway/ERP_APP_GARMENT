@@ -11,9 +11,9 @@ use App\Warehouse_detail;
 	    <div class="page-title">
 			<div class="col-md-12 col-sm-12 ">
 		        <div class="x_panel">
-		        	<h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
+		        	<h2 class="">Order Histry Detail
 		        		<span class="float-right">
-		        			<a href="{{route('history')}}"> {{--  --}}
+		        			<a href="{{route('history')}}" class="btn btn-danger btn-sm" style="border-radius: 20px"> 
 		        			Back
 		        			{{-- <i class="fa fa-back" aria-hidden="true"></i> --}}
 		        			</a>

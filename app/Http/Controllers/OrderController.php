@@ -130,7 +130,6 @@ class OrderController extends Controller
     {
         //
         $orders=Order::where('status_id','=',8)->get();
-        // dd($orders[0]->supplier->company_name);
         return view('production.warehouse.history',compact('orders'));
     }
     /**
@@ -160,6 +159,156 @@ class OrderController extends Controller
         $id = $request->id;
         $order=Order::find($id);
         return view('production.warehouse.deliveredInfo',compact('order'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function staff_0_history()
+    {
+        //
+        $orders=Order::where('status_id','>=',1)->get();
+        return view('production.staff.history',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_0_info(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('production.staff.info',compact('order'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_1_history()
+    {
+        //
+        $orders=Order::where('status_id','>=',2)->get();
+        return view('production.admin.history',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_1_info(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('production.admin.info',compact('order'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function staff_2_history()
+    {
+        //
+        $orders=Order::where('status_id','>=',3)->get();
+        return view('procurement.staff.history',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_2_info(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('procurement.staff.info',compact('order'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_3_history()
+    {
+        //
+        $orders=Order::where('status_id','>=',4)->get();
+        return view('procurement.admin.history',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_3_info(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('procurement.admin.info',compact('order'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function staff_4_history()
+    {
+        //
+        $orders=Order::where('status_id','>=',5)->get();
+        return view('finance.staff.history',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_4_info(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('finance.staff.info',compact('order'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function admin_5_history()
+    {
+        //
+        $orders=Order::where('status_id','>=',6)->get();
+        return view('finance.admin.history',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_5_info(Request $request)
+    {
+        //
+        $id = $request->id;
+        $order=Order::find($id);
+        return view('finance.admin.info',compact('order'));
     }
     /**
      * Update the specified resource in storage.
@@ -488,4 +637,6 @@ class OrderController extends Controller
             $order->save();
         });
     }
+
+    
 }

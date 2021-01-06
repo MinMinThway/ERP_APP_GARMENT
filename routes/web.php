@@ -47,10 +47,14 @@ Route::middleware('role:production/staff')->group(function () {
 	Route::get('/production/staff/report','warehouseDetailController@report')->name('production.staff.report');
 	Route::get('/production/staff/order','OrderController@order_create')->name('production.staff.order');
 	Route::get('/inventory_get','warehouseDetailController@get')->name('inventory_get');
+	Route::get('/production/staff/history','OrderController@staff_0_history')->name('staff_0_history');
+	Route::get('/production/staff/history/info','OrderController@order_0_info')->name('order_0_info');
 });
 
 Route::middleware('role:production/admin')->group(function () {
 	Route::get('/production/admin/home','HomeController@production_admin')->name('production.admin.home');
+Route::get('/production/admin/history','OrderController@admin_1_history')->name('admin_1_history');
+Route::get('/production/admin/history/info','OrderController@order_1_info')->name('order_1_info');
 });
 
 Route::middleware('role:procurement/staff')->group(function () {
@@ -64,7 +68,8 @@ Route::middleware('role:procurement/staff')->group(function () {
 	Route::get('/procurement/staff/order/error','OrderController@status_2_change_error')->name('status_2_change_error');
 	Route::get('/procurement/staff/order/success','OrderController@status_2_change_success')->name('status_2_change_success');
 	Route::resource('procurement/supplier','SupplierController');
-
+	Route::get('/procurement/staff/history','OrderController@staff_2_history')->name('staff_2_history');
+	Route::get('/procurement/staff/history/info','OrderController@order_2_info')->name('order_2_info');
 });
 Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');
@@ -72,6 +77,8 @@ Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/order/detail','OrderController@order_3_detail')->name('procurement.admin.order.detail');
 	Route::get('/procurement/admin/order/reject','OrderController@order_3_reject')->name('procurement.admin.order.reject');
 	Route::get('/status_3_change','OrderController@status_3_change')->name('status_3_change');
+	Route::get('/procurement/admin/history','OrderController@admin_3_history')->name('admin_3_history');
+	Route::get('/procurement/admin/history/info','OrderController@order_3_info')->name('order_3_info');
 });
 
 Route::middleware('role:finance/staff')->group(function () {
@@ -85,13 +92,30 @@ Route::middleware('role:finance/staff')->group(function () {
 	Route::get('/finance/staff/orders/update','OrderController@order_4_update')->name('finance.staff.order.update');
 	Route::get('/finance/staff/orders/reject','OrderController@order_4_reject')->name('finance.staff.order.reject');
 	Route::get('/finance/staff/balancesheet','AccountController@balancesheet')->name('finance.staff.balancesheet');
-	Route::get('/finance/staff/monthlybalance','AccountDetailController@monthlyreport')->name('finance.staff.monthlybalance');
+
+	
+
+	Route::get('/finance/staff/searchbalancesheet','AccountController@balancesheetsearch')->name('finance.staff.searchbalancesheet');
+
+
+	Route::get('/finance/staff/dailyreport','AccountController@dailyreport')->name('finance.staff.dailyreport');
+	Route::get('/finance/staff/monthlyreport','AccountController@monthlyreport')->name('finance.staff.monthlyreport');
+	Route::get('/finance/staff/yearlyreport','AccountController@yearlyreport')->name('finance.staff.yearlyreport');
+
+	Route::get('/finance/staff/searchreport','AccountController@searchreport')->name('finance.staff.searchreport');
+	Route::get('/finance/staff/monthlysearchreport','AccountController@monthlysearchreport')->name('finance.staff.monthlysearchreport');
+	Route::get('/finance/staff/yearlysearchreport','AccountController@yearlysearchreport')->name('finance.staff.yearlysearchreport');
+
+	Route::get('/finance/staff/account/budget','AccountController@account')->name('account.check');
 
 	Route::resource('finance/staff/account','AccountController');
-
+	Route::get('/finance/staff/history','OrderController@staff_4_history')->name('staff_4_history');
+	Route::get('/finance/staff/history/info','OrderController@order_4_info')->name('order_4_info');
 });
 
 
 Route::middleware('role:finance/admin')->group(function () {
 	Route::get('/finance/admin/home','HomeController@finance_admin')->name('finance.admin.home');
+	Route::get('/finance/admin/history','OrderController@admin_5_history')->name('admin_5_history');
+	Route::get('/finance/admin/history/info','OrderController@order_5_info')->name('order_5_info');
 });

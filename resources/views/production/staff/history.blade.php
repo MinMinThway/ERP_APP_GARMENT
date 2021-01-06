@@ -1,37 +1,25 @@
-@extends('production.warehouse.master')
+@extends('production.staff.master')
+@php
+use App\Order_detail;
+use App\Order;
+@endphp
 
 @section('body')
 <!-- page content -->
 <div class="right_col" role="main">
   	<div class="">
-	    <div class="page-title">
-			<div class="col-md-12 col-sm-12 ">
-		        <div class="x_panel">
-		        	<h2 class="">Raw Materils <i class="fa fa-cubes" aria-hidden="true"></i>
-		        		<span class="float-right">
-		        			<a href="{{route('materials.create')}}">
-		        			Add 
-		        			<i class="fa fa-plus" aria-hidden="true"></i>
-		        			</a>
-						</span>
-					</h2>
-		        </div>	    
-		   	</div>
-	    </div>
-
-	    <div class="clearfix"></div>
 
 	    <div class="clearfix"></div>
 		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Raw Material List <small></small></h2>
+	            	<h2>Delivered Order List <small> Support Lead Time for safe stock </small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
 		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
 		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		                    	<a class="dropdown-item" href="{{route('materials.create')}}">Add New</a>
+		                    	<a class="dropdown-item" href="">Add New</a> {{-- {{route('inventory.create')}} --}}
 		                    	<a class="dropdown-item" href="#">Settings 2</a>
 		                  	</div>
 		              	</li>
@@ -48,13 +36,9 @@
 			                      <thead>
 			                        <tr>
 			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center" width="200px">Name</th>
-			                        	<th class="align-middle text-center">Code No</th>
-			                        	<th class="align-middle text-center">Photo</th>
-			                        	<th class="align-middle text-center">Stock</th>
-			                        	<th class="align-middle text-center">Unit</th>
-			                        	<th class="align-middle text-center">Lead Time</th>
-			                        	<th class="align-middle text-center">Factor</th>
+			                        	<th class="align-middle text-center">Order Id</th>
+			                        	<th class="align-middle text-center">Date</th>
+			                        	<th class="align-middle text-center">Status</th>
 			                        	<th class="align-middle text-center">Action</th>
 			                        </tr>
 			                      </thead>
@@ -64,36 +48,58 @@
 			                      	@php
 			                      		$i=0;
 			                      	@endphp
-			                      	@foreach($warehouses as $warehouse)
+			                      	@foreach($orders as $order)
 			                        <tr>
-			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-left">{{$warehouse->name}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->codeno}}</td>
-			                        	<td class="align-middle text-center"><img width="100px" src="{{asset($warehouse->photo)}}"></td>
-			                        	<td class="align-middle text-center">{{$warehouse->stock_qty}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->UOM}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->order_time_duration}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->stock_safety_factor}}</td>
+			                        	<th class="align-middle text-center">{{++$i}}</th>
+										<th class="align-middle text-center">CYD-#{{$order->id}}</th>
+			                        	<th class="align-middle text-center">{{$order->date}}</th>
 			                        	<th class="align-middle text-center">
-			                        		<a href="{{route('materials.edit',$warehouse->id)}}" class="btn btn-warning mr-2">
-                                            <i class="fa fa-cog" aria-hidden="true"></i>
-                                        </a>
+			                        	<button style="border-radius: 25px" class="btn btn-sm text-white
+			                        	@if($order->status_id==1||$order->status_id==8)
+			                        	btn-primary
+			                        	@elseif($order->status_id==2||$order->status_id==3||$order->status_id==6)
+										btn-success
+			                        	@elseif($order->status_id==4||$order->status_id==5)
+										btn-danger
+										@elseif($order->status_id==7)
+										btn-warning
+			                        	@endif
+			                        	" 
+			                        	>
+			                        	@if($order->status_id==1)
+			                        	admin-production
+			                        	@elseif($order->status_id==2)
+			                        	staff-procurement
+			                        	@elseif($order->status_id==3)
+			                        	admin-procurement
+			                        	@elseif($order->status_id==4)
+			                        	staff-finance
+			                        	@elseif($order->status_id==5)
+			                        	admin-finance
+			                        	@elseif($order->status_id==6)
+			                        	order-state
+			                        	@elseif($order->status_id==7)
+			                        	shipping
+			                        	@else
+			                        	delivery
+			                        	@endif
 
-                                        <form action="{{route('materials.destroy',$warehouse->id)}}"
-                                        onsubmit="return confirm('Are you sure?')" 
-                                        method="POST" class="d-inline ml-2">
-                                        @csrf
-                                        @method('DELETE')
-                                            <button class="btn btn-outline-danger">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                            </button>
-                                        </form>
+			                        	{{-- {{$order->status_id}} --}}
+			                        	</button>
 
 			                        	</th>
+			                        	<th class="align-middle text-center">
+			                        	<form id="info{{$order->id}}" action="{{route('order_0_info')}}" method="POST" class="d-none">
+				                        	@csrf
+				                        	@method('GET')
+				                        	<input type="text" name="id" value="{{$order->id}}">
+			                        	</form>
+			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-info btn-sm" style="border-radius: 20px">info</button>
+			                        	</th>                    		
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
-			                    </table>
+			                    </table> 
 	                  		</div>
 	                	</div>
 	              	</div> 

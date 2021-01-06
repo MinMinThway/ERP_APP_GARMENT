@@ -2,22 +2,6 @@
 @php
 use App\Order_detail;
 use App\Order;
-	// $order= new Order;
-	// $order->date='2020-12-15';
-	// $order->invoice_no='CNG22343221';
-	// $order->total='50';
-	// $order->supplier_id=7;
-	// $order->status_id=7;
-	// $order->save();
-
-	// $order_detail=new Order_detail;
-	// $order_detail->qty=10;
-	// $order_detail->price='15';
-	// $order_detail->UOM='piece';
-	// $order_detail->warehouse_id=3;
-	// $order_detail->order_id=1;
-	// $order_detail->save();
-
 @endphp
 
 @section('body')
@@ -31,7 +15,7 @@ use App\Order;
 		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Order Acceptable List <small>Shipment On The Way</small></h2>
+	            	<h2>Delivered Order List <small> Support Lead Time for safe stock </small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">

@@ -107,7 +107,7 @@
                  <li class="{{ Request::is('production/warehouse/history*') ? 'current-page' : '' }}">
                     <a href="{{route('history')}}">
                       <i class="icofont-history pr-2" style="font-size: 20px"></i>
-                    History
+                    Order History
                     </a>
                   </li>
 

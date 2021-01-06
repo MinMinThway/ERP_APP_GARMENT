@@ -1,5 +1,9 @@
-@extends('production.warehouse.master')
-
+@extends('procurement.staff.master')
+@php
+// use App\Order_detail;
+use App\Warehouse;
+use App\Warehouse_detail;
+@endphp
 @section('body')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -7,11 +11,10 @@
 	    <div class="page-title">
 			<div class="col-md-12 col-sm-12 ">
 		        <div class="x_panel">
-		        	<h2 class="">Raw Materils <i class="fa fa-cubes" aria-hidden="true"></i>
+		        	<h2 class="">Order Histry Detail
 		        		<span class="float-right">
-		        			<a href="{{route('materials.create')}}">
-		        			Add 
-		        			<i class="fa fa-plus" aria-hidden="true"></i>
+		        			<a href="{{route('staff_2_history')}}" class="btn btn-danger btn-sm" style="border-radius: 20px">
+		        			Back
 		        			</a>
 						</span>
 					</h2>
@@ -25,15 +28,10 @@
 		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Raw Material List <small></small></h2>
+	            	<h2>Delivered List <small></small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
-		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		                    	<a class="dropdown-item" href="{{route('materials.create')}}">Add New</a>
-		                    	<a class="dropdown-item" href="#">Settings 2</a>
-		                  	</div>
 		              	</li>
 		              	<li><a class="close-link"><i class="fa fa-close"></i></a>
 		              	</li>
@@ -47,15 +45,11 @@
 			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
-			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center" width="200px">Name</th>
+			                        	<th class="align-middle text-center">No</th>  
 			                        	<th class="align-middle text-center">Code No</th>
-			                        	<th class="align-middle text-center">Photo</th>
-			                        	<th class="align-middle text-center">Stock</th>
-			                        	<th class="align-middle text-center">Unit</th>
-			                        	<th class="align-middle text-center">Lead Time</th>
-			                        	<th class="align-middle text-center">Factor</th>
-			                        	<th class="align-middle text-center">Action</th>
+			                        	<th class="align-middle text-center">Name</th>
+			                        	<th class="align-middle text-center">Qty</th>
+			                        	<th class="align-middle text-center">Unit</th>			         
 			                        </tr>
 			                      </thead>
 
@@ -64,42 +58,31 @@
 			                      	@php
 			                      		$i=0;
 			                      	@endphp
-			                      	@foreach($warehouses as $warehouse)
+			                      	@foreach($order->detail as $data)
+			                      	@php
+			                      		$warehouse=Warehouse::find($data->warehouse_id);
+			                      	@endphp
 			                        <tr>
-			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-left">{{$warehouse->name}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->codeno}}</td>
-			                        	<td class="align-middle text-center"><img width="100px" src="{{asset($warehouse->photo)}}"></td>
-			                        	<td class="align-middle text-center">{{$warehouse->stock_qty}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->UOM}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->order_time_duration}}</td>
-			                        	<td class="align-middle text-center">{{$warehouse->stock_safety_factor}}</td>
-			                        	<th class="align-middle text-center">
-			                        		<a href="{{route('materials.edit',$warehouse->id)}}" class="btn btn-warning mr-2">
-                                            <i class="fa fa-cog" aria-hidden="true"></i>
-                                        </a>
-
-                                        <form action="{{route('materials.destroy',$warehouse->id)}}"
-                                        onsubmit="return confirm('Are you sure?')" 
-                                        method="POST" class="d-inline ml-2">
-                                        @csrf
-                                        @method('DELETE')
-                                            <button class="btn btn-outline-danger">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                            </button>
-                                        </form>
-
-			                        	</th>
+			                        	<th class="align-middle text-center">{{++$i}}</th>  
+			                        	<th class="align-middle text-center">{{$warehouse->codeno}}</th>
+			                        	<th class="align-middle text-left">{{$warehouse->name}}</th>
+			                        	<th class="align-middle text-right">{{$data->qty}}</th>
+			                        	<th class="align-middle text-left">{{$data->UOM}}</th>           
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
-			                    </table>
+			                    </table> 
+			                    
 	                  		</div>
 	                	</div>
 	              	</div> 
+	            
 	            </div>
+
 	        </div>
 	    </div>
+
+	    {{-- <div class="clearfix"a></div> --}}
   	</div>
 </div>
 <!-- /page content -->

@@ -31,7 +31,8 @@ use App\Order;
 		{{-- <div class="col-md-12 col-sm-12 "> --}}
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Stock Safe <small>depend on lead time and safety factor</small></h2>
+	            	<h2><span class="text text-success"><i class="icofont-safety icofont-2x"></i>Stock Safe </span>
+	            		<small>depend on lead time and safety factor</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
@@ -57,10 +58,15 @@ use App\Order;
 			                        	<th class="align-middle text-center">Code No</th>
 			                        	<th class="align-middle text-center" width="150px">Name</th>
 			                        	<th class="align-middle text-center">Stock</th>
-			                        	<th class="align-middle text-center">Lead Time</th>
+			                        	<th class="align-middle text-center text-success">
+			                        	<i class="icofont-mathematical-alt-1"></i>
+			                        	Lead Time
+			                        	</th>
 			                        	<th class="align-middle text-center">Factor</th>
-			                        	<th class="align-middle text-center">Reorder Date</th>
-			                        	{{-- <th class="align-middle text-center">Action</th> --}}
+			                        	<th class="align-middle text-center text-success">
+										<i class="icofont-mathematical-alt-1"></i>
+			                        	Reorder Date
+			                        	</th>
 			                        </tr>
 			                      </thead>
 
