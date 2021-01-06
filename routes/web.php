@@ -40,6 +40,7 @@ Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/delivery/set','OrderController@delivered')->name('delivered');
 	Route::get('/production/warehouse/history','OrderController@history')->name('history');
 	Route::get('/production/warehouse/history/info','OrderController@deliveredInfo')->name('deliveredInfo');
+	Route::get('/earning','warehouseDetailController@earning1')->name('earning1');
 });
 
 Route::middleware('role:production/staff')->group(function () {

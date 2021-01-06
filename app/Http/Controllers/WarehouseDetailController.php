@@ -293,4 +293,41 @@ class WarehouseDetailController extends Controller
         $warehouses=Warehouse::all();
         return view('production.admin.analysis',compact('warehouses'));
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function earning1()
+    {
+        //
+        date_default_timezone_set("Asia/Rangoon");
+        $d1=strtotime('-3day today');
+        $d2=strtotime('-2day today');
+        $d3=strtotime('-1day today');
+        $d4=strtotime('today');
+        $d5=strtotime('+1day today');
+        $d6=strtotime('+2day today');
+        $d7=strtotime('+3day today');
+        $day1=date('Y-m-d',$d1);
+        $day2=date('Y-m-d',$d2);
+        $day3=date('Y-m-d',$d3);
+        $day4=date('Y-m-d',$d4);
+        $day5=date('Y-m-d',$d5);
+        $day6=date('Y-m-d',$d6);
+        $day7=date('Y-m-d',$d7);
+        $day1_count=Warehouse_detail::where('date','=',$day1)->count();
+        $day2_count=Warehouse_detail::where('date','=',$day2)->count();
+        $day3_count=Warehouse_detail::where('date','=',$day3)->count();
+        $day4_count=Warehouse_detail::where('date','=',$day4)->count();
+        $day5_count=Warehouse_detail::where('date','=',$day5)->count();
+        $day6_count=Warehouse_detail::where('date','=',$day6)->count();
+        $day7_count=Warehouse_detail::where('date','=',$day7)->count();
+    $total = array(
+       $day1_count,$day2_count,$day3_count,$day4_count,
+       $day5_count,$day6_count,$day7_count,$day1,$day2,
+       $day3,$day4,$day5,$day6,$day7
+    );
+    echo json_encode($total);
+    }  
 }
