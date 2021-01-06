@@ -95,6 +95,10 @@ use App\Order;
 				                        	<input type="text" name="id" value="{{$order->id}}">
 			                        	</form>
 			                        		<button onclick="document.getElementById('info{{$order->id}}').submit();" class="btn btn-info btn-sm" style="border-radius: 20px">info</button>
+			                        		@if($order->denile_note&&$order->status_id==1)
+			                        		<button name='reject' class="btn btn-danger btn-sm" data-id='{{$order->id}}' style="border-radius: 20px;"
+			                        		>Rejected</button>
+			                        		@endif
 			                        	</th>                    		
 			                        </tr>
 			                        @endforeach
@@ -109,6 +113,23 @@ use App\Order;
   	</div>
 </div>
 <!-- /page content -->
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="note">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('script')
@@ -140,5 +161,27 @@ use App\Order;
 <script src="{{asset('vendors/pdfmake/build/vfs_fonts.js')}}"></script>
 
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+		$(document).on('click','button[name=reject]',function(){
+			var id=$(this).data('id');
+			$.ajax({
+			url:'{{route('note_0_get')}}',
+			method:'GET',
+			data:{id:id},
+			success:function(res){
+				$('#note').text(res);
+				$('#reject').modal('toggle');
+				}
+			});
+		})
+	})
+</script>
 
 @endsection

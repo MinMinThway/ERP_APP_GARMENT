@@ -368,6 +368,69 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function order_1_index() // procurement/admin/order list
+    {
+        //
+        $orders = Order::where('status_id','=',1)
+                ->get();
+        return view('production.admin.order',compact('orders'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_1_detail(Request $request, Order $order)  // procurement/admin/ check order detail
+    {
+        //
+        $id=$request->id;
+        $order=Order::find($id);
+        return view('production.admin.detail',compact('order'));
+   
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_1_change(Request $request, Order $order) // procurement/staff/ status chage
+    {
+        //
+        $id=$request->id;
+        $order=Order::find($id);
+        $order->status_id=2;
+        $order->save();
+        return redirect()->route('production.admin.order');
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_1_reject(Request $request, Order $order)  // procurement/admin/ check order detail
+    {
+        //
+        $id=$request->id;
+        $note=$request->note;
+        $order=Order::find($id);
+        $order->denile_note=$note;
+        $order->save();
+
+        $orders = Order::where('status_id','=',1)
+                    ->get();
+        return view('production.admin.order',compact('orders'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function order_2_index() // procurement/staff/order edit/update
     {
         //
@@ -441,7 +504,7 @@ class OrderController extends Controller
         }
         foreach ($order->detail as $item) {
             if ($item->price>0) {
-                var_dump($item->price);
+                // var_dump($item->price);
             }else{
                 $_SESSION['errortype']='Price does not match!';
                 $warehouse=Warehouse::find($item->warehouse_id);
@@ -450,8 +513,13 @@ class OrderController extends Controller
                 exit();
             }
         }
+        $total=0;
+        foreach ($order->detail as $items) {
+            $total+=$items->qty*$items->price;
+        }
         $order->status_id=3;
         $order->denile_note=null;
+        $order->total=$total;
         $order->save();
         $_SESSION['successtitle']='Congratulations! you have successfully.';
         $_SESSION['success']='Your admin is approve after checking process.';
@@ -479,6 +547,18 @@ class OrderController extends Controller
     public function status_2_change_success(Request $request, Order $order) // procurement/staff/ status chage error
     {
         return view('procurement.staff.success');
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function note_0_get() // get/reject/note
+    {
+        //
+        $id=$_GET['id'];
+        $order=Order::find($id);
+        echo $order->denile_note;
     }
     /**
      * Display a listing of the resource.

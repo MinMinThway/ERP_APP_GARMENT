@@ -1,8 +1,23 @@
-@extends('procurement.admin.master')
+@extends('production.admin.master')
 @php
 use App\Order_detail;
 use App\Order;
-use App\Supplier;
+	// $order= new Order;
+	// $order->date='2020-12-15';
+	// $order->invoice_no='CNG22343221';
+	// $order->total='50';
+	// $order->supplier_id=7;
+	// $order->status_id=7;
+	// $order->save();
+
+	// $order_detail=new Order_detail;
+	// $order_detail->qty=10;
+	// $order_detail->price='15';
+	// $order_detail->UOM='piece';
+	// $order_detail->warehouse_id=3;
+	// $order_detail->order_id=1;
+	// $order_detail->save();
+
 @endphp
 
 @section('body')
@@ -16,7 +31,8 @@ use App\Supplier;
 		{{-- <div class="col-md-12 col-sm-12 "> --}}
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Order Request <small>please click detail for check and approve</small></h2>
+	            	<h2><span class="text text-success"><i class="icofont-safety icofont-2x"></i>Stock Safe </span>
+	            		<small>depend on lead time and safety factor</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
@@ -39,43 +55,68 @@ use App\Supplier;
 			                      <thead>
 			                        <tr>
 			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center">Order_id</th>
-			                        	<th class="align-middle text-center">Date</th>
-			                        	<th class="align-middle text-center">Item(nos)</th>
-			                        	<th class="align-middle text-center">Total</th>
-			                        	<th class="align-middle text-center">Supplier</th>
-			                        	<th class="align-middle text-center">Action</th>        	
+			                        	<th class="align-middle text-center">Code No</th>
+			                        	<th class="align-middle text-center" width="150px">Name</th>
+			                        	<th class="align-middle text-center">Stock</th>
+			                        	<th class="align-middle text-center text-success">
+			                        	<i class="icofont-mathematical-alt-1"></i>
+			                        	Lead Time
+			                        	</th>
+			                        	<th class="align-middle text-center">Factor</th>
+			                        	<th class="align-middle text-center text-success">
+										<i class="icofont-mathematical-alt-1"></i>
+			                        	Reorder Date
+			                        	</th>
 			                        </tr>
 			                      </thead>
+
+
 			                      <tbody>
-			                      	@php
+ 			                      	@php
 			                      		$i=0;
+			                      		$today=date('Y-m-d',strtotime('today'));
 			                      	@endphp
-			                      	@foreach($orders as $order)
-			                      	@php
-			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
-			                      		$supplier=Supplier::find($order->supplier_id);
-			                      	@endphp
+			                      	@foreach($warehouses as $warehouse)
+			                        <tr>
+			                        	<th class="align-middle text-center
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{++$i}}</th>
+			                        	<th class="align-middle text-center 
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->codeno}}</th>
 
-									<tr>
-			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-center">ERP#{{$order->id}}</td>
-			                        	<td class="align-middle text-right" >{{$order->date}}</td>
-			                        	<td class="align-middle text-right">{{$detail}}</td>
-			                        	<td class="align-middle text-right">
-			                        		{{number_format($order->total,2)}}
-			                        	</td>
-			                        	<td class="align-middle text-left">{{$supplier->company_name}}</td>
-			                        	<td class="align-middle text-center">
+			                        	<th class="align-middle text-left
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->name}}</th>
 
-			                      		<form action="{{route('procurement.admin.order.detail')}}" method="POST">
-						               		@csrf
-						               		@method('GET')
-						               		<input type="hidden" name="id" value="{{$order->id}}">
-		                        		<button type="submit" class="btn btn-info" style="border-radius: 20px;">
-		                        		detail
-		                        		</button>
-		                        		</form>
+			                        	<th class="align-middle text-right
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->stock_qty}}</th>
+
+			                        	<th class="align-middle text-center
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->order_time_duration}}</th>
+
+			                        	<th class="align-middle text-center
+			                        	@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->stock_safety_factor}}</th>
+			                        	<th class="align-middle text-center
+										@if($warehouse->reorder_date<$today)
+			                        	text-danger
+			                        	@endif"
+			                        	>{{$warehouse->reorder_date}}</th>                    		
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
@@ -121,18 +162,4 @@ use App\Supplier;
 
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
 
-
-{{-- <script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script> --}}
-
-
-
-<script type="text/javascript">
-	$(document).ready(function(){
-
-	})
-	                
-</script>
 @endsection

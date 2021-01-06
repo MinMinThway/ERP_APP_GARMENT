@@ -1,4 +1,4 @@
-@extends('procurement.admin.master')
+@extends('production.admin.master')
 @php
 use App\Order_detail;
 use App\Order;
@@ -42,8 +42,6 @@ use App\Supplier;
 			                        	<th class="align-middle text-center">Order_id</th>
 			                        	<th class="align-middle text-center">Date</th>
 			                        	<th class="align-middle text-center">Item(nos)</th>
-			                        	<th class="align-middle text-center">Total</th>
-			                        	<th class="align-middle text-center">Supplier</th>
 			                        	<th class="align-middle text-center">Action</th>        	
 			                        </tr>
 			                      </thead>
@@ -54,7 +52,10 @@ use App\Supplier;
 			                      	@foreach($orders as $order)
 			                      	@php
 			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
-			                      		$supplier=Supplier::find($order->supplier_id);
+			                      		if ($order->denile_note) {
+			                      			// dd('note ');
+			                      			continue;
+			                      		}
 			                      	@endphp
 
 									<tr>
@@ -62,13 +63,9 @@ use App\Supplier;
 			                        	<td class="align-middle text-center">ERP#{{$order->id}}</td>
 			                        	<td class="align-middle text-right" >{{$order->date}}</td>
 			                        	<td class="align-middle text-right">{{$detail}}</td>
-			                        	<td class="align-middle text-right">
-			                        		{{number_format($order->total,2)}}
-			                        	</td>
-			                        	<td class="align-middle text-left">{{$supplier->company_name}}</td>
 			                        	<td class="align-middle text-center">
 
-			                      		<form action="{{route('procurement.admin.order.detail')}}" method="POST">
+			                      		<form action="{{route('production.admin.order.detail')}}" method="POST">
 						               		@csrf
 						               		@method('GET')
 						               		<input type="hidden" name="id" value="{{$order->id}}">

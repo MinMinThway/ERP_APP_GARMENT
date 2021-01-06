@@ -1,4 +1,4 @@
-@extends('procurement.admin.master')
+@extends('production.admin.master')
 @php
 use App\Order_detail;
 use App\Order;
@@ -11,7 +11,6 @@ use App\Supplier;
   	<div class="">
 
 	    <div class="clearfix"></div>
-
 	    <div class="clearfix"></div>
 		{{-- <div class="col-md-12 col-sm-12 "> --}}
 	        <div class="x_panel">
@@ -19,15 +18,17 @@ use App\Supplier;
 	            	<h2>Order Request <small>please click detail for check and approve</small></h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-		              	<li class="dropdown">
-		                	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-		                	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		                    	<a class="dropdown-item" href="">Add New</a> {{-- {{route('inventory.create')}} --}}
-		                    	<a class="dropdown-item" href="#">Settings 2</a>
-		                  	</div>
-		              	</li>
-		              	<li><a class="close-link"><i class="fa fa-close"></i></a>
-		              	</li>
+		              	<button data-toggle="modal" data-target="#reject" type="submit" class="btn btn-danger btn-sm" style="border-radius: 20px;">
+                		Reject
+                		</button>
+                  		<form action="{{route('status_1_change')}}" method="POST" class="d-inline">
+		               		@csrf
+		               		@method('GET')
+		               		<input type="hidden" name="id" value="{{$order->id}}">		               	
+		               	<button type="submit" class="btn btn-success btn-sm" style="border-radius: 20px;">
+                		approve
+                		</button>
+                		</form>
 	            	</ul>
 	            	<div class="clearfix"></div>
 	          	</div>
@@ -38,45 +39,26 @@ use App\Supplier;
 			                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 			                      <thead>
 			                        <tr>
-			                        	<th class="align-middle text-center">No</th>
-			                        	<th class="align-middle text-center">Order_id</th>
-			                        	<th class="align-middle text-center">Date</th>
-			                        	<th class="align-middle text-center">Item(nos)</th>
-			                        	<th class="align-middle text-center">Total</th>
-			                        	<th class="align-middle text-center">Supplier</th>
-			                        	<th class="align-middle text-center">Action</th>        	
+			                        	<th class="align-middle text-center" width="10%">No</th>
+			                        	<th class="align-middle text-center" width="10%">Code No</th>
+			                        	<th class="align-middle text-center" width="30%">Name</th>
+			                        	<th class="align-middle text-center" width="20%">Stock Left</th>
+			                        	<th class="align-middle text-center" width="10%">Order qty</th>
+			                        	<th class="align-middle text-center" width="10%">Unit</th>
 			                        </tr>
 			                      </thead>
 			                      <tbody>
 			                      	@php
-			                      		$i=0;
+										$i=0;
 			                      	@endphp
-			                      	@foreach($orders as $order)
-			                      	@php
-			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
-			                      		$supplier=Supplier::find($order->supplier_id);
-			                      	@endphp
-
+			                      	@foreach($order->detail as $item)
 									<tr>
 			                        	<td class="align-middle text-center">{{++$i}}</td>
-			                        	<td class="align-middle text-center">ERP#{{$order->id}}</td>
-			                        	<td class="align-middle text-right" >{{$order->date}}</td>
-			                        	<td class="align-middle text-right">{{$detail}}</td>
-			                        	<td class="align-middle text-right">
-			                        		{{number_format($order->total,2)}}
-			                        	</td>
-			                        	<td class="align-middle text-left">{{$supplier->company_name}}</td>
-			                        	<td class="align-middle text-center">
-
-			                      		<form action="{{route('procurement.admin.order.detail')}}" method="POST">
-						               		@csrf
-						               		@method('GET')
-						               		<input type="hidden" name="id" value="{{$order->id}}">
-		                        		<button type="submit" class="btn btn-info" style="border-radius: 20px;">
-		                        		detail
-		                        		</button>
-		                        		</form>
-			                        </tr>
+			                        	<td class="align-middle text-center">{{$item->warehouse->codeno}}</td>
+			                        	<td class="align-middle text-left" >{{$item->warehouse->name}}</td>
+			                        	<td class="align-middle text-right" >{{$item->warehouse->stock_qty}}</td>
+			                        	<td class="align-middle text-right">{{$item->qty}}</td>
+				                        <td class="align-middle text-left">{{$item->UOM}}</td>
 			                        @endforeach
 			                      </tbody>
 			                    </table> 
@@ -89,6 +71,35 @@ use App\Supplier;
   	</div>
 </div>
 <!-- /page content -->
+
+<!-- Modal -->
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('production.admin.order.reject')}}" method="POST">
+      	@csrf
+      	@method('GET')
+      	<input type="hidden" name="id" value="{{$order->id}}">
+      <div class="modal-body">
+        <textarea class="text" style="width: 100%;text-align: left;" name="note">
+        	Please give reason about reject. clearly define what you want to check again!
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Reject</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 @endsection
 
 @section('script')
@@ -122,10 +133,10 @@ use App\Supplier;
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
 
 
-{{-- <script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
+<script src="{{asset('vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script> --}}
+<script type="text/javascript">$('#sampleTable').DataTable();$('.display').DataTable();</script>
 
 
 
