@@ -371,7 +371,8 @@ class OrderController extends Controller
     public function order_1_index() // procurement/admin/order list
     {
         //
-        $orders = Order::where('status_id','=',1)->get();
+        $orders = Order::where('status_id','=',1)
+                ->get();
         return view('production.admin.order',compact('orders'));
     }
     /**
@@ -419,11 +420,11 @@ class OrderController extends Controller
         $note=$request->note;
         $order=Order::find($id);
         $order->denile_note=$note;
-        $order->status_id=$order->status_id-1;
         $order->save();
 
-        $orders = Order::where('status_id','=',1)->get();
-        return view('procurement.admin.order',compact('orders'));
+        $orders = Order::where('status_id','=',1)
+                    ->get();
+        return view('production.admin.order',compact('orders'));
     }
     /**
      * Display a listing of the resource.

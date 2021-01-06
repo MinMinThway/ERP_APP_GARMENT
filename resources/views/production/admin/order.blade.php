@@ -52,7 +52,10 @@ use App\Supplier;
 			                      	@foreach($orders as $order)
 			                      	@php
 			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
-			                      		$supplier=Supplier::find($order->supplier_id);
+			                      		if ($order->denile_note) {
+			                      			// dd('note ');
+			                      			continue;
+			                      		}
 			                      	@endphp
 
 									<tr>

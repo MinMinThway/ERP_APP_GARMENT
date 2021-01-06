@@ -21,7 +21,7 @@ use App\Supplier;
 		              	<button data-toggle="modal" data-target="#reject" type="submit" class="btn btn-danger btn-sm" style="border-radius: 20px;">
                 		Reject
                 		</button>
-                  		<form action="{{route('status_3_change')}}" method="POST" class="d-inline">
+                  		<form action="{{route('status_1_change')}}" method="POST" class="d-inline">
 		               		@csrf
 		               		@method('GET')
 		               		<input type="hidden" name="id" value="{{$order->id}}">		               	
