@@ -52,6 +52,9 @@ use App\Supplier;
 			                      	@endphp
 			                      	@foreach($orders as $order)
 			                      	@php
+			                      		if ($order->status_id!=2&&$order->status_id!=6) {
+			                      			continue;
+			                      		}
 			                      		$detail=Order_detail::where('order_id','=',$order->id)->count();
 			                      		$suppliers=Supplier::all();
 			                      	@endphp
@@ -62,7 +65,7 @@ use App\Supplier;
 			                        	<td class="align-middle text-center" >{{$order->date}}</td>
 			                        	<td class="align-middle text-center">{{$detail}}</td>
 			                        	<td class="align-middle text-center">
-		                        		<select style="height:30px;border-radius: 10px;" id='ed{{$order->id}}' onchange="select('#ed{{$order->id}}','select')">
+		                        		<select style="height:30px;border-radius: 10px;" id='ed{{$order->id}}' onchange="select('#ed{{$order->id}}','select')" @if($order->status_id==6) disabled @endif>
 		                        			@foreach($suppliers as $supplier)
 
 		                        			<option data-oid="{{$order->id}}" value="{{$supplier->id}}" @if($supplier->id==$order->supplier_id) selected @endif>{{$supplier->company_name}}</option>
@@ -70,6 +73,7 @@ use App\Supplier;
 		                        		</select>
 			                        	</td>
 			                        	<td class="align-middle text-center">
+			                        		@if($order->status_id==2)
 			                        		<form action="{{route('order_edit')}}" method="POST">
 		                        			@csrf
 		                        			@method('GET')
@@ -78,6 +82,14 @@ use App\Supplier;
 			                        		edit
 			                        		</button>
 			                        		</form>
+			                        		@else
+			                        		<button class="btn btn-success"
+			                        		style="border-radius: 20px;"
+			                        		onclick="select('hello',{{$order->id}})">
+			                        		Shipping
+			                        		</button>
+			                        		</form>
+			                        		@endif
 			                        		@if($order->denile_note)
 			                        		<button class="btn btn-danger btn-sm" data-id='{{$order->id}}' style="border-radius: 20px;"
 											onclick="select('{{$order->id}}','reject')"
@@ -112,6 +124,35 @@ use App\Supplier;
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ship" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLabel">Invoice Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('shipping')}}" method="POST">
+      	@csrf
+      	@method('GET')
+      	<input id="order_id" type="hidden" name="id" value="">
+      <div class="modal-body">
+        <textarea class="text" style="width: 100%;text-align: left;" name="invoice">
+        	Invoice No Here
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -181,6 +222,9 @@ function select(id,state){
 				$('#reject').modal('toggle');
 			}
 		})
+		}else{
+			$('#order_id').val(state);
+			$('#ship').modal('toggle');
 		}
 	})
 }

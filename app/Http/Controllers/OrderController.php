@@ -434,7 +434,8 @@ class OrderController extends Controller
     public function order_2_index() // procurement/staff/order edit/update
     {
         //
-        $orders = Order::where('status_id','=',2)->get();
+        $orders = Order::where('status_id','>',1)
+            ->get();
         return view('procurement.staff.order',compact('orders'));
     }
     /**
@@ -597,6 +598,27 @@ class OrderController extends Controller
         $order=Order::find($id);
         return view('procurement.admin.detail',compact('order'));
    
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_2_shipping(Request $request, Order $order)  // ship
+    {
+        //
+        $id=$request->id;
+        $invoice=$request->invoice;
+        $order=Order::find($id);
+        $order->invoice_no=$invoice;
+        $order->status_id=$order->status_id+1;
+        $order->save();
+
+        $orders = Order::where('status_id','>',1)
+            ->get();
+        return view('procurement.staff.order',compact('orders'));
     }
     /**
      * Update the specified resource in storage.

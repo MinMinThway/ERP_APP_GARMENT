@@ -81,6 +81,7 @@ Route::middleware('role:procurement/staff')->group(function () {
 	Route::resource('procurement/supplier','SupplierController');
 	Route::get('/procurement/staff/history','OrderController@staff_2_history')->name('staff_2_history');
 	Route::get('/procurement/staff/history/info','OrderController@order_2_info')->name('order_2_info');
+	Route::get('/shipping','OrderController@order_2_shipping')->name('shipping');
 Route::get('/earning4','warehouseDetailController@earning4')->name('earning4');
 });
 Route::middleware('role:procurement/admin')->group(function () {
