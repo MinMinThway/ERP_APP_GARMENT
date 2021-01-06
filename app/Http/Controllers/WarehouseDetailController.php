@@ -329,5 +329,265 @@ class WarehouseDetailController extends Controller
        $day3,$day4,$day5,$day6,$day7
     );
     echo json_encode($total);
-    }  
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function earning2()
+    {
+        // 1 jan
+    date_default_timezone_set("Asia/Rangoon");
+    $janStart = date('Y-m-d', strtotime('first day of january'));
+    $janEnd = date('Y-m-d',strtotime('last day of january'));
+    $janResult=Warehouse_detail::whereBetween('date', [$janStart, $janEnd])->count();
+    // 2 february
+    $febStart = date('Y-m-d', strtotime('first day of february'));
+    $febEnd = date('Y-m-d',strtotime('last day of february'));
+    $febResult=Warehouse_detail::whereBetween('date', [$febStart, $febEnd])->count();
+    // 3 march
+    $marchStart = date('Y-m-d', strtotime('first day of march'));
+    $marchEnd = date('Y-m-d',strtotime('last day of march'));
+    $marchResult=Warehouse_detail::whereBetween('date', [$marchStart, $marchEnd])->count();
+    // 4 april
+    $aprilStart = date('Y-m-d', strtotime('first day of april'));
+    $aprilEnd = date('Y-m-d',strtotime('last day of april'));
+    $aprilResult=Warehouse_detail::whereBetween('date', [$aprilStart, $aprilEnd])->count();
+    // 5 may
+    $mayStart = date('Y-m-d', strtotime('first day of may'));
+    $mayEnd = date('Y-m-d',strtotime('last day of may'));
+    $mayResult=Warehouse_detail::whereBetween('date', [$mayStart, $mayEnd])->count();
+    // 6 june
+    $junStart = date('Y-m-d', strtotime('first day of june'));
+    $junEnd = date('Y-m-d',strtotime('last day of june'));
+    $junResult=Warehouse_detail::whereBetween('date', [$junStart, $junEnd])->count();
+    // 7 july
+    $julStart = date('Y-m-d', strtotime('first day of july'));
+    $julEnd = date('Y-m-d',strtotime('last day of july'));
+    $julResult=Warehouse_detail::whereBetween('date', [$julStart, $julEnd])->count();
+    // 8 august
+    $augStart = date('Y-m-d', strtotime('first day of august'));
+    $augEnd = date('Y-m-d',strtotime('last day of august'));
+    $augResult=Warehouse_detail::whereBetween('date', [$augStart, $augEnd])->count();
+    // 9 september
+    $sepStart = date('Y-m-d', strtotime('first day of september'));
+    $sepEnd = date('Y-m-d',strtotime('last day of september'));
+    $sepResult=Warehouse_detail::whereBetween('date', [$sepStart, $sepEnd])->count();
+    // 10 october
+    $octStart = date('Y-m-d', strtotime('first day of october'));
+    $octEnd = date('Y-m-d',strtotime('last day of october'));
+    $octResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+    // 11 november
+    $novStart = date('Y-m-d', strtotime('first day of november'));
+    $novEnd = date('Y-m-d',strtotime('last day of november'));
+    $novResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+
+    // 12 december
+    $decStart = date('Y-m-d', strtotime('first day of december'));
+    $decEnd = date('Y-m-d',strtotime('last day of december'));
+    $decResult=Warehouse_detail::whereBetween('date', [$decStart, $decEnd])->count();
+
+    $total = array(
+        $janResult,$febResult,$marchResult,$aprilResult,
+        $mayResult,$junResult,$julResult,$augResult,
+        $sepResult,$octResult,$novResult,$decResult,
+    );
+    echo json_encode($total);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function earning3()
+    {
+        // 1 jan
+    date_default_timezone_set("Asia/Rangoon");
+    $janStart = date('Y-m-d', strtotime('first day of january'));
+    $janEnd = date('Y-m-d',strtotime('last day of january'));
+    $janResult=Warehouse_detail::whereBetween('date', [$janStart, $janEnd])->count();
+    // 2 february
+    $febStart = date('Y-m-d', strtotime('first day of february'));
+    $febEnd = date('Y-m-d',strtotime('last day of february'));
+    $febResult=Warehouse_detail::whereBetween('date', [$febStart, $febEnd])->count();
+    // 3 march
+    $marchStart = date('Y-m-d', strtotime('first day of march'));
+    $marchEnd = date('Y-m-d',strtotime('last day of march'));
+    $marchResult=Warehouse_detail::whereBetween('date', [$marchStart, $marchEnd])->count();
+    // 4 april
+    $aprilStart = date('Y-m-d', strtotime('first day of april'));
+    $aprilEnd = date('Y-m-d',strtotime('last day of april'));
+    $aprilResult=Warehouse_detail::whereBetween('date', [$aprilStart, $aprilEnd])->count();
+    // 5 may
+    $mayStart = date('Y-m-d', strtotime('first day of may'));
+    $mayEnd = date('Y-m-d',strtotime('last day of may'));
+    $mayResult=Warehouse_detail::whereBetween('date', [$mayStart, $mayEnd])->count();
+    // 6 june
+    $junStart = date('Y-m-d', strtotime('first day of june'));
+    $junEnd = date('Y-m-d',strtotime('last day of june'));
+    $junResult=Warehouse_detail::whereBetween('date', [$junStart, $junEnd])->count();
+    // 7 july
+    $julStart = date('Y-m-d', strtotime('first day of july'));
+    $julEnd = date('Y-m-d',strtotime('last day of july'));
+    $julResult=Warehouse_detail::whereBetween('date', [$julStart, $julEnd])->count();
+    // 8 august
+    $augStart = date('Y-m-d', strtotime('first day of august'));
+    $augEnd = date('Y-m-d',strtotime('last day of august'));
+    $augResult=Warehouse_detail::whereBetween('date', [$augStart, $augEnd])->count();
+    // 9 september
+    $sepStart = date('Y-m-d', strtotime('first day of september'));
+    $sepEnd = date('Y-m-d',strtotime('last day of september'));
+    $sepResult=Warehouse_detail::whereBetween('date', [$sepStart, $sepEnd])->count();
+    // 10 october
+    $octStart = date('Y-m-d', strtotime('first day of october'));
+    $octEnd = date('Y-m-d',strtotime('last day of october'));
+    $octResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+    // 11 november
+    $novStart = date('Y-m-d', strtotime('first day of november'));
+    $novEnd = date('Y-m-d',strtotime('last day of november'));
+    $novResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+
+    // 12 december
+    $decStart = date('Y-m-d', strtotime('first day of december'));
+    $decEnd = date('Y-m-d',strtotime('last day of december'));
+    $decResult=Warehouse_detail::whereBetween('date', [$decStart, $decEnd])->count();
+
+    $total = array(
+        $janResult,$febResult,$marchResult,$aprilResult,
+        $mayResult,$junResult,$julResult,$augResult,
+        $sepResult,$octResult,$novResult,$decResult,
+    );
+    echo json_encode($total);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function earning4()
+    {
+        // 1 jan
+    date_default_timezone_set("Asia/Rangoon");
+    $janStart = date('Y-m-d', strtotime('first day of january'));
+    $janEnd = date('Y-m-d',strtotime('last day of january'));
+    $janResult=Warehouse_detail::whereBetween('date', [$janStart, $janEnd])->count();
+    // 2 february
+    $febStart = date('Y-m-d', strtotime('first day of february'));
+    $febEnd = date('Y-m-d',strtotime('last day of february'));
+    $febResult=Warehouse_detail::whereBetween('date', [$febStart, $febEnd])->count();
+    // 3 march
+    $marchStart = date('Y-m-d', strtotime('first day of march'));
+    $marchEnd = date('Y-m-d',strtotime('last day of march'));
+    $marchResult=Warehouse_detail::whereBetween('date', [$marchStart, $marchEnd])->count();
+    // 4 april
+    $aprilStart = date('Y-m-d', strtotime('first day of april'));
+    $aprilEnd = date('Y-m-d',strtotime('last day of april'));
+    $aprilResult=Warehouse_detail::whereBetween('date', [$aprilStart, $aprilEnd])->count();
+    // 5 may
+    $mayStart = date('Y-m-d', strtotime('first day of may'));
+    $mayEnd = date('Y-m-d',strtotime('last day of may'));
+    $mayResult=Warehouse_detail::whereBetween('date', [$mayStart, $mayEnd])->count();
+    // 6 june
+    $junStart = date('Y-m-d', strtotime('first day of june'));
+    $junEnd = date('Y-m-d',strtotime('last day of june'));
+    $junResult=Warehouse_detail::whereBetween('date', [$junStart, $junEnd])->count();
+    // 7 july
+    $julStart = date('Y-m-d', strtotime('first day of july'));
+    $julEnd = date('Y-m-d',strtotime('last day of july'));
+    $julResult=Warehouse_detail::whereBetween('date', [$julStart, $julEnd])->count();
+    // 8 august
+    $augStart = date('Y-m-d', strtotime('first day of august'));
+    $augEnd = date('Y-m-d',strtotime('last day of august'));
+    $augResult=Warehouse_detail::whereBetween('date', [$augStart, $augEnd])->count();
+    // 9 september
+    $sepStart = date('Y-m-d', strtotime('first day of september'));
+    $sepEnd = date('Y-m-d',strtotime('last day of september'));
+    $sepResult=Warehouse_detail::whereBetween('date', [$sepStart, $sepEnd])->count();
+    // 10 october
+    $octStart = date('Y-m-d', strtotime('first day of october'));
+    $octEnd = date('Y-m-d',strtotime('last day of october'));
+    $octResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+    // 11 november
+    $novStart = date('Y-m-d', strtotime('first day of november'));
+    $novEnd = date('Y-m-d',strtotime('last day of november'));
+    $novResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+
+    // 12 december
+    $decStart = date('Y-m-d', strtotime('first day of december'));
+    $decEnd = date('Y-m-d',strtotime('last day of december'));
+    $decResult=Warehouse_detail::whereBetween('date', [$decStart, $decEnd])->count();
+
+    $total = array(
+        $janResult,$febResult,$marchResult,$aprilResult,
+        $mayResult,$junResult,$julResult,$augResult,
+        $sepResult,$octResult,$novResult,$decResult,
+    );
+    echo json_encode($total);
+    }
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function earning5()
+    {
+        // 1 jan
+    date_default_timezone_set("Asia/Rangoon");
+    $janStart = date('Y-m-d', strtotime('first day of january'));
+    $janEnd = date('Y-m-d',strtotime('last day of january'));
+    $janResult=Warehouse_detail::whereBetween('date', [$janStart, $janEnd])->count();
+    // 2 february
+    $febStart = date('Y-m-d', strtotime('first day of february'));
+    $febEnd = date('Y-m-d',strtotime('last day of february'));
+    $febResult=Warehouse_detail::whereBetween('date', [$febStart, $febEnd])->count();
+    // 3 march
+    $marchStart = date('Y-m-d', strtotime('first day of march'));
+    $marchEnd = date('Y-m-d',strtotime('last day of march'));
+    $marchResult=Warehouse_detail::whereBetween('date', [$marchStart, $marchEnd])->count();
+    // 4 april
+    $aprilStart = date('Y-m-d', strtotime('first day of april'));
+    $aprilEnd = date('Y-m-d',strtotime('last day of april'));
+    $aprilResult=Warehouse_detail::whereBetween('date', [$aprilStart, $aprilEnd])->count();
+    // 5 may
+    $mayStart = date('Y-m-d', strtotime('first day of may'));
+    $mayEnd = date('Y-m-d',strtotime('last day of may'));
+    $mayResult=Warehouse_detail::whereBetween('date', [$mayStart, $mayEnd])->count();
+    // 6 june
+    $junStart = date('Y-m-d', strtotime('first day of june'));
+    $junEnd = date('Y-m-d',strtotime('last day of june'));
+    $junResult=Warehouse_detail::whereBetween('date', [$junStart, $junEnd])->count();
+    // 7 july
+    $julStart = date('Y-m-d', strtotime('first day of july'));
+    $julEnd = date('Y-m-d',strtotime('last day of july'));
+    $julResult=Warehouse_detail::whereBetween('date', [$julStart, $julEnd])->count();
+    // 8 august
+    $augStart = date('Y-m-d', strtotime('first day of august'));
+    $augEnd = date('Y-m-d',strtotime('last day of august'));
+    $augResult=Warehouse_detail::whereBetween('date', [$augStart, $augEnd])->count();
+    // 9 september
+    $sepStart = date('Y-m-d', strtotime('first day of september'));
+    $sepEnd = date('Y-m-d',strtotime('last day of september'));
+    $sepResult=Warehouse_detail::whereBetween('date', [$sepStart, $sepEnd])->count();
+    // 10 october
+    $octStart = date('Y-m-d', strtotime('first day of october'));
+    $octEnd = date('Y-m-d',strtotime('last day of october'));
+    $octResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+    // 11 november
+    $novStart = date('Y-m-d', strtotime('first day of november'));
+    $novEnd = date('Y-m-d',strtotime('last day of november'));
+    $novResult=Warehouse_detail::whereBetween('date', [$octStart, $octEnd])->count();
+
+    // 12 december
+    $decStart = date('Y-m-d', strtotime('first day of december'));
+    $decEnd = date('Y-m-d',strtotime('last day of december'));
+    $decResult=Warehouse_detail::whereBetween('date', [$decStart, $decEnd])->count();
+
+    $total = array(
+        $janResult,$febResult,$marchResult,$aprilResult,
+        $mayResult,$junResult,$julResult,$augResult,
+        $sepResult,$octResult,$novResult,$decResult,
+    );
+    echo json_encode($total);
+    }
 }
