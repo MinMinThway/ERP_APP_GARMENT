@@ -1,4 +1,4 @@
-@extends('finance.staff.master')
+@extends('finance.admin.master')
 @php
 use App\Order_detail;
 use App\Order;
@@ -32,14 +32,14 @@ use App\Order;
 
                   <h2>Daily Reports</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a href="{{route('finance.staff.home')}}"><i class="fa fa-reply"> Back</i></a>
+                    <li><a href="{{route('finance.admin.home')}}"><i class="fa fa-reply"> Back</i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   
-                  <form id="demo-form2" action="{{route('finance.staff.monthlyreport')}}" data-parsley-validate class="form-horizontal form-label-left">
+                  <form id="demo-form2" action="{{route('finance.admin.dailyreport')}}" data-parsley-validate class="form-horizontal form-label-left">
                     @csrf
                     <label class="col-form-label col-md-3 col-sm-3 "> <h6><b>Please select Date <span class="required">*</span></b></h6>
                       </label>

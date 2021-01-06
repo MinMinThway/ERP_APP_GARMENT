@@ -1,9 +1,10 @@
-@extends('finance.staff.master')
+@extends('finance.admin.master')
 @php
 use App\Order_detail;
 use App\Order;
 @endphp
 @section('body')
+
   <!-- page content -->
   <div class="right_col" role="main">
         <div class="">
@@ -30,21 +31,21 @@ use App\Order;
                 <div class="x_title">
 
 
-                  <h2>Daily Reports</h2>
+                  <h2>Monthly Reports</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a href="{{route('finance.staff.home')}}"><i class="fa fa-reply"> Back</i></a>
+                    <li><a href="{{route('finance.admin.home')}}"><i class="fa fa-reply"> Back</i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   
-                  <form id="demo-form2" action="{{route('finance.staff.monthlyreport')}}" data-parsley-validate class="form-horizontal form-label-left">
+                  <form id="demo-form2" action="{{route('finance.admin.monthlyreport')}}" data-parsley-validate class="form-horizontal form-label-left">
                     @csrf
-                    <label class="col-form-label col-md-3 col-sm-3 "> <h6><b>Please select Date <span class="required">*</span></b></h6>
+                    <label class="col-form-label col-md-3 col-sm-3 "> <h6><b>Please select Month <span class="required">*</span></b></h6>
                       </label>
                       <div class="col-md-4 col-sm-4 ">
-                        <input class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" name="date" required="required" type="date" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                        <input class="date-picker form-control" placeholder="mm-yyyy" type="text" name="month" required="required" type="month" onfocus="this.type='month'" onmouseover="this.type='month'" onclick="this.type='month'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
                         <script>
                           function timeFunctionLong(input) {
                             setTimeout(function() {

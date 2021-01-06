@@ -91,7 +91,7 @@
                 <ul class="nav side-menu">
                   <li><a href="{{route('account.index')}}"><i class="fa fa-institution pr-2" style="font-size: 20px"></i>Bank Accounts</a>
                   </li>
-                  <li><a href="{{asset('/finance/staff/account/addbudget')}}"><i class="fa fa-money"></i>Budgets</a>
+                  <li><a href="{{route('account.newbudget')}}"><i class="fa fa-money"></i>Budgets</a>
                   </li>
                 </ul>
               </div>
@@ -129,8 +129,7 @@
                   </li>
                   <li><a href="{{route('finance.staff.yearlysearchreport')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Yearly Report</a>
                   </li>
-                  <li><a><i class="fa fa-sitemap pr-2" style="font-size: 20px"></i>Business Performance Ratios</a>
-                  </li>                  
+                                  
                 </ul>
               </div>
             </div>

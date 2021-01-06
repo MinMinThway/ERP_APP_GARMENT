@@ -197,115 +197,94 @@ if ($this_month>$past_month) {
             </div>
           </div>
         </div>
+        <h3 class="tile-title">Banks And Amounts</h3>
+        <div class="x_content">
+                    <div class="row">
+
+                       @foreach($account as $account)
+                       @if($account->id!=1)
+                      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                        <div class="tile-stats">
+                          <div class="icon"><a href="{{route('account.newbudget')}}"><i class="fa fa-credit-card " style="size: 20px;"></i></a>
+                          </div>
+                          <div class="count"><small>{{$account->bank}}</small></div>
+                            <h4><b>$ {{$account->balance}}</b></h4>
+                            {{-- <p>Lorem ipsum psdea itgum rixt.</p> --}}
+
+                              
+                          </div>
+                          @if($account->balance < 2000)
+                              
+                                <p style="color:red"><b>Please fill the amount for {{$account->bank}} Bank*</b></p>
+                              @endif
+                        </div>
+                       @endif
+                      @endforeach
+                    </div>
+                    </div>
           <!-- /top tiles -->
+          
+             
+
+        
+
+
+         
 
           <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-              <div class="dashboard_graph">
-
-                <div class="row x_title">
-                  <div class="col-md-6">
-                    <h3>Network Activities <small>Graph title sub-title</small></h3>
-                  </div>
-                  <div class="col-md-6">
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+            <div class="col-md-12">
+                <div class="tile">
+                    <h3 class="tile-title">Week Transection</h3>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
                     </div>
-                  </div>
                 </div>
-
-                <div class="col-md-9 col-sm-9 ">
-                  <div id="chart_plot_01" class="demo-placeholder"></div>
-                </div>
-                <div class="col-md-3 col-sm-3  bg-white">
-                  <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <div class="col-md-12 col-sm-12 ">
-                    <div>
-                      <p>Facebook Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Twitter Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 ">
-                    <div>
-                      <p>Conventional Media</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Bill boards</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="clearfix"></div>
-              </div>
             </div>
+    </div>
 
-          </div>
+    
+                  
+                  
+   
+  </div>
   
+
+                
+
 @endsection
-{{-- 
 @section('script')
-$.ajax({
-    type:"POST",
-    url:"getEarning.php",
-    success:function(response)
-    {
-      // console.log(response);
-      var earningresult = JSON.parse(response);
-
-      console.log(earningresult);
-      var data = {
-          labels: ["January", "February", "March", "April", "May", "June","July",
-            "August","September","October","November","December"],
-        datasets: [
-          {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor:   "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [earningresult[0],earningresult[1],earningresult[2],
-            earningresult[3],earningresult[4],earningresult[5],earningresult[6],earningresult[7],
-            earningresult[8],earningresult[9],earningresult[10],earningresult[11]]
-          }
-        ]
-      };
-
-      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-      var lineChart = new Chart(ctxl).Line(data);
-
-    }
-
-  })
-
-  });
-@endsection --}}
+<script type="text/javascript" src="{{asset('js/plugins/chart.js')}}"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        method:"GET",
+        url: '{{route('acearning')}}',
+        success:function(x){
+            var send = JSON.parse(x);
+            
+            var data = {
+            labels: [send[7],send[8],send[9],send[10],send[11],send[12],send[13]],
+            datasets: [
+              {
+                label: "",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(253,0,0,1)",
+                data: [ send[0],send[1],send[2],send[3],send[4],send[5],send[6]]
+              }
+            ]
+          };
+          
+          var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+          var lineChart = new Chart(ctxl).Line(data);
+        }
+    })
+</script>
+@endsection

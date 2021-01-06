@@ -108,7 +108,6 @@ class AccountDetailController extends Controller
     public function account(Request $request, Account_detail $account_detail)
     {
         $data=Account::find($request->bank);
-
         echo json_encode($data);
     }
 
@@ -142,4 +141,74 @@ class AccountDetailController extends Controller
          return view('finance.staff.home');
 
     }
+
+
+public function acearning()
+    {
+        //
+        date_default_timezone_set("Asia/Rangoon");
+        $d1=strtotime('-3day today');
+        $d2=strtotime('-2day today');
+        $d3=strtotime('-1day today');
+        $d4=strtotime('today');
+        $d5=strtotime('+1day today');
+        $d6=strtotime('+2day today');
+        $d7=strtotime('+3day today');
+        $day1=date('Y-m-d',$d1);
+        $day2=date('Y-m-d',$d2);
+        $day3=date('Y-m-d',$d3);
+        $day4=date('Y-m-d',$d4);
+        $day5=date('Y-m-d',$d5);
+        $day6=date('Y-m-d',$d6);
+        $day7=date('Y-m-d',$d7);
+        $day1_count=Account_detail::select('outcome')->where('date','=',$day1)->sum('outcome');
+        $day2_count=Account_detail::select('outcome')->where('date','=',$day2)->sum('outcome');
+        $day3_count=Account_detail::select('outcome')->where('date','=',$day3)->sum('outcome');
+        $day4_count=Account_detail::select('outcome')->where('date','=',$day4)->sum('outcome');
+        $day5_count=Account_detail::select('outcome')->where('date','=',$day5)->sum('outcome');
+        $day6_count=Account_detail::select('outcome')->where('date','=',$day6)->sum('outcome');
+        $day7_count=Account_detail::select('outcome')->where('date','=',$day7)->sum('outcome');
+    $total = array(
+       $day1_count,$day2_count,$day3_count,$day4_count,
+       $day5_count,$day6_count,$day7_count,$day1,$day2,
+       $day3,$day4,$day5,$day6,$day7
+    );
+    echo json_encode($total);
+    }  
+
+
+
+    public function acearning2()
+    {
+        //
+        date_default_timezone_set("Asia/Rangoon");
+        $d1=strtotime('-3day today');
+        $d2=strtotime('-2day today');
+        $d3=strtotime('-1day today');
+        $d4=strtotime('today');
+        $d5=strtotime('+1day today');
+        $d6=strtotime('+2day today');
+        $d7=strtotime('+3day today');
+        $day1=date('Y-m-d',$d1);
+        $day2=date('Y-m-d',$d2);
+        $day3=date('Y-m-d',$d3);
+        $day4=date('Y-m-d',$d4);
+        $day5=date('Y-m-d',$d5);
+        $day6=date('Y-m-d',$d6);
+        $day7=date('Y-m-d',$d7);
+        $day1_count=Account_detail::select('outcome')->where('date','=',$day1)->sum('outcome');
+        $day2_count=Account_detail::select('outcome')->where('date','=',$day2)->sum('outcome');
+        $day3_count=Account_detail::select('outcome')->where('date','=',$day3)->sum('outcome');
+        $day4_count=Account_detail::select('outcome')->where('date','=',$day4)->sum('outcome');
+        $day5_count=Account_detail::select('outcome')->where('date','=',$day5)->sum('outcome');
+        $day6_count=Account_detail::select('outcome')->where('date','=',$day6)->sum('outcome');
+        $day7_count=Account_detail::select('outcome')->where('date','=',$day7)->sum('outcome');
+    $total = array(
+       $day1_count,$day2_count,$day3_count,$day4_count,
+       $day5_count,$day6_count,$day7_count,$day1,$day2,
+       $day3,$day4,$day5,$day6,$day7
+    );
+    echo json_encode($total);
+    }  
 }
+

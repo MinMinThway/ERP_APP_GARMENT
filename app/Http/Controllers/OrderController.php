@@ -687,6 +687,82 @@ class OrderController extends Controller
             $order->status_id=5;
             $order->save();
 
+            // $account= Account::find($request->account);
+            // $oldbalance = $account->balance;
+            // $newbalance = $request->balance;
+            // $tranbalance = $oldbalance - $newbalance;
+            
+
+            // $accountdetail=new Account_detail;
+            // $accountdetail->date=$today;
+            // $accountdetail->outcome=$request->balance;
+            // $accountdetail->tranbalance= $tranbalance;
+            // $accountdetail->account_id= $request->account;
+            // $accountdetail->save();
+
+            // $account->balance  =   $tranbalance;
+            // $account->save();
+        });
+
+        return redirect()->route('finance.staff.balancesheet');
+    }
+
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function order_5_index() // procurement/admin/order list
+    {
+        //
+        $orders = Order::where('status_id','=',5)->get();
+        return view('finance.admin.orders',compact('orders'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_5_edit(Request $request, Order $order)
+    {
+        $id=$request->id;
+        $order=Order::find($id);
+        $account=Account::all();
+        return view('finance.admin.detailolders',compact('order','account'));
+
+        // $order_id=$request->orderid;
+        // $detail=Order_detail::all();
+        // $order = Order::find($order_id);
+        // return view('finance.staff.detailorder',compact('order',));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function status_5_change(Request $request, Order $order) // procurement/staff/ status chage
+    {
+        // dd($request->balance);
+        $id=$request->id;
+        $accountid=$request->account;
+        $oldtotal=$request->balance;
+
+       
+            DB::transaction(function() use ($request){
+            date_default_timezone_set("Asia/Rangoon");
+            $today = date('Y-m-d',strtotime('today'));
+
+            $order=Order::find($request->id);
+            $order->status_id=6;
+            $order->save();
+
             $account= Account::find($request->account);
             $oldbalance = $account->balance;
             $newbalance = $request->balance;
@@ -702,21 +778,115 @@ class OrderController extends Controller
 
             $account->balance  =   $tranbalance;
             $account->save();
-        });
+        
+    });
+            return redirect()->route('finance.admin.order');
+        }
 
-        return redirect()->route('finance.staff.balancesheet');
-    }
+    // public function order_5_update(Request $request, Order $order)
+    // {   
 
-    public function order_4_reject(Request $request, Order $order)
+        
+    //     $id = $request->id;
+    //     $accountid=$request->account;
+    //     $oldtotal=$request->balance;
+
+        
+    //     DB::transaction(function() use ($request){
+    //         date_default_timezone_set("Asia/Rangoon");
+    //         $today = date('Y-m-d',strtotime('today'));
+
+    //         $account= Account::find($request->account);
+    //         $oldbalance = $account->balance;
+    //         $newbalance = $request->balance;
+    //         $tranbalance = $oldbalance - $newbalance;
+            
+
+    //         $accountdetail=new Account_detail;
+    //         $accountdetail->date=$today;
+    //         $accountdetail->outcome=$request->balance;
+    //         $accountdetail->tranbalance= $tranbalance;
+    //         $accountdetail->account_id= $request->account;
+    //         $accountdetail->save();
+
+    //         $account->balance  =   $tranbalance;
+    //         $account->save();
+    //     });
+
+    //     return redirect()->route('finance.admin.order');
+    // }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Order  $order
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function order_5_detail(Request $request, Order $order)  // procurement/admin/ check order detail
+    // {
+    //     //
+    //     $id=$request->id;
+    //     $order=Order::find($id);
+    //     return view('finance.admin.detailorders',compact('order'));
+   
+    // }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function order_5_reject(Request $request, Order $order)  // procurement/admin/ check order detail
     {
-        dd($request);
-        DB::transaction(function() use ($request){
-            $order=Order::find($request->id);
-            $order->denile_note=$request->denile;
-            $order->status_id=3;
-            $order->save();
-        });
+        //
+        $id=$request->id;
+        $note=$request->note;
+        $order=Order::find($id);
+        $order->denile_note=$note;
+        $order->status_id=4;
+        $order->save();
+
+        $orders = Order::where('status_id','=',4)->get();
+        return view('finance.admin.orders',compact('orders'));
     }
+
+    public function note_5_get() // get/reject/note
+    {
+        //
+        $id=$_GET['id'];
+        $order=Order::find($id);
+        echo $order->denile_note;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    // public function status_4_change(Request $request, Order $order) // procurement/staff/ status chage
+    // {
+    //     //
+    //     $id=$request->id;
+    //     $order=Order::find($id);
+    //     $order->status_id=6;
+    //     $order->save();
+    //     return redirect()->route('finance.admin.order');
+    // }
+
+
+    // public function order_5_reject(Request $request, Order $order)
+    // {
+    //     //dd($request);
+    //     DB::transaction(function() use ($request){
+    //         $order=Order::find($request->id);
+    //         $order->denile_note=$request->denile;
+    //         $order->status_id=4;
+    //         $order->save();
+    //     });
+    // }
 
     
 }

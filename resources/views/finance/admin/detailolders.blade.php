@@ -1,4 +1,4 @@
-@extends('finance.staff.master')
+@extends('finance.admin.master')
 
 @section('body')
 @php
@@ -89,6 +89,8 @@ use App\Account_detail
                                 <th class="align-middle text-center">Qty</th>
                                 <th class="align-middle text-center">Unit</th>
                                 <th class="align-middle text-center">Order Price</th>
+                                <th class="align-middle text-center">Bank Account</th>
+                                <th class="align-middle text-center">Cheque No</th>
                                 
                               </tr>
                             </thead>
@@ -149,8 +151,17 @@ use App\Account_detail
                                   <span class="mr-2"><i class="icofont-minus"></i> 0.00</span>
                                   @endif
                                 </td>
+                              
+                                <td class="align-middle text-center">{{$order->account->bank}}</td>
+                                <td class="align-middle text-center">{{$order->cheque_no}}</td>
                               </tr>
                              @endforeach
+                             
+                           
+                              
+                               
+                         
+
                             </tbody>
                           </table>
                         </div>
@@ -160,8 +171,22 @@ use App\Account_detail
                       <!-- /.row -->
                        <div class="pt-3">
 
-                    {{--   <button class="btn btn-danger pull-right reject" data-target="#reject" data-id='{{$order->id}}' >Reject</button> --}}
-                      <button  class="btn btn-success pull-right submit">Submit</button>
+                      <button data-toggle="modal" data-target="#reject" type="submit" class="btn btn-danger btn-sm pull-right" style="border-radius: 20px;">
+                    Reject
+                    </button>
+                      <form action="{{route('finance.admin.order.change')}}" method="POST" class="d-inline">
+                      @csrf
+                      @method('GET')
+                      <input type="hidden" name="id" value="{{$order->id}}">
+                      <input type="hidden" name="balance" value="{{$order->total}}">
+                      <input type="hidden" name="account" value="{{$order->account->id}}">
+
+                    <button type="submit" class="btn btn-success btn-sm pull-right" style="border-radius: 20px;">
+                    Approve
+                    </button>
+                    </form>
+                  </div>
+                      {{-- <button  class="btn btn-outline-danger pull-right submit">Reject</button> --}}
 
                       
 
@@ -177,7 +202,7 @@ use App\Account_detail
 
                       </div>
                       <br><br><br><br>
-                      <div class="row">
+                      {{-- <div class="row">
                         <!-- accepted payments column -->
 
                         <div class="col-md-12 col-sm-12 bank" align="center" >
@@ -198,9 +223,9 @@ use App\Account_detail
                           @endif --}}
                       </div>
                       <br>
-                      </div>
+                      </div> --}}
                       
-                        <form id="demo-form2" action="{{route('finance.staff.order.update')}}"method="POST"data-parsley-validate class="form-horizontal form-label-left">
+                        {{-- <form id="demo-form2" action="{{route('finance.staff.order.update')}}"method="POST"data-parsley-validate class="form-horizontal form-label-left">
                           @csrf
                             @method('GET')
                             <input type="hidden" name="id" value="{{$order->id}}">
@@ -227,9 +252,37 @@ use App\Account_detail
             </div>
           </div>
 
-        </div>
+        </div> --}}
         <!-- /page content -->
 
+
+<!-- Modal -->
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('finance.admin.order.reject')}}" method="POST">
+        @csrf
+        @method('GET')
+        <input type="hidden" name="id" value="{{$order->id}}">
+      <div class="modal-body">
+        <textarea class="text" style="width: 100%;text-align: left;" name="note">
+          Please give reason about reject. clearly define what you want to check again!
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Reject</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('script')
@@ -272,14 +325,12 @@ use App\Account_detail
           })
 
 
-          $('#bank').on('click',function(){
-
-            alert("OK");
-
-            
-          })
-
-
+          // $('#bank').on('click',function(){
+          //   if($account->balance < $order->total)
+          //   {
+          //     alert("OK");
+          //   }
+          // })
 
           // $(".reject").on('click',function(){
           //    $(".denile").show();

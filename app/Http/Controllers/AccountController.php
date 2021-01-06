@@ -20,6 +20,13 @@ class AccountController extends Controller
         return view('finance.staff.indexbanks',compact('accounts'));
     }
 
+    public function adminindex()
+    {
+        $accounts= Account::orderBy('id','desc')->get();
+        return view('finance.admin.indexbank',compact('accounts'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -196,9 +203,19 @@ class AccountController extends Controller
             return view('finance.staff.reportsearch');
         }
 
+        public function adminsearchreport()
+        {
+            return view('finance.admin.dailysearch');
+        }
+
         public function monthlysearchreport()
         {
             return view('finance.staff.monthlyreportsearch');
+        }
+
+        public function adminmonthlysearchreport()
+        {
+            return view('finance.admin.adminmonthlyreportsearch');
         }
 
          public function yearlysearchreport()
@@ -206,8 +223,13 @@ class AccountController extends Controller
             return view('finance.staff.yearlyreportsearch');
         }
 
+         public function adminyearlysearchreport()
+        {
+            return view('finance.admin.adminyearlyreportsearch');
+        }
 
-        public function dailylyreport(Request $request){      
+
+        public function dailyreport(Request $request){      
             $date=date('d-m-Y',strtotime($request->date));
             if ($request->date) {
                 $orders = Order::where('date','=',$request->date)->get();
@@ -217,10 +239,18 @@ class AccountController extends Controller
 
         }
         
+        public function admindailyreport(Request $request){      
+            $date=date('d-m-Y',strtotime($request->date));
+            if ($request->date) {
+                $orders = Order::where('date','=',$request->date)->get();
+                $sum = Order::where('date','=',$request->date)->sum('total');
+            }
+            return view('finance.admin.dailyreportadmin',compact('orders','sum','date'));
+
+        }
+
         public function monthlyreport(Request $request){
 
-             
-            
             $month=date('Y-m',strtotime($request->month));
 
             //dd($month);
@@ -238,6 +268,25 @@ class AccountController extends Controller
             return view('finance.staff.monthlyreport',compact('orders','sum','month'));
         }
 
+        public function adminmonthlyreport(Request $request){
+
+            $month=date('Y-m',strtotime($request->month));
+
+            //dd($month);
+            if ($month) {
+
+                $orders = Order::where('date','like', '%' . $month . '%')->get();
+
+
+                $sum = Order::where('date','like', '%' . $month . '%')->sum('total');
+
+
+            }
+            //dd($month);
+           // dd($orders);
+            return view('finance.admin.adminmonthlyreport',compact('orders','sum','month'));
+        }
+
         public function yearlyreport(Request $request){
             
             $year=$request->year;
@@ -247,6 +296,17 @@ class AccountController extends Controller
                 $sum = Order::where('date','like', '%' . $year . '%')->sum('total');
             }
             return view('finance.staff.yearlyreport',compact('orders','sum','year'));
+        }
+
+        public function adminyearlyreport(Request $request){
+            
+            $year=$request->year;
+
+            if ($request->year) {
+                $orders = Order::where('date','like', '%' . $year . '%')->get();
+                $sum = Order::where('date','like', '%' . $year . '%')->sum('total');
+            }
+            return view('finance.admin.adminyearlyreport',compact('orders','sum','year'));
         }
 
     // public function account(Request $request, Account_detail $account_detail)
