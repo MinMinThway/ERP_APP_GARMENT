@@ -102,8 +102,8 @@
 
                  <li class="{{ Request::is('production/staff/report*') ? 'current-page' : '' }}">
                     <a href="{{route('production.staff.report')}}">
-                      <i class="icofont-listing-number pr-2" style="font-size: 20px"></i>
-                    Report
+                      <i class="icofont-safety pr-2" style="font-size: 20px"></i>
+                    Stock Safe
                     </a>
                   </li>
 

@@ -4,17 +4,6 @@ use App\Warehouse;
 use App\Warehouse_detail;
   // Total Material
   $count_items=Warehouse::all()->count();
-  
-  // Today Transection
-
-   // $tests=Warehouse_detail::whereBetween('date',['2020-12-20','2020-12-26'])->get();
-   // $i=1;
-   // foreach ($tests as $test) {
-   //   $test->date='2020-12-27';
-   //   $test->save();
-   // }
-   // var_dump($tests).die();
-
 
   date_default_timezone_set("Asia/Rangoon");
   $todayDate = date('Y-m-d',strtotime('today'));
@@ -187,16 +176,55 @@ if ($this_month>$past_month) {
             <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-clock-o"></i> Total Transection</span>
               <div class="count">{{$total_tran}}</div>
-{{--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> --}}
-            </div>
-            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
-              <span class="count_top"><i class="fa fa-user"></i> Other</span>
-              <div class="count">00</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-              <span></span>
             </div>
           </div>
         </div>
-          <!-- /top tiles -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <h3 class="tile-title">Week Transection</h3>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
+@endsection
+@section('script')
+<script type="text/javascript" src="{{asset('js/plugins/chart.js')}}"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        method:"GET",
+        url: '{{route('earning1')}}',
+        success:function(x){
+            var send = JSON.parse(x);
+            
+            var data = {
+            labels: [send[7],send[8],send[9],send[10],send[11],send[12],send[13]],
+            datasets: [
+              {
+                label: "",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(253,0,0,1)",
+                data: [ send[0],send[1],send[2],send[3],send[4],send[5],send[6]]
+              }
+            ]
+          };
+          
+          var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+          var lineChart = new Chart(ctxl).Line(data);
+        }
+    })
+</script>
 @endsection
