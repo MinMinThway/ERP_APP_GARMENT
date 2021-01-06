@@ -40,7 +40,7 @@ Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/delivery/set','OrderController@delivered')->name('delivered');
 	Route::get('/production/warehouse/history','OrderController@history')->name('history');
 	Route::get('/production/warehouse/history/info','OrderController@deliveredInfo')->name('deliveredInfo');
-	Route::get('/earning','warehouseDetailController@earning1')->name('earning1');
+	Route::get('/earning1','warehouseDetailController@earning1')->name('earning1');
 });
 
 Route::middleware('role:production/staff')->group(function () {
@@ -52,6 +52,7 @@ Route::middleware('role:production/staff')->group(function () {
 	Route::get('/production/staff/history','OrderController@staff_0_history')->name('staff_0_history');
 	Route::get('/production/staff/history/info','OrderController@order_0_info')->name('order_0_info');
 	Route::get('/production/staff/analysis','warehouseDetailController@analysis')->name('analysis');
+	Route::get('/earning2','warehouseDetailController@earning2')->name('earning2');
 });
 
 Route::middleware('role:production/admin')->group(function () {
@@ -64,6 +65,7 @@ Route::get('/production/admin/history','OrderController@admin_1_history')->name(
 Route::get('/production/admin/history/info','OrderController@order_1_info')->name('order_1_info');
 Route::get('/status_1_change','OrderController@status_1_change')->name('status_1_change');
 Route::get('/production/admin/order/reject','OrderController@order_1_reject')->name('production.admin.order.reject');
+Route::get('/earning3','warehouseDetailController@earning3')->name('earning3');
 });
 
 Route::middleware('role:procurement/staff')->group(function () {
@@ -79,6 +81,8 @@ Route::middleware('role:procurement/staff')->group(function () {
 	Route::resource('procurement/supplier','SupplierController');
 	Route::get('/procurement/staff/history','OrderController@staff_2_history')->name('staff_2_history');
 	Route::get('/procurement/staff/history/info','OrderController@order_2_info')->name('order_2_info');
+	Route::get('/shipping','OrderController@order_2_shipping')->name('shipping');
+Route::get('/earning4','warehouseDetailController@earning4')->name('earning4');
 });
 Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/procurement/admin/home','HomeController@procurement_admin')->name('procurement.admin.home');
@@ -88,6 +92,7 @@ Route::middleware('role:procurement/admin')->group(function () {
 	Route::get('/status_3_change','OrderController@status_3_change')->name('status_3_change');
 	Route::get('/procurement/admin/history','OrderController@admin_3_history')->name('admin_3_history');
 	Route::get('/procurement/admin/history/info','OrderController@order_3_info')->name('order_3_info');
+Route::get('/earning5','warehouseDetailController@earning5')->name('earning5');
 });
 
 Route::middleware('role:finance/staff')->group(function () {
