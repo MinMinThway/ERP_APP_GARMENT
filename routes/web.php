@@ -54,6 +54,8 @@ Route::middleware('role:production/staff')->group(function () {
 
 Route::middleware('role:production/admin')->group(function () {
 	Route::get('/production/admin/home','HomeController@production_admin')->name('production.admin.home');
+Route::get('/production/admin/report','warehouseDetailController@report2')->name('production.admin.report');
+Route::get('/production/admin/analysis','warehouseDetailController@analysis2')->name('analysis2');
 Route::get('/production/admin/history','OrderController@admin_1_history')->name('admin_1_history');
 Route::get('/production/admin/history/info','OrderController@order_1_info')->name('order_1_info');
 });

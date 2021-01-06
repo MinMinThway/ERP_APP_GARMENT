@@ -230,4 +230,67 @@ class WarehouseDetailController extends Controller
         $warehouses=Warehouse::all();
         return view('production.staff.analysis',compact('warehouses'));
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function report2() // production staff report
+    {   
+    // lead time
+    $delivered_orders=Order::where('status_id','=','8')->orderBy('id','desc')->get(); // select finish order
+    // dd($delivered_orders);
+    $items=Warehouse::all();
+    foreach ($items as $item) { // represent you items in warehouse
+        foreach ($delivered_orders as $delivered_order) {   // represent delivered order            
+            $break=false;
+            foreach ($delivered_order->detail as $order_details) { // order in item                
+                if ($item->id==$order_details->warehouse_id) {                    
+                    $recieve=date('Y-m-d',strtotime($delivered_order->updated_at));
+                    $lead_time=((abs(strtotime($delivered_order->date)-strtotime($recieve)))/(60*60*24));
+                    $item->order_time_duration=$lead_time;
+                    $item->save();
+                    $break=true;
+                    break;                    
+                }
+            }
+            if ($break) {break;}
+        }
+    }
+    // lead time 
+    // calculation reorder date
+    $warehouse_details = Warehouse_detail::select(DB::raw('sum(output_qty) as total_output'),
+        DB::raw('count(DISTINCT date) as total_day'),'warehouse_id')
+                ->groupBy('warehouse_id')
+                ->get();
+    foreach ($warehouse_details as $value) {
+        $avg_out_day=$value->total_output/$value->total_day; // avg consume
+        $stock=Warehouse::find($value->warehouse_id);
+        if ($avg_out_day>0) {   // check have transection items
+            $day_left=number_format($stock->stock_qty/$avg_out_day,0)-($stock->order_time_duration*$stock->stock_safety_factor); // day left for orders
+            // if ($day_left>0) {
+                $d=strtotime('+'.$day_left.' day');
+                $reorder_date=date('Y-m-d',strtotime('today',$d));
+                $stock->reorder_date=$reorder_date;
+                $stock->save();
+            // }
+         }           
+    }
+    // calculation reorder date
+    $warehouses=Warehouse::orderBy('reorder_date')
+        ->where('reorder_date','!=',null)
+        ->get();
+    return view('production.admin.report',compact('warehouses'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function analysis2()
+    {
+        //
+        $warehouses=Warehouse::all();
+        return view('production.admin.analysis',compact('warehouses'));
+    }
 }
