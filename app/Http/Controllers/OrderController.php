@@ -441,7 +441,7 @@ class OrderController extends Controller
         }
         foreach ($order->detail as $item) {
             if ($item->price>0) {
-                var_dump($item->price);
+                // var_dump($item->price);
             }else{
                 $_SESSION['errortype']='Price does not match!';
                 $warehouse=Warehouse::find($item->warehouse_id);
@@ -450,8 +450,13 @@ class OrderController extends Controller
                 exit();
             }
         }
+        $total=0;
+        foreach ($order->detail as $items) {
+            $total+=$items->qty*$items->price;
+        }
         $order->status_id=3;
         $order->denile_note=null;
+        $order->total=$total;
         $order->save();
         $_SESSION['successtitle']='Congratulations! you have successfully.';
         $_SESSION['success']='Your admin is approve after checking process.';

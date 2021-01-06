@@ -93,8 +93,8 @@
                     </a>
                   </li> --}}
 
-                  <li class="{{ Request::is('production/warehouse/inventory*') ? 'current-page' : '' }}">
-                    <a href="{{route('inventory.index')}}">
+                  <li class="{{ Request::is('production/staff/inventory*') ? 'current-page' : '' }}">
+                    <a href="{{route('analysis')}}">
                       <i class="icofont-chart-line-alt pr-2" style="font-size: 20px"></i>
                      Inventory Analysis
                     </a>

@@ -49,6 +49,7 @@ Route::middleware('role:production/staff')->group(function () {
 	Route::get('/inventory_get','warehouseDetailController@get')->name('inventory_get');
 	Route::get('/production/staff/history','OrderController@staff_0_history')->name('staff_0_history');
 	Route::get('/production/staff/history/info','OrderController@order_0_info')->name('order_0_info');
+	Route::get('/production/staff/analysis','warehouseDetailController@analysis')->name('analysis');
 });
 
 Route::middleware('role:production/admin')->group(function () {

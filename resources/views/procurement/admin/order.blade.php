@@ -60,9 +60,11 @@ use App\Supplier;
 									<tr>
 			                        	<td class="align-middle text-center">{{++$i}}</td>
 			                        	<td class="align-middle text-center">ERP#{{$order->id}}</td>
-			                        	<td class="align-middle text-center" >{{$order->date}}</td>
-			                        	<td class="align-middle text-center">{{$detail}}</td>
-			                        	<td class="align-middle text-center">{{$order->total}}</td>
+			                        	<td class="align-middle text-right" >{{$order->date}}</td>
+			                        	<td class="align-middle text-right">{{$detail}}</td>
+			                        	<td class="align-middle text-right">
+			                        		{{number_format($order->total,2)}}
+			                        	</td>
 			                        	<td class="align-middle text-left">{{$supplier->company_name}}</td>
 			                        	<td class="align-middle text-center">
 

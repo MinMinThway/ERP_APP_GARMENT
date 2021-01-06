@@ -219,4 +219,15 @@ class WarehouseDetailController extends Controller
         ->get();
     return view('production.staff.report',compact('warehouses'));
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function analysis()
+    {
+        //
+        $warehouses=Warehouse::all();
+        return view('production.staff.analysis',compact('warehouses'));
+    }
 }
