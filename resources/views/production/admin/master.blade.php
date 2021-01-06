@@ -101,6 +101,13 @@
                     </a>
                   </li>
 
+                  <li class="{{ Request::is('production/admin/order*') ? 'current-page' : '' }}">
+                    <a href="{{route('production.admin.order')}}">
+                      <i class="icofont-notification icofont-2x pr-1"></i>
+                       Order Request
+                    </a>
+                  </li>
+                  
                   <li class="{{ Request::is('production/admin/history*') ? 'current-page' : '' }}">
                     <a href="{{route('admin_1_history')}}">
                       <i class="icofont-history pr-2" style="font-size: 20px"></i>
