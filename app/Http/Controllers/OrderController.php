@@ -728,4 +728,25 @@ class OrderController extends Controller
 
         return redirect()->route('finance.staff.balancesheet');
     }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function noti(Request $request, Order $order)  // procurement/admin/ check order detail
+    {
+        $orders=Order::where('status_id','=',7)->orderBy('updated_at','desc')->get();
+        $Array=[];
+        foreach ($orders as $order) {
+            $array=[
+                'id' => $order->id,
+                'invoice' => $order->invoice_no,
+                'time' =>strtotime($order->updated_at),
+            ];
+            array_push($Array,$array);
+        }
+        echo json_encode($Array);
+    }
 }
