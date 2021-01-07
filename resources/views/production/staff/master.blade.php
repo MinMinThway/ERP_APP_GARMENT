@@ -212,7 +212,7 @@
           </div>
           <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
+        <!-- /footer  content -->
       </div>
     </div>
 
