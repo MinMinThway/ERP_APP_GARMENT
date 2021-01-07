@@ -160,65 +160,24 @@
                     <li role="presentation" class="nav-item dropdown open">
                       <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
+                        <span id="count" class="badge bg-green"></span>
                       </a>
                       <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
+
+                        <div id="message">
+                        </div>
+                        
                         <li class="nav-item">
                           <div class="text-center">
                             <a class="dropdown-item">
-                              <strong>See All Alerts</strong>
+                              <a href="{{route('staff_2_history')}}">
+                              <strong>See More</strong>
+                              </a>
                               <i class="fa fa-angle-right"></i>
                             </a>
                           </div>
                         </li>
+
                       </ul>
                     </li>
                   </ul>
@@ -283,3 +242,134 @@
     @yield('script')
   </body>
 </html>
+
+<script type="text/javascript">
+  var old=false,seen=false;
+  var count=0;
+  $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('#navbarDropdown1').click(function(){
+      seen=true;
+    })
+    var test=setInterval(noti,3000);
+    function noti(){
+      $.ajax({
+        url:"{{route('noti')}}",
+        method:'GET',
+        data:{opt:'>',state:1},
+        success:function(ans){
+          var now=JSON.parse(ans);
+          var d = new Date();
+          var n = Math.round(d.getTime() / 1000);
+
+            if (!old) {old=now;} // initialized
+            if (seen) {
+              old=now;
+              seen=false;
+              count=0;
+            }
+
+            if (old) {
+              var str_old=JSON.stringify(old);
+              var str_now=JSON.stringify(now);
+              if (str_old!=str_now) {
+                count++;
+                old=now;
+              }
+            }
+            $('#count').text(count);
+            // clearInterval(test);
+
+            html='';
+            var $i=1;
+
+            now.forEach(function(v,i){
+              var notforyou=true;
+              // time calculation
+              var time_diff=Math.abs(v.time-n);
+              if (time_diff>86400) {
+                var ago=Math.round(time_diff/86400);
+                var text=ago+' day ago';
+              }else if (time_diff>3600) {
+                var ago=Math.round(time_diff/3600);
+                var text=ago+' hour ago';
+              }else if (time_diff>60) {
+                var ago=Math.round(time_diff/60);
+                var text=ago+' min ago';
+              }else{
+                var ago=time_diff;
+                var text=ago+' sec ago';
+              }
+              // time calculation
+
+              // title status
+              if (v.status==2) {
+                var title='Order Request #ERP'+v.id;
+              }else if (v.status==3) {
+                var title='Report Recieved! #ERP'+v.id;
+              }else if (v.status==4) {
+                var title='Finance #ERP'+v.id;
+              }else if (v.status==6) {
+                var title='Approved! #ERP'+v.id;
+              }else if (v.status==8) {
+                var title='delivery! #ERP'+v.id;
+              }else{
+                notforyou=false;
+              }
+              // title status
+              // title status
+              if (v.status==2) {
+                var body='Plz set price form director(production)';
+              }else if (v.status==3) {
+                var body='i will be check! director(procurement)';
+              }else if (v.status==4) {
+                var body='your order total= '+v.total+'$ is recieved!';
+              }else if (v.status==6) {
+                var body='Your order is approve by finance';
+              }else if (v.status==8) {
+                var body='i recieved all item from warehouse';
+              }else{
+              }
+              // title status
+
+
+              if ($i>4) {
+              }else{
+              if (notforyou) {
+                html+=` <li class="nav-item bg-gray">
+                          <form id="info${v.id}" action="{{route('order_2_info')}}" method="POST" class="d-none">
+                            @csrf
+                            @method('GET')
+                            <input type="text" name="id" value="${v.id}">
+                          </form>
+                          <a class="dropdown-item"
+                          onclick="event.preventDefault();document.getElementById('info${v.id}').submit();">
+                            <span class="image">
+                            </span>
+                            <span>
+                              <span>${title}</span>
+                              <span class="time">
+                              ${text}
+                              </span>
+                            </span>
+                            <span class="message">
+                              ${body}
+                            </span>
+                          </a>
+                        </li>`;
+              }
+              }
+              $i++;           
+            })
+            $('#message').html(html);
+          }
+
+      });
+    }
+
+  })
+</script>
