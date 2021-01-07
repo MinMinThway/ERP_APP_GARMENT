@@ -36,23 +36,26 @@
 	                    <span></span>
 	                    <span></span>
 	                </button>
-	                <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon mr-2" src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">Coder<span class="text-alt">Docs</span></span></a></div>    
+	                <div class="site-logo"><a class="navbar-brand" href="index.html"><span class="logo-text">ERP<span class="text-alt">Software For Garment</span></span></a></div>    
                 </div><!--//docs-logo-wrapper-->
 	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
-	                <div class="top-search-box d-none d-lg-flex">
-		                <form class="search-form">
-				            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
-				            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
-				        </form>
-	                </div>
 	
 					<ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
-						<li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
-			            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-		                <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
-		                <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="https://github.com/arkarMannAung">
+							<i class="fab fa-github fa-fw"></i></a>
+						</li>
+			            <li class="list-inline-item"><a href="#">
+			            	<i class="fab fa-twitter fa-fw"></i></a>
+			            </li>
+		                <li class="list-inline-item"><a href="#">
+		                	<i class="fab fa-slack fa-fw"></i></a>
+		                </li>
+		                <li class="list-inline-item"><a href="#">
+		                	<i class="fab fa-product-hunt fa-fw"></i></a>
+		                </li>
 		            </ul><!--//social-list-->
-		            <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-4-documentation-template-for-software-projects/" class="btn btn-primary d-none d-lg-flex">Download</a>
+
+		            <a href="{{route('welcome')}}" class="mr-5">login</a>
 	            </div><!--//docs-top-utilities-->
             </div><!--//container-->
         </div><!--//branding-->
@@ -69,44 +72,24 @@
 		    <nav id="docs-nav" class="docs-nav navbar">
 			    <ul class="section-items list-unstyled nav flex-column pb-3">
 				    <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span class="theme-icon-holder mr-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Section Item 1.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Section Item 1.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Section Item 1.3</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Section Item 1.4</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-5">Section Item 1.5</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-6">Section Item 1.6</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span class="theme-icon-holder mr-2"><i class="fas fa-arrow-down"></i></span>Installation</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-1">Section Item 2.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-2">Section Item 2.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-3">Section Item 2.3</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-3"><span class="theme-icon-holder mr-2"><i class="fas fa-box"></i></span>APIs</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-1">Section Item 3.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-2">Section Item 3.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-3-3">Section Item 3.3</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-4"><span class="theme-icon-holder mr-2"><i class="fas fa-cogs"></i></span>Integrations</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-1">Section Item 4.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-2">Section Item 4.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-3">Section Item 4.3</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-5"><span class="theme-icon-holder mr-2"><i class="fas fa-tools"></i></span>Utilities</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-5-1">Section Item 5.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-5-2">Section Item 5.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-5-3">Section Item 5.3</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-6"><span class="theme-icon-holder mr-2"><i class="fas fa-laptop-code"></i></span>Web</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-1">Section Item 6.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-2">Section Item 6.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-6-3">Section Item 6.3</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-7"><span class="theme-icon-holder mr-2"><i class="fas fa-tablet-alt"></i></span>Mobile</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-7-1">Section Item 7.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-7-2">Section Item 7.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-7-3">Section Item 7.3</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-8"><span class="theme-icon-holder mr-2"><i class="fas fa-book-reader"></i></span>Resources</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-1">Section Item 8.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-2">Section Item 8.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-8-3">Section Item 8.3</a></li>
-				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-9"><span class="theme-icon-holder mr-2"><i class="fas fa-lightbulb"></i></span>FAQs</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-9-1">Section Item 9.1</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-9-2">Section Item 9.2</a></li>
-				    <li class="nav-item"><a class="nav-link scrollto" href="#item-9-3">Section Item 9.3</a></li>
+
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Team Member</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Problem Statement</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Entity Relationship Diagram</a></li>
+
+				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span class="theme-icon-holder mr-2"><i class="fas fa-arrow-down"></i></span>Authentication</a></li>
+
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-1">Database Considerations</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-2">Routing</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-2-3">Authenticating</a></li>
+
+				    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-4"><span class="theme-icon-holder mr-2"><i class="fas fa-cogs"></i></span>Function</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-1">Reorder Date Calculation</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-2">Standard Deviation</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-3">Order Panel</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-4">Procurement Panel</a></li>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-5">Finance Panel</a>
+				    <li class="nav-item"><a class="nav-link scrollto" href="#item-4-6">Notification</a>
 			    </ul>
 
 		    </nav><!--//docs-nav-->
@@ -115,534 +98,182 @@
 		    <div class="container">
 			    <article class="docs-article" id="section-1">
 				    <header class="docs-header">
-					    <h1 class="docs-heading">Introduction <span class="docs-time">Last updated: 2019-06-01</span></h1>
+					    <h1 class="docs-heading">Introduction <span class="docs-time">Last updated: 2021-01-07</span></h1>
 					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-						</section><!--//docs-intro-->
-						
-						<h5>Github Code Example:</h5>
-						<p>You can <a class="theme-link" href="https://gist.github.com/"  target="_blank">embed your code snippets using Github gists</a></p>
-						<div class="docs-code-block">
-							<!-- ** Embed github code starts ** -->
-							<script src="https://gist.github.com/xriley/fce6cf71edfd2dadc7919eb9c98f3f17.js"></script>
-							<!-- ** Embed github code ends ** -->
-						</div><!--//docs-code-block-->
-						
-					     <h5>Highlight.js Example:</h5>
-						<p>You can <a class="theme-link" href="https://github.com/highlightjs/highlight.js" target="_blank">embed your code snippets using highlight.js</a> It supports <a class="theme-link" href="https://highlightjs.org/static/demo/" target="_blank">185 languages and 89 styles</a>.</p>
-						<p>This template uses <a class="theme-link" href="https://highlightjs.org/static/demo/" target="_blank">Atom One Dark</a> style for the code blocks: <br><code>&#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css&#x22;&#x3E;</code></p>
-						<div class="docs-code-block">
-							<pre class="shadow-lg rounded"><code class="json hljs">[
-  {
-    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"apples"</span>,
-    <span class="hljs-attr">"count"</span>: [<span class="hljs-number">12000</span>, <span class="hljs-number">20000</span>],
-    <span class="hljs-attr">"description"</span>: {<span class="hljs-attr">"text"</span>: <span class="hljs-string">"..."</span>, <span class="hljs-attr">"sensitive"</span>: <span class="hljs-literal">false</span>}
-  },
-  {
-    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"oranges"</span>,
-    <span class="hljs-attr">"count"</span>: [<span class="hljs-number">17500</span>, <span class="hljs-literal">null</span>],
-    <span class="hljs-attr">"description"</span>: {<span class="hljs-attr">"text"</span>: <span class="hljs-string">"..."</span>, <span class="hljs-attr">"sensitive"</span>: <span class="hljs-literal">false</span>}
-  }
-]
-
-
-</code></pre>
-						</div><!--//docs-code-block-->
-						
-						
+						    <p style="line-height: 50px;text-align: justify;">ကျနော်တို့ Creative Youth Developer Group မှနေပြီးတော့ ဆွေးနွေးဆုံးဖြတ်ထားတဲ့ project ကတော့ Ordering for Garment Web application ဖြစ်ပါတယ် အထည်ချုပ်စက်ရုံတစ်ခုရဲ့ ပစ္စည်းမှာယူရေးဟာ ထုတ်လုပ်ရေး၊ ကုန်ကြမ်းဝယ်ယူရေးနှင့် ဘဏ္ဍာရေးဆိုင်ရာ စိစစ်ခြင်းစတဲ့အပိုင်းတွေနဲ့ ပါဝင်ပါတ်သက်နေပါတယ်။ ဒီ project ဟာဆိုရင် Enterprise Resource Planning (ERP) ကိုချဉ်းကပ်တဲ့ Organization တစ်ခုရဲ့ ဌာနတစ်ခုနှင့်တစ်ခု ချိတ်ဆက်ရာမှာ မှန်ကန်တဲ့ သတင်းအချက်အလက်တွေကို analysis လုပ်နိုင်ဖို့အတွက်ဒီ app ထောက်ပံ့ပေးသွားမှာဖြစ်ပါတယ်။</p>
+						</section><!--//docs-intro-->		
 				    </header>
+
 				    <section class="docs-section" id="item-1-1">
-						<h2 class="section-heading">Section Item 1.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. </p>
-						<p>Code Example: <code>npm install &lt;package&gt;</code></p>
-						<h5>Unordered List Examples:</h5>
-						<ul>
-						    <li><strong class="mr-1">HTML5:</strong> <code>&lt;div id="foo"&gt;</code></li>
-						    <li><strong class="mr-1">CSS:</strong> <code>#foo { color: red }</code></li>
-						    <li><strong class="mr-1">JavaScript:</strong> <code>console.log(&#x27;#foo\bar&#x27;);</code></li>
-						</ul>
-						<h5>Ordered List Examples:</h5>
-						<ol>
-							<li>Download lorem ipsum dolor sit amet.</li>
-							<li>Click ipsum faucibus venenatis.</li>
-							<li>Configure fermentum malesuada nunc.</li>
-							<li>Deploy donec non ante libero.</li>
-						</ol>
-                        <h5>Callout Examples:</h5>
-                        <div class="callout-block callout-block-info">
-                            
-                            <div class="content">
-                                <h4 class="callout-title">
-	                                <span class="callout-icon-holder mr-1">
-		                                <i class="fas fa-info-circle"></i>
-		                            </span><!--//icon-holder-->
-	                                Note
-	                            </h4>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium <code>&lt;code&gt;</code> , Nemo enim ipsam voluptatem quia voluptas <a href="#">link example</a> sit aspernatur aut odit aut fugit.</p>
-                            </div><!--//content-->
-                        </div><!--//callout-block-->
+						<h2 class="section-heading py-3">Team Member</h2>
+						<div class="row justify-content-center">
+							<div class="col col-sm-12 col-md-4 ">
+								<img src="{{asset('logo/Arkar Mann Aung.jpg')}}" class="rounded-circle mx-auto d-block" width="250px">
+								<h3 class="text-center mt-5">ARKAR MANN AUNG</h1>
+								<a class="text-center nav-link" href="http://arkarmannaung.me/">visit</a>
+							</div>
+							<div class="col col-sm-12 col-md-4">
+								<img src="{{asset('logo/min min thway.jpg')}}" class="rounded-circle mx-auto d-block" width="250px">
+								<h3 class="text-center mt-5">MIN MIN THWAY</h1>
+								<a class="text-center nav-link" href="http://minminthway.me">visit</a>
+							</div>
+							<div class="col col-sm-12 col-md-4">
+								<img src="{{asset('logo/Hinin Htet Hmuu Khin.jpg')}}" class="rounded-circle mx-auto d-block" width="250px">
+								<h3 class="text-center mt-5">HNIN THET HMUU KHIN</h1>
+								<a class="text-center nav-link" href="http://hninthethmuekhin.me">visit</a>
+							</div>
+						</div>
+						<p> </p>	
                         
-                        <div class="callout-block callout-block-warning">
-                            <div class="content">
-                                <h4 class="callout-title">
-	                                <span class="callout-icon-holder mr-1">
-		                                <i class="fas fa-bullhorn"></i>
-		                            </span><!--//icon-holder-->
-	                                Warning
-	                            </h4>
-                                <p>Nunc hendrerit odio quis dignissim efficitur. Proin ut finibus libero. Morbi posuere fringilla felis eget sagittis. Fusce sem orci, cursus in tortor <a href="#">link example</a> tellus vel diam viverra elementum.</p>
-                            </div><!--//content-->
-                        </div><!--//callout-block-->
-                        
-                        <div class="callout-block callout-block-success">
-                            <div class="content">
-                                <h4 class="callout-title">
-	                                <span class="callout-icon-holder mr-1">
-		                                <i class="fas fa-thumbs-up"></i>
-		                            </span><!--//icon-holder-->
-	                                Tip
-	                            </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <a href="#">Link example</a> aenean commodo ligula eget dolor.</p>
-                            </div><!--//content-->
-                        </div><!--//callout-block-->
-                        
-                        <div class="callout-block callout-block-danger mr-1">
-                            <div class="content">
-                                <h4 class="callout-title">
-	                                <span class="callout-icon-holder">
-		                                <i class="fas fa-exclamation-triangle"></i>
-		                            </span><!--//icon-holder-->
-	                                Danger
-	                            </h4>
-                                <p>Morbi eget interdum sapien. Donec sed turpis sed nulla lacinia accumsan vitae ut tellus. Aenean vestibulum <a href="#">Link example</a> maximus ipsum vel dignissim. Morbi ornare elit sit amet massa feugiat, viverra dictum ipsum pellentesque. </p>
-                            </div><!--//content-->
-                        </div><!--//callout-block-->
-                        
-                        <h5 class="mt-5">Alert Examples:</h5>
-                        <div class="alert alert-primary" role="alert">
-						  This is a primary alert—check it out!
-						</div>
-						<div class="alert alert-secondary" role="alert">
-						  This is a secondary alert—check it out!
-						</div>
-						<div class="alert alert-success" role="alert">
-						  This is a success alert—check it out!
-						</div>
-						<div class="alert alert-danger" role="alert">
-						  This is a danger alert—check it out!
-						</div>
-						<div class="alert alert-warning" role="alert">
-						  This is a warning alert—check it out!
-						</div>
-						<div class="alert alert-info" role="alert">
-						  This is a info alert—check it out!
-						</div>
-						<div class="alert alert-light" role="alert">
-						  This is a light alert—check it out!
-						</div>
-						<div class="alert alert-dark" role="alert">
-						  This is a dark alert—check it out!
-						</div>
-                        
-                       
 					</section><!--//section-->
 					
 					<section class="docs-section" id="item-1-2">
-						<h2 class="section-heading">Section Item 1.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-						<h5>Image Lightbox Example:</h5>
-						<figure class="figure docs-figure py-3">
-						    <a href="assets/images/features/appify-theme-projects-overview-lg.jpg" data-title="Image Lightbox Example" data-toggle="lightbox"><img class="figure-img img-fluid shadow rounded" src="assets/images/features/appify-add-members.gif" alt="" style="width: 600px;"></a>
-						    <figcaption class="figure-caption mt-3"><i class="fas fa-info-circle mr-2"></i>Credit: the above screencast is taken from <a  class="theme-link" href="https://themes.3rdwavemedia.com/bootstrap-templates/product/appify-bootstrap-4-admin-template-for-app-developers/" target="_blank"><i class="fas fa-external-link-alt"></i>Appify theme</a>.</figcaption>
-						</figure>
-						
-						<h5>Custom Table:</h5>
-						<div class="table-responsive my-4">
-							<table class="table table-bordered">
-								<tbody>
-								    <tr>
-									    <th class="theme-bg-light"><a class="theme-link" href="#">Option 1</a></th>
-									    <td>Option 1 desc lorem ipsum dolor sit amet, consectetur adipiscing elit. </td>
-									</tr>
-									<tr>
-									      <th class="theme-bg-light"><a class="theme-link" href="#">Option 2</a></th>
-									      <td>Option 2 desc lorem ipsum dolor sit amet, consectetur adipiscing elit. </td>
-									</tr>
-									
-									<tr>
-									    <th class="theme-bg-light"><a class="theme-link" href="#">Option 3</a></th>
-									    <td>Option 3 desc lorem ipsum dolor sit amet, consectetur adipiscing elit. </td>
-									</tr>
-									
-									<tr>
-									    <th class="theme-bg-light"><a class="theme-link" href="#">Option 4</a></th>
-									    <td>Option 4 desc lorem ipsum dolor sit amet, consectetur adipiscing elit. </td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!--//table-responsive-->
-						<h5>Stripped Table:</h5>
-						<div class="table-responsive my-4">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">First</th>
-										<th scope="col">Last</th>
-										<th scope="col">Handle</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-									</tr>
-									<tr>
-										<th scope="row">2</th>
-										<td>Jacob</td>
-										<td>Thornton</td>
-										<td>@fat</td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!--//table-responsive-->
-						<h5>Bordered Dark Table:</h5>
-						<div class="table-responsive my-4">
-							<table class="table table-bordered table-dark">
-								<thead>
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">First</th>
-										<th scope="col">Last</th>
-										<th scope="col">Handle</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-									</tr>
-									<tr>
-										<th scope="row">2</th>
-										<td>Jacob</td>
-										<td>Thornton</td>
-										<td>@fat</td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-									</tr>
-								</tbody>
-							</table>
-						</div><!--//table-responsive-->
-						
+						<h2 class="section-heading">Problem Statement</h2>
+						<p style="line-height: 50px;text-align: justify;">ကုန်ကြမ်းမပြတ်လပ်ရေးဟာ ထုတ်လုပ်ရေး လုပ်ငန်းတင်သာမက အခြားသော ကုန်ပစ္စည်းရောင်းဝယ်ရာတွင်လည်း အလွန်ရေးကြီးတဲ့အချက်ဖြစ်ပါတယ်။ပစ္စည်းပြတ်လပ်မှုဟာ ထုတ်ကုန်လုပ်ငန်းမှာ လုပ်ငန်းလည်ပတ်မှုကို အနှောက်အယှက်ဖြစ်စေသလို ဖြန့်ဖြူးရောင်းချရေးလုပ်ငန်းတွေမှာဆိုရင် ဖောက်သည်တွေရဲ့ satisfaction level ကိုထိခိုက်စေနိုင်ပါတယ်။ဒါကြောင့် ထုတ်လုပ်ရေးဌာနအနေနဲ့ ကုန်ကြမ်းများကို stock အတွင်းမ ပြတ်လပ်စေပဲ မှာယူရမည့်ရက်ကို ခန့်မှန်းတွက်ချက်ပေးမှာဖြစ်ပါတယ်။ ထုတ်လုပ်ရေးဌာနမှ ကုန်ပစ္စည်း order များကို ဝယ်ယူရေးဌာနမှ ဈေးများစုံစမ်းထည့်သွင်းခြင်း၊ suplier အချက်အလက်များ ဖြည့်သွင်းပြီးနောက် ငွေစာရင်းဌာနသို့ ငွေတောင်းခံခြင်းများကို web မှတစ်ဆင့်ဆောင်ရွက်နိုင်မည်ဖြစ်ပါသည်။ ငွေစာရင်းဌာနမှ ဘဏ္ဍာရေးဆိုင်ရာစိစစ်နိုင်ရန် ယခင်မှာယူခဲ့ဖူးသော order များမှ ဈေးနှုန်းများနှင့် နှိုင်းယှဉ်ပြခြင်းနှင့် ငွေစာရင်းများ ထည့်သွင်းတွက်ချက်နိုင်မည်ဖြစ်ပါသည်။</p>
 						
 					</section><!--//section-->
 					
 					<section class="docs-section" id="item-1-3">
-						<h2 class="section-heading">Section Item 1.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-						<h5>Badges Examples:</h5>
-						<div class="my-4">
-						    <span class="badge badge-primary">Primary</span>
-							<span class="badge badge-secondary">Secondary</span>
-							<span class="badge badge-success">Success</span>
-							<span class="badge badge-danger">Danger</span>
-							<span class="badge badge-warning">Warning</span>
-							<span class="badge badge-info">Info</span>
-							<span class="badge badge-light">Light</span>
-							<span class="badge badge-dark">Dark</span>
+						<h2 class="section-heading">Entity Relationship Diagram</h2>
+						<div class="row">
+							<div class="col col-12">
+								<img src="{{asset('logo/ERD.jpg')}}" class="img-fluid">	
+							</div>
 						</div>
-						<h5>Button Examples:</h5>
-						<div class="row my-3">
-                        <div class="col-md-6 col-12">
-                                <ul class="list list-unstyled pl-0">
-                                    <li><a href="#" class="btn btn-primary">Primary Button</a></li>
-                                    <li><a href="#" class="btn btn-secondary">Secondary Button</a></li>
-                                    <li><a href="#" class="btn btn-light">Light Button</a></li>
-                                    <li><a href="#" class="btn btn-success">Succcess Button</a></li>
-                                    <li><a href="#" class="btn btn-info">Info Button</a></li>
-                                    <li><a href="#" class="btn btn-warning">Warning Button</a></li>
-                                    <li><a href="#" class="btn btn-danger">Danger Button</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <ul class="list list-unstyled pl-0">
-                                    <li><a href="#" class="btn btn-primary"><i class="fas fa-download mr-2"></i> Download Now</a></li>
-                                    <li><a href="#" class="btn btn-secondary"><i class="fas fa-book mr-2"></i> View Docs</a></li>
-                                    <li><a href="#" class="btn btn-light"><i class="fas fa-arrow-alt-circle-right mr-2"></i> View Features</a></li>
-                                    <li><a href="#" class="btn btn-success"><i class="fas fa-code-branch mr-2"></i> Fork Now</a></li>
-                                    <li><a href="#" class="btn btn-info"><i class="fas fa-play-circle mr-2"></i> Find Out Now</a></li>
-                                    <li><a href="#" class="btn btn-warning"><i class="fas fa-bug mr-2"></i> Report Bugs</a></li>
-                                    <li><a href="#" class="btn btn-danger"><i class="fas fa-exclamation-circle mr-2"></i> Submit Issues</a></li>
-                                </ul>
-                            </div>
-                        </div><!--//row-->
-                        
-                        <h5>Progress Examples:</h5>
-                        <div class="my-4">
-	                        <div class="progress my-4">
-								<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							<div class="progress my-4">
-							    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							<div class="progress my-4">
-							    <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-							<div class="progress my-4">
-							    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-							</div>
-                        </div>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-1-4">
-						<h2 class="section-heading">Section Item 1.4</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
 						
-						
-						<h5>Pagination Example:</h5>
-						<nav aria-label="Page navigation example">
-						    <ul class="pagination pl-0">
-							    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-							    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-							    <li class="page-item"><a class="page-link" href="#">2</a></li>
-							    <li class="page-item"><a class="page-link" href="#">3</a></li>
-							    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-						    </ul>
-						</nav>
-						
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-						
-					</section><!--//section-->
-					<section class="docs-section" id="item-1-5">
-						<h2 class="section-heading">Section Item 1.5</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					<section class="docs-section" id="item-1-6">
-						<h2 class="section-heading">Section Item 1.6</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
 					</section><!--//section-->
 					
 			    </article>
 			    
 			    <article class="docs-article" id="section-2">
 				    <header class="docs-header">
-					    <h1 class="docs-heading">Installation</h1>
+					    <h1 class="docs-heading">Authentication With Laravel 7</h1>
 					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
+						    <p>Laravel makes implementing authentication very simple. In fact, almost everything is configured for you out of the box. The authentication configuration file is located at config/auth.php, which contains several well documented options for tweaking the behavior of the authentication services.</p>
+						    <h2>Account List</h2>
+						    <div class="container">
+							    <table class="table table-responsive" width="100%">
+							    	<thead class="badge-dark">
+							    		<tr>
+							    			<th width="10%">no</th>
+							    			<th width="25%">name</th>
+							    			<th width="20%">password</th>
+							    			<th width="25%">department</th>
+							    			<th width="20%">role</th>
+							    		</tr>
+							    	</thead>
+
+							    	<tbody>
+							    		<tr>
+							    			<th>1</th>
+							    			<th>production@warehouse.com</th>
+							    			<th>password</th>
+							    			<th>production</th>
+							    			<th>store keeper</th>
+							    		</tr>
+							   			<tr>
+							    			<th>2</th>
+							    			<th>production@staff.com</th>
+							    			<th>password</th>
+							    			<th>production</th>
+							    			<th>staff</th>
+							    		</tr>
+							   			<tr>
+							    			<th>3</th>
+							    			<th>production@admin.com</th>
+							    			<th>password</th>
+							    			<th>production</th>
+							    			<th>staff</th>
+							    		</tr>
+							   			<tr>
+							    			<th>4</th>
+							    			<th>procurement@staff.com</th>
+							    			<th>password</th>
+							    			<th>procurement</th>
+							    			<th>staff</th>
+							    		</tr>
+							   			<tr>
+							    			<th>5</th>
+							    			<th>procurement@admin.com</th>
+							    			<th>password</th>
+							    			<th>procurement</th>
+							    			<th>admin</th>
+							    		</tr>
+							   			<tr>
+							    			<th>6</th>
+							    			<th>finance@staff.com</th>
+							    			<th>password</th>
+							    			<th>finance</th>
+							    			<th>staff</th>
+							    		</tr>
+							   			<tr>
+							    			<th>7</th>
+							    			<th>finance@admin.com</th>
+							    			<th>password</th>
+							    			<th>finance</th>
+							    			<th>admin</th>
+							    		</tr>
+							    	</tbody>						    	
+							    </table>
+						    </div>
 						</section><!--//docs-intro-->
 				    </header>
 				     <section class="docs-section" id="item-2-1">
-						<h2 class="section-heading">Section Item 2.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Database Considerations</h2>
+						<p>By default, Laravel includes an App\User Eloquent model in your app directory. This model may be used with the default Eloquent authentication driver. If your application is not using Eloquent, you may use the database authentication driver which uses the Laravel query builder.</p>
 					</section><!--//section-->
 					
 					<section class="docs-section" id="item-2-2">
-						<h2 class="section-heading">Section Item 2.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Routing</h2>
+						<p>Laravel's laravel/ui package provides a quick way to scaffold all of the routes and views you need for authentication using a few simple commands:
+
+composer require laravel/ui:^2.4
+
+php artisan ui vue --auth
+
+This command should be used on fresh applications and will install a layout view, registration and login views, as well as routes for all authentication end-points. A HomeController will also be generated to handle post-login requests to your application's dashboard.</p>
 					</section><!--//section-->
-					
 					<section class="docs-section" id="item-2-3">
-						<h2 class="section-heading">Section Item 2.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Authenticating</h2>
+						<p>Now that you have routes and views setup for the included authentication controllers, you are ready to register and authenticate new users for your application! You may access your application in a browser since the authentication controllers already contain the logic (via their traits) to authenticate existing users and store new users in the database.</p>
 					</section><!--//section-->
 			    </article><!--//docs-article-->
-			    
-			    
-			    <article class="docs-article" id="section-3">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">APIs</h1>
-					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-						</section><!--//docs-intro-->
-				    </header>
-				     <section class="docs-section" id="item-3-1">
-						<h2 class="section-heading">Section Item 3.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-3-2">
-						<h2 class="section-heading">Section Item 3.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-3-3">
-						<h2 class="section-heading">Section Item 3.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-			    </article><!--//docs-article-->
-			    
+			    		    
 			    <article class="docs-article" id="section-4">
 				    <header class="docs-header">
-					    <h1 class="docs-heading">Intergrations</h1>
+					    <h1 class="docs-heading">Function</h1>
 					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
+						    <p style="line-height: 50px;text-align: justify;">ကုန်ပစ္စည်းများ၏အချက်အလက်များကို warehouse ထဲမှာ register ပြုလုပ်နိုင်ပြီး နေ့စဉ် အဝင်အထွက်များကို မှတ်တမ်းပြုစုရမှာဖြစ်ပါတယ်။ထိုမှတ်တမ်းများမှတစ်ဆင့် ကုန်ပစ္စည်းတစ်ခုချင်းအလိုက် တစ်ရက်ပျမ်းမျှ အချက်အလက်များရရှိပါမည်။ ကုန်ပစ္စည်းတိုင်းတွင် lead Time ကိုသတ်မှတ်ပေးနိုင်မည်ဖြစ်ပြီး safety factor ကို လိုအပ်သလိုထည့်သွင်းနိုင်ပါမည်။ကုန်ပစ္စည်းများ၏ ပျမ်းမျှခြင်းများမှတစ်ဆင့် ကုန်ဆုံးမည့်ရက်ကို ခန့်မှန်းရာတွင် စံကွဲလွဲနှုန်း standard deviation သည်များစွာ ပါတ်သက်နေသည့်အတွက် population mean နဲ့ standard deviation ကို production staff panel တွင်ထည့်သွင်းပေးထားပါသည်။warehouse တွင် order delivery invoice လက်ခံရရှိကြောင်း အတည်ပြုလိုက်သည်နှင့် ထို order စတင်မှာယူသည့်ရက်မှ ရောက်ရှိသည့်နေ့ရက်အထိ ကြာချိန်(lead time) အား တွက်ချက်ပြီး updated ပြုလုပ်သွားမည်ဖြစ်ပါသည်။Stock Safe တွက်ချက်ရာတွင် ပျမ်းမျှ daily output ကိုအခြေခံကာ တွက်ချက်ထားသဖြင့် စံကွဲလွဲမှု့နှုန်းများလေလေ ခန့်မှန်းမှု့တိကျမှု့နဲလေလေဖြစ်ရာ stock safe ဖြစ်နိုင်စေရန် ကွဲလွဲမှု့များသော ပစ္စည်းများကို safety factor တိုးယူနိုင်ရန်အတွက် အကြံပြုပါသည်။.</p>
 						</section><!--//docs-intro-->
 				    </header>
 				     <section class="docs-section" id="item-4-1">
-						<h2 class="section-heading">Section Item 4.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+						<h2 class="section-heading">Reorder Date Calculation</h2>
+						<img src="{{asset('logo/panel1.jpg')}}" class="img-fluid py-5">
+					</section><!--//section-->
+
+				     <section class="docs-section" id="item-4-2">
+						<h2 class="section-heading">Standard Deviation</h2>
+						<img src="{{asset('logo/panel2.jpg')}}" class="img-fluid py-5">
+					</section><!--//section-->
+
+				     <section class="docs-section" id="item-4-3">
+						<h2 class="section-heading">Order Panel</h2>
+						<img src="{{asset('logo/panel3.jpg')}}" class="img-fluid py-5">
 					</section><!--//section-->
 					
-					<section class="docs-section" id="item-4-2">
-						<h2 class="section-heading">Section Item 4.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+					<section class="docs-section" id="item-4-4">
+						<h2 class="section-heading">Procurement Panel</h2>
+						<img src="{{asset('logo/panel4.jpg')}}" class="img-fluid py-5">
 					</section><!--//section-->
-					
-					<section class="docs-section" id="item-4-3">
-						<h2 class="section-heading">Section Item 4.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
+
+					<section class="docs-section" id="item-4-5">
+						<h2 class="section-heading">Finance Panel</h2>
+						<img src="{{asset('logo/panel5.jpg')}}" class="img-fluid py-5">
 					</section><!--//section-->
-			    </article><!--//docs-article-->
-			    
-			    <article class="docs-article" id="section-5">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">Utilities</h1>
-					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-						</section><!--//docs-intro-->
-				    </header>
-				     <section class="docs-section" id="item-5-1">
-						<h2 class="section-heading">Section Item 5.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-5-2">
-						<h2 class="section-heading">Section Item 5.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-5-3">
-							<h2 class="section-heading">Section Item 5.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-			    </article><!--//docs-article-->
-			    
-			    
-		        <article class="docs-article" id="section-6">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">Web</h1>
-					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-						</section><!--//docs-intro-->
-				    </header>
-				     <section class="docs-section" id="item-6-1">
-						<h2 class="section-heading">Section Item 6.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-6-2">
-						<h2 class="section-heading">Section Item 6.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-6-3">
-							<h2 class="section-heading">Section Item 6.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-			    </article><!--//docs-article-->
-			    
-			    
-			    <article class="docs-article" id="section-7">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">Mobile</h1>
-					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-						</section><!--//docs-intro-->
-				    </header>
-				     <section class="docs-section" id="item-7-1">
-						<h2 class="section-heading">Section Item 7.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-7-2">
-						<h2 class="section-heading">Section Item 7.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-7-3">
-							<h2 class="section-heading">Section Item 7.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-			    </article><!--//docs-article-->
-			    
-			    
-			    <article class="docs-article" id="section-8">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">Resources</h1>
-					    <section class="docs-intro">
-						    <p>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-						</section><!--//docs-intro-->
-				    </header>
-				     <section class="docs-section" id="item-8-1">
-						<h2 class="section-heading">Section Item 8.1</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-2">
-						<h2 class="section-heading">Section Item 8.2</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-8-3">
-							<h2 class="section-heading">Section Item 8.3</h2>
-						<p>Vivamus efficitur fringilla ullamcorper. Cras condimentum condimentum mauris, vitae facilisis leo. Aliquam sagittis purus nisi, at commodo augue convallis id. Sed interdum turpis quis felis bibendum imperdiet. Mauris pellentesque urna eu leo gravida iaculis. In fringilla odio in felis ultricies porttitor. Donec at purus libero. Vestibulum libero orci, commodo nec arcu sit amet, commodo sollicitudin est. Vestibulum ultricies malesuada tempor.</p>
-					</section><!--//section-->
-			    </article><!--//docs-article-->
-			    
-			    
-			    <article class="docs-article" id="section-9">
-				    <header class="docs-header">
-					    <h1 class="docs-heading">FAQs</h1>
-					    <section class="docs-intro">
-						    <p>Section intro goes here. You can list all your FAQs using the format below.</p>
-						</section><!--//docs-intro-->
-				    </header>
-				     <section class="docs-section" id="item-9-1">
-						<h2 class="section-heading">Section Item 9.1 <small>(FAQ Category One)</small></h2>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>What's sit amet quam eget lacinia?</h5>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
-						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>Can I  bibendum sodales?</h5>
-						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>Where arcu sed urna gravida?</h5>
-						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-9-2">
-						<h2 class="section-heading">Section Item 9.2 <small>(FAQ Category Two)</small></h2>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>What's sit amet quam eget lacinia?</h5>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>How to ipsum dolor sit amet quam tortor?</h5>
-						<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>Can I  bibendum sodales?</h5>
-						<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-						<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>Where arcu sed urna gravida?</h5>
-						<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
-					</section><!--//section-->
-					
-					<section class="docs-section" id="item-9-3">
-							<h2 class="section-heading">Section Item 9.3 <small>(FAQ Category Three)</small></h2>
-						    <h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>How to dapibus sollicitudin justo vel fermentum?</h5>
-							<p>Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-							<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>How long bibendum sodales?</h5>
-							<p>Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. </p>
-							<h5 class="pt-3"><i class="fas fa-question-circle mr-1"></i>Where dapibus sollicitudin?</h5>
-							<p>Aenean et sodales nisi, vel efficitur sapien. Quisque molestie diam libero, et elementum diam mollis ac. In dignissim aliquam est eget ullamcorper. Sed id sodales tortor, eu finibus leo. Vivamus dapibus sollicitudin justo vel fermentum. Curabitur nec arcu sed urna gravida lobortis. Donec lectus est, imperdiet eu viverra viverra, ultricies nec urna. </p>
+
+					<section class="docs-section" id="item-4-6">
+						<h2 class="section-heading">Notification</h2>
+						<img src="{{asset('logo/panel6.jpg')}}" class="img-fluid py-5">
 					</section><!--//section-->
 			    </article><!--//docs-article-->
 
