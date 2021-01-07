@@ -38,6 +38,7 @@ use App\Order;
 			                        	<th class="align-middle text-center">No</th>
 			                        	<th class="align-middle text-center">Order Id</th>
 			                        	<th class="align-middle text-center">Date</th>
+			                        	<th class="align-middle text-center">Total</th>
 			                        	<th class="align-middle text-center">Status</th>
 			                        	<th class="align-middle text-center">Action</th>
 			                        </tr>
@@ -53,6 +54,7 @@ use App\Order;
 			                        	<th class="align-middle text-center">{{++$i}}</th>
 										<th class="align-middle text-center">CYD-#{{$order->id}}</th>
 			                        	<th class="align-middle text-center">{{$order->date}}</th>
+			                        	<th class="align-middle text-center">{{$order->total}}</th>
 			                        	<th class="align-middle text-center">
 			                        	<button style="border-radius: 25px" class="btn btn-sm text-white
 			                        	@if($order->status_id==1||$order->status_id==8)

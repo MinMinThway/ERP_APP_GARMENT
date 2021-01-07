@@ -1,4 +1,4 @@
-@extends('finance.staff.master')
+@extends('finance.admin.master')
 
 @section('body')
 @php
@@ -89,6 +89,8 @@ use App\Account_detail
                                 <th class="align-middle text-center">Qty</th>
                                 <th class="align-middle text-center">Unit</th>
                                 <th class="align-middle text-center">Order Price</th>
+                                <th class="align-middle text-center">Bank Account</th>
+                                <th class="align-middle text-center">Cheque No</th>
                                 
                               </tr>
                             </thead>
@@ -149,8 +151,17 @@ use App\Account_detail
                                   <span class="mr-2"><i class="icofont-minus"></i> 0.00</span>
                                   @endif
                                 </td>
+                              
+                                <td class="align-middle text-center">{{$order->account->bank}}</td>
+                                <td class="align-middle text-center">{{$order->cheque_no}}</td>
                               </tr>
                              @endforeach
+                             
+                           
+                              
+                               
+                         
+
                             </tbody>
                           </table>
                         </div>
@@ -159,28 +170,62 @@ use App\Account_detail
 
                       <!-- /.row -->
                        <div class="pt-3">
-                          <button  class="btn btn-success pull-right submit">Submit</button>
+
+                      <button data-toggle="modal" data-target="#reject" type="submit" class="btn btn-danger btn-sm pull-right" style="border-radius: 20px;">
+                    Reject
+                    </button>
+                      <form action="{{route('finance.admin.order.change')}}" method="POST" class="d-inline">
+                      @csrf
+                      @method('GET')
+                      <input type="hidden" name="id" value="{{$order->id}}">
+                      <input type="hidden" name="balance" value="{{$order->total}}">
+                      <input type="hidden" name="account" value="{{$order->account->id}}">
+
+                    <button type="submit" class="btn btn-success btn-sm pull-right" style="border-radius: 20px;">
+                    Approve
+                    </button>
+                    </form>
+                  </div>
+                      {{-- <button  class="btn btn-outline-danger pull-right submit">Reject</button> --}}
+
+                      
+
+                        {{-- <form id="rejectform" action="{{route('finance.staff.order.reject')}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
+                          @csrf
+                            @method('GET')
+                             <input type="hidden" name="id" value="{{$order->id}}">
+                            <div id="denile" class="denile">
+                         <h6><b>Denile Reason</b></h6>
+                          <textarea id="denilenote" class="w-100"></textarea>
+                        </div>
+                      </form> --}}
+
                       </div>
                       <br><br><br><br>
-                      <div class="row">
+                      {{-- <div class="row">
                         <!-- accepted payments column -->
 
-                          <div class="col-md-12 col-sm-12 bank" align="center" >
-                            <h6><b>Please Select Bank</b></h6>
-                          <select class="form-control" id="bank" name="bankname">
-                            <option>Choose option</option>
-                            @foreach($account as $account)
-                            @if($account->id!=1)
-                              <option id={{$account->id}}>
-                                {{$account->bank}}</option>
-                            @endif
-                            @endforeach
-                          </select>
-                        </div>
-                        <br>
+                        <div class="col-md-12 col-sm-12 bank" align="center" >
+                          <h6><b>Please Select Bank</b></h6>
+                        <select class="form-control" id="bank" name="bankname">
+                          <option>Choose option</option>
+                          @foreach($account as $account)
+                          @if($account->id!=1)
+                            <option id={{$account->id}}>
+                              {{$account->bank}}</option>
+                          @endif
+
+                          @endforeach
+
+                        </select>
+                        {{-- @if($account->balance > $data->price)
+                              <p>Amount is low</p>
+                          @endif --}}
                       </div>
+                      <br>
+                      </div> --}}
                       
-                        <form id="demo-form2" action="{{route('finance.staff.order.update')}}"method="POST"data-parsley-validate class="form-horizontal form-label-left">
+                        {{-- <form id="demo-form2" action="{{route('finance.staff.order.update')}}"method="POST"data-parsley-validate class="form-horizontal form-label-left">
                           @csrf
                             @method('GET')
                             <input type="hidden" name="id" value="{{$order->id}}">
@@ -188,12 +233,7 @@ use App\Account_detail
                             <input type="hidden" name="account" value="{{$account->id}}">
                             <div div class="col-md-12 col-sm-12 cheque" align="center">
                            <h6><b>Cheque No</b></h6>
-                          <input type="number" class="form-control @error('bankname') is-invalid @enderror" id="cheque" name="cheque" value="{{old('cheque')}}">
- 
-                                @error('cheque')
-                                          <div class="alert alert-danger">{{ $message }}</div>
-                                      @enderror
-
+                          <input type="number" class="form-control" id="cheque" name="cheque">
                           </div>
                         </div>
 
@@ -212,10 +252,39 @@ use App\Account_detail
             </div>
           </div>
 
-        </div>
+        </div> --}}
         <!-- /page content -->
-      
+
+
+<!-- Modal -->
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('finance.admin.order.reject')}}" method="POST">
+        @csrf
+        @method('GET')
+        <input type="hidden" name="id" value="{{$order->id}}">
+      <div class="modal-body">
+        <textarea class="text" style="width: 100%;text-align: left;" name="note">
+          Please give reason about reject. clearly define what you want to check again!
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Reject</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
+
 @section('script')
 <script src="{{asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
@@ -242,52 +311,34 @@ use App\Account_detail
 <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-           
-          $(".bank").hide();
-          $(".cheque").hide();
-          $(".btnapprove").hide();
-         
+      $(document).ready(function(){
+          // $(".denile").hide(1);
+          $(".bank").hide(1);
+          $(".cheque").hide(1);
+          $(".btnapprove").hide(1);
+          $(".done").hide(1);
 
           $(".submit").on('click',function(){
             $(".bank").show(1);
           $(".cheque").show(1);
             $(".btnapprove").show();
-            $(".submit").hide(1);
-        
-    //         $.ajaxSetup({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             }
-    //         });
+          })
 
-    //       $("#bank").on('click',function(){
 
-    //         var bank =$(this).children(":selected").attr("id");
-    //         $.ajax(
-    //                 {
-    //               method:'GET',
-    //               url:"",
-    //               data:{
-    //                 bank:bank
-    //               },
+          // $('#bank').on('click',function(){
+          //   if($account->balance < $order->total)
+          //   {
+          //     alert("OK");
+          //   }
+          // })
 
-    //         success:function(data)
-    //           {
-    //             if(data){
-    //              var array = JSON.parse(data);
-    //              // console.log(array.type);
-    //             $('#ammount').val(array.balance);
-    //             }
-    //           }
-    
-    // });
+          // $(".reject").on('click',function(){
+          //    $(".denile").show();
+          //     $(".done").show(1);
+          // })
 
-       
-
-    })
-
-    })
+          
+      })
 </script>
 
 @endsection

@@ -13,7 +13,7 @@ use App\Order;
 		<div class="col-md-12 col-sm-12 ">
 	        <div class="x_panel">
 	          	<div class="x_title">
-	            	<h2>Delivered Order List <small> Support Lead Time for safe stock </small></h2>
+	            	<h2>Daily Report Search for {{$date}} </h2>
 	            	<ul class="nav navbar-right panel_toolbox">
 		              	<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
 		              	<li class="dropdown">
@@ -28,6 +28,12 @@ use App\Order;
 	            	</ul>
 	            	<div class="clearfix"></div>
 	          	</div>
+	          	{{-- <div>
+	          		<form action="{{route('finance.staff.monthlyreport')}}" method="POST">
+	          			<input type="date" name="date">
+	          			<button type="submit" name="submit">Submit</button>
+	          		</form>
+	          	</div> --}}
 	          	<div class="x_content">
 	              	<div class="row">
 	                  	<div class="col-sm-12">
@@ -39,7 +45,8 @@ use App\Order;
 			                        	<th class="align-middle text-center">Order Id</th>
 			                        	<th class="align-middle text-center">Date</th>
 			                        	<th class="align-middle text-center">Total</th>
-			                        	<th class="align-middle text-center">Status</th>
+			                        	<th class="align-middle text-center">Cheque No</th>
+			                        	<th class="align-middle text-center">Bank Name</th>
 			                        	<th class="align-middle text-center">Action</th>
 			                        </tr>
 			                      </thead>
@@ -55,8 +62,10 @@ use App\Order;
 										<th class="align-middle text-center">CYD-#{{$order->id}}</th>
 			                        	<th class="align-middle text-center">{{$order->date}}</th>
 			                        	<th class="align-middle text-center">{{$order->total}}</th>
-			                        	<th class="align-middle text-center">
-			                        	<button style="border-radius: 25px" class="btn btn-sm text-white
+			                        	<th class="align-middle text-center">{{$order->cheque_no}}</th>
+			                        	<th class="align-middle text-center">{{$order->account->bank}}</th>
+			                        	{{-- <th class="align-middle text-center"> --}}
+			                        	{{-- <button style="border-radius: 25px" class="btn btn-sm text-white
 			                        	@if($order->status_id==1||$order->status_id==8)
 			                        	btn-primary
 			                        	@elseif($order->status_id==2||$order->status_id==3||$order->status_id==6)
@@ -87,9 +96,9 @@ use App\Order;
 			                        	@endif
 
 			                        	{{-- {{$order->status_id}} --}}
-			                        	</button>
+			                        {{-- 	</button> --}}
 
-			                        	</th>
+			                        	{{-- </th> --}}
 			                        	<th class="align-middle text-center">
 			                        	<form id="info{{$order->id}}" action="{{route('order_4_info')}}" method="POST" class="d-none">
 				                        	@csrf
@@ -101,7 +110,15 @@ use App\Order;
 			                        </tr>
 			                        @endforeach
 			                      </tbody>
+			                    <tbody>
+			                    	<tr>
+			                    		<td colspan="5" class="align-middle text-center"><h6><b>Total Amount for {{$date}} is</b></h6></td>
+			                    		<td colspan="2" class="align-middle text-right"><h6><b>{{$sum}}</b></h6></td>
+			                    	</tr>
+			                    </tbody>
 			                    </table> 
+
+			                     
 	                  		</div>
 	                	</div>
 	              	</div> 

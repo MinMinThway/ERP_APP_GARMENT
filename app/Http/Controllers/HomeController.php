@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Account;
 
 class HomeController extends Controller
 {
@@ -57,11 +58,13 @@ class HomeController extends Controller
 
     public function finance_staff()
     {
-        return view('finance.staff.home');
+        $account = Account::all();
+        return view('finance.staff.home',compact('account'));
     }
 
     public function finance_admin()
-    {
-        return view('finance.admin.home');
+    {   
+        $account = Account::all();
+        return view('finance.admin.home',compact('account'));
     } 
 }

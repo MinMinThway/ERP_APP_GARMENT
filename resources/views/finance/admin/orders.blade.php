@@ -1,4 +1,4 @@
-@extends('finance.staff.master')
+@extends('finance.admin.master')
 
 @section('body')
 
@@ -6,7 +6,6 @@
 use App\Order_detail;
 use App\Order;
 use App\Supplier;
-use App\Account;
 @endphp
 
 @section('body')
@@ -16,9 +15,9 @@ use App\Account;
       <div class="page-title">
       <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
-              <h2 class="">Balance Sheet <i class="fa fa-exchange" aria-hidden="true"></i>
+              <h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
                 <span class="float-right">
-                  <a href="{{route('delivery')}}"> {{--  --}}
+                  <a href=""> {{--  --}}
                   Back
                   {{-- <i class="fa fa-back" aria-hidden="true"></i> --}}
                   </a>
@@ -34,9 +33,7 @@ use App\Account;
     <div class="col-md-12 col-sm-12 ">
           <div class="x_panel">
               <div class="x_title">
-                 
-
-                <h2>Balance Sheet List </h2>
+                <h2>Order Acceptable List</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     <li class="dropdown">
@@ -58,13 +55,12 @@ use App\Account;
                           <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                               <tr>
-                                <th class="align-middle text-center">No</th>
+                                <th class="align-middle text-center">No</th>  
+                                <th class="align-middle text-center">Order Id</th>
                                 <th class="align-middle text-center">Date</th>
-                                <th class="align-middle text-center">Income</th>
-                                <th class="align-middle text-center">Outcome</th>
-                                <th class="align-middle text-center">Balance</th>
-                                <th class="align-middle text-center">Action</th>
-
+                                <th class="align-middle text-center">Item</th>
+                                <th class="align-middle text-center">Total Amount</th>
+                                <th class="align-middle text-center">Action</th>               
                               </tr>
                             </thead>
 
@@ -73,21 +69,33 @@ use App\Account;
                               @php
                                 $i=0;
                               @endphp
-                              @foreach($account_details as $accountdetail)
-                             {{--  @php
+                              @foreach($orders as $order)
+                              @php
                                 $detail=Order_detail::where('order_id','=',$order->id)->count();
                                 $suppliers=Supplier::all();
-                              @endphp --}}
-                              
+                              @endphp
 
                             <tr>
                                 <td class="align-middle text-center">{{++$i}}</td>
-                                <td class="align-middle text-center">{{$accountdetail->date}}</td>
-                                <td class="align-middle text-center" >{{$accountdetail->income}}</td>
-                                <td class="align-middle text-center">{{$accountdetail->outcome}}</td>
-                                <td class="align-middle text-center">{{$accountdetail->tranbalance}}</td>
+                                <td class="align-middle text-center">ERP#{{$order->id}}</td>
+                                <td class="align-middle text-center" >{{$order->date}}</td>
+                                <td class="align-middle text-center">{{$detail}}</td>
+                                <td class="align-middle text-center">{{$order->total}}</td>
 
-                                <td class="align-middle text-center">{{$accountdetail->account->bank}}</td>
+                                
+
+
+                                <td class="align-middle text-center">
+                                  <form action="{{route('order.order_5_edit')}}" method="POST">
+                                  @csrf
+                                  @method('GET')
+                                  <input type="hidden" name="id" value="{{$order->id}}">
+                                  <button type="submit" class="btn btn-primary btn-sm" name="btnsubmit"><i class="fa fa-info"></i></button>
+                                  </form>
+                                  {{-- @if($order->denile_note)
+                                  <button class="btn btn-danger" data-id='{{$order->id}}' style="border-radius: 20px;">Rejected</button>
+                                  @endif --}}
+
                                 </th>
                               </tr>
                               @endforeach
