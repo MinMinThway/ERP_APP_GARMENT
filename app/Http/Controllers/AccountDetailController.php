@@ -105,11 +105,11 @@ class AccountDetailController extends Controller
     }
 
 
-     public function checkaccount(Request $request, Account_detail $account_detail)
-    {
-        $data=Account::find($request->bank);
-        echo json_encode($data);
-    }
+    //  public function checkaccount(Request $request, Account_detail $account_detail)
+    // {
+    //     $data=Account::find($request->bank);
+    //     echo json_encode($data);
+    // }
 
     public function account(Request $request, Account_detail $account_detail)
     {

@@ -106,7 +106,7 @@ Route::middleware('role:finance/staff')->group(function () {
 	Route::get('/finance/staff/account/addbudget','AccountDetailController@account')->name('account.addtype');
 
 	
-	Route::get('/finance/staff/account/checkbal','AccountDetailController@checkaccount')->name('account.checkbal');
+	// Route::get('/finance/staff/account/checkbal','AccountDetailController@checkaccount')->name('account.checkbal');
 
 	Route::get('/finance/staff/account/budget/addbalance','AccountDetailController@amountadd')->name('account.addbalance');
 

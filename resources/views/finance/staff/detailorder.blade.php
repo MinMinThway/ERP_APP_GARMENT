@@ -211,7 +211,6 @@ use App\Account_detail
         <!-- /page content -->
       
 @endsection
-
 @section('script')
 <script src="{{asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
@@ -238,8 +237,8 @@ use App\Account_detail
 <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
 
 <script type="text/javascript">
-      $(document).ready(function(){
-            alert("OK");
+    $(document).ready(function(){
+           
           $(".bank").hide();
           $(".cheque").hide();
           $(".btnapprove").hide();
@@ -251,33 +250,33 @@ use App\Account_detail
             $(".btnapprove").show();
             $(".submit").hide(1);
         
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             }
+    //         });
 
-          $("#bank").on('click',function(){
+    //       $("#bank").on('click',function(){
 
-            var bank =$(this).children(":selected").attr("id");
-            $.ajax(
-                    {
-                  method:'GET',
-                  url:"{{route('account.checkbal')}}",
-                  data:{
-                    bank:bank
-                  },
+    //         var bank =$(this).children(":selected").attr("id");
+    //         $.ajax(
+    //                 {
+    //               method:'GET',
+    //               url:"",
+    //               data:{
+    //                 bank:bank
+    //               },
 
-            success:function(data)
-              {
-                if(data){
-                 var array = JSON.parse(data);
-                 // console.log(array.type);
-                 $ammount = $('#ammount').val(array.balance);
-                }
-              }
+    //         success:function(data)
+    //           {
+    //             if(data){
+    //              var array = JSON.parse(data);
+    //              // console.log(array.type);
+    //             $('#ammount').val(array.balance);
+    //             }
+    //           }
     
-    });
+    // });
 
        
 
