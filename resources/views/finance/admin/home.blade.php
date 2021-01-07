@@ -233,29 +233,7 @@ if ($this_month>$past_month) {
     </div>
 
     
-                  {{-- <div class="x_content">
-                    <div class="row">
-                       @foreach($account as $account)
-                       @if($account->id!=1)
-                      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
-                        <div class="tile-stats">
-                          <div class="icon"><i class="fa fa-caret-square-o-right"></i>
-                          </div>
-                          <div class="count"><small>{{$account->bank}}</small></div>
-                            <h4><b>$ {{$account->balance}}</b></h4>
-                            {{-- <p>Lorem ipsum psdea itgum rixt.</p> --}}
 
-                              {{-- @if($account->balance < 2000)
-                              
-                                <p style="color:red">Please fill the amount for {{$account->bank}}</p>
-                              
-                              @endif
-                          </div>
-                        </div>
-                       @endif
-                      @endforeach
-                    </div> --}}
-                   {{--  </div> --}} --}}
                   
    
   </div>
