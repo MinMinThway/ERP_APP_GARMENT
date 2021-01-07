@@ -182,7 +182,7 @@ class AccountController extends Controller
             // dd($id);
             $orders=Order::where('status_id','=',5)->get();
             $accounts=Account::where('bank','=',$request->bankname)->get();
-            $account_details=Account_detail::where('account_id','=',$request->bankname)->get();
+            $account_details=Account_detail::where('account_id','=',$request->bankname)->orderBy('id','desc')->get();
             return view('finance.staff.balancesheet',compact('orders','account_details','accounts'));
         }
 

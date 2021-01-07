@@ -25,19 +25,22 @@ use App\Account;
   $d_zero_div=false;
   if ($today_transection>$yesterday_transection) {
     // trend
-    $df_ct_day=$today_transection-$yesterday_transection;
+    if ($yesterday_transection<1) {
+      $d_zero_div=true;
+    } else {
+      $df_ct_day=$today_transection-$yesterday_transection;
+    
+    $df_ct_ps_down=number_format(($df_ct_day*100)/$yesterday_transection,0);
+    }
+  }else{
+
+     $df_ct_day=$yesterday_transection-$today_transection;
     if ($yesterday_transection<1) {
       $d_zero_div=true;
     } else {
     $df_ct_ps_up=number_format((($df_ct_day*100)/$yesterday_transection),0);
     }
-  }else{
-    if ($yesterday_transection<1) {
-      $d_zero_div=true;
-    } else {
-    $df_ct_day=$yesterday_transection-$today_transection;
-    $df_ct_ps_down=number_format(($df_ct_day*100)/$yesterday_transection,0);
-    }
+
   }
 
   // Today Transection
@@ -68,14 +71,16 @@ use App\Account;
     if ($past_week<1) {
       $w_zero_div=true;
     } else {
-    $df_ct_wk_up=number_format((($df_ct_week*100)/$past_week),0);
+      $df_ct_wk_down=number_format((($df_ct_week*100)/$past_week),0);
+    
     }
   }else{
     if ($past_week<1) {
       $w_zero_div=true;
     } else {
     $df_ct_week=$past_week-$this_week;
-    $df_ct_wk_down=number_format((($df_ct_week*100)/$past_week),0);
+
+    $df_ct_wk_up=number_format((($df_ct_week*100)/$past_week),0);
     }
   }
 
@@ -100,7 +105,7 @@ if ($this_month>$past_month) {
   if ($past_month<1) {
     $m_zero_div=true;
   } else {
-    $df_ct_mt_up=number_format((($df_ct_month*100)/$past_month),0);
+   $df_ct_mt_down=number_format((($df_ct_month*100)/$past_month),0);
   }
   
 }else{
@@ -108,7 +113,8 @@ if ($this_month>$past_month) {
     $m_zero_div=true;
   } else {
     $df_ct_month=$past_month-$this_month;
-    $df_ct_mt_down=number_format((($df_ct_month*100)/$past_month),0); // %
+     $df_ct_mt_up=number_format((($df_ct_month*100)/$past_month),0);
+     // %
   }
 }
   //Months Transection
@@ -200,16 +206,15 @@ if ($this_month>$past_month) {
         <h3 class="tile-title">Banks And Amounts</h3>
         <div class="x_content">
                     <div class="row">
-
                        @foreach($account as $account)
                        @if($account->id!=1)
                       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
                         <div class="tile-stats">
-                          <div class="icon"><a href="{{route('account.newbudget')}}"><i class="fa fa-credit-card " style="size: 20px;"></i></a>
+                          <div class="icon"><a href="="><i class="fa fa-credit-card " style="size: 20px;"></i></a>
                           </div>
                           <div class="count"><small>{{$account->bank}}</small></div>
                             <h4><b>$ {{$account->balance}}</b></h4>
-                            {{-- <p>Lorem ipsum psdea itgum rixt.</p> --}}
+                            <p>Lorem ipsum psdea itgum rixt.</p>
 
                               
                           </div>

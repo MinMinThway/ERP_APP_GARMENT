@@ -39,7 +39,7 @@ use App\Order;
                 </div>
                 <div class="x_content">
                   
-                  <form id="demo-form2" action="{{route('finance.staff.monthlyreport')}}" data-parsley-validate class="form-horizontal form-label-left">
+                  <form id="demo-form2" action="{{route('finance.staff.dailyreport')}}" data-parsley-validate class="form-horizontal form-label-left">
                     @csrf
                     <label class="col-form-label col-md-3 col-sm-3 "> <h6><b>Please select Date <span class="required">*</span></b></h6>
                       </label>

@@ -113,7 +113,26 @@ use App\Supplier;
 
           </div>
       </div>
+{{-- 
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="note">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> --}}
 
+<!-- /page content -->
 <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -131,6 +150,7 @@ use App\Supplier;
     </div>
   </div>
 </div>
+
       {{-- <div class="clearfix"a></div> --}}
       {{-- <div class="pt-3">
       <button onclick="document.getElementById('deli').submit();" class="btn btn-success pull-right">Delivery</button>
@@ -171,14 +191,26 @@ use App\Supplier;
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
 
 @endsection
-
+@section('script')
 <script type="text/javascript">
 function select(id,state){
   $(document).ready(function(){
-    
-    else if (state=='reject') {
+    if (state=='select') {
+    var selector=id+' option:selected';
+    var order_id=$(selector).data('oid');
+    var supplier_id=$(selector).val();
+
+    $.ajax({
+      url:'{{route('setsupplier')}}',
+      method:'GET',
+      data:{oid:order_id,sid:supplier_id},
+      success:function(res){
+        
+      }
+    })
+    }else if (state=='reject') {
       $.ajax({
-      url:'{{route('note_5_get')}}',
+      url:'{{route('note_2_get')}}',
       method:'GET',
       data:{id:id},
       success:function(res){
@@ -186,7 +218,11 @@ function select(id,state){
         $('#reject').modal('toggle');
       }
     })
+    }else{
+      $('#order_id').val(state);
+      $('#ship').modal('toggle');
     }
-
+  })
 }
 </script>
+@endsection

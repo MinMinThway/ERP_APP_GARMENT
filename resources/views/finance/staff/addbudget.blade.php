@@ -103,79 +103,6 @@
 				</div>
 	</div>
 
-	 	{{-- var bank=$('#bank').val();
-
-	// 	$.ajax(
-	// 	{
-	// 		method:'POST',
-	// 		url:"{{route('account.newbudget')}}",
-	// 		data:{
-	// 			bank:bank,
-	// 		},
-	// 		dataType:'json',
-
-
-	// 		success:function(response)
-	// 		{
-	// 			//console.log(response);
-	// 			var data= JSON.parse(response);
-	// 			var account='';
-	// 			account +=`<select class="form-control">
-	// 							<option>Choose option</option>
-								
-	// 						</select>`;
-									
-	// 		$.each(data,function(i,v){
-	// 			if(v)
-	// 			{
-	// 				var accounttype=v.type;
-					
-					
-
-	// 				accountnoresultDiv +=`<option>{{$account->type}}</option>`;
-
-	// 			}
-
-	// 	})
-
-	// $('#accountno').html(accountnoresultDiv);
-		
-// 	}
-// })
-// });
-
-    
-     
-
-
-	{{-- <script type="text/javascript">
-		$(document).ready(function(){
-			
-
-			function fetch_accountno(query = '')
-			{
-
-				$.ajax({
-					url:"{{route('account.fetch_accountno')}}",
-					method:'GET',
-					data:{query:query},
-					dataType:'json',
-					success:function(data)
-					{
-						$('#accountno').html(data.account_no)// table data 
-
-					}
-				})
-			}
-
-			$(document).on('keyup','#bank',function(){
-				var query= $(this).val();
-				fetch_accountno(query);
-
-			});
-
-		});
-	</script> --}}
 @endsection
 
 @section('script')
@@ -215,23 +142,6 @@
 		
 		});
 
-		
-
-
-		// 	 $.ajax(
-		// {
-		// 	method:'POST',
-			// url:"",
-		// 	data:{
-		// 		bank:bank,
-		// 	},
-		// 	dataType:'json',
-			
-		// 	success:function(response)
-	 // 		{
-	 // 			//console.log(response);
-	 // 		}
-		// });
 			 
 
 		})

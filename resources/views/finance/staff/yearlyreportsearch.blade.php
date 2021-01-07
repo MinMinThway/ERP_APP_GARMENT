@@ -34,7 +34,7 @@ use App\Order;
                 <div class="x_title">
 
 
-                  <h2>Daily Reports</h2>
+                  <h2>Yearly Reports</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a href="{{route('finance.staff.home')}}"><i class="fa fa-reply"> Back</i></a>
                     </li>
@@ -45,7 +45,7 @@ use App\Order;
                   
                   <form id="demo-form2" action="{{route('finance.staff.yearlyreport')}}" data-parsley-validate class="form-horizontal form-label-left">
                     @csrf
-                    <label class="col-form-label col-md-3 col-sm-3 "> <h6><b>Please select Date <span class="required">*</span></b></h6>
+                    <label class="col-form-label col-md-3 col-sm-3 "> <h6><b>Please select Year!<span class="required">*</span></b></h6>
                       </label>
                       
                       <div class="col-md-9 col-sm-9 ">

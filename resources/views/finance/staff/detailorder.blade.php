@@ -193,9 +193,9 @@ use App\Account_detail
                           @endforeach
 
                         </select>
-                        {{-- @if($account->balance > $data->price)
-                              <p>Amount is low</p>
-                          @endif --}}
+
+                        {{-- <input type="text" class="form-control" name="ammount" id="ammount" disabled=""> --}}
+
                       </div>
                       <br>
                       </div>
@@ -229,6 +229,33 @@ use App\Account_detail
 
         </div>
         <!-- /page content -->
+          <!-- Modal -->
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('production.admin.order.reject')}}" method="POST">
+        @csrf
+        @method('GET')
+        <input type="hidden" name="id" value="{{$order->id}}">
+      <div class="modal-body">
+        <textarea class="text" style="width: 100%;text-align: left;" name="note">
+          Please give reason about reject. clearly define what you want to check again!
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Reject</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 @endsection
 
@@ -257,7 +284,13 @@ use App\Account_detail
 <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
 
-<script type="text/javascript">
+
+
+ @section('script')
+  <script type="text/javascript">
+    $(document).ready(function(){
+       
+       <script type="text/javascript">
       $(document).ready(function(){
           // $(".denile").hide(1);
           $(".bank").hide(1);
@@ -269,25 +302,42 @@ use App\Account_detail
             $(".bank").show(1);
           $(".cheque").show(1);
             $(".btnapprove").show();
-          })
+            $(".submit").hide(1);
+        
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
+          $("#bank").on('click',function(){
 
-          $('#bank').on('click',function(){
+            var bank =$(this).children(":selected").attr("id");
+            $.ajax(
+                    {
+                  method:'GET',
+                  url:"{{route('account.checkbal')}}",
+                  data:{
+                    bank:bank
+                  },
 
-            alert("OK");
+            success:function(data)
+              {
+                if(data){
+                 var array = JSON.parse(data);
+                 // console.log(array.type);
+                 $ammount = $('#ammount').val(array.balance);
+                }
+              }
+    
+    });
 
-            
-          })
+       
 
+    })
 
-
-          // $(".reject").on('click',function(){
-          //    $(".denile").show();
-          //     $(".done").show(1);
-          // })
-
-          
-      })
+    })
 </script>
-
 @endsection
+
+ 
