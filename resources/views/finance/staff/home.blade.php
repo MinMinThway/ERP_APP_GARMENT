@@ -214,7 +214,6 @@ if ($this_month>$past_month) {
                           </div>
                           <div class="count"><small>{{$account->bank}}</small></div>
                             <h4><b>$ {{$account->balance}}</b></h4>
-                            {{-- <p>Lorem ipsum psdea itgum rixt.</p> --}}
 
                               
                           </div>
