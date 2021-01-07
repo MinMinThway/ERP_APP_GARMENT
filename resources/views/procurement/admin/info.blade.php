@@ -11,7 +11,7 @@ use App\Warehouse_detail;
 	    <div class="page-title">
 			<div class="col-md-12 col-sm-12 ">
 		        <div class="x_panel">
-		        	<h2 class="">Order Histry Detail
+		        	<h2 class="">Order Histry Detail <span class="text text-success font-weight-bold">#ERP{{$order->id}}</span>
 		        		<span class="float-right">
 		        			<a href="{{route('admin_3_history')}}" class="btn btn-danger btn-sm" style="border-radius: 20px">
 		        			Back

@@ -903,6 +903,8 @@ class OrderController extends Controller
                 'id' => $order->id,
                 'invoice' => $order->invoice_no,
                 'time' =>strtotime($order->updated_at),
+                'status' => $order->status_id,
+                'total' => $order->total,
             ];
             array_push($Array,$array);
         }

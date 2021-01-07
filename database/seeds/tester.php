@@ -12,9 +12,9 @@ class tester extends Seeder
     public function run()
     {
         //
-        $order=Order::find(10);
+        $order=Order::find(20);
         $order->invoice_no='IN'.time();
-        $order->status_id=7;
+        $order->status_id=8;
         $order->save();
     }
 }

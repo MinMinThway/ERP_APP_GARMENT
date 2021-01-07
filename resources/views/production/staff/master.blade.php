@@ -187,14 +187,14 @@
                         <li class="nav-item">
                           <div class="text-center">
                             <a class="dropdown-item">
-                              <a href="{{route('delivery')}}">
+                              <a href="{{route('staff_0_history')}}">
                               <strong>See More</strong>
                               </a>
                               <i class="fa fa-angle-right"></i>
                             </a>
                           </div>
                         </li>
-                        
+
                       </ul>
                     </li>
                   </ul>
@@ -261,7 +261,8 @@
 </html>
 
 <script type="text/javascript">
-  var old=0,seen=false;
+  var old=false,seen=false;
+  var count=0;
   $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -271,7 +272,7 @@
     $('#navbarDropdown1').click(function(){
       seen=true;
     })
-    setInterval(noti,3000);
+    var test=setInterval(noti,3000);
     function noti(){
       $.ajax({
         url:"{{route('noti')}}",
@@ -281,20 +282,31 @@
           var now=JSON.parse(ans);
           var d = new Date();
           var n = Math.round(d.getTime() / 1000);
-            if (old==0) {
-              old=now;
-            var count=Math.abs(now.length-old.length);
-            $('#count').text(count);
-            }
+
+            if (!old) {old=now;} // initialized
             if (seen) {
               old=now;
               seen=false;
+              count=0;
             }
-            var count=Math.abs(now.length-old.length);
+
+            if (old) {
+              var str_old=JSON.stringify(old);
+              var str_now=JSON.stringify(now);
+              if (str_old!=str_now) {
+                count++;
+                old=now;
+              }
+            }
             $('#count').text(count);
+            // clearInterval(test);
+
             html='';
             var $i=1;
+
             now.forEach(function(v,i){
+              var notforyou=true;
+              // time calculation
               var time_diff=Math.abs(v.time-n);
               if (time_diff>86400) {
                 var ago=Math.round(time_diff/86400);
@@ -309,29 +321,66 @@
                 var ago=time_diff;
                 var text=ago+' sec ago';
               }
+              // time calculation
+
+              // title status
+              if (v.status==1) {
+                var title='REPORT RECIEVED! #ERP'+v.id;
+              }else if (v.status==2) {
+                var title='PROCUREMENT #ERP'+v.id;
+              }else if (v.status==4) {
+                var title='APPROVED! #ERP'+v.id;
+              }else if (v.status==6) {
+                var title='APPROVED! #ERP'+v.id;
+              }else if (v.status==7) {
+                var title='SHIPPING! #ERP'+v.id;
+              }else if (v.status==8) {
+                var title='DELIVERY! #ERP'+v.id;
+              }else{
+                notforyou=false;
+              }
+              // title status
+              // title status
+              if (v.status==1) {
+                var body='i will be check! director(production)';
+              }else if (v.status==2) {
+                var body='your order is recieved! from staff procurement';
+              }else if (v.status==4) {
+                var body='Your order is approve by procurement';
+              }else if (v.status==6) {
+                var body='Your order is approve by finance';
+              }else if (v.status==7) {
+                var body='your order is shipping now!';
+              }else if (v.status==8) {
+                var body='i recieved all item from warehouse';
+              }
+              // title status
+
               if ($i>4) {
               }else{
-              html+=` <li class="nav-item bg-light">
-                        <form id="info${v.id}" action="{{route('deliveryInfo')}}" method="POST" class="d-none">
-                          @csrf
-                          @method('GET')
-                          <input type="text" name="id" value="${v.id}">
-                        </form>
-                        <a class="dropdown-item"
-                        onclick="event.preventDefault();document.getElementById('info${v.id}').submit();">
-                          <span class="image">
-                          </span>
-                          <span>
-                            <span>ERP#${v.id}</span>
-                            <span class="time">
-                            ${text}
+              if (notforyou) {
+                html+=` <li class="nav-item bg-gray">
+                          <form id="info${v.id}" action="{{route('order_0_info')}}" method="POST" class="d-none">
+                            @csrf
+                            @method('GET')
+                            <input type="text" name="id" value="${v.id}">
+                          </form>
+                          <a class="dropdown-item"
+                          onclick="event.preventDefault();document.getElementById('info${v.id}').submit();">
+                            <span class="image">
                             </span>
-                          </span>
-                          <span class="message">
-                            Invoice - ${v.invoice}
-                          </span>
-                        </a>
-                      </li>`;
+                            <span>
+                              <span>${title}</span>
+                              <span class="time">
+                              ${text}
+                              </span>
+                            </span>
+                            <span class="message">
+                              ${body}
+                            </span>
+                          </a>
+                        </li>`;
+              }
               }
               $i++;           
             })
