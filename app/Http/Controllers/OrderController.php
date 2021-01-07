@@ -894,7 +894,9 @@ class OrderController extends Controller
      */
     public function noti(Request $request, Order $order)  // procurement/admin/ check order detail
     {
-        $orders=Order::where('status_id','=',7)->orderBy('updated_at','desc')->get();
+        $state=$request->state;
+        $opt=$request->opt;
+        $orders=Order::where('status_id',$opt,$state)->orderBy('updated_at','desc')->get();
         $Array=[];
         foreach ($orders as $order) {
             $array=[
