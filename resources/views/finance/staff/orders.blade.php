@@ -93,8 +93,8 @@ use App\Supplier;
                                   <button type="submit" class="btn btn-primary btn-sm" name="btnsubmit"><i class="fa fa-info"></i></button>
                                   </form>
                                   @if($order->denile_note)
-                                  <button class="btn btn-danger btn-sm" data-id='{{$order->id}}' style="border-radius: 20px;"
-                                    onclick="select('{{$order->id}}','reject')"
+                                  <button class="btn btn-danger btn-sm" id="gg" name="id" data-id='{{$order->id}}' style="border-radius: 20px;"
+                                   {{--  onclick="select('{{$order->id}}','reject')" --}}
                                   >Rejected</button>
                                   @endif
 
@@ -193,36 +193,26 @@ use App\Supplier;
 @endsection
 @section('script')
 <script type="text/javascript">
-function select(id,state){
-  $(document).ready(function(){
-    if (state=='select') {
-    var selector=id+' option:selected';
-    var order_id=$(selector).data('oid');
-    var supplier_id=$(selector).val();
 
-    $.ajax({
-      url:'{{route('setsupplier')}}',
-      method:'GET',
-      data:{oid:order_id,sid:supplier_id},
-      success:function(res){
-        
-      }
-    })
-    }else if (state=='reject') {
-      $.ajax({
-      url:'{{route('note_2_get')}}',
-      method:'GET',
-      data:{id:id},
-      success:function(res){
-        $('#note').text(res);
-        $('#reject').modal('toggle');
-      }
-    })
-    }else{
-      $('#order_id').val(state);
-      $('#ship').modal('toggle');
-    }
+  $(document).ready(function(){
+    
+    $("#gg").on('click',function(){
+
+      alert("OK");
+    //   $.ajax({
+    //   url:'',
+    //   method:'GET',
+    //   data:{id:id},
+    //   success:function(res){
+    //     $('#note').text(res);
+    //     $('#reject').modal('toggle');
+    //   }
+    // })
+    // }else{
+    //   $('#order_id').val(state);
+    //   $('#ship').modal('toggle');
+    // }
   })
-}
+
 </script>
 @endsection

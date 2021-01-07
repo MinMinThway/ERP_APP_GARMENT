@@ -159,45 +159,25 @@ use App\Account_detail
 
                       <!-- /.row -->
                        <div class="pt-3">
-
-                    {{--   <button class="btn btn-danger pull-right reject" data-target="#reject" data-id='{{$order->id}}' >Reject</button> --}}
-                      <button  class="btn btn-success pull-right submit">Submit</button>
-
-                      
-
-                        {{-- <form id="rejectform" action="{{route('finance.staff.order.reject')}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
-                          @csrf
-                            @method('GET')
-                             <input type="hidden" name="id" value="{{$order->id}}">
-                            <div id="denile" class="denile">
-                         <h6><b>Denile Reason</b></h6>
-                          <textarea id="denilenote" class="w-100"></textarea>
-                        </div>
-                      </form> --}}
-
+                          <button  class="btn btn-success pull-right submit">Submit</button>
                       </div>
                       <br><br><br><br>
                       <div class="row">
                         <!-- accepted payments column -->
 
-                        <div class="col-md-12 col-sm-12 bank" align="center" >
-                          <h6><b>Please Select Bank</b></h6>
-                        <select class="form-control" id="bank" name="bankname">
-                          <option>Choose option</option>
-                          @foreach($account as $account)
-                          @if($account->id!=1)
-                            <option id={{$account->id}}>
-                              {{$account->bank}}</option>
-                          @endif
-
-                          @endforeach
-
-                        </select>
-
-                        {{-- <input type="text" class="form-control" name="ammount" id="ammount" disabled=""> --}}
-
-                      </div>
-                      <br>
+                          <div class="col-md-12 col-sm-12 bank" align="center" >
+                            <h6><b>Please Select Bank</b></h6>
+                          <select class="form-control" id="bank" name="bankname">
+                            <option>Choose option</option>
+                            @foreach($account as $account)
+                            @if($account->id!=1)
+                              <option id={{$account->id}}>
+                                {{$account->bank}}</option>
+                            @endif
+                            @endforeach
+                          </select>
+                        </div>
+                        <br>
                       </div>
                       
                         <form id="demo-form2" action="{{route('finance.staff.order.update')}}"method="POST"data-parsley-validate class="form-horizontal form-label-left">
@@ -229,34 +209,7 @@ use App\Account_detail
 
         </div>
         <!-- /page content -->
-          <!-- Modal -->
-<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="{{route('production.admin.order.reject')}}" method="POST">
-        @csrf
-        @method('GET')
-        <input type="hidden" name="id" value="{{$order->id}}">
-      <div class="modal-body">
-        <textarea class="text" style="width: 100%;text-align: left;" name="note">
-          Please give reason about reject. clearly define what you want to check again!
-        </textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger">Reject</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-
+      
 @endsection
 
 @section('script')
@@ -284,19 +237,13 @@ use App\Account_detail
 <script type="text/javascript" src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
 
-
-
- @section('script')
-  <script type="text/javascript">
-    $(document).ready(function(){
-       
-       <script type="text/javascript">
+<script type="text/javascript">
       $(document).ready(function(){
-          // $(".denile").hide(1);
-          $(".bank").hide(1);
-          $(".cheque").hide(1);
-          $(".btnapprove").hide(1);
-          $(".done").hide(1);
+            alert("OK");
+          $(".bank").hide();
+          $(".cheque").hide();
+          $(".btnapprove").hide();
+         
 
           $(".submit").on('click',function(){
             $(".bank").show(1);
@@ -338,6 +285,5 @@ use App\Account_detail
 
     })
 </script>
-@endsection
 
- 
+@endsection
