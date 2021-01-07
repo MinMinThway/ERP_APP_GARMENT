@@ -1,4 +1,4 @@
-@extends('finance.staff.master')
+@extends('finance.admin.master')
 
 @section('body')
  <div class="right_col" role="main">
@@ -27,8 +27,7 @@
                   <div class="x_title">
                     <h2>Accounts</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a href="{{route('account.create')}}"><i class="fa fa-plus-circle fa-lg"> Add</i></a>
-                    </li>
+                      
                     </ul>
                     <div class="clearfix"></div>
                   </div>
@@ -41,7 +40,7 @@
                           <th>Account Type</th>
                           <th>Account Number</th>
                           <th>Balance</th>
-                          <th>Action</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -55,13 +54,6 @@
                           <td>{{$account->type}}</td>
                           <td>{{$account->acc_number}}</td>
                           <td>${{$account->balance}}</td>
-                          <td>
-                          	<a href="{{route('account.edit',$account->id)}}" class="btn btn-primary btn-sm" alt="Edit"><i class="fa fa-edit"></i></a>
-                        <form method="post" action="{{route('account.destroy',$account->id)}}" onsubmit="return confirm('Are you sure?')" class="d-inline">
-                              @csrf
-                        @method('DELETE')
-
-                          <button type="submit" class="btn btn-danger btn-sm" name="btnsubmit" value="Delete"><i class="fa fa-trash"></i></button></td>
                         </tr>
                           @endif
                         @endforeach

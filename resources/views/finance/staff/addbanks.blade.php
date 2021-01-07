@@ -27,7 +27,7 @@
 								<div class="x_title">
 									<h2>Add Banks</h2>
 									<ul class="nav navbar-right panel_toolbox">
-										<li><a href="{{route('account.home')}}"><i class="fa fa-reply"> Back</i></a>
+										<li><a href="{{route('finance.staff.home')}}"><i class="fa fa-reply"> Back</i></a>
 										</li>
 									</ul>
 									<div class="clearfix"></div>
@@ -63,7 +63,7 @@
 					                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="accountno">Account Number</label><span class="required">*</span>
 
 					                        <div class="col-md-6 col-sm-6">
-					                          <input type="text" id="accountno" name="accountno" required="required" class="form-control @error('accountno') is-invalid @enderror" value="{{old('accountno')}}">
+					                          <input type="number" id="accountno" name="accountno" required="required" class="form-control @error('accountno') is-invalid @enderror" value="{{old('accountno')}}">
 
 												@error('accountno')
 					                                <div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +76,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="balance">Balance<span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="balance" name="balance" required="required" class="form-control @error('balance') is-invalid @enderror" value="{{old('balance')}}">
+												<input type="number" min=0 id="balance" name="balance" required="required" class="form-control @error('balance') is-invalid @enderror" value="{{old('balance')}}">
 
 												@error('balance')
 					                                <div class="alert alert-danger">{{ $message }}</div>

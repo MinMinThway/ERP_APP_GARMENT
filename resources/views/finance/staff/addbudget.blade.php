@@ -200,7 +200,9 @@
 				bank:bank
 			},
 			// // dataType:'json',
-			
+
+
+		
 			success:function(data)
 	 		{
 	 			if(data){
@@ -209,11 +211,8 @@
 	 			 $('#actype').val(array.type);
 	 			 $('#accountno').val(array.acc_number);
 	 			}
-
-
-
 	 		}
-		});
+		
 		});
 
 		
@@ -235,6 +234,7 @@
 		// });
 			 
 
+		})
 
 		})
 	</script>

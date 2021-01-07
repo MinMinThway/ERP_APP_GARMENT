@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<link rel="stylesheet" type="text/css" href="{{asset('icon/icofont/icofont.min.css')}}">
+
+=======
 
 {{-- For staff --}}
 <li class="{{ Request::is('finance/staff/history*') ? 'current-page' : '' }}">
@@ -14,3 +18,4 @@ Order History
 Order History
 </a>
 </li>
+>>>>>>> 7559efcad60d54c4caf89c190d4777092a8019df
