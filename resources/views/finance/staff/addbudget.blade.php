@@ -109,6 +109,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			 
+
 	$.ajaxSetup({
 	    headers: {
 	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -119,6 +120,7 @@
 		$("#bank").on('change',function(){
 			var bank =$(this).children(":selected").attr("id");
 			
+			console.log(bank);
 			$.ajax(
 				{
 			method:'GET',
@@ -130,15 +132,21 @@
 
 
 		
-			success:function(data)
-	 		{
-	 			if(data){
-	 			 var array = JSON.parse(data);
-	 			 // console.log(array.type);
-	 			 $('#actype').val(array.type);
-	 			 $('#accountno').val(array.acc_number);
-	 			}
-	 		}
+			// success:function(data)
+	 	// 	{
+	 	// 		if(data){
+	 	// 		 var array = JSON.parse(data);
+	 	// 		 // console.log(array.bank);
+	 	// 		  // $blah=array.type;
+	 	// 		  // if($blah>$order->balance);
+	 	// 		  // {
+	 	// 		  // 	alert("OK");
+	 	// 		  // }
+	 	// 		 // console.log($blah);
+	 	// 		 $('#actype').val(array.type);
+	 	// 		 $('#accountno').val(array.acc_number);
+	 	// 		}
+	 	// 	}
 		
 		});
 

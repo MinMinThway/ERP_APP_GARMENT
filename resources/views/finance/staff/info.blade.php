@@ -66,6 +66,9 @@ use App\Warehouse_detail;
 			                        	<th class="align-middle text-center">{{++$i}}</th>  
 			                        	<th class="align-middle text-center">{{$warehouse->codeno}}</th>
 			                        	<th class="align-middle text-left">{{$warehouse->name}}</th>
+			                        	<th>{{$data->price}}</th>
+			                        	<th>{{$order->supplier->company_name}}</th>
+			                        	{{-- <th>{{$order->total}}</th> --}}
 			                        	<th class="align-middle text-right">{{$data->qty}}</th>
 			                        	<th class="align-middle text-left">{{$data->UOM}}</th>           
 			                        </tr>

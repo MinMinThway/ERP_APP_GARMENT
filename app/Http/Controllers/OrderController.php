@@ -690,16 +690,27 @@ class OrderController extends Controller
         // return view('finance.staff.detailorder',compact('order',));
     }
 
+    public function error()
+    {
+        return view('finance.staff.error');
+    }
+
     public function order_4_update(Request $request, Order $order)
     {   
 
-        
         $id = $request->id;
         $accountid=$request->account;
+        $bank=$request->bankname;
         $oldtotal=$request->balance;
+        $balance2=$request->balance2;
+        //dd($request->bankname);
 
-        //dd($request->cheque);
-        // $cheque=$request->cheque;
+        if($bank > $oldtotal)
+        {
+            return redirect()->route('account.error');
+        }
+        else{
+        
         DB::transaction(function() use ($request){
             date_default_timezone_set("Asia/Rangoon");
             $today = date('Y-m-d',strtotime('today'));
@@ -729,7 +740,8 @@ class OrderController extends Controller
 
             // $account->balance  =   $tranbalance;
             // $account->save();
-        });
+            });
+        }
 
         return redirect()->route('finance.staff.home');
     }
@@ -931,4 +943,6 @@ class OrderController extends Controller
     //         $order->save();
     //     });
     // }
+
+
 }

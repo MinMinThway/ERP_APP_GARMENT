@@ -162,48 +162,51 @@ use App\Account_detail
                           <button  class="btn btn-success pull-right submit">Submit</button>
                       </div>
                       <br><br><br><br>
-                      <div class="row">
-                        <!-- accepted payments column -->
-
-                          <div class="col-md-12 col-sm-12 bank" align="center" >
-                            <h6><b>Please Select Bank</b></h6>
-                          <select class="form-control" id="bank" name="bankname">
-                            <option>Choose option</option>
-                            @foreach($account as $account)
-                            @if($account->id!=1)
-                              <option id={{$account->id}}>
-                                {{$account->bank}}</option>
-                            @endif
-                            @endforeach
-                          </select>
-                        </div>
-                        <br>
-                      </div>
                       
+                        <!-- accepted payments column -->
                         <form id="demo-form2" action="{{route('finance.staff.order.update')}}"method="POST"data-parsley-validate class="form-horizontal form-label-left">
                           @csrf
                             @method('GET')
+                          <div class="col-md-12 col-sm-12 bank" align="center" >
+                            <h6><b>Please Select Bank</b></h6>
+                                <select class="form-control" id="bank" name="bankname" data-oid="{{$order->id}}">
+                                  <option>Choose option</option>
+                                  @foreach($account as $account)
+                                  @if($account->id!=1)
+                                    <option id="{{$account->id}}" value="{{$account->balance}}">
+                                      {{$account->bank}}</option>
+                                  @endif
+                                  @endforeach
+                                </select>
+                          </div>
+                        <br>
+                      
+                      
+                        
                             <input type="hidden" name="id" value="{{$order->id}}">
                             <input type="hidden" name="balance" value="{{$order->total}}">
                             <input type="hidden" name="account" value="{{$account->id}}">
+                            <input type="hidden" name="balance2" value="{{$account->balance}}">
+
                             <div div class="col-md-12 col-sm-12 cheque" align="center">
                            <h6><b>Cheque No</b></h6>
                           <input type="number" class="form-control @error('bankname') is-invalid @enderror" id="cheque" name="cheque" value="{{old('cheque')}}">
  
                                 @error('cheque')
                                           <div class="alert alert-danger">{{ $message }}</div>
-                                      @enderror
+                                      
+                                @enderror
 
                           </div>
                         </div>
-
+                      </form>
 
                       <!-- /.row -->
                     </section>
                     <div class="pt-3">
                       <button onclick="document.getElementById('demo-form2').submit();" class="btn btn-success pull-right btnapprove">Report</button>
-
                       </div>
+
                   </div>
                 </div>
 
@@ -243,7 +246,16 @@ use App\Account_detail
 
 <script type="text/javascript">
     $(document).ready(function(){
-           
+          
+
+          
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
           $(".bank").hide();
           $(".cheque").hide();
           $(".btnapprove").hide();
@@ -254,34 +266,55 @@ use App\Account_detail
           $(".cheque").show(1);
             $(".btnapprove").show();
             $(".submit").hide(1);
-        
-    //         $.ajaxSetup({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             }
-    //         });
+          
 
-    //       $("#bank").on('click',function(){
+            
+          //   alert("OK");
 
-    //         var bank =$(this).children(":selected").attr("id");
-    //         $.ajax(
-    //                 {
-    //               method:'GET',
-    //               url:"",
-    //               data:{
-    //                 bank:bank
-    //               },
+          // $("#bank").on('change',function(){
 
-    //         success:function(data)
-    //           {
-    //             if(data){
-    //              var array = JSON.parse(data);
-    //              // console.log(array.type);
-    //             $('#ammount').val(array.balance);
-    //             }
-    //           }
-    
-    // });
+          //   var selector='#bank option:selected';
+          //   var order_id=$(selector).data('oid');
+          //   var account_id=$(selector).val();
+
+          //    //alert(supplier_id);
+
+
+          //    $.ajax({
+          //       method:'GET',
+          //       url:"{{route('account.checkbal')}}",
+          //       data:{ id:account_id,oid:order_id },
+          //       success:function(data){
+
+          //         if(data=='error')
+          //         {
+          //             alert("Please fill the bill");
+          //         }
+
+
+          //       }
+
+          
+          //   });
+          
+
+              
+          //       success:function(data,data2)
+          //       {
+          //         if(data){
+          //          var array = JSON.parse(data);
+
+          //           console.log(array.bank);
+          //           // $blah=array.type;
+          //           // if($blah>$order->balance);
+          //           // {
+          //           //  alert("OK");
+          //           // }
+          //          // console.log($blah);
+          //          $('#actype').val(array.type);
+          //          $('#accountno').val(array.acc_number);
+          //         }
+          //       }
 
        
 

@@ -40,7 +40,6 @@ use App\Order;
 			                        	<th class="align-middle text-center">Date</th>
 			                        	<th class="align-middle text-center">Total</th>
 			                        	<th class="align-middle text-center">Status</th>
-			                        	<th class="align-middle text-center">Action</th>
 			                        </tr>
 			                      </thead>
 

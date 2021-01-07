@@ -117,6 +117,18 @@ class AccountDetailController extends Controller
         echo json_encode($data);
     }
 
+    public function checkbal(Request $request, Account_detail $account_detail)
+    {
+
+        $data=Order::find($request->oid);
+        //dd($data->total);
+        $data->account_id=$request->id;
+        $data->save();
+        echo json_encode($data);
+    }
+
+    
+
     public function amountadd(Request $request, Account_detail $account_detail)
     {
 
