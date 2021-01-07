@@ -704,6 +704,11 @@ class OrderController extends Controller
             date_default_timezone_set("Asia/Rangoon");
             $today = date('Y-m-d',strtotime('today'));
 
+             $request->validate([
+            'cheque'    => 'required|min:5',
+            ]);
+
+
             $order=Order::find($request->id);
             $order->cheque_no=$request->cheque;
             $order->status_id=5;
@@ -726,7 +731,7 @@ class OrderController extends Controller
             // $account->save();
         });
 
-        return redirect()->route('finance.staff.balancesheet');
+        return redirect()->route('finance.staff.home');
     }
 
 
@@ -880,7 +885,6 @@ class OrderController extends Controller
         $order=Order::find($id);
         echo $order->denile_note;
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -888,6 +892,20 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
+    public function noti(Request $request, Order $order)  // procurement/admin/ check order detail
+    {
+        $orders=Order::where('status_id','=',7)->orderBy('updated_at','desc')->get();
+        $Array=[];
+        foreach ($orders as $order) {
+            $array=[
+                'id' => $order->id,
+                'invoice' => $order->invoice_no,
+                'time' =>strtotime($order->updated_at),
+            ];
+            array_push($Array,$array);
+        }
+        echo json_encode($Array);
+    }
     // public function status_4_change(Request $request, Order $order) // procurement/staff/ status chage
     // {
     //     //
@@ -909,6 +927,4 @@ class OrderController extends Controller
     //         $order->save();
     //     });
     // }
-
-    
 }

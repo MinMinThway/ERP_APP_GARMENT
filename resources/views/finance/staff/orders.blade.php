@@ -93,8 +93,8 @@ use App\Supplier;
                                   <button type="submit" class="btn btn-primary btn-sm" name="btnsubmit"><i class="fa fa-info"></i></button>
                                   </form>
                                   @if($order->denile_note)
-                                  <button class="btn btn-danger btn-sm" data-id='{{$order->id}}' style="border-radius: 20px;"
-                                    onclick="select('{{$order->id}}','reject')"
+                                  <button class="btn btn-danger btn-sm" id="gg" name="id" data-id='{{$order->id}}' style="border-radius: 20px;"
+                                   {{--  onclick="select('{{$order->id}}','reject')" --}}
                                   >Rejected</button>
                                   @endif
 
@@ -113,7 +113,26 @@ use App\Supplier;
 
           </div>
       </div>
+{{-- 
+<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">Reject Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="note">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> --}}
 
+<!-- /page content -->
 <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -131,6 +150,7 @@ use App\Supplier;
     </div>
   </div>
 </div>
+
       {{-- <div class="clearfix"a></div> --}}
       {{-- <div class="pt-3">
       <button onclick="document.getElementById('deli').submit();" class="btn btn-success pull-right">Delivery</button>
@@ -171,22 +191,28 @@ use App\Supplier;
 {{-- <script src="{{asset('build/js/custom.js')}}"></script> --}}
 
 @endsection
-
+@section('script')
 <script type="text/javascript">
-function select(id,state){
+
   $(document).ready(function(){
     
-    else if (state=='reject') {
-      $.ajax({
-      url:'{{route('note_5_get')}}',
-      method:'GET',
-      data:{id:id},
-      success:function(res){
-        $('#note').text(res);
-        $('#reject').modal('toggle');
-      }
-    })
-    }
+    $("#gg").on('click',function(){
 
-}
+      alert("OK");
+    //   $.ajax({
+    //   url:'',
+    //   method:'GET',
+    //   data:{id:id},
+    //   success:function(res){
+    //     $('#note').text(res);
+    //     $('#reject').modal('toggle');
+    //   }
+    // })
+    // }else{
+    //   $('#order_id').val(state);
+    //   $('#ship').modal('toggle');
+    // }
+  })
+
 </script>
+@endsection

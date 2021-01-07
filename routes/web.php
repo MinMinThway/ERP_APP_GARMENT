@@ -27,7 +27,7 @@ Route::get('/warehouse', function(){
 });
 
 Route::resource('/Order','OrderController');
-
+Route::get('/noti','OrderController@noti')->name('noti');
 // Route::middleware('auth')->group(function () {
 // STATUS 
 Route::middleware('role:production/warehouse')->group(function () {
@@ -99,14 +99,14 @@ Route::middleware('role:finance/staff')->group(function () {
 
 	Route::get('/finance/staff/home','HomeController@finance_staff')->name('finance.staff.home');
 
-	Route::get('/finance/staff/account/addbudget','AccountController@newbudget')->name('account.newbudget');
+	Route::get('/finance/staff/account/addbudget/a','AccountController@newbudget')->name('account.newbudget');
 
 
 
-	Route::get('/finance/staff/account/blahbudget','AccountDetailController@account')->name('account.addtype');
+	Route::get('/finance/staff/account/addbudget','AccountDetailController@account')->name('account.addtype');
 
 	
-
+	// Route::get('/finance/staff/account/checkbal','AccountDetailController@checkaccount')->name('account.checkbal');
 
 	Route::get('/finance/staff/account/budget/addbalance','AccountDetailController@amountadd')->name('account.addbalance');
 

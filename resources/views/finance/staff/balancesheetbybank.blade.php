@@ -14,7 +14,7 @@ use App\Account;
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Reports</h3>
+              <h3>Balance Sheet</h3>
             </div>
 
             <div class="title_right">
@@ -35,7 +35,7 @@ use App\Account;
                 <div class="x_title">
 
 
-                  <h2>Monthly Reports</h2>
+                  <h2>Check Balance Sheet!</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a href="{{route('finance.staff.home')}}"><i class="fa fa-reply"> Back</i></a>
                     </li>
@@ -47,7 +47,7 @@ use App\Account;
                   <form id="demo-form2" action="{{route('finance.staff.balancesheet')}}" data-parsley-validate class="form-horizontal form-label-left" method="POST">
                     @csrf
                     @method('GET')
-                    <label class="col-form-label col-md-3 col-sm-3 "><h6><b>Please select Month <span class="required">*</span></b></h6>
+                    <label class="col-form-label col-md-3 col-sm-3 "><h6><b>Please select Bank Name!<span class="required">*</span></b></h6>
                       </label>
                       <div class="col-md-4 col-sm-4 ">
                         <select class="form-control" id="bank" name="bankname">

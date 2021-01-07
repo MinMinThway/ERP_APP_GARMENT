@@ -99,13 +99,13 @@
               <div class="menu_section">
                 <h3>Orders</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-laptop pr-2" style="font-size: 20px"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
+                  <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-inbox pr-2" style="font-size: 20px"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
                     </ul>
               </div>
                   <div class="menu_section">
                 <h3>Balance</h3>
                 <ul class="nav side-menu">
-                   <li><a href="{{route('finance.staff.searchbalancesheet')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Balance Sheet</a>
+                   <li><a href="{{route('finance.staff.searchbalancesheet')}}"><i class="fa fa-file-text-o pr-2" style="font-size: 20px"></i>Balance Sheet</a>
                    </li>
                    <li class="{{ Request::is('finance/staff/history*') ? 'current-page' : '' }}">
                       <a href="{{route('staff_4_history')}}">
@@ -123,11 +123,11 @@
                 <h3>Reports</h3>
                 <ul class="nav side-menu">
                   </li>
-                  <li><a href="{{route('finance.staff.searchreport')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Daily Report</a>
+                  <li><a href="{{route('finance.staff.searchreport')}}"><i class="fa fa-file-archive-o pr-2" style="font-size: 20px"></i>Daily Report</a>
                   </li>
-                  <li><a href="{{route('finance.staff.monthlysearchreport')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Monthly Report</a>
+                  <li><a href="{{route('finance.staff.monthlysearchreport')}}"><i class="fa fa-file pr-2" style="font-size: 20px"></i>Monthly Report</a>
                   </li>
-                  <li><a href="{{route('finance.staff.yearlysearchreport')}}"><i class="fa fa-bug pr-2" style="font-size: 20px"></i>Yearly Report</a>
+                  <li><a href="{{route('finance.staff.yearlysearchreport')}}"><i class="fa fa-file-text pr-2" style="font-size: 20px"></i>Yearly Report</a>
                   </li>
                                   
                 </ul>

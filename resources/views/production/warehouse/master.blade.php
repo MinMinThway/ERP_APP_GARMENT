@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+	   {{-- <link rel="icon" href="images/favicon.ico" type="image/ico" /> --}}
 
     <title>ERP Software</title>
     {{-- icofont --}}
@@ -167,65 +167,24 @@
                     <li role="presentation" class="nav-item dropdown open">
                       <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
+                        <span id="count" class="badge bg-green"></span>
                       </a>
                       <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="dropdown-item">
-                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
+
+                        <div id="message">
+                        </div>
+                        
                         <li class="nav-item">
                           <div class="text-center">
                             <a class="dropdown-item">
-                              <strong>See All Alerts</strong>
+                              <a href="{{route('delivery')}}">
+                              <strong>See More</strong>
+                              </a>
                               <i class="fa fa-angle-right"></i>
                             </a>
                           </div>
                         </li>
+
                       </ul>
                     </li>
                   </ul>
@@ -290,3 +249,87 @@
     @yield('script')
   </body>
 </html>
+
+<script type="text/javascript">
+  var old=0,seen=false;
+  $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('#navbarDropdown1').click(function(){
+      seen=true;
+    })
+    setInterval(noti,3000);
+    function noti(){
+      $.ajax({
+        url:"{{route('noti')}}",
+        method:'GET',
+        data:{user:'get'},
+        success:function(ans){
+          var now=JSON.parse(ans);
+          var d = new Date();
+          var n = Math.round(d.getTime() / 1000);
+            if (old==0) {
+              old=now;
+            var count=Math.abs(now.length-old.length);
+            $('#count').text(count);
+            }
+            if (seen) {
+              old=now;
+              seen=false;
+            }
+            var count=Math.abs(now.length-old.length);
+            $('#count').text(count);
+            html='';
+            var $i=1;
+            now.forEach(function(v,i){
+              var time_diff=Math.abs(v.time-n);
+              if (time_diff>86400) {
+                var ago=Math.round(time_diff/86400);
+                var text=ago+' day ago';
+              }else if (time_diff>3600) {
+                var ago=Math.round(time_diff/3600);
+                var text=ago+' hour ago';
+              }else if (time_diff>60) {
+                var ago=Math.round(time_diff/60);
+                var text=ago+' min ago';
+              }else{
+                var ago=time_diff;
+                var text=ago+' sec ago';
+              }
+              if ($i>4) {
+              }else{
+              html+=` <li class="nav-item bg-light">
+                        <form id="info${v.id}" action="{{route('deliveryInfo')}}" method="POST" class="d-none">
+                          @csrf
+                          @method('GET')
+                          <input type="text" name="id" value="${v.id}">
+                        </form>
+                        <a class="dropdown-item"
+                        onclick="event.preventDefault();document.getElementById('info${v.id}').submit();">
+                          <span class="image">
+                          </span>
+                          <span>
+                            <span>ERP#${v.id}</span>
+                            <span class="time">
+                            ${text}
+                            </span>
+                          </span>
+                          <span class="message">
+                            Invoice - ${v.invoice}
+                          </span>
+                        </a>
+                      </li>`;
+              }
+              $i++;           
+            })
+            $('#message').html(html);
+          }
+
+      });
+    }
+
+  })
+</script>

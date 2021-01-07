@@ -6,6 +6,7 @@
 use App\Order_detail;
 use App\Order;
 use App\Supplier;
+use App\Account;
 @endphp
 
 @section('body')
@@ -15,7 +16,7 @@ use App\Supplier;
       <div class="page-title">
       <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
-              <h2 class="">Transection <i class="fa fa-exchange" aria-hidden="true"></i>
+              <h2 class="">Balance Sheet <i class="fa fa-exchange" aria-hidden="true"></i>
                 <span class="float-right">
                   <a href="{{route('delivery')}}"> {{--  --}}
                   Back
@@ -33,7 +34,9 @@ use App\Supplier;
     <div class="col-md-12 col-sm-12 ">
           <div class="x_panel">
               <div class="x_title">
-                <h2>Order Acceptable List</h2>
+                 
+
+                <h2>Balance Sheet List </h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     <li class="dropdown">

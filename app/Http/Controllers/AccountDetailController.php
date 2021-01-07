@@ -105,6 +105,12 @@ class AccountDetailController extends Controller
     }
 
 
+    //  public function checkaccount(Request $request, Account_detail $account_detail)
+    // {
+    //     $data=Account::find($request->bank);
+    //     echo json_encode($data);
+    // }
+
     public function account(Request $request, Account_detail $account_detail)
     {
         $data=Account::find($request->bank);
@@ -113,11 +119,11 @@ class AccountDetailController extends Controller
 
     public function amountadd(Request $request, Account_detail $account_detail)
     {
+
+        $input=$request->input;
          DB::transaction(function() use ($request){
             date_default_timezone_set("Asia/Rangoon");
             $today = date('Y-m-d',strtotime('today'));
-
-        $input=$request->input;
 
         $account= Account::find($request->id);
         $oldbalance = $account->balance;
@@ -138,8 +144,8 @@ class AccountDetailController extends Controller
         $account->save();
          
         });
-         return view('finance.staff.home');
-
+         
+         return redirect()->route('account.index');
     }
 
 
