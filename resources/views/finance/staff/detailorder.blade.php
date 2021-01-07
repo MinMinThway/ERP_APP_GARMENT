@@ -188,7 +188,12 @@ use App\Account_detail
                             <input type="hidden" name="account" value="{{$account->id}}">
                             <div div class="col-md-12 col-sm-12 cheque" align="center">
                            <h6><b>Cheque No</b></h6>
-                          <input type="number" class="form-control" id="cheque" name="cheque">
+                          <input type="number" class="form-control @error('bankname') is-invalid @enderror" id="cheque" name="cheque" value="{{old('cheque')}}">
+ 
+                                @error('cheque')
+                                          <div class="alert alert-danger">{{ $message }}</div>
+                                      @enderror
+
                           </div>
                         </div>
 

@@ -704,6 +704,11 @@ class OrderController extends Controller
             date_default_timezone_set("Asia/Rangoon");
             $today = date('Y-m-d',strtotime('today'));
 
+             $request->validate([
+            'cheque'    => 'required|min:5',
+            ]);
+
+
             $order=Order::find($request->id);
             $order->cheque_no=$request->cheque;
             $order->status_id=5;
@@ -726,7 +731,7 @@ class OrderController extends Controller
             // $account->save();
         });
 
-        return redirect()->route('finance.staff.balancesheet');
+        return redirect()->route('finance.staff.home');
     }
 
 
