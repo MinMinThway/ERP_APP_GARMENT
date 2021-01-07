@@ -266,7 +266,7 @@
       $.ajax({
         url:"{{route('noti')}}",
         method:'GET',
-        data:{user:'get'},
+        data:{opt:'=',state:7},
         success:function(ans){
           var now=JSON.parse(ans);
           var d = new Date();
