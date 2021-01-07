@@ -25,7 +25,7 @@ Route::get('/', 'Main@welcome')->name('welcome');
 Route::get('/warehouse', function(){ 
 	return view('production.warehouse.warehouse');
 });
-
+Route::get('/documentation','Main@docs')->name('docs');
 Route::resource('/Order','OrderController');
 Route::get('/noti','OrderController@noti')->name('noti');
 // Route::middleware('auth')->group(function () {

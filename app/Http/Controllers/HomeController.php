@@ -66,5 +66,5 @@ class HomeController extends Controller
     {   
         $account = Account::all();
         return view('finance.admin.home',compact('account'));
-    } 
+    }
 }

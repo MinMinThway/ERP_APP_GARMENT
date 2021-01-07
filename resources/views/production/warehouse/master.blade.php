@@ -251,7 +251,8 @@
 </html>
 
 <script type="text/javascript">
-  var old=0,seen=false;
+  var old=false,seen=false;
+  var count=0;
   $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -261,7 +262,7 @@
     $('#navbarDropdown1').click(function(){
       seen=true;
     })
-    setInterval(noti,3000);
+    var test=setInterval(noti,3000);
     function noti(){
       $.ajax({
         url:"{{route('noti')}}",
@@ -271,20 +272,31 @@
           var now=JSON.parse(ans);
           var d = new Date();
           var n = Math.round(d.getTime() / 1000);
-            if (old==0) {
-              old=now;
-            var count=Math.abs(now.length-old.length);
-            $('#count').text(count);
-            }
+
+            if (!old) {old=now;} // initialized
             if (seen) {
               old=now;
               seen=false;
+              count=0;
             }
-            var count=Math.abs(now.length-old.length);
+
+            if (old) {
+              var str_old=JSON.stringify(old);
+              var str_now=JSON.stringify(now);
+              if (str_old!=str_now) {
+                count++;
+                old=now;
+              }
+            }
             $('#count').text(count);
+            // clearInterval(test);
+
             html='';
             var $i=1;
+
             now.forEach(function(v,i){
+              var notforyou=true;
+              // time calculation
               var time_diff=Math.abs(v.time-n);
               if (time_diff>86400) {
                 var ago=Math.round(time_diff/86400);
@@ -299,29 +311,46 @@
                 var ago=time_diff;
                 var text=ago+' sec ago';
               }
+              // time calculation
+
+              // title status
+              if (v.status==7) {
+                var title='SHIPPING! #ERP'+v.id;
+              }else{
+                notforyou=false;
+              }
+              // title status
+              // title status
+              if (v.status==7) {
+                var body='Noted- Order #ERP'+v.id+' is shipping now!';
+              }
+              // title status
+
               if ($i>4) {
               }else{
-              html+=` <li class="nav-item bg-light">
-                        <form id="info${v.id}" action="{{route('deliveryInfo')}}" method="POST" class="d-none">
-                          @csrf
-                          @method('GET')
-                          <input type="text" name="id" value="${v.id}">
-                        </form>
-                        <a class="dropdown-item"
-                        onclick="event.preventDefault();document.getElementById('info${v.id}').submit();">
-                          <span class="image">
-                          </span>
-                          <span>
-                            <span>ERP#${v.id}</span>
-                            <span class="time">
-                            ${text}
+              if (notforyou) {
+                html+=` <li class="nav-item bg-gray">
+                          <form id="info${v.id}" action="{{route('deliveryInfo')}}" method="POST" class="d-none">
+                            @csrf
+                            @method('GET')
+                            <input type="text" name="id" value="${v.id}">
+                          </form>
+                          <a class="dropdown-item"
+                          onclick="event.preventDefault();document.getElementById('info${v.id}').submit();">
+                            <span class="image">
                             </span>
-                          </span>
-                          <span class="message">
-                            Invoice - ${v.invoice}
-                          </span>
-                        </a>
-                      </li>`;
+                            <span>
+                              <span>${title}</span>
+                              <span class="time">
+                              ${text}
+                              </span>
+                            </span>
+                            <span class="message">
+                              ${body}
+                            </span>
+                          </a>
+                        </li>`;
+              }
               }
               $i++;           
             })

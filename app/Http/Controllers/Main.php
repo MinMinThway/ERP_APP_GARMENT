@@ -19,4 +19,8 @@ class Main extends Controller
     {
         return view('welcome');
     }
+    public function docs()
+    {   
+        return view('documentation.docs');
+    }
 }
