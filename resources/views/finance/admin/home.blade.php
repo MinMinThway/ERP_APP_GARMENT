@@ -195,6 +195,30 @@ if ($this_month>$past_month) {
             </div>
           </div>
         </div>
+         <h3 class="tile-title">Banks And Amounts</h3>
+        <div class="x_content">
+                    <div class="row">
+                       @foreach($account as $account)
+                       @if($account->id!=1)
+                      <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                        <div class="tile-stats">
+                          <div class="icon"><a href="="><i class="fa fa-credit-card " style="size: 20px;"></i></a>
+                          </div>
+                          <div class="count"><small>{{$account->bank}}</small></div>
+                            <h4><b>$ {{$account->balance}}</b></h4>
+                            {{-- <p>Lorem ipsum psdea itgum rixt.</p> --}}
+
+                              
+                          </div>
+                          @if($account->balance < 2000)
+                              
+                                <p style="color:red"><b>Please fill the amount for {{$account->bank}} Bank*</b></p>
+                              @endif
+                        </div>
+                       @endif
+                      @endforeach
+                    </div>
+                    </div>
           <!-- /top tiles -->
           
           <div class="row">
@@ -209,7 +233,7 @@ if ($this_month>$past_month) {
     </div>
 
     
-                  <div class="x_content">
+                  {{-- <div class="x_content">
                     <div class="row">
                        @foreach($account as $account)
                        @if($account->id!=1)
@@ -221,7 +245,7 @@ if ($this_month>$past_month) {
                             <h4><b>$ {{$account->balance}}</b></h4>
                             {{-- <p>Lorem ipsum psdea itgum rixt.</p> --}}
 
-                              @if($account->balance < 2000)
+                              {{-- @if($account->balance < 2000)
                               
                                 <p style="color:red">Please fill the amount for {{$account->bank}}</p>
                               
@@ -230,8 +254,8 @@ if ($this_month>$past_month) {
                         </div>
                        @endif
                       @endforeach
-                    </div>
-                    </div>
+                    </div> --}}
+                   {{--  </div> --}} --}}
                   
    
   </div>
