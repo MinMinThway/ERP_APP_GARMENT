@@ -113,6 +113,8 @@ use App\Supplier;
 
           </div>
       </div>
+    </div>
+  </div>
 {{-- 
 <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
