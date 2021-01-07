@@ -73,7 +73,7 @@ Route::middleware('role:procurement/staff')->group(function () {
 	Route::get('/procurement/staff/order','OrderController@order_2_index')->name('procurement.staff.order');
 	Route::get('/procurement/staff/order/edit','OrderController@order_edit')->name('order_edit');
 	Route::get('/setsupplier','OrderController@set_supplier')->name('setsupplier');
-	Route::get('/noteget','OrderController@note_2_get')->name('note_2_get');
+	Route::get('/note_2_get','OrderController@note_2_get')->name('note_2_get');
 	Route::get('/setprice','OrderController@set_price')->name('setprice');
 	Route::get('/status_2_change','OrderController@status_2_change')->name('status_2_change');
 	Route::get('/procurement/staff/order/error','OrderController@status_2_change_error')->name('status_2_change_error');
