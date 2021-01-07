@@ -110,6 +110,7 @@ use App\Supplier;
 
           </div>
       </div>
+    </div>
 
       {{-- <div class="clearfix"a></div> --}}
       {{-- <div class="pt-3">
