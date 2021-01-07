@@ -210,7 +210,7 @@ if ($this_month>$past_month) {
                        @if($account->id!=1)
                       <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
                         <div class="tile-stats">
-                          <div class="icon"><a href="="><i class="fa fa-credit-card " style="size: 20px;"></i></a>
+                          <div class="icon"><a href="="><i class="fa fa-credit-card" style="size: 20px;"></i></a>
                           </div>
                           <div class="count"><small>{{$account->bank}}</small></div>
                             <h4><b>$ {{$account->balance}}</b></h4>
