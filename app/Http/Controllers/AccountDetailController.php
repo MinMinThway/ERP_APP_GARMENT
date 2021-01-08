@@ -105,39 +105,27 @@ class AccountDetailController extends Controller
     }
 
 
-    //  public function checkaccount(Request $request, Account_detail $account_detail)
-    // {
-    //     $data=Account::find($request->bank);
-    //     echo json_encode($data);
-    // }
 
-    public function account(Request $request, Account_detail $account_detail)
+
+   public function account(Request $request, Account_detail $account_detail)
     {
         $data=Account::find($request->bank);
         echo json_encode($data);
     }
 
-    public function checkbal(Request $request, Account_detail $account_detail)
-    {
-
-        $data=Order::find($request->oid);
-        //dd($data->total);
-        $data->account_id=$request->id;
-        $data->save();
-        echo json_encode($data);
-    }
-
+ 
     
 
-    public function amountadd(Request $request, Account_detail $account_detail)
+   public function amountadd(Request $request, Account_detail $account_detail)
     {
 
-        $input=$request->input;
+        
+        $input=$request->bankname;
          DB::transaction(function() use ($request){
             date_default_timezone_set("Asia/Rangoon");
             $today = date('Y-m-d',strtotime('today'));
 
-        $account= Account::find($request->id);
+        $account= Account::find($request->bankname);
         $oldbalance = $account->balance;
         $newbalance = $request->ammount;
         $tranbalance = $oldbalance + $newbalance;
@@ -146,9 +134,10 @@ class AccountDetailController extends Controller
          $accountdetail=new Account_detail;
 
          $accountdetail->date=$today;
+
          $accountdetail->income=$request->ammount;
          $accountdetail->tranbalance= $tranbalance;
-         $accountdetail->account_id= $request->id;
+         $accountdetail->account_id= $request->bankname;
 
         $accountdetail->save();
 
