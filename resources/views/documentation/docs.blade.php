@@ -120,7 +120,7 @@
 							<div class="col col-sm-12 col-md-4">
 								<img src="{{asset('logo/Hinin Htet Hmuu Khin.jpg')}}" class="rounded-circle mx-auto d-block" width="250px">
 								<h3 class="text-center mt-5">HNIN THET HMUU KHIN</h1>
-								<a class="text-center nav-link" href="http://hninthethmuekhin.me">visit</a>
+								<a class="text-center nav-link" href="http://hninthethmukhin.me/">visit</a>
 							</div>
 						</div>
 						<p> </p>	
