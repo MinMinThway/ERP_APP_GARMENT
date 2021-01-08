@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Order;
-class tester extends Seeder
+class noti extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,10 +11,9 @@ class tester extends Seeder
      */
     public function run()
     {
-        //
         $order=Order::find(43);
         $order->invoice_no='IN'.time();
-        $order->status_id=4;
+        $order->status_id=5;
         $order->save();
     }
 }
