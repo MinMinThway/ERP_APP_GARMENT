@@ -269,6 +269,7 @@ This command should be used on fresh applications and will install a layout view
 					<section class="docs-section" id="item-4-5">
 						<h2 class="section-heading">Finance Panel</h2>
 						<img src="{{asset('logo/panel5.jpg')}}" class="img-fluid py-5">
+						<img src="{{asset('logo/panel51.jpg')}}" class="img-fluid py-5">
 					</section><!--//section-->
 
 					<section class="docs-section" id="item-4-6">
