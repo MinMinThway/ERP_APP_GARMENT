@@ -3,6 +3,7 @@
 // use App\Order_detail;
 use App\Warehouse;
 use App\Warehouse_detail;
+use App\Order_detail;
 @endphp
 @section('body')
 <!-- page content -->
@@ -11,7 +12,7 @@ use App\Warehouse_detail;
 	    <div class="page-title">
 			<div class="col-md-12 col-sm-12 ">
 		        <div class="x_panel">
-		        	<h2 class="">Order Histry Detail
+		        	<h2 class="">Order History Detail
 		        		<span class="float-right">
 		        			<a href="{{route('admin_5_history')}}" class="btn btn-danger btn-sm" style="border-radius: 20px">
 		        			Back
@@ -38,6 +39,27 @@ use App\Warehouse_detail;
 	            	</ul>
 	            	<div class="clearfix"></div>
 	          	</div>
+	          	<div class="row">
+                        <div class="  invoice-header">
+                          <h6 style="margin-left: 15px;">
+                              @foreach($order->detail as $data)
+                              @php
+                              	$detail=Order_detail::where('order_id','=',$order->id)->count();
+                                $warehouse=Warehouse::find($data->warehouse_id);
+                              @endphp
+                              @endforeach
+                              <h6 style="margin-left: 15px;"><b>Order Date: {{$order->date}}</b></h6>
+                              <h6 style="margin-left: 15px;"><b>Order ID: CYD_# {{$order->id}}</b></h6>
+                              <h6 style="margin-left: 15px;"><b>Total Items: {{$detail}}</b></h6>
+                              <h6 style="margin-left: 15px;"><b>Cheque No : CNG {{$order->cheque_no}}</b></h6>
+                              <h6 style="margin-left: 15px;"><b>Supplier Name: {{$order->supplier->company_name}}</b></h6>
+                              
+                          </h6>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+
+
 	          	<div class="x_content">
 	              	<div class="row">
 	                  	<div class="col-sm-12">
@@ -49,7 +71,8 @@ use App\Warehouse_detail;
 			                        	<th class="align-middle text-center">Code No</th>
 			                        	<th class="align-middle text-center">Name</th>
 			                        	<th class="align-middle text-center">Qty</th>
-			                        	<th class="align-middle text-center">Unit</th>			         
+			                        	<th class="align-middle text-center">Unit</th>
+			                        	<th class="align-middle text-center">Unit Price</th>
 			                        </tr>
 			                      </thead>
 
@@ -67,10 +90,23 @@ use App\Warehouse_detail;
 			                        	<th class="align-middle text-center">{{$warehouse->codeno}}</th>
 			                        	<th class="align-middle text-left">{{$warehouse->name}}</th>
 			                        	<th class="align-middle text-right">{{$data->qty}}</th>
-			                        	<th class="align-middle text-left">{{$data->UOM}}</th>           
+			                        	<th class="align-middle text-left">{{$data->UOM}}</th>
+			                        	<th class="align-middle text-right">{{$data->price}} $</th>                      
+			                        	
+			                        	
+			                        	
+			                        	
 			                        </tr>
-			                        @endforeach
+			                       
 			                      </tbody>
+			                       @endforeach
+			                      <tfoot>
+			                      	
+			                      		<th class="align-middle text-center" colspan="5">Total Price</th>
+			                      		<th class="align-middle text-right">{{$order->total}} $</th>
+			                      	
+			                      </tfoot>
+			                      
 			                    </table> 
 			                    
 	                  		</div>

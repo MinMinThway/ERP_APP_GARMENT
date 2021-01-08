@@ -6,11 +6,9 @@ use App\Account_detail;
 use App\Order;
 use App\Account;
   
-  
+
   $transaction_count=Account_detail::all()->sum('outcome');
   
-  
-
 
   date_default_timezone_set("Asia/Rangoon");
   $todayDate = date('Y-m-d',strtotime('today'));
@@ -25,22 +23,19 @@ use App\Account;
   $d_zero_div=false;
   if ($today_transection>$yesterday_transection) {
     // trend
-    if ($yesterday_transection<1) {
-      $d_zero_div=true;
-    } else {
-      $df_ct_day=$today_transection-$yesterday_transection;
-    
-    $df_ct_ps_down=number_format(($df_ct_day*100)/$yesterday_transection,0);
-    }
-  }else{
-
-     $df_ct_day=$yesterday_transection-$today_transection;
+    $df_ct_day=$today_transection-$yesterday_transection;
     if ($yesterday_transection<1) {
       $d_zero_div=true;
     } else {
     $df_ct_ps_up=number_format((($df_ct_day*100)/$yesterday_transection),0);
     }
-
+  }else{
+    if ($yesterday_transection<1) {
+      $d_zero_div=true;
+    } else {
+    $df_ct_day=$yesterday_transection-$today_transection;
+    $df_ct_ps_down=number_format(($df_ct_day*100)/$yesterday_transection,0);
+    }
   }
 
   // Today Transection
@@ -71,22 +66,21 @@ use App\Account;
     if ($past_week<1) {
       $w_zero_div=true;
     } else {
-      $df_ct_wk_down=number_format((($df_ct_week*100)/$past_week),0);
-    
+    $df_ct_wk_up=number_format((($df_ct_week*100)/$past_week),0);
     }
   }else{
     if ($past_week<1) {
       $w_zero_div=true;
     } else {
     $df_ct_week=$past_week-$this_week;
-
-    $df_ct_wk_up=number_format((($df_ct_week*100)/$past_week),0);
+    $df_ct_wk_down=number_format((($df_ct_week*100)/$past_week),0);
     }
   }
 
   // week Transection
 
   //Months Transection
+  $mp = strtotime("first day of this Month");
 $start_this_month=date('Y-m-d',strtotime('first day of this Month'));
 $end_this_month=date('Y-m-d',strtotime('last day of this Month'));
 
@@ -105,7 +99,7 @@ if ($this_month>$past_month) {
   if ($past_month<1) {
     $m_zero_div=true;
   } else {
-   $df_ct_mt_down=number_format((($df_ct_month*100)/$past_month),0);
+    $df_ct_mt_up=number_format((($df_ct_month*100)/$past_month),0);
   }
   
 }else{
@@ -113,11 +107,46 @@ if ($this_month>$past_month) {
     $m_zero_div=true;
   } else {
     $df_ct_month=$past_month-$this_month;
-     $df_ct_mt_up=number_format((($df_ct_month*100)/$past_month),0);
-     // %
+    $df_ct_mt_down=number_format((($df_ct_month*100)/$past_month),0); // %
   }
 }
   //Months Transection
+
+//year transection
+// $start_this_year=date('Y-m-d',strtotime('first day of this Year'));
+// $end_this_year=date('Y-m-d',strtotime('last day of this Year',strtotime("+334 days")));
+
+// //var_dump($end_this_year);
+// $start_past_year=date('Y-m-d',strtotime('first day of this Month',strtotime("-12 month")));
+// $end_past_year=date('Y-m-d',strtotime('last day of this Month',strtotime("-1 month")));
+
+// // var_dump($end_past_year);
+// $this_year=Account_detail::whereBetween('date', [$start_this_year, $end_this_year])->sum('outcome');
+// $past_year=Account_detail::whereBetween('date', [$start_past_year, $end_past_year])->sum('outcome');
+
+// $df_ct_ye_up=0;
+// $df_ct_ye_down=0;
+// $ye_zero_div=false;
+
+// if($this_year>$past_year){
+
+//   $dt_ct_year=$this_year-$past_year;
+//   if($past_year<1) {
+//     $ye_zero_div=true;
+//   } else{
+//       $dt_ct_ye_up=number_format((($df_ct_year*100)/$past_year),0);
+//   }
+
+//   }else{
+//     if ($past_year<1) {
+//       $ye_zero_div=true;
+//     } else{
+//       $dt_ct_year=$past_year-$this_year;
+//       $df_ct_ye_down=number_format((($dt_ct_year*100)/$past_year),0);
+    
+//   }
+// }
+
 
   // Total Transection
   $total_tran = Account_detail::select('outcome')->whereNotNull('outcome')->count();
@@ -187,20 +216,31 @@ if ($this_month>$past_month) {
                 @else
                 <i class="fa fa-sort-desc"></i>{{$df_ct_mt_down}}% </i>
                 @endif
-              </i> From last Week</span>
+              </i> From last Month</span>
               @endif
             </div>
+            {{-- <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
+              <span class="count_top"><i class="fa fa-clock-o"></i> Year Expenditure</span>
+              <div class="count">{{$this_year}}</div>
+              @if($ye_zero_div)
+                invalid:ref
+              @else
+              <span class="count_bottom"><i class=" @if($df_ct_ye_up>$df_ct_ye_down) green @else red @endif">
+              @if($df_ct_ye_up>$df_ct_ye_down)
+                <i class="fa fa-sort-asc"></i>{{$df_ct_ye_up}}% </i>
+                @else
+                <i class="fa fa-sort-desc"></i>{{$df_ct_ye_down}}% </i>
+                @endif
+              </i> From last Year</span>
+              @endif
+            </div> --}}
+
             <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-clock-o"></i> Total Transection</span>
               <div class="count">{{$total_tran}}</div>
 {{--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> --}}
             </div>
-            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center" >
-              <span class="count_top"><i class="fa fa-user"></i> Other</span>
-              <div class="count">00</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-              <span></span>
-            </div>
+            
           </div>
         </div>
         <h3 class="tile-title">Banks And Amounts</h3>
