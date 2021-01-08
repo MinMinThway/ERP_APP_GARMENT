@@ -153,7 +153,7 @@
 						    <h2>Account List</h2>
 						    <div class="container">
 							    <table class="table table-responsive" width="100%">
-							    	<thead class="badge-dark">
+							    	<thead class="table table-dark">
 							    		<tr>
 							    			<th width="10%">no</th>
 							    			<th width="25%">name</th>
