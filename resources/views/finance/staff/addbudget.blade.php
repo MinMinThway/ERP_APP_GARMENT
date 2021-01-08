@@ -40,7 +40,9 @@
 								<div class="x_content">
 									<br />
 										
-
+									<form id="demo-form2" action="{{route('account.addbalance')}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
+										@csrf
+              							@method('GET')
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Bank Name<span class="required">*</span>
 											</label>
@@ -49,7 +51,7 @@
 													<option>Choose option</option>
 													@foreach($account as $account)
 													@if($account->id!=1)
-														<option id={{$account->id}}>
+														<option id="{{$account->id}}" value="{{$account->id}}">
 															{{$account->bank}}</option>
 													@endif
 													@endforeach
@@ -57,10 +59,8 @@
 												
 											</div>
 										</div>
-										<form id="demo-form2" action="{{route('account.addbalance')}}" method="POST"data-parsley-validate class="form-horizontal form-label-left">
-										@csrf
-              							@method('GET')
-              							<input type="hidden" name="id" value="{{$account->id}}">
+										
+              							
 
               							
 										<div class="item form-group">
@@ -134,7 +134,7 @@
 	 		{
 	 			if(data){
 	 			 var array = JSON.parse(data);
-	 			 // console.log(array.type);
+	 			 
 	 			 $('#actype').val(array.type);
 	 			 $('#accountno').val(array.acc_number);
 	 			}

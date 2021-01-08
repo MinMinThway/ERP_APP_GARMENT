@@ -25,7 +25,7 @@ Route::get('/', 'Main@welcome')->name('welcome');
 Route::get('/warehouse', function(){ 
 	return view('production.warehouse.warehouse');
 });
-
+Route::get('/documentation','Main@docs')->name('docs');
 Route::resource('/Order','OrderController');
 Route::get('/noti','OrderController@noti')->name('noti');
 // Route::middleware('auth')->group(function () {
@@ -98,43 +98,28 @@ Route::get('/earning5','warehouseDetailController@earning5')->name('earning5');
 Route::middleware('role:finance/staff')->group(function () {
 
 	Route::get('/finance/staff/home','HomeController@finance_staff')->name('finance.staff.home');
-
-	Route::get('/finance/staff/account/addbudget/a','AccountController@newbudget')->name('account.newbudget');
-
-
-
+	Route::get('/finance/staff/account/addbudget/newbudget','AccountController@newbudget')->name('account.newbudget');
 	Route::get('/finance/staff/account/addbudget','AccountDetailController@account')->name('account.addtype');
-
-	
+	Route::get('/finance/staff/account/checkbal','AccountDetailController@checkbal')->name('account.checkbal');
 	// Route::get('/finance/staff/account/checkbal','AccountDetailController@checkaccount')->name('account.checkbal');
-
+	Route::get('/finance/staff/account/error','OrderController@error')->name('account.error');
 	Route::get('/finance/staff/account/budget/addbalance','AccountDetailController@amountadd')->name('account.addbalance');
-
 	Route::get('/finance/staff/orders','OrderController@order_4_index')->name('finance.staff.order');
 	Route::get('/finance/staff/orders/detail','OrderController@order_4_edit')->name('finance.staff.order.detail');
 	Route::get('/finance/staff/orders/update','OrderController@order_4_update')->name('finance.staff.order.update');
 	Route::get('/finance/staff/orders/reject','OrderController@order_4_reject')->name('finance.staff.order.reject');
 	Route::get('/finance/staff/balancesheet','AccountController@balancesheet')->name('finance.staff.balancesheet');
-
-	
-
 	Route::get('/finance/staff/searchbalancesheet','AccountController@balancesheetsearch')->name('finance.staff.searchbalancesheet');
-
-
 	Route::get('/finance/staff/dailyreport','AccountController@dailyreport')->name('finance.staff.dailyreport');
 	Route::get('/finance/staff/monthlyreport','AccountController@monthlyreport')->name('finance.staff.monthlyreport');
 	Route::get('/finance/staff/yearlyreport','AccountController@yearlyreport')->name('finance.staff.yearlyreport');
-
 	Route::get('/finance/staff/searchreport','AccountController@searchreport')->name('finance.staff.searchreport');
 	Route::get('/finance/staff/monthlysearchreport','AccountController@monthlysearchreport')->name('finance.staff.monthlysearchreport');
 	Route::get('/finance/staff/yearlysearchreport','AccountController@yearlysearchreport')->name('finance.staff.yearlysearchreport');
-
 	Route::get('/finance/staff/account/budget','AccountController@account')->name('account.check');
-
 	Route::resource('finance/staff/account','AccountController');
 	Route::get('/finance/staff/history','OrderController@staff_4_history')->name('staff_4_history');
 	Route::get('/finance/staff/history/info','OrderController@order_4_info')->name('order_4_info');
-
 	Route::get('/acearning','AccountDetailController@acearning')->name('acearning');
 });
 
@@ -144,28 +129,19 @@ Route::middleware('role:finance/staff')->group(function () {
 Route::middleware('role:finance/admin')->group(function () {
 	Route::get('/finance/admin/home','HomeController@finance_admin')->name('finance.admin.home');
 	Route::get('/finance/admin/account','AccountController@adminindex')->name('account.adminindex');
-
-
 	Route::get('/finance/admin/dailyreport','AccountController@admindailyreport')->name('finance.admin.dailyreport');
 	Route::get('/finance/admin/monthlyreport','AccountController@adminmonthlyreport')->name('finance.admin.monthlyreport');
 	Route::get('/finance/admin/yearlyreport','AccountController@adminyearlyreport')->name('finance.admin.yearlyreport');
-
 	Route::get('/finance/admin/searchreport','AccountController@adminsearchreport')->name('finance.admin.searchreport');
 	Route::get('/finance/admin/monthlysearchreport','AccountController@adminmonthlysearchreport')->name('finance.admin.monthlysearchreport');
 	Route::get('/finance/admin/yearlysearchreport','AccountController@adminyearlysearchreport')->name('finance.admin.yearlysearchreport');
-
-
 	Route::get('/finance/admin/history','OrderController@admin_5_history')->name('admin_5_history');
 	Route::get('/finance/admin/history/info','OrderController@order_5_info')->name('order_5_info');
-
 	Route::get('/finance/admin/orders','OrderController@order_5_index')->name('finance.admin.order');
 	Route::get('/finance/admin/orders/detail/a','OrderController@order_5_edit')->name('order.order_5_edit');
-
 	Route::get('/finance/admin/orders/detail','OrderController@status_5_change')->name('finance.admin.order.change');
-
 	// Route::get('/finance/admin/orders/update','OrderController@order_5_update')->name('finance.admin.order.update');
 	Route::get('/finance/admin/orders/reject','OrderController@order_5_reject')->name('finance.admin.order.reject');
-
 	Route::get('/acearning2','AccountDetailController@acearning2')->name('acearning2');
 	Route::get('/noteget','OrderController@note_5_get')->name('note_5_get');
 

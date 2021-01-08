@@ -63,7 +63,8 @@ use App\Account;
                                 <th class="align-middle text-center">Income</th>
                                 <th class="align-middle text-center">Outcome</th>
                                 <th class="align-middle text-center">Balance</th>
-                                <th class="align-middle text-center">Action</th>
+                                <th class="align-middle text-center">Bank Name</th>
+                                
 
                               </tr>
                             </thead>
@@ -86,7 +87,6 @@ use App\Account;
                                 <td class="align-middle text-center" >{{$accountdetail->income}}</td>
                                 <td class="align-middle text-center">{{$accountdetail->outcome}}</td>
                                 <td class="align-middle text-center">{{$accountdetail->tranbalance}}</td>
-
                                 <td class="align-middle text-center">{{$accountdetail->account->bank}}</td>
                                 </th>
                               </tr>
