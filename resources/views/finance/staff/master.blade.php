@@ -99,7 +99,7 @@
               <div class="menu_section">
                 <h3>Orders</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-inbox pr-2" style="font-size: 20px"></i> Orders Page <span class="label label-success pull-right">2</span></a></li>
+                  <li><a href="{{route('finance.staff.order')}}"><i class="fa fa-inbox pr-2" style="font-size: 20px"></i> Orders Page <span class="label label-success pull-right"></span></a></li>
                     </ul>
               </div>
                   <div class="menu_section">

@@ -705,7 +705,7 @@ class OrderController extends Controller
         $balance2=$request->balance2;
         //dd($request->bankname);
 
-        if($bank > $oldtotal)
+        if($bank < $oldtotal)
         {
             return redirect()->route('account.error');
         }
