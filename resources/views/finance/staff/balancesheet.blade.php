@@ -64,7 +64,7 @@ use App\Account;
                                 <th class="align-middle text-center">Outcome</th>
                                 <th class="align-middle text-center">Balance</th>
                                 <th class="align-middle text-center">Bank Name</th>
-                                <th class="align-middle text-center">Action</th>
+                                
 
                               </tr>
                             </thead>
