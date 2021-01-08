@@ -170,7 +170,7 @@ if ($this_month>$past_month) {
                 {{-- <span class="count_bottom"><i class="green">4% </i> From last Week</span> --}}
               </div>
             </a>
-            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
+            <div class="col-md-3 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-clock-o"></i> Today Expenditure</span>
               <div class="count">{{$today_transection}}</div>
               @if($d_zero_div)
@@ -235,7 +235,7 @@ if ($this_month>$past_month) {
               @endif
             </div> --}}
 
-            <div class="col-md-2 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
+            <div class="col-md-3 col-sm-4  tile_stats_count pr-4 pl-4 text-center">
               <span class="count_top"><i class="fa fa-clock-o"></i> Total Transection</span>
               <div class="count">{{$total_tran}}</div>
 {{--               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> --}}
@@ -253,7 +253,7 @@ if ($this_month>$past_month) {
                           <div class="icon"><a href="="><i class="fa fa-credit-card" style="size: 20px;"></i></a>
                           </div>
                           <div class="count"><small>{{$account->bank}}</small></div>
-                            <h4><b>$ {{$account->balance}}</b></h4>
+                            <h4 style="margin-left: 10px;"><b>$ {{$account->balance}}</b></h4>
 
                               
                           </div>

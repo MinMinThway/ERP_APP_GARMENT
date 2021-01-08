@@ -200,6 +200,7 @@ use App\Supplier;
     
     $("#gg").on('click',function(){
 
+         
       alert("OK");
     //   $.ajax({
     //   url:'',

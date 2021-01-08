@@ -132,21 +132,21 @@
 
 
 		
-			// success:function(data)
-	 	// 	{
-	 	// 		if(data){
-	 	// 		 var array = JSON.parse(data);
-	 	// 		 // console.log(array.bank);
-	 	// 		  // $blah=array.type;
-	 	// 		  // if($blah>$order->balance);
-	 	// 		  // {
-	 	// 		  // 	alert("OK");
-	 	// 		  // }
-	 	// 		 // console.log($blah);
-	 	// 		 $('#actype').val(array.type);
-	 	// 		 $('#accountno').val(array.acc_number);
-	 	// 		}
-	 	// 	}
+			success:function(data)
+	 		{
+	 			if(data){
+	 			 var array = JSON.parse(data);
+	 			 // console.log(array.bank);
+	 			  // $blah=array.type;
+	 			  // if($blah>$order->balance);
+	 			  // {
+	 			  // 	alert("OK");
+	 			  // }
+	 			 // console.log($blah);
+	 			 $('#actype').val(array.type);
+	 			 $('#accountno').val(array.acc_number);
+	 			}
+	 		}
 		
 		});
 
