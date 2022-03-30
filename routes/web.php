@@ -32,9 +32,9 @@ Route::get('/noti','OrderController@noti')->name('noti');
 // STATUS 
 Route::middleware('role:production/warehouse')->group(function () {
 	Route::get('/production/warehouse/home','HomeController@warehouse')->name('warehouse.home');
-	Route::resource('/production/warehouse/materials','warehouseController');
-	Route::resource('/production/warehouse/inventory','warehouseDetailController');
-	Route::get('/inventory_get1','warehouseDetailController@get1')->name('inventory_get1');
+	Route::resource('/production/warehouse/materials','WarehouseController');
+	Route::resource('/production/warehouse/inventory','WarehouseDetailController');
+	Route::get('/inventory_get1','WarehouseDetailController@get1')->name('inventory_get1');
 	Route::get('/production/warehouse/delivery','OrderController@delivery')->name('delivery');
 	Route::get('/production/warehouse/delivery/info','OrderController@deliveryInfo')->name('deliveryInfo');
 	Route::get('/production/warehouse/delivery/set','OrderController@delivered')->name('delivered');
@@ -45,27 +45,27 @@ Route::middleware('role:production/warehouse')->group(function () {
 
 Route::middleware('role:production/staff')->group(function () {
 	Route::get('/production/staff/home','HomeController@production_staff')->name('production.staff.home');
-	Route::get('/production/staff/report','warehouseDetailController@report')->name('production.staff.report');
+	Route::get('/production/staff/report','WarehouseDetailController@report')->name('production.staff.report');
 	Route::get('/note0get','OrderController@note_0_get')->name('note_0_get');
 	Route::get('/production/staff/order','OrderController@order_create')->name('production.staff.order');
-	Route::get('/inventory_get','warehouseDetailController@get')->name('inventory_get');
+	Route::get('/inventory_get','WarehouseDetailController@get')->name('inventory_get');
 	Route::get('/production/staff/history','OrderController@staff_0_history')->name('staff_0_history');
 	Route::get('/production/staff/history/info','OrderController@order_0_info')->name('order_0_info');
-	Route::get('/production/staff/analysis','warehouseDetailController@analysis')->name('analysis');
-	Route::get('/earning2','warehouseDetailController@earning2')->name('earning2');
+	Route::get('/production/staff/analysis','WarehouseDetailController@analysis')->name('analysis');
+	Route::get('/earning2','WarehouseDetailController@earning2')->name('earning2');
 });
 
 Route::middleware('role:production/admin')->group(function () {
 Route::get('/production/admin/home','HomeController@production_admin')->name('production.admin.home');
-Route::get('/production/admin/report','warehouseDetailController@report2')->name('production.admin.report');
-Route::get('/production/admin/analysis','warehouseDetailController@analysis2')->name('analysis2');
+Route::get('/production/admin/report','WarehouseDetailController@report2')->name('production.admin.report');
+Route::get('/production/admin/analysis','WarehouseDetailController@analysis2')->name('analysis2');
 Route::get('/production/admin/order','OrderController@order_1_index')->name('production.admin.order');
 Route::get('/production/admin/order/detail','OrderController@order_1_detail')->name('production.admin.order.detail');
 Route::get('/production/admin/history','OrderController@admin_1_history')->name('admin_1_history');
 Route::get('/production/admin/history/info','OrderController@order_1_info')->name('order_1_info');
 Route::get('/status_1_change','OrderController@status_1_change')->name('status_1_change');
 Route::get('/production/admin/order/reject','OrderController@order_1_reject')->name('production.admin.order.reject');
-Route::get('/earning3','warehouseDetailController@earning3')->name('earning3');
+Route::get('/earning3','WarehouseDetailController@earning3')->name('earning3');
 });
 
 Route::middleware('role:procurement/staff')->group(function () {

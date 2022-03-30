@@ -697,9 +697,9 @@ class OrderController extends Controller
 
     public function order_4_update(Request $request, Order $order)
     {   
-
         $id = $request->id;
         $accountid=$request->account;
+       
         $bank=$request->bankname;
         $oldtotal=$request->balance;
         $balance2=$request->balance2;
@@ -723,6 +723,7 @@ class OrderController extends Controller
             $order=Order::find($request->id);
             $order->cheque_no=$request->cheque;
             $order->status_id=5;
+            $order->account_id = $request->account;
             $order->save();
 
             // $account= Account::find($request->account);
@@ -788,9 +789,10 @@ class OrderController extends Controller
      */
     public function status_5_change(Request $request, Order $order) // procurement/staff/ status chage
     {
-        // dd($request->balance);
+        // dd($request->all());
         $id=$request->id;
         $accountid=$request->account;
+        // dd($accountid);
         $oldtotal=$request->balance;
 
        
@@ -805,11 +807,12 @@ class OrderController extends Controller
             $account= Account::find($request->account);
             $oldbalance = $account->balance;
             $newbalance = $request->balance;
-            $tranbalance = $oldbalance - $newbalance;
+            $tranbalance = (int)$oldbalance - (int)$newbalance;
             
 
             $accountdetail=new Account_detail;
             $accountdetail->date=$today;
+            $accountdetail->income = '';
             $accountdetail->outcome=$request->balance;
             $accountdetail->tranbalance= $tranbalance;
             $accountdetail->account_id= $request->account;

@@ -7,7 +7,7 @@ use App\Order;
 use App\Account;
   
   
-  $transaction_count=Account_detail::all()->sum('outcome');
+  $transaction_count=Account_detail::all()->sum((int)('outcome'));
   
 
   date_default_timezone_set("Asia/Rangoon");

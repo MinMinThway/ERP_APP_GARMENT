@@ -136,6 +136,7 @@ class AccountDetailController extends Controller
          $accountdetail->date=$today;
 
          $accountdetail->income=$request->ammount;
+         $accountdetail->outcome = "";
          $accountdetail->tranbalance= $tranbalance;
          $accountdetail->account_id= $request->bankname;
 

@@ -17,6 +17,6 @@ class Account extends Model
 
     public function order()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class,'account_id');
     }
 }
